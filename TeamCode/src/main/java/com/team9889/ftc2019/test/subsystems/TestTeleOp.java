@@ -14,7 +14,7 @@ import com.team9889.ftc2019.subsystems.Intake;
 public class TestTeleOp extends Team9889Linear {
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         waitForStart(false);
 
         while (opModeIsActive()){

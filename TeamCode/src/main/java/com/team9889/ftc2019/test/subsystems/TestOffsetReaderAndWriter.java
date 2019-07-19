@@ -14,7 +14,7 @@ import com.team9889.lib.android.FileWriter;
 @Disabled
 public class TestOffsetReaderAndWriter extends LinearOpMode {
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         FileReader offsetReader;
         FileWriter offsetSaver;
         String fileName = "testReaderAndWriter.csv";

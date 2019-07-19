@@ -16,7 +16,7 @@ import com.team9889.ftc2019.subsystems.ScoringLift;
 @Disabled
 public class TestIntake extends LinearOpMode {
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         Intake mIntake = new Intake();
         mIntake.init(hardwareMap, false);
 

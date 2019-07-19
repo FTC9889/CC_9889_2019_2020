@@ -20,7 +20,7 @@ public class TestDumperPositions extends Team9889Linear {
     private ElapsedTime loopTimer = new ElapsedTime();
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         waitForStart(false);
 
         Robot.getLift().setLiftState(LiftStates.UP);

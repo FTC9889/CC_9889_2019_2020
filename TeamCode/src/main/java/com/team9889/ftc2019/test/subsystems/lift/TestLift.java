@@ -12,7 +12,7 @@ import com.team9889.ftc2019.subsystems.ScoringLift;
 @Disabled
 public class TestLift extends LinearOpMode {
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         ScoringLift mLift = new ScoringLift();
         mLift.init(hardwareMap, false);
 
