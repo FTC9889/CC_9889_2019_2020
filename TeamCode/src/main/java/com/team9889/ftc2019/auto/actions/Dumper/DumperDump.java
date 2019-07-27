@@ -20,13 +20,13 @@ public class DumperDump extends Action {
     @Override
     public void start() {
         Robot.getInstance().getDumper().collectingTimer.reset();
-        Robot.getInstance().setScorerStates(Robot.scorerStates.DUMP);
+      //  Robot.getInstance().setScorerStates(Robot.scorerStates.DUMP);
         timer.reset();
     }
 
     @Override
     public void update() {
-        Robot.getInstance().update(timer);
+ //       Robot.getInstance().update(timer);
     }
 
     @Override

@@ -35,31 +35,31 @@ public class IntakeCollecting extends Action {
 
     @Override
     public void update() {
-        Robot.getInstance().update(timer);
-        double angle = Robot.getInstance().getDrive().getAngle().getTheda(AngleUnit.DEGREES);
+//        Robot.getInstance().update(timer);
+//        double angle = Robot.getInstance().getDrive().getAngle().getTheda(AngleUnit.DEGREES);
 
-        if (angle < 35 && !(angle > 55) || right) {
-            Robot.getInstance().getDrive().setLeftRightPower(.4, -.4);
+//        if (angle < 35 && !(angle > 55) || right) {
+//            Robot.getInstance().getDrive().setLeftRightPower(.4, -.4);
             left = false;
             right = true;
-        }
+//        }
 
-        if (angle > 55 || left){
-            Robot.getInstance().getDrive().setLeftRightPower(-.4, .4);
-            right = false;
-            left = true;
-        }
+//        if (angle > 55 || left){
+//            Robot.getInstance().getDrive().setLeftRightPower(-.4, .4);
+//            right = false;
+//            left = true;
+//        }
     }
 
     @Override
     public boolean isFinished() {
-        return timer.milliseconds() > timeOut;
+        return false;
     }
 
     @Override
     public void done() {
-        Robot.getInstance().getDrive().setLeftRightPower(0,0);
+//        Robot.getInstance().getDrive().setLeftRightPower(0,0);
         Robot.getInstance().getIntake().outtake();
-        Robot.getInstance().update(timer);
+//        Robot.getInstance().update(timer);
     }
 }

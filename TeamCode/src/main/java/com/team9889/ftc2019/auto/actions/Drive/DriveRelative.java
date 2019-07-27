@@ -97,8 +97,8 @@ public class DriveRelative extends Action {
 
         // Check if we are running on a computer
         if(!simulation) {
-            leftOffset = mDrive.getLeftDistance();
-            rightOffset = mDrive.getRightDistance();
+//            leftOffset = mDrive.getLeftDistance();
+//            rightOffset = mDrive.getRightDistance();
         } else {
             FileWriter log = new FileWriter(this.getClass().getSimpleName() + ".csv");
 
@@ -124,13 +124,13 @@ public class DriveRelative extends Action {
     @Override
     public void update() {
         if(!simulation) {
-            double leftCurrent = mDrive.getLeftDistance() - leftOffset;
-            double rightCurrent = mDrive.getRightDistance() - rightOffset;
+//            double leftCurrent = mDrive.getLeftDistance() - leftOffset;
+//            double rightCurrent = mDrive.getRightDistance() - rightOffset;
 
-            double left = leftFollower.update(leftCurrent, timer.milliseconds());
-            double right = rightFollower.update(rightCurrent, timer.milliseconds());
+//            double left = leftFollower.update(leftCurrent, timer.milliseconds());
+//            double right = rightFollower.update(rightCurrent, timer.milliseconds());
 
-            mDrive.setLeftRightPower(left, right);
+//            mDrive.setLeftRightPower(left, right);
         }
     }
 
@@ -142,7 +142,8 @@ public class DriveRelative extends Action {
     @Override
     public void done() {
         // Check if we are running this code in a simulation
-        if (simulation)
-            mDrive.setLeftRightPower(0,0);
+        if (simulation){
+//            mDrive.setLeftRightPower(0,0);
+        }
     }
 }

@@ -101,9 +101,9 @@ public class DriveMotionProfile extends Action {
         log = new FileWriter("driveMotionProfile.csv");
 
         // Check if we are running in a simulation
-        mDrive.DriveControlState(Drive.DriveControlStates.MOTION_PROFILE);
-        leftOffset = mDrive.getLeftDistance();
-        rightOffset = mDrive.getRightDistance();
+//        mDrive.DriveControlState(Drive.DriveControlStates.MOTION_PROFILE);
+//        leftOffset = mDrive.getLeftDistance();
+//        rightOffset = mDrive.getRightDistance();
 
         profile.calculate(distance, parameters);
 
@@ -121,23 +121,23 @@ public class DriveMotionProfile extends Action {
     public void update() {
 
         double leftPosition, rightPosition;
-        leftPosition = mDrive.getLeftDistance() - leftOffset;
-        rightPosition = mDrive.getRightDistance() - rightOffset;
+//        leftPosition = mDrive.getLeftDistance() - leftOffset;
+//        rightPosition = mDrive.getRightDistance() - rightOffset;
 
-        double currentAngle = mDrive.getAngle().getTheda(AngleUnit.DEGREES);
-        double steer = angleCorrection.update(currentAngle, angle.getTheda(AngleUnit.DEGREES));
-        steer = Math.sin(steer);
+//        double currentAngle = mDrive.getAngle().getTheda(AngleUnit.DEGREES);
+//        double steer = angleCorrection.update(currentAngle, angle.getTheda(AngleUnit.DEGREES));
+//        steer = Math.sin(steer);
 
         double currentTime = timer.seconds();
 
-        double leftSpeed = leftMotionProfileFollower.update(leftPosition, currentTime);
-        double rightSpeed = rightMotionProfileFollower.update(rightPosition, currentTime);
+//        double leftSpeed = leftMotionProfileFollower.update(leftPosition, currentTime);
+//        double rightSpeed = rightMotionProfileFollower.update(rightPosition, currentTime);
 
         double currentWantedPosition = profile.getOutput(currentTime).getPosition();
 
-        mDrive.setLeftRightPower(leftSpeed + steer, rightSpeed - steer);
+//        mDrive.setLeftRightPower(leftSpeed + steer, rightSpeed - steer);
 
-        currentPosition[count] = CruiseLib.Average(leftPosition, rightPosition);
+//        currentPosition[count] = CruiseLib.Average(leftPosition, rightPosition);
         calculatedpositions[count] = currentWantedPosition;
         count++;
     }
@@ -149,7 +149,7 @@ public class DriveMotionProfile extends Action {
 
     @Override
     public void done() {
-        mDrive.setLeftRightPower(0,0);
+//        mDrive.setLeftRightPower(0,0);
 
         for (int i=0;i<count;i++) {
             log.write(currentPosition[i] + "," + calculatedpositions[i]);

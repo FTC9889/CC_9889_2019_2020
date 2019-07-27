@@ -27,38 +27,38 @@ public class MeasureMaxSpeedAndAccel extends Team9889Linear {
 
         FileWriter fileWriter = new FileWriter("speedData.csv");
 
-        Robot.getDrive().setLeftRightPower(1, 1);
+//        Robot.getDrive().setLeftRightPower(1, 1);
 
         timer.reset();
-        while (opModeIsActive() && timer.seconds()<3 && Robot.getDrive().getRightDistance() < 50){
-            double leftPos = Robot.getDrive().getLeftTicks();
-            double rightPos = Robot.getDrive().getRightTicks();
+//        while (opModeIsActive() && timer.seconds()<3 && Robot.getDrive().getRightDistance() < 50){
+//            double leftPos = Robot.getDrive().getLeftTicks();
+//            double rightPos = Robot.getDrive().getRightTicks();
             double dr = dt.milliseconds();
 
-            double leftSpeed = (leftPos - LastLPosition) / dr;
-            double rightSpeed = (rightPos - LastRPosition) / dr;
+//            double leftSpeed = (leftPos - LastLPosition) / dr;
+//            double rightSpeed = (rightPos - LastRPosition) / dr;
 
-            double leftAcc = (leftSpeed - LastLSpeed) / dr;
-            double rightAcc = (rightSpeed - LastRSpeed) / dr;
+//            double leftAcc = (leftSpeed - LastLSpeed) / dr;
+//            double rightAcc = (rightSpeed - LastRSpeed) / dr;
 
-            String output = String.valueOf(leftPos) + "," + String.valueOf(rightPos) + "," +
-                    String .valueOf(leftSpeed) + "," + String.valueOf(rightSpeed) + "," +
-                    String .valueOf(leftAcc) + "," + String .valueOf(rightAcc);
-            fileWriter.write(output);
+//            String output = String.valueOf(leftPos) + "," + String.valueOf(rightPos) + "," +
+//                    String .valueOf(leftSpeed) + "," + String.valueOf(rightSpeed) + "," +
+//                    String .valueOf(leftAcc) + "," + String .valueOf(rightAcc);
+//            fileWriter.write(output);
 
-            LastRPosition = rightPos;
-            LastLPosition = leftPos;
-            LastLSpeed = leftSpeed;
+//            LastRPosition = rightPos;
+//            LastLPosition = leftPos;
+//            LastLSpeed = leftSpeed;
 
-            LastRSpeed = rightSpeed;
+//            LastRSpeed = rightSpeed;
 
             dt.reset();
             sleep(1);
         }
 
-        Robot.getDrive().setLeftRightPower(0,0);
+//        Robot.getDrive().setLeftRightPower(0,0);
 
-        fileWriter.close();
+//        fileWriter.close();
 
     }
-}
+//}

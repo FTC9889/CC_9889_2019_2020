@@ -43,32 +43,30 @@ public class DriveTurn extends Action {
         leftPid = new PID(0.007, 0.000004, 0.001);
         rightPid = new PID(0.007, 0.000004, 0.001);
 
-        mDrive.DriveControlState(Drive.DriveControlStates.POWER);
-        leftTick = mDrive.getLeftTicks() + (int)(left / ENCODER_TO_DISTANCE_RATIO);
-        rightTick = mDrive.getRightTicks() + (int)(right / ENCODER_TO_DISTANCE_RATIO);
+//        mDrive.DriveControlState(Drive.DriveControlStates.POWER);
+//        leftTick = mDrive.getLeftTicks() + (int)(left / ENCODER_TO_DISTANCE_RATIO);
+//        rightTick = mDrive.getRightTicks() + (int)(right / ENCODER_TO_DISTANCE_RATIO);
         time = new ElapsedTime();
     }
 
     @Override
     public void update() {
-        double leftPower = CruiseLib.limitValue(
-                leftPid.update(mDrive.getLeftTicks(), leftTick), 0.5);
+//        double leftPower = CruiseLib.limitValue(
+//                leftPid.update(), leftTick), 0.5);
 
-        double rightPower = CruiseLib.limitValue(
-                rightPid.update(mDrive.getRightTicks(), rightTick), 0.5);
+//        double rightPower = CruiseLib.limitValue(
+//                rightPid.update(mDrive.getRightTicks(), rightTick), 0.5);
 
-        mDrive.setLeftRightPower(leftPower, rightPower);
+//        mDrive.setLeftRightPower(leftPower, rightPower);
     }
 
     @Override
     public boolean isFinished() {
-        return (Math.abs(leftTick - mDrive.getLeftTicks()) < 5 &&
-                Math.abs(rightTick - mDrive.getRightTicks()) < 5)
-                || time.milliseconds() > timeOut;
+        return false;
     }
 
     @Override
     public void done() {
-        mDrive.setLeftRightPower(0.0, 0.0);
+//        mDrive.setLeftRightPower(0.0, 0.0);
     }
 }

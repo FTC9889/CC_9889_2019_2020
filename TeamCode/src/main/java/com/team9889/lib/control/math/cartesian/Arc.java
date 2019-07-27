@@ -130,9 +130,9 @@ public class Arc extends Action{
     @Override
     public void start() {
         // Check if we are running in a simulation
-        mDrive.DriveControlState(Drive.DriveControlStates.MOTION_PROFILE);
-        leftOffset = mDrive.getLeftDistance();
-        rightOffset = mDrive.getRightDistance();
+//        mDrive.DriveControlState(Drive.DriveControlStates.MOTION_PROFILE);
+//        leftOffset = mDrive.getLeftDistance();
+//        rightOffset = mDrive.getRightDistance();
 
         double radius = distance/angle.getTheda(AngleUnit.RADIANS);
 
@@ -154,16 +154,16 @@ public class Arc extends Action{
     @Override
     public void update() {
         double leftPosition, rightPosition;
-        leftPosition = mDrive.getLeftDistance() - leftOffset;
-        rightPosition = mDrive.getRightDistance() - rightOffset;
+//        leftPosition = mDrive.getLeftDistance() - leftOffset;
+//        rightPosition = mDrive.getRightDistance() - rightOffset;
 
-        double currentAngle = mDrive.getAngle().getTheda(AngleUnit.DEGREES);
+//        double currentAngle = mDrive.getAngle().getTheda(AngleUnit.DEGREES);
         double steer = 0;
 
-        double leftSpeed = leftMotionProfileFollower.update(leftPosition, timer.seconds());
-        double rightSpeed = rightMotionProfileFollower.update(rightPosition, timer.seconds());
+//        double leftSpeed = leftMotionProfileFollower.update(leftPosition, timer.seconds());
+//        double rightSpeed = rightMotionProfileFollower.update(rightPosition, timer.seconds());
 
-        mDrive.setLeftRightPower(leftSpeed + steer, rightSpeed - steer);
+//        mDrive.setLeftRightPower(leftSpeed + steer, rightSpeed - steer);
     }
 
     @Override
@@ -173,6 +173,6 @@ public class Arc extends Action{
 
     @Override
     public void done() {
-        mDrive.setLeftRightPower(0,0);
+//        mDrive.setLeftRightPower(0,0);
     }
 }

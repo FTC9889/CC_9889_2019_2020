@@ -19,7 +19,7 @@ public class TestliftAndArmsReady extends Team9889Linear {
             Robot.getLift().setLiftState(LiftStates.READY);
 //            Robot.getArms().setArmsStates(Arms.SuperstructureStates.GRAB);
 
-            updateTelemetry();
+//            updateTelemetry();
         }
 
     }

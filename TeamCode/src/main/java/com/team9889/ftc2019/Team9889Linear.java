@@ -36,11 +36,6 @@ public abstract class Team9889Linear extends LinearOpMode {
                 getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
         relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
 
-        Date currentData = new Date();
-        SimpleDateFormat  format = new SimpleDateFormat("dd.M.yyyy hh:mm:ss");
-
-        RobotLog.a("Robot Init Started at " + format.format(currentData));
-
         Robot.init(hardwareMap, autonomous);
 
         telemetry.setMsTransmissionInterval(autonomous ? 50:1000);
@@ -54,8 +49,6 @@ public abstract class Team9889Linear extends LinearOpMode {
                 telemetry.addData("Waiting for Start","");
                 Robot.outputToTelemetry(telemetry);
                 telemetry.update();
-
-                Robot.getLift().update(matchTime);
             }
         } else {
             // Teleop Init Loop code
@@ -66,18 +59,6 @@ public abstract class Team9889Linear extends LinearOpMode {
         }
 
         matchTime.reset();
-    }
-
-    /**
-     * Run this to update the Default Telemetry
-     */
-    protected void updateTelemetry(){
-        if(telemetry.getMsTransmissionInterval()==50)
-            telemetry.addData("Match Timer", 30 - this.matchTime.seconds());
-        else
-            telemetry.addData("Match Timer", 120 - this.matchTime.seconds());
-        Robot.outputToTelemetry(telemetry);
-        telemetry.update();
     }
 
     /**

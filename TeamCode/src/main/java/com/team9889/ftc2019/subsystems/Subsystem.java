@@ -10,21 +10,9 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  */
 
 public abstract class Subsystem {
-    public abstract void init(HardwareMap hardwareMap, boolean auto);
-
-    public abstract void zeroSensors();
+    public abstract void init(boolean auto);
 
     public abstract void outputToTelemetry(Telemetry telemetry);
 
-    public abstract void update(ElapsedTime time);
-
-    public abstract void stop();
-
-    protected void sleep(long milliseconds){
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+    public abstract void update();
 }

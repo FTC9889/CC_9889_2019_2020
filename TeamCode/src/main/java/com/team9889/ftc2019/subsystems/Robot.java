@@ -3,37 +3,50 @@ package com.team9889.ftc2019.subsystems;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
+import com.team9889.ftc2019.Constants;
 import com.team9889.ftc2019.states.LiftStates;
+import com.team9889.lib.control.kinematics.TankDriveKinematicModel;
+import com.team9889.lib.hardware.Motor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.openftc.revextensions2.ExpansionHubEx;
+import org.openftc.revextensions2.ExpansionHubMotor;
+import org.openftc.revextensions2.RevBulkData;
+import org.openftc.revextensions2.RevExtensions2;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
- * Created by joshua9889 on 3/28/2018.
+ * Created by Eric on 7/26/2019.
  */
 
-public class Robot extends Subsystem {
+public class Robot{
+
+    // motors (remember to stop motors)
+    public Motor fLDrive, fRDrive, bLDrive, bRDrive;
+    public Motor intake;
+
+    RevBulkData bulkDataMaster, bulkDataSlave;
+    ExpansionHubEx revHubMaster, revHubSlave;
+
+    private int lastLeftPosition, lastRightPosition;
+    TankDriveKinematicModel model = new TankDriveKinematicModel();
+
+    private static ElapsedTime timer = new ElapsedTime();
+
+    public double[] pose = new double[4];
 
     private static Robot mInstance = null;
 
     private Drive mDrive = new Drive();
-    private ScoringLift mScoringLift = new ScoringLift();
-    private HangingLift mHangingLift = new HangingLift();
-    private Intake mIntake = new Intake();
     private Camera mCamera = new Camera();
-    private Dumper mDumper = new Dumper();
 
-    private ElapsedTime timer = new ElapsedTime();
-
-    private ElapsedTime liftUpTimer = new ElapsedTime();
-
-    public boolean transitionDone = false;
-    public boolean autoSampled = true;
-
-    private List<Subsystem> subsystems = Arrays.asList(
-            mDrive, mScoringLift, mHangingLift, mIntake, mCamera, mDumper// Add more subsystems here as needed
+    private List<Object> subsystems = Arrays.asList(
+            mDrive, mCamera// Add more subsystems here as needed
     );
 
     public static Robot getInstance() {
@@ -43,122 +56,78 @@ public class Robot extends Subsystem {
         return mInstance;
     }
 
-    public enum scorerStates{
-        COLLECTING, STORED, SCORING, DUMP, NULL, AUTONOMOUS
+    public void init(HardwareMap hardwareMap, boolean auto){
+        timer.reset();
+
+        Date currentData = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("dd.M.yyyy hh:mm:ss");
+        RobotLog.a("Robot Init Started at " + format.format(currentData));
+
+        RevExtensions2.init();
+
+        revHubMaster = hardwareMap.get(ExpansionHubEx.class, Constants.kRevHubMaster);
+        revHubSlave = hardwareMap.get(ExpansionHubEx.class, Constants.kRevHubSlave);
+
+        fLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveMasterId);
+        bLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveSlaveId);
+        fRDrive = new Motor(hardwareMap, Constants.DriveConstants.kRightDriveMasterId);
+        bRDrive = new Motor(hardwareMap, Constants.DriveConstants.kRightDriveSlaveId);
+        intake = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeMotorId);
     }
 
-    public scorerStates wantedScorerState = scorerStates.NULL;
+    boolean first = true;
+    public void update(){
+        bulkDataMaster = revHubMaster.getBulkInputData();
+        bulkDataSlave = revHubSlave.getBulkInputData();
+        Motor.numHardwareUsesThisUpdate+=2;
 
+        fRDrive.update(bulkDataMaster);
+        bRDrive.update(bulkDataMaster);
+        fLDrive.update(bulkDataSlave);
+        bLDrive.update(bulkDataSlave);
+        intake.update(bulkDataSlave);
 
-    /**
-     * @param hardwareMap Hardware Map of the OpMode
-     * @param autonomous  Are we running autonomous? (Used for gyros and the like)
-     */
-    @Override
-    public void init(HardwareMap hardwareMap, boolean autonomous) {
-        for (Subsystem subsystem : subsystems) {
-            RobotLog.a("=========== Initialing " + subsystem.toString() + " ===========");
-            subsystem.init(hardwareMap, autonomous);
-            RobotLog.a("=========== Finished Initialing " + subsystem.toString() + " ===========");
-        }
+        if(!first)
+            pose = model.calculateAbs((fRDrive.getPosition() - lastRightPosition) * Constants.DriveConstants.ENCODER_TO_DISTANCE_RATIO,
+                    (fLDrive.getPosition() - lastLeftPosition) * Constants.DriveConstants.ENCODER_TO_DISTANCE_RATIO);
+        else
+            first = false;
+
+        lastLeftPosition = fLDrive.getPosition();
+        lastRightPosition = fRDrive.getPosition();
+
+//        for (Motor motor:Arrays.asList(fLDrive, fRDrive, bLDrive, bRDrive, intake)) {
+//            motor.update(bulkDataMaster, bulkDataSlave);
+//        }
     }
 
-    @Override
-    public void zeroSensors() {
-        for (Subsystem subsystem : subsystems) {
-            RobotLog.a("=========== Zeroing " + subsystem.toString() + " ===========");
-            subsystem.zeroSensors();
-            RobotLog.a("=========== Finished Zeroing " + subsystem.toString() + " ===========");
-        }
-    }
-
-    @Override
     public void outputToTelemetry(Telemetry telemetry) {
-        for (Subsystem subsystem : subsystems) {
-            telemetry.addData(subsystem.toString(), "");
-            subsystem.outputToTelemetry(telemetry);
-            telemetry.addLine();
-        }
 
-        telemetry.addData("Wanted Robot State", wantedScorerState);
     }
 
-    @Override
-    public void update(ElapsedTime time) {
-        switch (wantedScorerState) {
-            case SCORING:
-                getLift().setLiftState(LiftStates.UP);
-
-                if (getLift().getHeight() < -1700) {
-                    getDumper().wantedDumperState = Dumper.dumperStates.SCORING;
-                }
-                liftUpTimer.reset();
-                break;
-
-            case COLLECTING:
-                    getDumper().wantedDumperState = Dumper.dumperStates.COLLECTING;
-                    if (getDumper().dumperTimer.milliseconds() > 800)
-                        getLift().setLiftState(LiftStates.DOWN);
-                break;
-
-            case DUMP:
-                getDumper().wantedDumperState = Dumper.dumperStates.DUMP;
-                getLift().setLiftState(LiftStates.UP);
-                liftUpTimer.reset();
-                break;
-
-            case AUTONOMOUS:
-                getLift().setLiftState(LiftStates.READY);
-                if (getLift().isCurrentWantedState())
-                    getDumper().setDumperStates(Dumper.dumperStates.SCORING);
-                liftUpTimer.reset();
-                break;
-
-            case NULL:
-                getDumper().wantedDumperState = Dumper.dumperStates.NULL;
-                liftUpTimer.reset();
-                break;
-        }
-
-        for (Subsystem subsystem : subsystems) {
-            subsystem.update(timer);
+    public void stop(){
+        for (Motor motor:Arrays.asList(fLDrive, fRDrive, bLDrive, bRDrive, intake)) {
+            motor.setPower(0);
         }
     }
 
-    public void setScorerStates(scorerStates states){
-        this.wantedScorerState = states;
-    }
-
-    @Override
-    public void stop() {
-        for (Subsystem subsystem : subsystems) {
-            RobotLog.a("=========== Stopping " + subsystem.toString() + " ===========");
-            subsystem.stop();
-            RobotLog.a("=========== Finished Stopping " + subsystem.toString() + " ===========");
-        }
-    }
-
-    public Drive getDrive() {
+    public Drive getDrive(){
         return mDrive;
     }
-
-    public Intake getIntake() {
-        return mIntake;
-    }
-
-    public ScoringLift getLift() {
-        return mScoringLift;
-    }
-
-    public HangingLift getHangingLift() {
-        return mHangingLift;
-    }
-
-    public Camera getCamera() {
-        return mCamera;
-    }
-
     public Dumper getDumper(){
-        return mDumper;
+        return null;
     }
+    public Intake getIntake(){
+        return null;
+    }
+    public ScoringLift getLift(){
+        return null;
+    }
+    public HangingLift getHangingLift(){
+        return null;
+    }
+    public Camera getCamera(){
+        return null;
+    }
+
 }

@@ -24,9 +24,9 @@ public class AutonomousCraterSideDoubleSample extends AutoModeBase {
     public void run(AutoModeBase.Side side, boolean doubleSample, boolean scoreSample) {
 //        Robot.getLift().setStopperPosition(0.3);
         runAction(new Wait(1000));
-        Robot.getDrive().setLeftRightPower(.1, .1);
+//        Robot.getDrive().setLeftRightPower(.1, .1);
         runAction(new Wait(1000));
-        Robot.getDrive().setLeftRightPower(0, 0);
+//        Robot.getDrive().setLeftRightPower(0, 0);
 //        Robot.getLift().setHookPosition(0);
         runAction(new Wait(1000));
 
@@ -77,10 +77,10 @@ public class AutonomousCraterSideDoubleSample extends AutoModeBase {
 
 
         runAction(new Wait(250));
-        runAction(new DriveTurn(new Rotation2d(Robot.getDrive().getAngle().getTheda(AngleUnit.DEGREES)-135,
-                AngleUnit.DEGREES), 1500));
-        runAction(new DriveTurn(new Rotation2d(Robot.getDrive().getAngle().getTheda(AngleUnit.DEGREES)-135,
-                AngleUnit.DEGREES), 1500));
+//        runAction(new DriveTurn(new Rotation2d(Robot.getDrive().getAngle().getTheda(AngleUnit.DEGREES)-135,
+//                AngleUnit.DEGREES), 1500));
+//        runAction(new DriveTurn(new Rotation2d(Robot.getDrive().getAngle().getTheda(AngleUnit.DEGREES)-135,
+//                AngleUnit.DEGREES), 1500));
 
         switch (Robot.getCamera().getGold()){
             case LEFT:

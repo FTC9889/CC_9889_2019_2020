@@ -18,13 +18,13 @@ public class DumperScoring extends Action {
 
     @Override
     public void start() {
-        Robot.getInstance().setScorerStates(Robot.scorerStates.SCORING);
+//        Robot.getInstance().setScorerStates(Robot.scorerStates.SCORING);
         timer.reset();
     }
 
     @Override
     public void update() {
-        Robot.getInstance().update(timer);
+ //       Robot.getInstance().update(timer);
     }
 
     @Override

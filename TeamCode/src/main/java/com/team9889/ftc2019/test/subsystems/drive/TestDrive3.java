@@ -17,7 +17,7 @@ public class TestDrive3 extends AutoModeBase {
     @Override
     public void run(AutoModeBase.Side side, boolean doubleSample, boolean scoreSample) {
 
-        telemetry.addData("Angle", Robot.getDrive().getAngle().getTheda(AngleUnit.DEGREES));
+//        telemetry.addData("Angle", Robot.getDrive().getAngle().getTheda(AngleUnit.DEGREES));
         telemetry.update();
         runAction(new Wait(4000));
     }

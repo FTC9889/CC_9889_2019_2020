@@ -18,7 +18,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * Created by joshua9889 on 3/28/2018.
  */
 
-public class ScoringLift extends Subsystem {
+public class ScoringLift {
 
     private DcMotorEx liftMotor;
     private DigitalChannel lowerLimit;
@@ -48,7 +48,7 @@ public class ScoringLift extends Subsystem {
         System.out.println(p);
     }
 
-    @Override
+//    @Override
     public void init(HardwareMap hardwareMap, boolean auto) {
         liftMotor = hardwareMap.get(DcMotorEx.class, Constants.ScoringLiftConstants.kLeftLiftId);
 
@@ -74,12 +74,12 @@ public class ScoringLift extends Subsystem {
         first = true;
     }
 
-    @Override
+ //   @Override
     public void zeroSensors() {
         offset = getHeightTicks();
     }
 
-    @Override
+  //  @Override
     public void outputToTelemetry(Telemetry telemetry) {
         telemetry.addData("Velocity", currentSpeed);
         telemetry.addData("Average Speed", averageSpeed.get());
@@ -97,7 +97,7 @@ public class ScoringLift extends Subsystem {
         telemetry.addData("Current State", currentState);
     }
 
-    @Override
+ //   @Override
     public void update(ElapsedTime time) {
         getLowerLimitPressed();
 
@@ -155,7 +155,7 @@ public class ScoringLift extends Subsystem {
         liftOperatorControl = currentState == wantedState;
     }
 
-    @Override
+//    @Override
     public void stop() {
         setLiftState(LiftStates.NULL);
     }

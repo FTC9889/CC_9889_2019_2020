@@ -22,8 +22,8 @@ public class TestDrive extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        mDrive.init(hardwareMap, true);
-        mDrive.resetEncoders();
+//        mDrive.init(hardwareMap, true);
+//        mDrive.resetEncoders();
 
         waitForStart();
         test1();
@@ -47,13 +47,13 @@ public class TestDrive extends LinearOpMode {
         while (opModeIsActive() && speed < 4000){
             testingSpeed += step;
 
-            double currentPos = (mDrive.getLeftTicks() + mDrive.getRightTicks()) / 2;
-            speed = (currentPos-lastPosition)/dt.seconds();
+//            double currentPos = (mDrive.getLeftTicks() + mDrive.getRightTicks()) / 2;
+//            speed = (currentPos-lastPosition)/dt.seconds();
 
             mDrive.setThrottleSteerPower(testingSpeed, 0);
             sleep(100);
 
-            lastPosition = currentPos;
+//            lastPosition = currentPos;
             dt.reset();
             telemetry.addData("testing speed", testingSpeed);
             telemetry.addData("current speed", speed);
@@ -65,13 +65,13 @@ public class TestDrive extends LinearOpMode {
         while (opModeIsActive() && speed < 4000){
             testingSpeed += step;
 
-            double currentPos = (mDrive.getLeftTicks() + mDrive.getRightTicks()) / 2;
-            speed = (currentPos-lastPosition)/dt.seconds();
+//            double currentPos = (mDrive.getLeftTicks() + mDrive.getRightTicks()) / 2;
+//            speed = (currentPos-lastPosition)/dt.seconds();
 
             mDrive.setThrottleSteerPower(testingSpeed, 0);
             sleep(100);
 
-            lastPosition = currentPos;
+//            lastPosition = currentPos;
             lastSpeed = speed;
             dt.reset();
             telemetry.addData("testing speed", testingSpeed);
@@ -84,13 +84,13 @@ public class TestDrive extends LinearOpMode {
         sleep(10000);
 
 
-        mDrive.setLeftRightPower(1, 1);
+//        mDrive.setLeftRightPower(1, 1);
 
         // Go for 3 seconds
         while (opModeIsActive() && time.seconds()<3){
-            double currentPos = (mDrive.getLeftTicks() + mDrive.getRightTicks()) / 2;
+//            double currentPos = (mDrive.getLeftTicks() + mDrive.getRightTicks()) / 2;
 
-            speed = (currentPos-lastPosition)/dt.seconds();
+//            speed = (currentPos-lastPosition)/dt.seconds();
 
             double accl = (speed-lastSpeed)/dt.seconds();
 
@@ -98,7 +98,7 @@ public class TestDrive extends LinearOpMode {
             if(speed != 0 && accl != 0)
                 logger.write(time.seconds() + "," + speed + "," + accl);
 
-            lastPosition = currentPos;
+//            lastPosition = currentPos;
             lastSpeed = speed;
             dt.reset();
         }

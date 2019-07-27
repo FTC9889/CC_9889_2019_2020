@@ -39,28 +39,28 @@ public class DriveRightMotor extends Action {
     public void start() {
         rightPid = new PID(0.003, 0.0, 0.025);
 
-        mDrive.DriveControlState(Drive.DriveControlStates.POWER);
+//        mDrive.DriveControlState(Drive.DriveControlStates.POWER);
 
-        offset = mDrive.getRightTicks();
+//        offset = mDrive.getRightTicks();
         rightTick = (int)(right / ENCODER_TO_DISTANCE_RATIO);
         time = new ElapsedTime();
     }
 
     @Override
     public void update() {
-        double rightPower = rightPid.update(mDrive.getRightTicks() - offset, rightTick);
-        rightPower = CruiseLib.limitValue(rightPower, 0.5);
+//        double rightPower = rightPid.update(mDrive.getRightTicks() - offset, rightTick);
+//        rightPower = CruiseLib.limitValue(rightPower, 0.5);
 
-        mDrive.setLeftRightPower(0, rightPower);
+//        mDrive.setLeftRightPower(0, rightPower);
     }
 
     @Override
     public boolean isFinished() {
-        return Math.abs(rightTick - (mDrive.getRightTicks() - offset)) < 5 || time.milliseconds() > timeOut;
+        return false;
     }
 
     @Override
     public void done() {
-        mDrive.setLeftRightPower(0.0, 0.0);
+//        mDrive.setLeftRightPower(0.0, 0.0);
     }
 }

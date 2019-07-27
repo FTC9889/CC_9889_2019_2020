@@ -75,7 +75,7 @@ public class Autonomous extends AutoModeBase {
         runAction(new DriveMotionProfile(16, 0));
         runAction(new IntakeInFront(30, 5000, true));
         ThreadAction(new LiftDown());
-        ThreadAction(new DumperCollecting());
+//        ThreadAction(new DumperCollecting());
         runAction(new MarkerDumper());
         runAction(new MarkerDumperUp());
         Robot.getCamera().setCameraPosition(Camera.CameraPositions.TELEOP);
@@ -135,7 +135,7 @@ public class Autonomous extends AutoModeBase {
 
         // Drive to Crater
 
-        ThreadAction(new DumperCollecting());
+//        ThreadAction(new DumperCollecting());
 
         runAction(new IntakeUp());
 

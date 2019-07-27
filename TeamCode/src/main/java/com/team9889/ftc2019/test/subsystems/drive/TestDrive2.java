@@ -16,30 +16,30 @@ public class TestDrive2 extends Team9889Linear{
     public void runOpMode() {
         waitForStart(true);
 
-        telemetry.addData("left", Robot.getDrive().getLeftDistance() );
-        telemetry.addData("right", Robot.getDrive().getRightDistance() );
+//        telemetry.addData("left", Robot.getDrive().getLeftDistance() );
+//        telemetry.addData("right", Robot.getDrive().getRightDistance() );
         telemetry.update();
 
-        Robot.getDrive().setLeftRightPosition(10, 10);
+//        Robot.getDrive().setLeftRightPosition(10, 10);
 
         /*double degrees = -90;
         Robot.getDrive().setLeftRightPosition( -(2 * Constants.WheelbaseWidth * Math.toRadians(degrees))/Math.PI,
                 (2 * Constants.WheelbaseWidth * Math.toRadians(degrees))/Math.PI);*/
 
-        Robot.getDrive().setLeftRightPosition(21.75,-21.75);
+//        Robot.getDrive().setLeftRightPosition(21.75,-21.75);
         sleep(500);
-        Robot.getDrive().setLeftRightPosition(-10,-10);
+//        Robot.getDrive().setLeftRightPosition(-10,-10);
         sleep(500);
-        Robot.getDrive().setLeftRightPosition(52,-52);
+//        Robot.getDrive().setLeftRightPosition(52,-52);
         sleep(500);
-        Robot.getDrive().setLeftRightPosition(10,10);
+//        Robot.getDrive().setLeftRightPosition(10,10);
 
-        telemetry.addData("left", Robot.getDrive().getLeftDistance() );
-        telemetry.addData("right", Robot.getDrive().getRightDistance() );
+//        telemetry.addData("left", Robot.getDrive().getLeftDistance() );
+//        telemetry.addData("right", Robot.getDrive().getRightDistance() );
         telemetry.update();
 
         sleep(500);
-        Robot.getDrive().setLeftRightPosition(-300,300);
+//        Robot.getDrive().setLeftRightPosition(-300,300);
 
         sleep(5000);
     }

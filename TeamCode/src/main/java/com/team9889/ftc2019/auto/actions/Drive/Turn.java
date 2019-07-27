@@ -37,12 +37,12 @@ public class Turn extends Action {
 
     @Override
     public void update() {
-        double imuAngle = mDrive.getAngle().getTheda(AngleUnit.DEGREES);
-        double leftPower = anglePid.update(imuAngle, angle);
-        leftPower = CruiseLib.limitValue(leftPower, .5);
-        mDrive.setLeftRightPower(leftPower, -leftPower);
+//        double imuAngle = mDrive.getAngle().getTheda(AngleUnit.DEGREES);
+//        double leftPower = anglePid.update(imuAngle, angle);
+//        leftPower = CruiseLib.limitValue(leftPower, .5);
+//        mDrive.setLeftRightPower(leftPower, -leftPower);
 
-        RobotLog.a("Angle of Gyro: " + String.valueOf(imuAngle));
+//        RobotLog.a("Angle of Gyro: " + String.valueOf(imuAngle));
 
         if (Math.abs(anglePid.getError()) < 2 ){
             counter ++;
@@ -56,6 +56,6 @@ public class Turn extends Action {
 
     @Override
     public void done() {
-        mDrive.setLeftRightPower(0, 0);
+//        mDrive.setLeftRightPower(0, 0);
     }
 }

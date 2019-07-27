@@ -17,7 +17,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * Created by joshua9889 on 3/28/2018.
  */
 
-public class HangingLift extends Subsystem {
+public class HangingLift {
 
     private DcMotorEx liftMotor;
     private CRServo hook;
@@ -32,7 +32,7 @@ public class HangingLift extends Subsystem {
     private LiftStates currentState = LiftStates.NULL;
     private LiftStates wantedState = LiftStates.NULL;
 
-    @Override
+//    @Override
     public void init(HardwareMap hardwareMap, boolean auto) {
         liftMotor = hardwareMap.get(DcMotorEx.class, Constants.HangingLiftConstants.kLiftId);
 
@@ -54,12 +54,12 @@ public class HangingLift extends Subsystem {
         }
     }
 
-    @Override
+//    @Override
     public void zeroSensors() {
         offset = getHeightTicks();
     }
 
-    @Override
+//    @Override
     public void outputToTelemetry(Telemetry telemetry) {
         telemetry.addData("Offset", offset);
         telemetry.addData("Height of lift", getHeight());
@@ -74,7 +74,7 @@ public class HangingLift extends Subsystem {
         telemetry.addData("Current State", currentState);
     }
 
-    @Override
+//    @Override
     public void update(ElapsedTime time) {
         getLowerLimitPressed();
 
@@ -124,7 +124,7 @@ public class HangingLift extends Subsystem {
         }
     }
 
-    @Override
+//    @Override
     public void stop() {
         setLiftState(LiftStates.NULL);
     }

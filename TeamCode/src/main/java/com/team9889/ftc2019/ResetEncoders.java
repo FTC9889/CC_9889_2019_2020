@@ -14,6 +14,6 @@ public class ResetEncoders extends Team9889Linear{
     public void runOpMode() {
         waitForStart(false);
 
-        Robot.zeroSensors();
+//        Robot.zeroSensors();
     }
 }

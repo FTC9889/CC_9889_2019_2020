@@ -9,36 +9,36 @@ import com.team9889.ftc2019.subsystems.Robot;
 /**
  * Created by MannoMation on 2/27/2019.
  */
-public class DumperCollecting extends Action {
+public class DumperCollecting {
 
     private ElapsedTime timer = new ElapsedTime();
 
-    @Override
+    //@Override
     public void setup(String args) {
 
     }
 
-    @Override
+   // @Override
     public void start() {
         Robot.getInstance().getDumper().setDumperStates(Dumper.dumperStates.COLLECTING);
         timer.reset();
     }
 
-    @Override
+   // @Override
     public void update() {
         if (timer.milliseconds() > 1000)
-            Robot.getInstance().getLift().setLiftState(LiftStates.DOWN);
+     //       Robot.getInstance().getLift().setLiftState(LiftStates.DOWN);
 
-        Robot.getInstance().getLift().update(timer);
+  //      Robot.getInstance().getLift().update(timer);
         Robot.getInstance().getDumper().update(timer);
     }
 
-    @Override
-    public boolean isFinished() {
-        return timer.milliseconds() > 3000 && Robot.getInstance().getLift().getCurrentState() == LiftStates.DOWN;
-    }
+//    @Override
+  //  public boolean isFinished() {
+    //    return timer.milliseconds() > 3000 && Robot.getInstance().getLift().getCurrentState() == LiftStates.DOWN;
+    //}
 
-    @Override
+   // @Override
     public void done() {
 
     }

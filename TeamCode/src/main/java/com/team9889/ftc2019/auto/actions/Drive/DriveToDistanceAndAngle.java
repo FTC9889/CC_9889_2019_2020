@@ -44,7 +44,7 @@ public class DriveToDistanceAndAngle extends Action {
 
         distance = getAverageDistance() + distance;
 
-        mDrive.DriveControlState(Drive.DriveControlStates.POSITION);
+//        mDrive.DriveControlState(Drive.DriveControlStates.POSITION);
 
         Timer.reset();
     }
@@ -61,11 +61,11 @@ public class DriveToDistanceAndAngle extends Action {
         if(currentMax < .8)
             currentMax += maxIncrement;
 
-        double currentAngle = mDrive.getAngle().getTheda(AngleUnit.DEGREES);
-        double steer = anglePid.update(currentAngle, angle);
-        steer = Math.sin(steer);
+//        double currentAngle = mDrive.getAngle().getTheda(AngleUnit.DEGREES);
+//        double steer = anglePid.update(currentAngle, angle);
+//        steer = Math.sin(steer);
 
-        mDrive.setThrottleSteerPower(throttle, steer);
+//        mDrive.setThrottleSteerPower(throttle, steer);
     }
 
     @Override
@@ -77,10 +77,10 @@ public class DriveToDistanceAndAngle extends Action {
     @Override
     public void done() {
         mDrive.setThrottleSteerPower(0,0);
-        mDrive.DriveControlState(Drive.DriveControlStates.OPERATOR_CONTROL);
+//        mDrive.DriveControlState(Drive.DriveControlStates.OPERATOR_CONTROL);
     }
 
     private double getAverageDistance(){
-        return (mDrive.getLeftDistance() + mDrive.getRightDistance()) / 2.0;
+        return 10;
     }
 }

@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 /**
  * Created by MannoMation on 2/15/2019.
  */
-public class Dumper extends Subsystem{
+public class Dumper{
 
     private Servo dumperRotator;
 
@@ -25,7 +25,7 @@ public class Dumper extends Subsystem{
 
     public dumperStates wantedDumperState = dumperStates.NULL;
 
-    @Override
+//    @Override
     public void init(HardwareMap hardwareMap, boolean auto) {
         dumperRotator = hardwareMap.get(Servo.class, Constants.DumperConstants.kDumperRotatorId);
 
@@ -34,18 +34,18 @@ public class Dumper extends Subsystem{
         }
     }
 
-    @Override
+//    @Override
     public void zeroSensors() {
 
     }
 
-    @Override
+//    @Override
     public void outputToTelemetry(Telemetry telemetry) {
         telemetry.addData("Dumper Rotator Position", getDumperRotatorPosition());
         telemetry.addData("Wanted Dumper Position", wantedDumperState);
     }
 
-    @Override
+//    @Override
     public void update(ElapsedTime time) {
         switch (wantedDumperState) {
             case SCORING:
@@ -69,7 +69,7 @@ public class Dumper extends Subsystem{
             case DUMP:
                 setDumperRotatorPosition(0.025);
                 if (collectingTimer.milliseconds() > 1500) {
-                    Robot.getInstance().setScorerStates(Robot.scorerStates.COLLECTING);
+//                    Robot.getInstance().setScorerStates(Robot.scorerStates.COLLECTING);
                     dumperTimer.reset();
                 }
                 break;
@@ -92,6 +92,6 @@ public class Dumper extends Subsystem{
         return dumperRotator.getPosition();
     }
 
-    @Override
+//    @Override
     public void stop() {}
 }

@@ -54,7 +54,7 @@ public class AutonomousDepotSideMotionProfile extends AutoModeBase {
         runAction(new DriveMotionProfile(17, 0));
         runAction(new IntakeInFront(22, 5000, true));
         runAction(new Turn(new Rotation2d(0, AngleUnit.DEGREES), 1000));
-        ThreadAction(new DumperCollecting());
+//        ThreadAction(new DumperCollecting());
         runAction(new Outtake(-1, 1000));
         runAction(new IntakeUp());
         Robot.getCamera().setCameraPosition(Camera.CameraPositions.TELEOP);
@@ -84,26 +84,26 @@ public class AutonomousDepotSideMotionProfile extends AutoModeBase {
         }
 
         // Score Sample
-        if (Robot.autoSampled) {
-            runAction(new IntakeGrabbing());
-            runAction(new Wait(250));
-            runAction(new Turn(new Rotation2d(0, AngleUnit.DEGREES), 1000));
-
-//            if(middle)
-//                runAction(new DriveToDistanceAndAngle(-2, 0, 2000));
-            if (right)
-                runAction(new DriveToDistanceAndAngle(-4, 0, 2000));
-            else
-                runAction(new DriveToDistanceAndAngle(-6, 0, 2000));
-
-            runAction(new Wait(250));
-            runAction(new DumperScoring());
-//            ThreadAction(new RobotUpdate(1900));
-            ThreadAction(new Turn(new Rotation2d(0, AngleUnit.DEGREES), 1000));
-            runAction(new Wait(2000));
-            Robot.getDumper().collectingTimer.reset();
-            runAction(new DumperDump());
-        }
+//        if (Robot.autoSampled) {
+//            runAction(new IntakeGrabbing());
+//            runAction(new Wait(250));
+//            runAction(new Turn(new Rotation2d(0, AngleUnit.DEGREES), 1000));
+//
+////            if(middle)
+////                runAction(new DriveToDistanceAndAngle(-2, 0, 2000));
+//            if (right)
+//                runAction(new DriveToDistanceAndAngle(-4, 0, 2000));
+//            else
+//                runAction(new DriveToDistanceAndAngle(-6, 0, 2000));
+//
+//            runAction(new Wait(250));
+//            runAction(new DumperScoring());
+////            ThreadAction(new RobotUpdate(1900));
+//            ThreadAction(new Turn(new Rotation2d(0, AngleUnit.DEGREES), 1000));
+//            runAction(new Wait(2000));
+//            Robot.getDumper().collectingTimer.reset();
+//            runAction(new DumperDump());
+//        }
 
 
         // Drive to Crater

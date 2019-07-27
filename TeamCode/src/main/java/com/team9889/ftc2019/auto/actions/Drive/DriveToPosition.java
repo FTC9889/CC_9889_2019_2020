@@ -38,30 +38,29 @@ public class DriveToPosition extends Action {
         leftPid = new PID(0.005, 0.0000001, 0.001);
         rightPid = new PID(0.005, 0.0000001, 0.001);
 
-        mDrive.DriveControlState(Drive.DriveControlStates.POWER);
-        leftTick = mDrive.getLeftTicks() + (int)(left / Constants.DriveConstants.ENCODER_TO_DISTANCE_RATIO);
-        rightTick = mDrive.getRightTicks() + (int)(right / Constants.DriveConstants.ENCODER_TO_DISTANCE_RATIO);
+//        mDrive.DriveControlState(Drive.DriveControlStates.POWER);
+//        leftTick = mDrive.getLeftTicks() + (int)(left / Constants.DriveConstants.ENCODER_TO_DISTANCE_RATIO);
+//        rightTick = mDrive.getRightTicks() + (int)(right / Constants.DriveConstants.ENCODER_TO_DISTANCE_RATIO);
         time = new ElapsedTime();
     }
 
     @Override
     public void update() {
-        double LeftPower = leftPid.update(mDrive.getLeftTicks(), leftTick);
-        double RightPower = rightPid.update(mDrive.getRightTicks(), rightTick);
-        LeftPower = CruiseLib.limitValue(LeftPower, .7);
-        RightPower = CruiseLib.limitValue(RightPower, .7);
+//        double LeftPower = leftPid.update(mDrive.getLeftTicks(), leftTick);
+//        double RightPower = rightPid.update(mDrive.getRightTicks(), rightTick);
+//        LeftPower = CruiseLib.limitValue(LeftPower, .7);
+//        RightPower = CruiseLib.limitValue(RightPower, .7);
 
-        mDrive.setLeftRightPower(LeftPower, RightPower);
+//        mDrive.setLeftRightPower(LeftPower, RightPower);
     }
 
     @Override
     public boolean isFinished() {
-        return (Math.abs(leftTick - mDrive.getLeftTicks()) < 5 &&
-                Math.abs(rightTick - mDrive.getRightTicks()) < 5) || time.milliseconds() > timeOut;
+        return false;
     }
 
     @Override
     public void done() {
-        this.mDrive.setLeftRightPower(0.0, 0.0);
+//        this.mDrive.setLeftRightPower(0.0, 0.0);
     }
 }

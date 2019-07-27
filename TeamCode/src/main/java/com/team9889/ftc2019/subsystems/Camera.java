@@ -14,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * Created by MannoMation on 10/27/2018.
  */
 
-public class Camera extends Subsystem{
+public class Camera{
 
     private Servo xAxis;
     private Servo yAxis;
@@ -35,7 +35,7 @@ public class Camera extends Subsystem{
     }
 
 
-    @Override
+//    @Override
     public void init(HardwareMap hardwareMap, boolean auto) {
         xAxis = hardwareMap.get(Servo.class, Constants.CameraConstants.kCameraXAxisId);
         yAxis = hardwareMap.get(Servo.class, Constants.CameraConstants.kCameraYAxisId);
@@ -63,18 +63,18 @@ public class Camera extends Subsystem{
         }
     }
 
-    @Override
+//    @Override
     public void zeroSensors() {
 
     }
 
-    @Override
+//    @Override
     public void outputToTelemetry(Telemetry telemetry) {
         telemetry.addData("X Axis", getXAxis());
         telemetry.addData("Y Axis", getYAxis());
     }
 
-    @Override
+//    @Override
     public void update(ElapsedTime time) {
         setXYAxisPosition();
     }
@@ -155,7 +155,7 @@ public class Camera extends Subsystem{
         }
     }
 
-    @Override
+//    @Override
     public void stop() {
         detector.disable();
     }

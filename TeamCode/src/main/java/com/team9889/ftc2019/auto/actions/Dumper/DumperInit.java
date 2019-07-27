@@ -7,7 +7,7 @@ import com.team9889.ftc2019.subsystems.Robot;
 /**
  * Created by MannoMation on 2/27/2019.
  */
-public class DumperInit extends Action{
+public class DumperInit{
 
     private ElapsedTime timer = new ElapsedTime();
     private double timeOut;
@@ -16,29 +16,29 @@ public class DumperInit extends Action{
         this.timeOut = timeOut;
     }
 
-    @Override
+//    @Override
     public void setup(String args) {
 
     }
 
-    @Override
+//    @Override
     public void start() {
-        Robot.getInstance().setScorerStates(Robot.scorerStates.AUTONOMOUS);
+//        Robot.getInstance().setScorerStates(Robot.scorerStates.AUTONOMOUS);
         timer.reset();
     }
 
-    @Override
+//    @Override
     public void update() {
-        Robot.getInstance().update(timer);
+ //       Robot.getInstance().update(timer);
     }
 
-    @Override
+ //   @Override
     public boolean isFinished() {
         return timer.milliseconds() > timeOut;
     }
 
-    @Override
+ //   @Override
     public void done() {
-        Robot.getInstance().getLift().setLiftPower(0);
+ //       Robot.getInstance().getLift().setLiftPower(0);
     }
 }

@@ -18,7 +18,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * Created by licorice17 on 9/14/2018.
  */
 
-public class Intake extends Subsystem {
+public class Intake {
 
     // Hardware
     private DcMotorEx intakeMotor, extender;
@@ -55,7 +55,7 @@ public class Intake extends Subsystem {
         return intakeOperatorControl;
     }
 
-    @Override
+ //   @Override
     public void init(HardwareMap hardwareMap, boolean auto) {
         intakeMotor = hardwareMap.get(DcMotorEx.class, Constants.IntakeConstants.kIntakeMotorId);
         extender = hardwareMap.get(DcMotorEx.class, Constants.IntakeConstants.kIntakeExtenderId);
@@ -88,12 +88,12 @@ public class Intake extends Subsystem {
 
     }
 
-    @Override
+//    @Override
     public void zeroSensors() {
         offset = getIntakeExtenderPositionTicks();
     }
 
-    @Override
+//    @Override
     public void outputToTelemetry(Telemetry telemetry) {
         telemetry.addData("PID Output", extenderPID.getOutput());
 
@@ -114,7 +114,7 @@ public class Intake extends Subsystem {
         telemetry.addData("Current Rotator State", currentIntakeRotatorState);
     }
 
-    @Override
+//    @Override
     public void update(ElapsedTime time) {
         switch (wantedIntakeState) {
             case INTAKING:
@@ -197,7 +197,7 @@ public class Intake extends Subsystem {
                     intakeOperatorControl = false;
                     setIntakeRotatorState(RotatorStates.UP);
                     setIntakeExtenderPower(1);
-                    Robot.getInstance().transitionDone = true;
+//                    Robot.getInstance().transitionDone = true;
                 } else if(transitionTimer.milliseconds() > 1000 && transitionTimer.milliseconds() < 1200) {
                     setIntakeExtenderPower(0);
                     setIntakePower(0);
@@ -214,7 +214,7 @@ public class Intake extends Subsystem {
         setIntakeGatePosition();
     }
 
-    @Override
+//    @Override
     public void stop() {
         setIntakePower(0);
     }

@@ -27,8 +27,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 public class AutonomousCraterSide extends AutoModeBase {
     @Override
     public void run(AutoModeBase.Side side, boolean doubleSample, boolean scoreSample) {
-        Robot.setScorerStates(com.team9889.ftc2019.subsystems.Robot.scorerStates.STORED);
-        Robot.update(matchTime);
+//        Robot.setScorerStates(com.team9889.ftc2019.subsystems.Robot.scorerStates.STORED);
+//        Robot.update(matchTime);
         Robot.getCamera().setCameraPosition(Camera.CameraPositions.FRONTCENTER);
 //        runAction(new Land2(2500));
         runAction(new Wait(500));
@@ -75,14 +75,14 @@ public class AutonomousCraterSide extends AutoModeBase {
 
         // Dump Marker
         runAction(new DumperScoring());
-        runAction(new DumperInit(2000));
+//        runAction(new DumperInit(2000));
 
         // Park in Crater
         ThreadAction(new DumperScoring());
         runAction(new DriveToDistanceAndAngle(40, 45, 4000));
 
-        Robot.setScorerStates(com.team9889.ftc2019.subsystems.Robot.scorerStates.STORED);
-        Robot.update(matchTime);
+//        Robot.setScorerStates(com.team9889.ftc2019.subsystems.Robot.scorerStates.STORED);
+//        Robot.update(matchTime);
 
         runAction(new IntakeInFront(20, 2000, true));
 
