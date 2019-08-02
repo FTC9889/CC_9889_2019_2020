@@ -2,7 +2,7 @@ package com.team9889.lib.control.math.cartesian;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team9889.ftc2019.Constants;
-import com.team9889.ftc2019.auto.actions.Action;
+//import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.Drive;
 import com.team9889.ftc2019.subsystems.Robot;
 import com.team9889.lib.android.FileWriter;
@@ -16,7 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 /**
  * Created by joshua9889 on 3/25/2019.
  */
-public class Arc extends Action{
+public class Arc {
     public static void main(String... args){
 
         double distance = 20;
@@ -99,7 +99,7 @@ public class Arc extends Action{
         System.out.println();
     }
 
-    private Drive mDrive = Robot.getInstance().getDrive();
+//    private Drive mDrive = Robot.getInstance().getDrive();
 
     private double distance;
     private Rotation2d angle;
@@ -124,10 +124,10 @@ public class Arc extends Action{
         this.angle = angle;
     }
 
-    @Override
+//    @Override
     public void setup(String args) {}
 
-    @Override
+//    @Override
     public void start() {
         // Check if we are running in a simulation
 //        mDrive.DriveControlState(Drive.DriveControlStates.MOTION_PROFILE);
@@ -151,7 +151,7 @@ public class Arc extends Action{
         }
     }
 
-    @Override
+//    @Override
     public void update() {
         double leftPosition, rightPosition;
 //        leftPosition = mDrive.getLeftDistance() - leftOffset;
@@ -166,12 +166,12 @@ public class Arc extends Action{
 //        mDrive.setLeftRightPower(leftSpeed + steer, rightSpeed - steer);
     }
 
-    @Override
+//    @Override
     public boolean isFinished() {
         return (leftMotionProfileFollower.isFinished() && rightMotionProfileFollower.isFinished());
     }
 
-    @Override
+//    @Override
     public void done() {
 //        mDrive.setLeftRightPower(0,0);
     }

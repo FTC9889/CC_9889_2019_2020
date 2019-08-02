@@ -1,5 +1,7 @@
 package com.team9889.lib.hardware;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Hardware;
 import com.team9889.ftc2019.subsystems.Robot;
@@ -13,16 +15,22 @@ import org.openftc.revextensions2.RevBulkData;
 
 public class Motor {
     public ExpansionHubMotor motor;
-    private int position;
+    private int position, offsetPosition = 0;
     private double currentPower = 0;
     private double velocity;
     private double ratio;
     public static int numHardwareUsesThisUpdate = 0;
 
-    public Motor(HardwareMap hardwareMap, String id, double ratio){
+    public Motor(HardwareMap hardwareMap, String id, double ratio, DcMotorSimple.Direction direction,
+                 boolean resetEncoder){
         this.motor = (ExpansionHubMotor) hardwareMap.dcMotor.get(id);
         this.ratio = ratio;
         numHardwareUsesThisUpdate ++;
+        this.motor.setDirection(direction);
+        if(resetEncoder){
+            position = motor.getCurrentPosition();
+            this.resetEncoder();
+        }
     }
 
     public Motor(HardwareMap hardwareMap, String id) {
@@ -40,7 +48,7 @@ public class Motor {
     }
 
     public int getPosition(){
-        return position;
+        return position - offsetPosition;
     }
 
     public double getVelocity(){
@@ -50,5 +58,9 @@ public class Motor {
     public void update(RevBulkData bulkData){
         position = bulkData.getMotorCurrentPosition(motor);
         velocity = bulkData.getMotorVelocity(motor);
+    }
+
+    public void resetEncoder(){
+        offsetPosition = position;
     }
 }

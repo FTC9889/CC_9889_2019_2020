@@ -22,8 +22,6 @@ import static com.team9889.ftc2019.Constants.DriveConstants.ENCODER_TO_DISTANCE_
 
 public class Drive extends Subsystem{
 
-    Robot robot = Robot.getInstance();
-
     @Override
     public void init(boolean auto) {
 
@@ -39,16 +37,16 @@ public class Drive extends Subsystem{
 
     }
 
-    private void setLeftRightPower(double left, double right){
-        robot.fLDrive.setPower(left);
-        robot.bLDrive.setPower(left);
-        robot.fRDrive.setPower(right);
-        robot.bRDrive.setPower(right);
+    public static void setLeftRightPower(double left, double right) {
+        Robot.getInstance().fLDrive.setPower(CruiseLib.limitValue(left, 1, -1));
+        Robot.getInstance().bLDrive.setPower(CruiseLib.limitValue(left, 1, -1));
+        Robot.getInstance().fRDrive.setPower(CruiseLib.limitValue(right, 1, -1));
+        Robot.getInstance().bRDrive.setPower(CruiseLib.limitValue(right, 1, -1));
     }
 
-    public void setThrottleSteerPower(double throttle, double steer){
-        double left = throttle + steer;
-        double right = throttle - steer;
+    public static void setThrottleSteerPower(double throttle, double turn){
+        double left = throttle + turn;
+        double right = throttle - turn;
         setLeftRightPower(left, right);
     }
 }

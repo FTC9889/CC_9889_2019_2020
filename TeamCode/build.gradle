@@ -13,5 +13,5 @@ apply from: '../build.common.gradle'
 dependencies {
     //NOTE: this is the correct version, the below screenshot is outdated
     api 'org.openftc:rev-extensions-2:1.1'
-    api 'org.openftc:ftc-opmode-tuner-common:0.22'
+//    api 'org.openftc:ftc-opmode-tuner-common:0.22'
 }

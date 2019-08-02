@@ -1,5 +1,7 @@
 package com.team9889.ftc2019.subsystems;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
@@ -42,13 +44,6 @@ public class Robot{
 
     private static Robot mInstance = null;
 
-    private Drive mDrive = new Drive();
-    private Camera mCamera = new Camera();
-
-    private List<Object> subsystems = Arrays.asList(
-            mDrive, mCamera// Add more subsystems here as needed
-    );
-
     public static Robot getInstance() {
         if (mInstance == null)
             mInstance = new Robot();
@@ -56,11 +51,14 @@ public class Robot{
         return mInstance;
     }
 
+    private Drive mDrive = new Drive();
+
     public void init(HardwareMap hardwareMap, boolean auto){
         timer.reset();
 
         Date currentData = new Date();
         SimpleDateFormat format = new SimpleDateFormat("dd.M.yyyy hh:mm:ss");
+
         RobotLog.a("Robot Init Started at " + format.format(currentData));
 
         RevExtensions2.init();
@@ -68,10 +66,14 @@ public class Robot{
         revHubMaster = hardwareMap.get(ExpansionHubEx.class, Constants.kRevHubMaster);
         revHubSlave = hardwareMap.get(ExpansionHubEx.class, Constants.kRevHubSlave);
 
-        fLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveMasterId);
-        bLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveSlaveId);
-        fRDrive = new Motor(hardwareMap, Constants.DriveConstants.kRightDriveMasterId);
-        bRDrive = new Motor(hardwareMap, Constants.DriveConstants.kRightDriveSlaveId);
+        fLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveMasterId, 1,
+                DcMotorSimple.Direction.REVERSE, true);
+        bLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveSlaveId, 1,
+                DcMotorSimple.Direction.REVERSE, true);
+        fRDrive = new Motor(hardwareMap, Constants.DriveConstants.kRightDriveMasterId, 1,
+                DcMotorSimple.Direction.FORWARD, true);
+        bRDrive = new Motor(hardwareMap, Constants.DriveConstants.kRightDriveSlaveId, 1,
+                DcMotorSimple.Direction.FORWARD, true);
         intake = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeMotorId);
     }
 
@@ -111,23 +113,20 @@ public class Robot{
         }
     }
 
-    public Drive getDrive(){
-        return mDrive;
-    }
-    public Dumper getDumper(){
-        return null;
-    }
-    public Intake getIntake(){
-        return null;
-    }
-    public ScoringLift getLift(){
-        return null;
-    }
-    public HangingLift getHangingLift(){
-        return null;
-    }
-    public Camera getCamera(){
-        return null;
-    }
+//    public Dumper getDumper(){
+//        return null;
+//    }
+//    public Intake getIntake(){
+//        return null;
+//    }
+//    public ScoringLift getLift(){
+//        return null;
+//    }
+//    public HangingLift getHangingLift(){
+//        return null;
+//    }
+//    public Camera getCamera(){
+//        return null;
+//    }
 
 }
