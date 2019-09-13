@@ -22,11 +22,15 @@ public class Motor {
     public static int numHardwareUsesThisUpdate = 0;
 
     public Motor(HardwareMap hardwareMap, String id, double ratio, DcMotorSimple.Direction direction,
-                 boolean resetEncoder){
+                 boolean Brake, boolean RunWithoutEncoder, boolean resetEncoder){
         this.motor = (ExpansionHubMotor) hardwareMap.dcMotor.get(id);
         this.ratio = ratio;
         numHardwareUsesThisUpdate ++;
         this.motor.setDirection(direction);
+        if (Brake)
+            this.motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        if (RunWithoutEncoder)
+            this.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         if(resetEncoder){
             position = motor.getCurrentPosition();
             this.resetEncoder();

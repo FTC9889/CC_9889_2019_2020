@@ -1,8 +1,12 @@
 package com.team9889.ftc2019.subsystems;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
 import com.team9889.ftc2019.Constants;
@@ -31,14 +35,25 @@ public class Robot{
     // motors (remember to stop motors)
     public Motor fLDrive, fRDrive, bLDrive, bRDrive;
     public Motor intake;
+    public Motor hangingLiftMotor;
+    public Motor intakeMotor, intakeExtender;
+
+    public CRServo hangingHook;
+    public Servo intakeRotator, intakeGate, markerDumper;
+    public Servo xAxis, yAxis;
+
+    public DigitalChannel hangingLowerLimit;
+    public DigitalChannel intakeInSwitch;
 
     RevBulkData bulkDataMaster, bulkDataSlave;
     ExpansionHubEx revHubMaster, revHubSlave;
 
+    public HardwareMap hardwareMap;
+
     private int lastLeftPosition, lastRightPosition;
     TankDriveKinematicModel model = new TankDriveKinematicModel();
 
-    private static ElapsedTime timer = new ElapsedTime();
+    public static ElapsedTime timer = new ElapsedTime();
 
     public double[] pose = new double[4];
 
@@ -52,9 +67,11 @@ public class Robot{
     }
 
     private Drive mDrive = new Drive();
+    private MecanumDriveTest mMecanumDrive = new MecanumDriveTest();
 
     public void init(HardwareMap hardwareMap, boolean auto){
         timer.reset();
+        this.hardwareMap = hardwareMap;
 
         Date currentData = new Date();
         SimpleDateFormat format = new SimpleDateFormat("dd.M.yyyy hh:mm:ss");
@@ -67,14 +84,35 @@ public class Robot{
         revHubSlave = hardwareMap.get(ExpansionHubEx.class, Constants.kRevHubSlave);
 
         fLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveMasterId, 1,
-                DcMotorSimple.Direction.REVERSE, true);
+                DcMotorSimple.Direction.REVERSE, false, false, true);
         bLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveSlaveId, 1,
-                DcMotorSimple.Direction.REVERSE, true);
+                DcMotorSimple.Direction.REVERSE, false, false, true);
         fRDrive = new Motor(hardwareMap, Constants.DriveConstants.kRightDriveMasterId, 1,
-                DcMotorSimple.Direction.FORWARD, true);
+                DcMotorSimple.Direction.FORWARD, false, false, true);
         bRDrive = new Motor(hardwareMap, Constants.DriveConstants.kRightDriveSlaveId, 1,
-                DcMotorSimple.Direction.FORWARD, true);
-        intake = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeMotorId);
+                DcMotorSimple.Direction.FORWARD, false, false, true);
+
+        hangingLiftMotor = new Motor(hardwareMap, Constants.HangingLiftConstants.kLiftId, 1,
+                DcMotorSimple.Direction.REVERSE, true, false, true);
+
+        hangingHook = hardwareMap.crservo.get(Constants.HangingLiftConstants.kHookId);
+
+        hangingLowerLimit = hardwareMap.get(DigitalChannel.class, Constants.HangingLiftConstants.kLiftLowerLimitSensorId);
+
+        intakeMotor = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeMotorId, 1,
+                DcMotorSimple.Direction.REVERSE, false, false, false);
+        intakeExtender = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeExtenderId, 1,
+                DcMotorSimple.Direction.REVERSE, true, true, false);
+
+        intakeRotator = hardwareMap.get(Servo.class, Constants.IntakeConstants.kIntakeRotatorId);
+        intakeGate = hardwareMap.get(Servo.class, Constants.IntakeConstants.kIntakeGate);
+        markerDumper = hardwareMap.get(Servo.class, Constants.IntakeConstants.kMarkerDumper);
+
+        intakeInSwitch = hardwareMap.get(DigitalChannel.class, Constants.IntakeConstants.kIntakeInSwitchId);
+
+        xAxis = hardwareMap.get(Servo.class, Constants.CameraConstants.kCameraXAxisId);
+        yAxis = hardwareMap.get(Servo.class, Constants.CameraConstants.kCameraYAxisId);
+
     }
 
     boolean first = true;
@@ -113,6 +151,12 @@ public class Robot{
         }
     }
 
+    public  Drive getDrive(){
+        return mDrive;
+    }
+    public MecanumDriveTest getMecanumDrive(){
+        return mMecanumDrive;
+    }
 //    public Dumper getDumper(){
 //        return null;
 //    }

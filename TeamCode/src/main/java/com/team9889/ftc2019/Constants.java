@@ -39,6 +39,7 @@ public class Constants {
          */
         public final static double ENCODER_TO_DISTANCE_RATIO = (WheelDiameter * Math.PI) / 537.6;
         public final static double AngleToInchRatio = (Math.PI / 180.) * (WheelbaseWidth / 2.);
+        public final static double InchToTick = (Math.PI * WheelDiameter) * 537.6;
     }
 
     public static void main(String[] args) {

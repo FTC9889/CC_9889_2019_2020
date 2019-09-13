@@ -14,11 +14,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * Created by MannoMation on 10/27/2018.
  */
 
-public class Camera{
-
-    private Servo xAxis;
-    private Servo yAxis;
-
+public class Camera extends Subsystem{
     private GoldAlignDetector detector;
 
     public enum GoldPositions{
@@ -35,16 +31,13 @@ public class Camera{
     }
 
 
-//    @Override
-    public void init(HardwareMap hardwareMap, boolean auto) {
-        xAxis = hardwareMap.get(Servo.class, Constants.CameraConstants.kCameraXAxisId);
-        yAxis = hardwareMap.get(Servo.class, Constants.CameraConstants.kCameraYAxisId);
-
+    @Override
+    public void init(boolean auto) {
         if (auto) {
             setCameraPosition(CameraPositions.STORED);
 
             detector = new GoldAlignDetector();
-            detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+            detector.init(Robot.getInstance().hardwareMap.appContext, CameraViewDisplay.getInstance());
             detector.useDefaults();
 
             // Optional Tuning
@@ -63,19 +56,20 @@ public class Camera{
         }
     }
 
-//    @Override
     public void zeroSensors() {
 
     }
 
-//    @Override
+
+    @Override
     public void outputToTelemetry(Telemetry telemetry) {
         telemetry.addData("X Axis", getXAxis());
         telemetry.addData("Y Axis", getYAxis());
     }
 
-//    @Override
-    public void update(ElapsedTime time) {
+
+    @Override
+    public void update() {
         setXYAxisPosition();
     }
 
@@ -89,16 +83,16 @@ public class Camera{
     }
 
     private void setXYAxisPosition() {
-        xAxis.setPosition(xPosition);
-        yAxis.setPosition(yPosition);
+        Robot.getInstance().xAxis.setPosition(xPosition);
+        Robot.getInstance().yAxis.setPosition(yPosition);
     }
 
     private double getXAxis(){
-        return (xAxis.getPosition());
+        return (Robot.getInstance().xAxis.getPosition());
     }
 
     private double getYAxis(){
-        return (yAxis.getPosition());
+        return (Robot.getInstance().yAxis.getPosition());
     }
 
     public boolean isGoldInfront() {
