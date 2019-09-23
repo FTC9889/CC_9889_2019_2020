@@ -1,30 +1,22 @@
 package com.team9889.ftc2019.subsystems;
 
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
 import com.team9889.ftc2019.Constants;
-import com.team9889.ftc2019.states.LiftStates;
 import com.team9889.lib.control.kinematics.TankDriveKinematicModel;
 import com.team9889.lib.hardware.Motor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.openftc.revextensions2.ExpansionHubEx;
-import org.openftc.revextensions2.ExpansionHubMotor;
 import org.openftc.revextensions2.RevBulkData;
 import org.openftc.revextensions2.RevExtensions2;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Eric on 7/26/2019.
@@ -34,16 +26,17 @@ public class Robot{
 
     // motors (remember to stop motors)
     public Motor fLDrive, fRDrive, bLDrive, bRDrive;
-    public Motor intake;
-    public Motor hangingLiftMotor;
-    public Motor intakeMotor, intakeExtender;
-
-    public CRServo hangingHook;
-    public Servo intakeRotator, intakeGate, markerDumper;
-    public Servo xAxis, yAxis;
-
-    public DigitalChannel hangingLowerLimit;
-    public DigitalChannel intakeInSwitch;
+    public Motor intakeLeft, intakeRight;
+    public Servo capServo;
+//    public Motor hangingLiftMotor;
+//    public Motor intakeMotor, intakeExtender;
+//
+//    public CRServo hangingHook;
+//    public Servo intakeRotator, intakeGate, markerDumper;
+//    public Servo xAxis, yAxis;
+//
+//    public DigitalChannel hangingLowerLimit;
+//    public DigitalChannel intakeInSwitch;
 
     RevBulkData bulkDataMaster, bulkDataSlave;
     ExpansionHubEx revHubMaster, revHubSlave;
@@ -67,7 +60,8 @@ public class Robot{
     }
 
     private Drive mDrive = new Drive();
-    private MecanumDriveTest mMecanumDrive = new MecanumDriveTest();
+    private MecanumDrive mMecanumDrive = new MecanumDrive();
+    private Intake mIntake = new Intake();
 
     public void init(HardwareMap hardwareMap, boolean auto){
         timer.reset();
@@ -92,40 +86,48 @@ public class Robot{
         bRDrive = new Motor(hardwareMap, Constants.DriveConstants.kRightDriveSlaveId, 1,
                 DcMotorSimple.Direction.FORWARD, false, false, true);
 
-        hangingLiftMotor = new Motor(hardwareMap, Constants.HangingLiftConstants.kLiftId, 1,
-                DcMotorSimple.Direction.REVERSE, true, false, true);
+        intakeLeft = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeLeftMotorId, 1,
+                DcMotorSimple.Direction.REVERSE, false, true, false);
+        intakeRight = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeRightMotorId, 1,
+                DcMotorSimple.Direction.FORWARD, false, true, false);
+        capServo = hardwareMap.get(Servo.class, Constants.IntakeConstants.kCapServo);
 
-        hangingHook = hardwareMap.crservo.get(Constants.HangingLiftConstants.kHookId);
-
-        hangingLowerLimit = hardwareMap.get(DigitalChannel.class, Constants.HangingLiftConstants.kLiftLowerLimitSensorId);
-
-        intakeMotor = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeMotorId, 1,
-                DcMotorSimple.Direction.REVERSE, false, false, false);
-        intakeExtender = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeExtenderId, 1,
-                DcMotorSimple.Direction.REVERSE, true, true, false);
-
-        intakeRotator = hardwareMap.get(Servo.class, Constants.IntakeConstants.kIntakeRotatorId);
-        intakeGate = hardwareMap.get(Servo.class, Constants.IntakeConstants.kIntakeGate);
-        markerDumper = hardwareMap.get(Servo.class, Constants.IntakeConstants.kMarkerDumper);
-
-        intakeInSwitch = hardwareMap.get(DigitalChannel.class, Constants.IntakeConstants.kIntakeInSwitchId);
-
-        xAxis = hardwareMap.get(Servo.class, Constants.CameraConstants.kCameraXAxisId);
-        yAxis = hardwareMap.get(Servo.class, Constants.CameraConstants.kCameraYAxisId);
+//        hangingLiftMotor = new Motor(hardwareMap, Constants.HangingLiftConstants.kLiftId, 1,
+//                DcMotorSimple.Direction.REVERSE, true, false, true);
+//
+//        hangingHook = hardwareMap.crservo.get(Constants.HangingLiftConstants.kHookId);
+//
+//        hangingLowerLimit = hardwareMap.get(DigitalChannel.class, Constants.HangingLiftConstants.kLiftLowerLimitSensorId);
+//
+//        intakeMotor = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeMotorId, 1,
+//                DcMotorSimple.Direction.REVERSE, false, false, false);
+//        intakeExtender = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeExtenderId, 1,
+//                DcMotorSimple.Direction.REVERSE, true, true, false);
+//
+//        intakeRotator = hardwareMap.get(Servo.class, Constants.IntakeConstants.kIntakeRotatorId);
+//        intakeGate = hardwareMap.get(Servo.class, Constants.IntakeConstants.kIntakeGate);
+//        markerDumper = hardwareMap.get(Servo.class, Constants.IntakeConstants.kMarkerDumper);
+//
+//        intakeInSwitch = hardwareMap.get(DigitalChannel.class, Constants.IntakeConstants.kIntakeInSwitchId);
+//
+//        xAxis = hardwareMap.get(Servo.class, Constants.CameraConstants.kCameraXAxisId);
+//        yAxis = hardwareMap.get(Servo.class, Constants.CameraConstants.kCameraYAxisId);
 
     }
 
     boolean first = true;
     public void update(){
+        mMecanumDrive.update();
+
         bulkDataMaster = revHubMaster.getBulkInputData();
         bulkDataSlave = revHubSlave.getBulkInputData();
-        Motor.numHardwareUsesThisUpdate+=2;
+//        Motor.numHardwareUsesThisUpdate+=2;
 
         fRDrive.update(bulkDataMaster);
         bRDrive.update(bulkDataMaster);
-        fLDrive.update(bulkDataSlave);
-        bLDrive.update(bulkDataSlave);
-        intake.update(bulkDataSlave);
+        fLDrive.update(bulkDataMaster);
+        bLDrive.update(bulkDataMaster);
+//        intake.update(bulkDataSlave);
 
         if(!first)
             pose = model.calculateAbs((fRDrive.getPosition() - lastRightPosition) * Constants.DriveConstants.ENCODER_TO_DISTANCE_RATIO,
@@ -146,7 +148,7 @@ public class Robot{
     }
 
     public void stop(){
-        for (Motor motor:Arrays.asList(fLDrive, fRDrive, bLDrive, bRDrive, intake)) {
+        for (Motor motor:Arrays.asList(fLDrive, fRDrive, bLDrive, bRDrive, intakeLeft, intakeRight)) {
             motor.setPower(0);
         }
     }
@@ -154,15 +156,15 @@ public class Robot{
     public  Drive getDrive(){
         return mDrive;
     }
-    public MecanumDriveTest getMecanumDrive(){
+    public MecanumDrive getMecanumDrive(){
         return mMecanumDrive;
     }
 //    public Dumper getDumper(){
 //        return null;
 //    }
-//    public Intake getIntake(){
-//        return null;
-//    }
+    public Intake getIntake(){
+        return mIntake;
+    }
 //    public ScoringLift getLift(){
 //        return null;
 //    }

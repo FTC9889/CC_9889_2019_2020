@@ -8,7 +8,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * Created by Eric on 9/7/2019.
  */
 
-public class MecanumDriveTest extends Subsystem {
+public class MecanumDrive extends Subsystem {
 
     private double currentAngle, wantedAngle;
     private double xEncoderOffset, yEncoderOffset, yDirection;
@@ -16,12 +16,16 @@ public class MecanumDriveTest extends Subsystem {
 
     public boolean setStraightPositionActive = false;
     public boolean setCurvePositionActive = false;
-    private double x, y, xSpeed, ySpeed = 0;
-    private double curve, circ, distance, unit, nextMilestone, travelTotal, travelDuringMilestone = 0;
-    private double speed = .5;
+    public double x, y, xSpeed, ySpeed, lastXSpeed, lastYSpeed = 0;
+    public double curve, circ, distance, unit, nextMilestone, travelTotal, travelDuringMilestone = 0;
+    private double speed = 1;
+
+    private double curveTimerOffset = 0;
 
     private boolean xDirectionRight;
     private boolean yDirectionFoward;
+
+    public double test = 0;
 
 
     @Override
@@ -31,11 +35,13 @@ public class MecanumDriveTest extends Subsystem {
 
     @Override
     public void outputToTelemetry(Telemetry telemetry) {
-
+        telemetry.addData("encoder", Robot.getInstance().fRDrive.getPosition());
     }
 
     @Override
     public void update() {
+        test =+ 1;
+
         if (setStraightPositionActive){
             if ((Robot.getInstance().fLDrive.getPosition() + Robot.getInstance().fRDrive.getPosition() / 2) - xEncoderOffset < xPositionTicks) {
                 xSpeed = .5;
@@ -46,12 +52,14 @@ public class MecanumDriveTest extends Subsystem {
             } else
                 ySpeed = 0;
 
-            setPower(xSpeed, ySpeed, wantedAngle - currentAngle);
+                setPower(xSpeed, ySpeed, wantedAngle - currentAngle);
+                lastXSpeed = xSpeed;
+                lastYSpeed = ySpeed;
 
             if (xSpeed == 0 && ySpeed == 0 && wantedAngle == currentAngle){
                 setStraightPositionActive = false;
             }
-        }else if (setCurvePositionActive){
+        }else if (setCurvePositionActive && Robot.timer.milliseconds() > (100 + curveTimerOffset)){
             if (travelTotal > nextMilestone) {
                 double factor = (travelTotal/distance); 	//Percent distance travelled (ex: 5/50 = .1 or 10% travelled)
                 double yFactor = (1-factor); 		//Percent distance not travelled (ex: 1-5/50 = .9 or 90% not travelled)
@@ -70,7 +78,14 @@ public class MecanumDriveTest extends Subsystem {
             travelDuringMilestone += speed;			//Increase the distance travelled since the last milestone
             travelTotal += speed;				//Most likely not needed; you have a means of tracking the distance travelled.
 
-            if (travelTotal < (distance * curve)) {
+            setPower(xSpeed, ySpeed, wantedAngle);
+
+            curveTimerOffset = Robot.timer.milliseconds();
+
+            if (travelTotal > (distance * curve)) {
+                xSpeed = 0;
+                ySpeed = 0;
+                setPower(0, 0, 0);
                 setCurvePositionActive = false;
             }
         }
@@ -86,7 +101,7 @@ public class MecanumDriveTest extends Subsystem {
         yPositionTicks = yPosition * Constants.DriveConstants.InchToTick;
         wantedAngle = angle;
 
-        xEncoderOffset = Robot.getInstance().fLDrive.getPosition() + Robot.getInstance().fRDrive.getPosition() / 2;
+//        xEncoderOffset = Robot.getInstance().fLDrive.getPosition() + Robot.getInstance().fRDrive.getPosition() / 2;
         yEncoderOffset = Robot.getInstance().bLDrive.getPosition();
 
         setStraightPositionActive = true;
@@ -99,19 +114,21 @@ public class MecanumDriveTest extends Subsystem {
         wantedAngle = angle;
         this.curve = curve / 100;
 
-        if (xPositionTicks > 0)
+        if (radius > 0)
             xDirectionRight = true;
-        else if (xPositionTicks < 0)
+        else if (radius < 0)
             xDirectionRight = false;
-        if (yPositionTicks > 0)
+        if (yDirection > 0)
             yDirectionFoward = true;
-        else if (yPositionTicks < 0)
+        else if (yDirection < 0)
             yDirectionFoward = false;
 
         circ = (2 * radius) * Math.PI;
         distance = circ / 4;
         unit = distance / 100;
         nextMilestone = unit;
+
+        ySpeed = speed;
 
 
         xEncoderOffset = Robot.getInstance().fLDrive.getPosition() + Robot.getInstance().fRDrive.getPosition() / 2;

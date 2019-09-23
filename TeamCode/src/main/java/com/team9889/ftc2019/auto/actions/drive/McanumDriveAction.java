@@ -21,8 +21,8 @@ public class McanumDriveAction extends Action {
         this.end = stopAtEnd;
     }
 
-    public McanumDriveAction(double xAxis, double yAxis, int angle, int curve, boolean stopAtEnd){
-        this.xAxis = xAxis;
+    public McanumDriveAction(double radius, double yAxis, int angle, int curve, boolean stopAtEnd){
+        this.xAxis = radius;
         this.yAxis = yAxis;
         this.angle = angle;
         this.curve = curve;
@@ -37,7 +37,7 @@ public class McanumDriveAction extends Action {
     @Override
     public void start() {
         if (curve == 0){
-            Robot.getInstance().getMecanumDrive().setPosition(xAxis, yAxis, angle);
+            Robot.getInstance().getMecanumDrive().setPosition(-xAxis, -yAxis, angle);
         }else {
             double circumference = xAxis * 2 * Math.PI / 4;
             xSpeed = 100 - ySpeed;
@@ -46,12 +46,15 @@ public class McanumDriveAction extends Action {
 
     @Override
     public void update() {
-
+        Robot.getInstance().getMecanumDrive().update();
     }
 
     @Override
     public boolean isFinished() {
-        return !Robot.getInstance().getMecanumDrive().setStraightPositionActive;
+        if (curve == 0)
+            return !Robot.getInstance().getMecanumDrive().setStraightPositionActive;
+        else
+            return !Robot.getInstance().getMecanumDrive().setCurvePositionActive;
     }
 
     @Override

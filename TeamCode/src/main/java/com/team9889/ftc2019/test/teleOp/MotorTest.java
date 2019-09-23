@@ -32,6 +32,7 @@ public class MotorTest extends LinearOpMode {
             Drive.setThrottleSteerPower(-gamepad1.left_stick_y, gamepad1.right_stick_x);
 
 
+            telemetry.addData("encoder", Robot.getInstance().fRDrive.getPosition());
             telemetry.addData("loop time", timer.milliseconds());
             telemetry.addData("Hardware", Motor.numHardwareUsesThisUpdate);
             telemetry.addData("front left position",
