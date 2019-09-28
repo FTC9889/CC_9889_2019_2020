@@ -1,8 +1,13 @@
 package com.team9889.ftc2019.subsystems;
 
 import com.team9889.ftc2019.Constants;
+import com.team9889.lib.control.math.cartesian.Pose;
+import com.team9889.lib.control.math.cartesian.Rotation2d;
+import com.team9889.lib.hardware.RevIMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.opencv.core.Mat;
 
 /**
  * Created by Eric on 9/7/2019.
@@ -27,6 +32,7 @@ public class MecanumDrive extends Subsystem {
 
     public double test = 0;
 
+    private static Pose currentPose = new Pose();
 
     @Override
     public void init(boolean auto) {
@@ -43,7 +49,7 @@ public class MecanumDrive extends Subsystem {
         test =+ 1;
 
         if (setStraightPositionActive){
-            if ((Robot.getInstance().fLDrive.getPosition() + Robot.getInstance().fRDrive.getPosition() / 2) - xEncoderOffset < xPositionTicks) {
+            if ((Robot.getInstance().fLDrive.getPosition() + Robot.getInstance().fRDrive.getPosition() / 2) - xEncoderOffset < Math.abs(xPositionTicks)) {
                 xSpeed = .5;
             } else
                 xSpeed = 0;
@@ -95,6 +101,15 @@ public class MecanumDrive extends Subsystem {
         this.currentAngle = angle;
     }
 
+    public Rotation2d getAngle(){
+        try {
+            currentPose.setRotation2d(new Rotation2d(-Robot.getInstance().imu.getNormalHeading(), AngleUnit.DEGREES));
+            return currentPose.getRotation2d();
+        } catch (Exception e){
+            return new Rotation2d(0, AngleUnit.DEGREES);
+        }
+    }
+
     //straight
     public void setPosition(double xPosition, double yPosition, int angle){
         xPositionTicks = xPosition * Constants.DriveConstants.InchToTick;
@@ -138,8 +153,21 @@ public class MecanumDrive extends Subsystem {
     }
 
     public void setPower(double leftStickX, double leftStickY, double rightStickX){
-        double r = Math.hypot(leftStickX, leftStickY);
-        double robotAngle = Math.atan2(leftStickY, leftStickX) - Math.PI / 4;
+
+        double x, y, angle;
+
+//        x = leftStickX * ((1 / 360) * getAngle().getTheda(AngleUnit.DEGREES));
+//        y = leftStickY / ((1 / 360) * getAngle().getTheda(AngleUnit.DEGREES));
+
+        x = leftStickY * (Math.cos(getAngle().getTheda(AngleUnit.RADIANS) + 1.5708));
+        y = leftStickY * (Math.sin(getAngle().getTheda(AngleUnit.RADIANS) + 1.5708));
+
+        x = x + (leftStickY * (Math.cos(getAngle().getTheda(AngleUnit.RADIANS))));
+        y = y + (leftStickY * (Math.sin(getAngle().getTheda(AngleUnit.RADIANS))));
+
+        double r = Math.hypot(x, y);
+        double robotAngle = Math.atan2(y, x) - Math.PI / 4;
+//        double robotAngle = Math.atan2(y, x) - getAngle().getTheda(AngleUnit.RADIANS);
         double rightX = rightStickX;
         final double v1 = r * Math.cos(robotAngle) + rightX;
         final double v2 = r * Math.sin(robotAngle) - rightX;

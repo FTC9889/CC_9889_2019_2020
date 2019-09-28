@@ -5,6 +5,7 @@ import android.graphics.Color;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.internal.usb.exception.RobotUsbTimeoutException;
 
 /**
@@ -48,6 +49,10 @@ public class Teleop extends Team9889Linear {
             }
 
             telemetry.addData("Loop Time", loopTimer.milliseconds());
+            telemetry.addData("angle", robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
+
+            telemetry.addData("x", gamepad1.left_stick_x);
+            telemetry.addData("y", gamepad1.left_stick_y);
 
             telemetry.update();
             robot.update();

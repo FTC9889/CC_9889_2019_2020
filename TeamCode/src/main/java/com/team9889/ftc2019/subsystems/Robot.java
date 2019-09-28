@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 import com.team9889.ftc2019.Constants;
 import com.team9889.lib.control.kinematics.TankDriveKinematicModel;
 import com.team9889.lib.hardware.Motor;
+import com.team9889.lib.hardware.RevIMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.openftc.revextensions2.ExpansionHubEx;
@@ -63,6 +64,9 @@ public class Robot{
     private MecanumDrive mMecanumDrive = new MecanumDrive();
     private Intake mIntake = new Intake();
 
+    public RevIMU imu = null;
+
+
     public void init(HardwareMap hardwareMap, boolean auto){
         timer.reset();
         this.hardwareMap = hardwareMap;
@@ -91,6 +95,9 @@ public class Robot{
         intakeRight = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeRightMotorId, 1,
                 DcMotorSimple.Direction.FORWARD, false, true, false);
         capServo = hardwareMap.get(Servo.class, Constants.IntakeConstants.kCapServo);
+
+//        if(auto)
+            imu = new RevIMU("imu", hardwareMap);
 
 //        hangingLiftMotor = new Motor(hardwareMap, Constants.HangingLiftConstants.kLiftId, 1,
 //                DcMotorSimple.Direction.REVERSE, true, false, true);

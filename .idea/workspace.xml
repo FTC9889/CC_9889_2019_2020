@@ -2,26 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c0014a9-6634-42b0-b884-64ef630aea19" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Wait.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/modes/NJITAuto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/modes/NJITAutoBlue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/test/drive/MecanumDriveTrainTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/control/math/equations/MecanumDrive.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Teleop.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Teleop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/AutoModeBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/AutoModeBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/McanumDriveAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/McanumDriveAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/HangingLift.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/HangingLift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Intake.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Intake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDriveTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Robot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/test/teleOp/MotorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/test/teleOp/MotorTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,25 +35,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Robot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="92" column="85" lean-forward="true" selection-start-line="92" selection-start-column="85" selection-end-line="92" selection-end-column="85" />
-              <folding>
-                <element signature="e#6548#6549#0" expanded="true" />
-                <element signature="e#6575#6576#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-508">
+              <caret line="98" column="18" lean-forward="true" selection-start-line="98" selection-start-column="18" selection-end-line="98" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
-              <caret line="104" column="25" lean-forward="true" selection-start-line="104" selection-start-column="25" selection-end-line="104" selection-end-column="25" />
-              <folding>
-                <element signature="e#3430#3431#0" expanded="true" />
-                <element signature="e#3471#3472#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="260">
+              <caret line="164" column="77" lean-forward="true" selection-start-line="164" selection-start-column="77" selection-end-line="164" selection-end-column="77" />
             </state>
           </provider>
         </entry>
@@ -76,7 +53,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/modes/NJITAuto.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
+            <state relative-caret-position="272">
               <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -97,20 +74,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Intake.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
+            <state relative-caret-position="578">
               <caret line="56" column="52" selection-start-line="56" selection-start-column="52" selection-end-line="56" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1183#1184#0" expanded="true" />
-                <element signature="e#1219#1220#0" expanded="true" />
-                <element signature="e#1246#1247#0" expanded="true" />
-                <element signature="e#1282#1283#0" expanded="true" />
-                <element signature="e#1306#1307#0" expanded="true" />
-                <element signature="e#1339#1340#0" expanded="true" />
                 <element signature="e#1350#1351#0" expanded="true" />
                 <element signature="e#1411#1412#0" expanded="true" />
-                <element signature="e#1446#1447#0" expanded="true" />
-                <element signature="e#1505#1506#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -125,11 +94,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Teleop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
+            <state relative-caret-position="340">
+              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -159,15 +128,15 @@
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/control/math/equations/MecanumDrive.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDriveTest.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/AutoModeBase.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Wait.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/McanumDriveAction.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Constants.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Robot.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Teleop.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/modes/NJITAutoBlue.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Intake.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/modes/NJITAuto.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Robot.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Teleop.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java" />
       </list>
     </option>
   </component>
@@ -182,7 +151,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
+      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -352,7 +321,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -637,13 +606,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Action.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Wait.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
@@ -655,17 +617,6 @@
             <element signature="e#591#592#0" expanded="true" />
             <element signature="e#683#684#0" expanded="true" />
             <element signature="e#738#739#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="104" column="25" lean-forward="true" selection-start-line="104" selection-start-column="25" selection-end-line="104" selection-end-column="25" />
-          <folding>
-            <element signature="e#3430#3431#0" expanded="true" />
-            <element signature="e#3471#3472#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -688,13 +639,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Robot.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/modes/NJITAuto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="92" column="85" lean-forward="true" selection-start-line="92" selection-start-column="85" selection-end-line="92" selection-end-column="85" />
+        <state relative-caret-position="272">
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
           <folding>
-            <element signature="e#6548#6549#0" expanded="true" />
-            <element signature="e#6575#6576#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Action.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Intake.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="56" column="52" selection-start-line="56" selection-start-column="52" selection-end-line="56" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1350#1351#0" expanded="true" />
+            <element signature="e#1411#1412#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -706,43 +675,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Intake.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/hardware/RevIMU.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="56" column="52" selection-start-line="56" selection-start-column="52" selection-end-line="56" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1183#1184#0" expanded="true" />
-            <element signature="e#1219#1220#0" expanded="true" />
-            <element signature="e#1246#1247#0" expanded="true" />
-            <element signature="e#1282#1283#0" expanded="true" />
-            <element signature="e#1306#1307#0" expanded="true" />
-            <element signature="e#1339#1340#0" expanded="true" />
-            <element signature="e#1350#1351#0" expanded="true" />
-            <element signature="e#1411#1412#0" expanded="true" />
-            <element signature="e#1446#1447#0" expanded="true" />
-            <element signature="e#1505#1506#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="70">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/modes/NJITAuto.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Robot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-508">
+          <caret line="98" column="18" lean-forward="true" selection-start-line="98" selection-start-column="18" selection-end-line="98" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Teleop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
+        <state relative-caret-position="340">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="164" column="77" lean-forward="true" selection-start-line="164" selection-start-column="77" selection-end-line="164" selection-end-column="77" />
         </state>
       </provider>
     </entry>
