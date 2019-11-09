@@ -78,7 +78,7 @@ public abstract class AutoModeBase extends Team9889Linear {
     }
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException{
         setCurrentAutoRunning();
 
         waitForStart(true);

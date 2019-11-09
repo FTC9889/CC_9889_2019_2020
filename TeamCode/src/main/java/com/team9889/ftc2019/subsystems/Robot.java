@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
 import com.team9889.ftc2019.Constants;
+import com.team9889.ftc2019.test.teleOp.RevExtensions2;
 import com.team9889.lib.control.kinematics.TankDriveKinematicModel;
 import com.team9889.lib.hardware.Motor;
 import com.team9889.lib.hardware.RevIMU;
@@ -13,7 +14,7 @@ import com.team9889.lib.hardware.RevIMU;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.openftc.revextensions2.ExpansionHubEx;
 import org.openftc.revextensions2.RevBulkData;
-import org.openftc.revextensions2.RevExtensions2;
+//import org.openftc.revextensions2.RevExtensions2;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -27,8 +28,11 @@ public class Robot{
 
     // motors (remember to stop motors)
     public Motor fLDrive, fRDrive, bLDrive, bRDrive;
+
     public Motor intakeLeft, intakeRight;
-    public Servo capServo;
+    public Servo intakeLeftS, intakeRightS;
+
+    public Motor leftLift, rightLift;
 //    public Motor hangingLiftMotor;
 //    public Motor intakeMotor, intakeExtender;
 //
@@ -60,7 +64,6 @@ public class Robot{
         return mInstance;
     }
 
-    private Drive mDrive = new Drive();
     private MecanumDrive mMecanumDrive = new MecanumDrive();
     private Intake mIntake = new Intake();
 
@@ -76,50 +79,35 @@ public class Robot{
 
         RobotLog.a("Robot Init Started at " + format.format(currentData));
 
-        RevExtensions2.init();
-
         revHubMaster = hardwareMap.get(ExpansionHubEx.class, Constants.kRevHubMaster);
         revHubSlave = hardwareMap.get(ExpansionHubEx.class, Constants.kRevHubSlave);
 
         fLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveMasterId, 1,
-                DcMotorSimple.Direction.REVERSE, false, false, true);
+                DcMotorSimple.Direction.REVERSE, true, false, true);
         bLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveSlaveId, 1,
-                DcMotorSimple.Direction.REVERSE, false, false, true);
+                DcMotorSimple.Direction.REVERSE, true, false, true);
         fRDrive = new Motor(hardwareMap, Constants.DriveConstants.kRightDriveMasterId, 1,
-                DcMotorSimple.Direction.FORWARD, false, false, true);
+                DcMotorSimple.Direction.FORWARD, true, false, true);
         bRDrive = new Motor(hardwareMap, Constants.DriveConstants.kRightDriveSlaveId, 1,
-                DcMotorSimple.Direction.FORWARD, false, false, true);
+                DcMotorSimple.Direction.FORWARD, true, false, true);
 
+        //Intake
         intakeLeft = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeLeftMotorId, 1,
-                DcMotorSimple.Direction.REVERSE, false, true, false);
-        intakeRight = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeRightMotorId, 1,
                 DcMotorSimple.Direction.FORWARD, false, true, false);
-        capServo = hardwareMap.get(Servo.class, Constants.IntakeConstants.kCapServo);
+        intakeRight = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeRightMotorId, 1,
+                DcMotorSimple.Direction.REVERSE, false, true, false);
+
+        intakeLeftS = hardwareMap.get(Servo.class, Constants.IntakeConstants.kIntakeLeftServoId);
+        intakeRightS = hardwareMap.get(Servo.class, Constants.IntakeConstants.kIntakeRightServoId);
+
+        //Lift
+        leftLift = new Motor(hardwareMap, Constants.LiftConstants.kLeftLift, 1,
+                DcMotorSimple.Direction.FORWARD, true, true, true);
+        rightLift = new Motor(hardwareMap, Constants.LiftConstants.kRightLift, 1,
+                DcMotorSimple.Direction.FORWARD, true, true, true);
 
 //        if(auto)
             imu = new RevIMU("imu", hardwareMap);
-
-//        hangingLiftMotor = new Motor(hardwareMap, Constants.HangingLiftConstants.kLiftId, 1,
-//                DcMotorSimple.Direction.REVERSE, true, false, true);
-//
-//        hangingHook = hardwareMap.crservo.get(Constants.HangingLiftConstants.kHookId);
-//
-//        hangingLowerLimit = hardwareMap.get(DigitalChannel.class, Constants.HangingLiftConstants.kLiftLowerLimitSensorId);
-//
-//        intakeMotor = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeMotorId, 1,
-//                DcMotorSimple.Direction.REVERSE, false, false, false);
-//        intakeExtender = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeExtenderId, 1,
-//                DcMotorSimple.Direction.REVERSE, true, true, false);
-//
-//        intakeRotator = hardwareMap.get(Servo.class, Constants.IntakeConstants.kIntakeRotatorId);
-//        intakeGate = hardwareMap.get(Servo.class, Constants.IntakeConstants.kIntakeGate);
-//        markerDumper = hardwareMap.get(Servo.class, Constants.IntakeConstants.kMarkerDumper);
-//
-//        intakeInSwitch = hardwareMap.get(DigitalChannel.class, Constants.IntakeConstants.kIntakeInSwitchId);
-//
-//        xAxis = hardwareMap.get(Servo.class, Constants.CameraConstants.kCameraXAxisId);
-//        yAxis = hardwareMap.get(Servo.class, Constants.CameraConstants.kCameraYAxisId);
-
     }
 
     boolean first = true;
@@ -127,7 +115,7 @@ public class Robot{
         mMecanumDrive.update();
 
         bulkDataMaster = revHubMaster.getBulkInputData();
-        bulkDataSlave = revHubSlave.getBulkInputData();
+//        bulkDataSlave = revHubSlave.getBulkInputData();
 //        Motor.numHardwareUsesThisUpdate+=2;
 
         fRDrive.update(bulkDataMaster);
@@ -158,10 +146,6 @@ public class Robot{
         for (Motor motor:Arrays.asList(fLDrive, fRDrive, bLDrive, bRDrive, intakeLeft, intakeRight)) {
             motor.setPower(0);
         }
-    }
-
-    public  Drive getDrive(){
-        return mDrive;
     }
     public MecanumDrive getMecanumDrive(){
         return mMecanumDrive;

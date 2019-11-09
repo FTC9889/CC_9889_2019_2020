@@ -7,6 +7,7 @@ import android.view.View;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
+import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.Robot;
 
 import java.text.SimpleDateFormat;
@@ -91,6 +92,18 @@ public abstract class Team9889Linear extends LinearOpMode {
 
     public void setBackgroundHSV(final float[] values) {
         setBackground(Color.HSVToColor(0xff, values));
+    }
+
+    public void runAction(Action action){
+        if(opModeIsActive())
+            action.start();
+
+        while (!action.isFinished() && opModeIsActive()) {
+            action.update();
+        }
+
+        if(opModeIsActive())
+            action.done();
     }
 
     public void setBackgroundRGB(final int[] values) {

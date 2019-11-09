@@ -32,7 +32,7 @@ public class Teleop extends Team9889Linear {
         while (opModeIsActive()){
             loopTimer.reset();
 
-            robot.getMecanumDrive().setPower(-gamepad1.left_stick_x, gamepad1.left_stick_y, -gamepad1.right_stick_x);
+            robot.getMecanumDrive().setFieldCentricPower(-gamepad1.left_stick_x, gamepad1.left_stick_y, -gamepad1.right_stick_x);
 
             if (gamepad1.a){
                 robot.getIntake().Intake();
@@ -42,17 +42,23 @@ public class Teleop extends Team9889Linear {
                 robot.getIntake().Outtake();
             }
 
-            if (gamepad1.left_bumper){
-                robot.getIntake().capUp();
-            }else if (gamepad1.right_bumper){
-                robot.getIntake().capDump();
-            }
+            if (gamepad1.right_bumper)
+                Robot.getIntake().IntakeDown();
+            else if (gamepad1.left_bumper)
+                Robot.getIntake().IntakeUp();
+
+            telemetry.addData("gamepad", gamepad1);
 
             telemetry.addData("Loop Time", loopTimer.milliseconds());
-            telemetry.addData("angle", robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
+            //telemetry.addData("angle", robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
 
             telemetry.addData("x", gamepad1.left_stick_x);
             telemetry.addData("y", gamepad1.left_stick_y);
+
+            telemetry.addData("FL", robot.fLDrive.getPosition());
+            telemetry.addData("BL", robot.bLDrive.getPosition());
+            telemetry.addData("FR", robot.fRDrive.getPosition());
+            telemetry.addData("BR", robot.bRDrive.getPosition());
 
             telemetry.update();
             robot.update();

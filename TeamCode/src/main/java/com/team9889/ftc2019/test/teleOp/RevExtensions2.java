@@ -11,6 +11,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 public class RevExtensions2 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        org.openftc.revextensions2.RevExtensions2.init();
+//        org.openftc.revextensions2.RevExtensions2.init();
     }
 }

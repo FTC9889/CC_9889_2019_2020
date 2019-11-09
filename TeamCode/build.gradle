@@ -7,11 +7,18 @@
 // the build definitions, you can place those customizations in this file, but
 // please think carefully as to whether such customizations are really necessary
 // before doing so.
+
+
 // Custom definitions may go here
+
 // Include common definitions from above.
 apply from: '../build.common.gradle'
+
 dependencies {
     //NOTE: this is the correct version, the below screenshot is outdated
-    api 'org.openftc:rev-extensions-2:1.1'
-//    api 'org.openftc:ftc-opmode-tuner-common:0.22'
+    implementation 'org.openftc:rev-extensions-2:1.2'
+}
+
+dependencies {
+    implementation 'org.openftc:easyopencv:1.2'
 }

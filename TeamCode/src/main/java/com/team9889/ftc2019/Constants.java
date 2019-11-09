@@ -30,8 +30,8 @@ public class Constants {
         public final static String kLeftDriveSlaveId = "lb";
         public final static String kRightDriveSlaveId = "rb";
 
-        public final static double WheelbaseWidth = 16;
-        public final static double WheelDiameter = 4;
+        public final static double WheelbaseWidth = 14.5;
+        public final static double WheelDiameter = 3.93701;
 
         /**
          * ticks to inch
@@ -58,13 +58,9 @@ public class Constants {
     public static class IntakeConstants {
         public final static String kIntakeLeftMotorId = "li";
         public final static String kIntakeRightMotorId = "ri";
-        public final static String kCapServo = "cs";
 
-        public final static String kIntakeExtenderId = "intakeextender";
-        public final static String kIntakeRotatorId = "intakerotator";
-        public final static String kIntakeGate = "intakegate";
-        public final static String kMarkerDumper = "markerdumper";
-        public final static String kIntakeInSwitchId = "intakeinswitch";
+        public final static String kIntakeLeftServoId = "lis";
+        public final static String kIntakeRightServoId = "ris";
 
         final static double kIntakeTicksPerRev = 537.6;  //NeveRest Orbital 20
         final static double kIntakeSpoolDiameter = 2;
@@ -82,33 +78,17 @@ public class Constants {
         public final static String kDumperRotatorId = "dumperrotator";
     }
 
-
     /*---------------------
     |                     |
-    |     ScoringLift!    |
+    |       Lift!         |
     |                     |
     ---------------------*/
 
-    //Settings for ScoringLift
-    public static class ScoringLiftConstants {
-        public final static String kLeftLiftId = "slift";
-        public final static String kLiftLowerLimitSensorId = "scoringliftlowerlimitsensor";
+    //Settings for Lift
+    public static class LiftConstants {
+        public final static String kLeftLift = "leftlift";
+        public final static String kRightLift = "rightlift";
     }
-
-
-    /*---------------------
-    |                     |
-    |     HangingLift!    |
-    |                     |
-    ---------------------*/
-
-    //Settings for ScoringLift
-    public static class HangingLiftConstants {
-        public final static String kLiftId = "hlift";
-        public final static String kHookId = "hook";
-        public final static String kLiftLowerLimitSensorId = "hangingliftlowerlimitsensor";
-    }
-
 
     /*---------------------
     |                     |

@@ -25,6 +25,8 @@ public class MecanumDrive extends Subsystem {
     public double curve, circ, distance, unit, nextMilestone, travelTotal, travelDuringMilestone = 0;
     private double speed = 1;
 
+    private double gyro;
+
     private double curveTimerOffset = 0;
 
     private boolean xDirectionRight;
@@ -33,6 +35,11 @@ public class MecanumDrive extends Subsystem {
     public double test = 0;
 
     private static Pose currentPose = new Pose();
+
+    public double frontLeft, frontRight, backLeft, backRight;
+    public int frontLeftInt, frontRightInt, backLeftInt, backRightInt;
+
+    public double xAutoPower, yAutoPower;
 
     @Override
     public void init(boolean auto) {
@@ -46,7 +53,7 @@ public class MecanumDrive extends Subsystem {
 
     @Override
     public void update() {
-        test =+ 1;
+
 
         if (setStraightPositionActive){
             if ((Robot.getInstance().fLDrive.getPosition() + Robot.getInstance().fRDrive.getPosition() / 2) - xEncoderOffset < Math.abs(xPositionTicks)) {
@@ -110,6 +117,7 @@ public class MecanumDrive extends Subsystem {
         }
     }
 
+    /*
     //straight
     public void setPosition(double xPosition, double yPosition, int angle){
         xPositionTicks = xPosition * Constants.DriveConstants.InchToTick;
@@ -151,23 +159,35 @@ public class MecanumDrive extends Subsystem {
 
         setCurvePositionActive = true;
     }
+    */
 
-    public void setPower(double leftStickX, double leftStickY, double rightStickX){
+    public void setFieldCentricPower(double x, double y, double rotation){
+        double timerOffset = 0;
+        if(Robot.timer.milliseconds() > 100 + timerOffset){
+            timerOffset = Robot.timer.milliseconds();
+            gyro = getAngle().getTheda(AngleUnit.RADIANS);
+        }
+        double xMod = x * Math.cos(/*getAngle().getTheda(AngleUnit.RADIANS)*/ gyro) - y * Math.sin(/*getAngle().getTheda(AngleUnit.RADIANS)*/ gyro);
+        double yMod = x * Math.sin(/*getAngle().getTheda(AngleUnit.RADIANS)*/ gyro) + y * Math.cos(/*getAngle().getTheda(AngleUnit.RADIANS)*/ gyro);
+        setPower(xMod, yMod, rotation);
+    }
 
-        double x, y, angle;
+    /*public void setPower(double leftStickX, double leftStickY, double rightStickX){
+
+        //double x, y, angle;
 
 //        x = leftStickX * ((1 / 360) * getAngle().getTheda(AngleUnit.DEGREES));
 //        y = leftStickY / ((1 / 360) * getAngle().getTheda(AngleUnit.DEGREES));
 
-        x = leftStickY * (Math.cos(getAngle().getTheda(AngleUnit.RADIANS) + 1.5708));
-        y = leftStickY * (Math.sin(getAngle().getTheda(AngleUnit.RADIANS) + 1.5708));
+        //x = leftStickY * (Math.cos(getAngle().getTheda(AngleUnit.RADIANS) + 1.5708));
+        //y = leftStickY * (Math.sin(getAngle().getTheda(AngleUnit.RADIANS) + 1.5708));
 
-        x = x + (leftStickY * (Math.cos(getAngle().getTheda(AngleUnit.RADIANS))));
-        y = y + (leftStickY * (Math.sin(getAngle().getTheda(AngleUnit.RADIANS))));
+        //x = x + (leftStickY * (Math.cos(getAngle().getTheda(AngleUnit.RADIANS))));
+        //y = y + (leftStickY * (Math.sin(getAngle().getTheda(AngleUnit.RADIANS))));
 
         double r = Math.hypot(x, y);
-        double robotAngle = Math.atan2(y, x) - Math.PI / 4;
-//        double robotAngle = Math.atan2(y, x) - getAngle().getTheda(AngleUnit.RADIANS);
+        //double robotAngle = Math.atan2(y, x) - Math.PI / 4;
+        double robotAngle = Math.atan2(y, x) - getAngle().getTheda(AngleUnit.RADIANS);
         double rightX = rightStickX;
         final double v1 = r * Math.cos(robotAngle) + rightX;
         final double v2 = r * Math.sin(robotAngle) - rightX;
@@ -178,5 +198,67 @@ public class MecanumDrive extends Subsystem {
         Robot.getInstance().fRDrive.setPower(v2);
         Robot.getInstance().bLDrive.setPower(v3);
         Robot.getInstance().bRDrive.setPower(v4);
+    }*/
+
+
+    public void setAutoPower(double leftStickX, double leftStickY, double rightStickX, double controller, double negative){
+        double r = Math.hypot(leftStickX, leftStickY);
+        double robotAngle = Math.atan2(leftStickY, leftStickX) - Math.PI / 4;
+        double rightX = rightStickX;
+        final double v1 = Math.abs(r * Math.cos(robotAngle) + rightX) * controller * frontLeftInt;
+        final double v2 = Math.abs(r * Math.sin(robotAngle) - rightX) * controller * frontRightInt;
+        final double v3 = Math.abs(r * Math.sin(robotAngle) + rightX) * controller * backLeftInt;
+        final double v4 = Math.abs(r * Math.cos(robotAngle) - rightX) * controller * backRightInt;
+
+        Robot.getInstance().fLDrive.setPower(v1 * frontLeft / Math.abs(frontLeft));
+        Robot.getInstance().fRDrive.setPower(v2 * frontRight / Math.abs(frontRight));
+        Robot.getInstance().bLDrive.setPower(v3 * backLeft / Math.abs(backLeft));
+        Robot.getInstance().bRDrive.setPower(v4 * backRight / Math.abs(backRight));
+    }
+
+    public void setPower(double leftStickX, double leftStickY, double rightStickX){
+        double r = Math.hypot(leftStickX, leftStickY);
+        double robotAngle = Math.atan2(leftStickY, leftStickX) - Math.PI / 4;
+        double rightX = rightStickX;
+        final double v1 = r * Math.cos(robotAngle) + rightX;
+        final double v2 = r * Math.sin(robotAngle) - rightX;
+        final double v3 = r * Math.sin(robotAngle) + rightX;
+        final double v4 = r * Math.cos(robotAngle) - rightX;
+
+        Robot.getInstance().fLDrive.setPower(v1);
+        Robot.getInstance().fRDrive.setPower(v2);
+        Robot.getInstance().bLDrive.setPower(v3);
+        Robot.getInstance().bRDrive.setPower(v4);
+    }
+
+    public void setPosition(double xPosition, double yPosition, double rotation){
+        if (Math.abs(xPosition) > Math.abs(yPosition)){
+            xAutoPower = 1;
+            yAutoPower = Math.abs(yPosition / xPosition);
+        }
+        else if (Math.abs(xPosition) < Math.abs(yPosition)){
+            xAutoPower = Math.abs(xPosition / yPosition);
+            yAutoPower = 1;
+        }
+
+        //setPower(.5, 0, 0);
+
+        double r = Math.hypot(xPosition, yPosition);
+        double robotAngle = Math.atan2(yPosition, xPosition) - Math.PI / 4;
+        double rightX = rotation;
+        frontLeft = (r * Math.cos(robotAngle) + rightX) * 1.414;
+        frontRight = (r * Math.sin(robotAngle) - rightX) * 1.414;
+        backLeft = (r * Math.sin(robotAngle) + rightX) * 1.414;
+        backRight = (r * Math.cos(robotAngle) - rightX) * 1.414;
+    }
+
+    public static void main(String[] args) {
+        double r = Math.hypot(1000, 0);
+        double robotAngle = Math.atan2(0, 1000) - Math.PI / 4;
+        double rightX = 0;
+        System.out.println((r * Math.cos(robotAngle) + rightX) * 1.414);
+        System.out.println(r * Math.sin(robotAngle) - rightX);
+        System.out.println(r * Math.sin(robotAngle) + rightX);
+        System.out.println(r * Math.cos(robotAngle) - rightX);
     }
 }

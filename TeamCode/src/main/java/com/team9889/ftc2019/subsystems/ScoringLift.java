@@ -18,5 +18,24 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * Created by joshua9889 on 3/28/2018.
  */
 
-public class ScoringLift {
+public class ScoringLift extends Subsystem{
+    @Override
+    public void init(boolean auto) {
+
+    }
+
+    @Override
+    public void outputToTelemetry(Telemetry telemetry) {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    public void SetLiftPower(double power){
+        Robot.getInstance().leftLift.setPower(power);
+        Robot.getInstance().rightLift.setPower(power);
+    }
 }

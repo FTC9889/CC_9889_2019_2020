@@ -1,19 +1,6 @@
 package com.team9889.ftc2019.subsystems;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
-import com.team9889.ftc2019.Constants;
-import com.team9889.lib.CruiseLib;
-import com.team9889.lib.control.controllers.PID;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.internal.usb.exception.RobotUsbTimeoutException;
 
 /**
  * Created by Eric on 8/19/2019.
@@ -36,24 +23,36 @@ public class Intake extends Subsystem {
 
     }
 
-    public void setIntakePower(double power){
+    public void SetIntakePower(double power){
         Robot.getInstance().intakeLeft.setPower(power);
         Robot.getInstance().intakeRight.setPower(power);
     }
     public void Intake(){
-        setIntakePower(0.75);
+        SetIntakePower(0.75);
     }
     public void Outtake(){
-        setIntakePower(-0.3);
+        SetIntakePower(-0.3);
     }
     public void Stop(){
-        setIntakePower(0);
+        SetIntakePower(0);
     }
 
-    public void capUp(){
-        Robot.getInstance().capServo.setPosition(0.8);
+    public void SetLeftIntakeHeight(double height){
+        Robot.getInstance().intakeLeftS.setPosition(height);
     }
-    public void capDump(){
-        Robot.getInstance().capServo.setPosition(0.2);
+    public void SetRightIntakeHeight(double height){
+        Robot.getInstance().intakeRightS.setPosition(height);
+    }
+    public void SetIntakeHeight(double leftHeight, double rightHeight){
+        SetLeftIntakeHeight(leftHeight);
+        SetRightIntakeHeight(rightHeight);
+    }
+
+    //TODO test these two heights
+    public void IntakeDown(){
+        SetIntakeHeight(1, 0);
+    }
+    public void IntakeUp(){
+        SetIntakeHeight(0, 1);
     }
 }

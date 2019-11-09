@@ -26,9 +26,9 @@ public class MecanumDriveTrainTest extends LinearOpMode {
             robot.getMecanumDrive().setPower(-gamepad1.left_stick_x, gamepad1.left_stick_y, -gamepad1.right_stick_x);
 
             if (gamepad1.b){
-                robot.getMecanumDrive().setPosition(20, 1, 0, 100);
+                //robot.getMecanumDrive().setPosition(20, 1, 0, 100);
             }else if (gamepad1.y) {
-                robot.getMecanumDrive().setPosition(40, 1, 0, 100);
+                //robot.getMecanumDrive().setPosition(40, 1, 0, 100);
             }
             else if (gamepad1.x){
                 robot.getMecanumDrive().x = 0;
