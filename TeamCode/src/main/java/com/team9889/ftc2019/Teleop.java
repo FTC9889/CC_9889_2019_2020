@@ -39,11 +39,7 @@ public class Teleop extends Team9889Linear {
             else if (gamepad1.left_trigger > 0.05)
                 Robot.getLift().SetLiftPower(-gamepad1.left_trigger);
             else {
-                Robot.getLift().SetLiftPower(0);
-            }
-
-            if (gamepad1.x){
-                telemetry.addData("Sky Stone Position", Robot.getCamera().getSkyStonePosition());
+                Robot.getLift().SetLiftPower(0.2);
             }
 
             if (gamepad1.dpad_left){
@@ -71,12 +67,14 @@ public class Teleop extends Team9889Linear {
                 Robot.getMecanumDrive().OpenFoundationHook();
             }
 
-            if (gamepad2.a){
+            if (gamepad2.left_bumper){
                 Robot.linearBar.setPower(1);
-            }else if (gamepad2.b){
+            }else if (gamepad2.right_bumper){
                 Robot.linearBar.setPower(-1);
             }else
                 Robot.linearBar.setPower(0);
+
+            Robot.getIntake().SetRollerPower(gamepad2.right_stick_y);
 
             telemetry.addData("gamepad", gamepad1);
 

@@ -34,29 +34,27 @@ public class Autonomous extends Team9889Linear {
 
     @Override
     public void runOpMode() throws InterruptedException {
-
-        Robot.init(hardwareMap, true );
-        waitForStart();
+        waitForStart(true);
 
         while (opModeIsActive() && !stop) {
 //          Grab Sky Stone
             runAction(new MecanumDriveAction(0, 1, 0, 1000));
             ThreadAction(new IntakeDown());
-            runAction(new MecanumToAngle(-23, 500));
+            runAction(new MecanumToAngle(-25, 600));
             telemetry.addData("", Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
             telemetry.update();
-            ThreadAction(new Intake());
-            runAction(new MecanumDriveAction(0, 32, -23, 2500));
+            Robot.getIntake().SetIntakePower(.75);
+            runAction(new MecanumDriveAction(0, 32, -25, 2500));
             runAction(new IntakeStop());
 
 //          Drive To Foundation
-            runAction(new MecanumDriveAction(0, -16, -23, 500));
+            runAction(new MecanumDriveAction(0, -4, -25, 1000));
             ThreadAction(new CloseGrabber());
             runAction(new MecanumToAngle(-65, 2000));
 //            runAction(new MecanumDriveAction(0, -44, -90, 3000));
 //            runAction(new MecanumDriveAction(8, 0, -90, 500));
             ThreadAction(new IntakeUp());
-            runAction(new MecanumDriveAction(0, -62, -90, 4000));
+            runAction(new MecanumDriveAction(0, -64, -90, 4000));
             runAction(new MecanumDriveAction(30, 0, -90, 2000));
 
 //          Move Foundation To Wall
@@ -70,7 +68,7 @@ public class Autonomous extends Team9889Linear {
 
 //          Drive To Pull Foundation
             ThreadAction(new LiftIn());
-            runAction(new MecanumDriveAction(-27, 0, -90, 2000));
+            runAction(new MecanumDriveAction(-22, 0, -90, 2000));
             runAction(new MecanumDriveAction(0, -24, -90, 2000));
             runAction(new MecanumToAngle(-90, 2000));
             telemetry.addData("", Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));

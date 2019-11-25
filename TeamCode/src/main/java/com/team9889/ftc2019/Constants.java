@@ -63,6 +63,8 @@ public class Constants {
         public final static String kIntakeLeftServoId = "lis";
         public final static String kIntakeRightServoId = "ris";
 
+        public final static String kIntakeRollerId = "roller";
+
         final static double kIntakeTicksPerRev = 537.6;  //NeveRest Orbital 20
         final static double kIntakeSpoolDiameter = 2;
         public final static double kIntakeTicksToInchRatio = kIntakeSpoolDiameter * Math.PI / kIntakeTicksPerRev;

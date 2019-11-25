@@ -33,6 +33,7 @@ public class Robot{
 
     public Motor intakeLeft, intakeRight;
     public Servo intakeLeftS, intakeRightS;
+    public CRServo roller;
 
     public Motor leftLift, rightLift;
     public Servo grabber;
@@ -107,6 +108,7 @@ public class Robot{
 
         intakeLeftS = hardwareMap.get(Servo.class, Constants.IntakeConstants.kIntakeLeftServoId);
         intakeRightS = hardwareMap.get(Servo.class, Constants.IntakeConstants.kIntakeRightServoId);
+        roller = hardwareMap.crservo.get(Constants.IntakeConstants.kIntakeRollerId);
 
         //Lift
         leftLift = new Motor(hardwareMap, Constants.LiftConstants.kLeftLift, 1,

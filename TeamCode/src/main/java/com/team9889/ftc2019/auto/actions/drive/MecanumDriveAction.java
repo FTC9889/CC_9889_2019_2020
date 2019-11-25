@@ -20,7 +20,7 @@ public class MecanumDriveAction extends Action {
     private cruiseController cc;
     private boolean ignoreAngle;
     double angleSpeed = 0;
-    private double minSpeed = 0;
+    private double minSpeed = 0.1;
 
     private ElapsedTime timer = new ElapsedTime();
 
@@ -61,7 +61,7 @@ public class MecanumDriveAction extends Action {
         }else if(xPosition != 0 && yPosition != 0) {
             cc = new cruiseController(.08, .2);
         }else {
-            cc = new cruiseController(.06, minSpeed);
+            cc = new cruiseController(.05, minSpeed);
         }
 
         Robot.getInstance().getMecanumDrive().setPosition(xPosition, yPosition, 0);
