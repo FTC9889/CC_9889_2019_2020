@@ -36,7 +36,7 @@ public class MecanumDrive extends Subsystem {
 
     private static Pose currentPose = new Pose();
 
-    public double frontLeft, frontRight, backLeft, backRight;
+    public double frontLeft, frontRight, backLeft, backRight, frontLeftG, frontRightG, backLeftG, backRightG;
     public int frontLeftInt, frontRightInt, backLeftInt, backRightInt;
 
     public double xAutoPower, yAutoPower;
@@ -201,14 +201,14 @@ public class MecanumDrive extends Subsystem {
     }*/
 
 
-    public void setAutoPower(double leftStickX, double leftStickY, double rightStickX, double controller, double negative){
-        double r = Math.hypot(leftStickX, leftStickY);
-        double robotAngle = Math.atan2(leftStickY, leftStickX) - Math.PI / 4;
-        double rightX = rightStickX;
-        final double v1 = Math.abs(r * Math.cos(robotAngle) + rightX) * controller * frontLeftInt;
-        final double v2 = Math.abs(r * Math.sin(robotAngle) - rightX) * controller * frontRightInt;
-        final double v3 = Math.abs(r * Math.sin(robotAngle) + rightX) * controller * backLeftInt;
-        final double v4 = Math.abs(r * Math.cos(robotAngle) - rightX) * controller * backRightInt;
+    public void setAutoPower(double gyro){
+        double r = Math.hypot(0, 0);
+        double robotAngle = Math.atan2(0, 0) - Math.PI / 4;
+        double rightX = gyro;
+        final double v1 = Math.abs(r * Math.cos(robotAngle) + rightX);
+        final double v2 = Math.abs(r * Math.sin(robotAngle) - rightX);
+        final double v3 = Math.abs(r * Math.sin(robotAngle) + rightX);
+        final double v4 = Math.abs(r * Math.cos(robotAngle) - rightX);
 
         Robot.getInstance().fLDrive.setPower(v1 * frontLeft / Math.abs(frontLeft));
         Robot.getInstance().fRDrive.setPower(v2 * frontRight / Math.abs(frontRight));
@@ -232,17 +232,6 @@ public class MecanumDrive extends Subsystem {
     }
 
     public void setPosition(double xPosition, double yPosition, double rotation){
-        if (Math.abs(xPosition) > Math.abs(yPosition)){
-            xAutoPower = 1;
-            yAutoPower = Math.abs(yPosition / xPosition);
-        }
-        else if (Math.abs(xPosition) < Math.abs(yPosition)){
-            xAutoPower = Math.abs(xPosition / yPosition);
-            yAutoPower = 1;
-        }
-
-        //setPower(.5, 0, 0);
-
         double r = Math.hypot(xPosition, yPosition);
         double robotAngle = Math.atan2(yPosition, xPosition) - Math.PI / 4;
         double rightX = rotation;
@@ -252,13 +241,27 @@ public class MecanumDrive extends Subsystem {
         backRight = (r * Math.cos(robotAngle) - rightX) * 1.414;
     }
 
+    public double getSpeed(double xPosition, double yPosition, double rotation){
+        double r = Math.hypot(xPosition, yPosition);
+        double robotAngle = Math.atan2(yPosition, xPosition) - Math.PI / 4;
+        double rightX = rotation;
+        return (r * Math.cos(robotAngle) + rightX) * 1.414;
+    }
+
     public static void main(String[] args) {
-        double r = Math.hypot(1000, 0);
-        double robotAngle = Math.atan2(0, 1000) - Math.PI / 4;
+        double r = Math.hypot(24, -24);
+        double robotAngle = Math.atan2(-24, 24) - Math.PI / 4;
         double rightX = 0;
         System.out.println((r * Math.cos(robotAngle) + rightX) * 1.414);
         System.out.println(r * Math.sin(robotAngle) - rightX);
         System.out.println(r * Math.sin(robotAngle) + rightX);
         System.out.println(r * Math.cos(robotAngle) - rightX);
+    }
+
+    public void OpenFoundationHook(){
+        Robot.getInstance().foundationHook.setPosition(1);
+    }
+    public void CloseFoundationHook(){
+        Robot.getInstance().foundationHook.setPosition(0.4);
     }
 }

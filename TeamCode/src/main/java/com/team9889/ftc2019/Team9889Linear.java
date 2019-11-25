@@ -106,6 +106,18 @@ public abstract class Team9889Linear extends LinearOpMode {
             action.done();
     }
 
+    public void ThreadAction(final Action action){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                runAction(action);
+            }
+        };
+
+        if(opModeIsActive() && !isStopRequested())
+            new Thread(runnable).start();
+    }
+
     public void setBackgroundRGB(final int[] values) {
         float[] hsv = new float[3];
         Color.RGBToHSV(values[0], values[1], values[2], hsv);

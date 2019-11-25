@@ -21,4 +21,5 @@ dependencies {
 
 dependencies {
     implementation 'org.openftc:easyopencv:1.2'
+    implementation 'com.github.dogecv:dogecv:2020.4-alpha'
 }

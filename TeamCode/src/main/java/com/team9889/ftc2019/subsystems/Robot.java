@@ -1,5 +1,6 @@
 package com.team9889.ftc2019.subsystems;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -28,11 +29,14 @@ public class Robot{
 
     // motors (remember to stop motors)
     public Motor fLDrive, fRDrive, bLDrive, bRDrive;
+    public Servo foundationHook;
 
     public Motor intakeLeft, intakeRight;
     public Servo intakeLeftS, intakeRightS;
 
     public Motor leftLift, rightLift;
+    public Servo grabber;
+    public CRServo linearBar;
 //    public Motor hangingLiftMotor;
 //    public Motor intakeMotor, intakeExtender;
 //
@@ -66,6 +70,8 @@ public class Robot{
 
     private MecanumDrive mMecanumDrive = new MecanumDrive();
     private Intake mIntake = new Intake();
+    private ScoringLift mLift = new ScoringLift();
+    private Camera mCamera = new Camera();
 
     public RevIMU imu = null;
 
@@ -83,13 +89,15 @@ public class Robot{
         revHubSlave = hardwareMap.get(ExpansionHubEx.class, Constants.kRevHubSlave);
 
         fLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveMasterId, 1,
-                DcMotorSimple.Direction.REVERSE, true, false, true);
+                DcMotorSimple.Direction.FORWARD, true, false, true);
         bLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveSlaveId, 1,
-                DcMotorSimple.Direction.REVERSE, true, false, true);
+                DcMotorSimple.Direction.FORWARD, true, false, true);
         fRDrive = new Motor(hardwareMap, Constants.DriveConstants.kRightDriveMasterId, 1,
-                DcMotorSimple.Direction.FORWARD, true, false, true);
+                DcMotorSimple.Direction.REVERSE, true, false, true);
         bRDrive = new Motor(hardwareMap, Constants.DriveConstants.kRightDriveSlaveId, 1,
-                DcMotorSimple.Direction.FORWARD, true, false, true);
+                DcMotorSimple.Direction.REVERSE, true, false, true);
+
+        foundationHook = hardwareMap.get(Servo.class, Constants.DriveConstants.kFoundationHook);
 
         //Intake
         intakeLeft = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeLeftMotorId, 1,
@@ -104,10 +112,20 @@ public class Robot{
         leftLift = new Motor(hardwareMap, Constants.LiftConstants.kLeftLift, 1,
                 DcMotorSimple.Direction.FORWARD, true, true, true);
         rightLift = new Motor(hardwareMap, Constants.LiftConstants.kRightLift, 1,
-                DcMotorSimple.Direction.FORWARD, true, true, true);
+                DcMotorSimple.Direction.REVERSE, true, true, true);
+
+        grabber = hardwareMap.get(Servo.class, Constants.LiftConstants.kGrabber);
+        linearBar = hardwareMap.crservo.get(Constants.LiftConstants.kLinearBar);
 
 //        if(auto)
             imu = new RevIMU("imu", hardwareMap);
+
+            if (auto){
+                getIntake().IntakeUp();
+                getLift().GrabberOpen();
+                getMecanumDrive().OpenFoundationHook();
+                update();
+            }
     }
 
     boolean first = true;
@@ -156,14 +174,15 @@ public class Robot{
     public Intake getIntake(){
         return mIntake;
     }
-//    public ScoringLift getLift(){
-//        return null;
-//    }
+
+    public ScoringLift getLift(){
+        return mLift;
+    }
 //    public HangingLift getHangingLift(){
 //        return null;
 //    }
-//    public Camera getCamera(){
-//        return null;
-//    }
+    public Camera getCamera(){
+        return mCamera;
+    }
 
 }

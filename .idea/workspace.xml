@@ -1,10 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="031be3f4-1337-4d6c-ac57-67448f70bdf5" name="Default Changelist" comment="" />
+    <list default="true" id="031be3f4-1337-4d6c-ac57-67448f70bdf5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/FtcRobotController/src/main/assets/Skystone.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FtcRobotController/src/main/assets/Skystone.tflite" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FtcRobotController/src/main/assets/Skystone.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/external/samples/ConceptSoundsSKYSTONE.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/external/samples/ConceptVuforiaSkyStoneNavigation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/external/samples/ConceptVuforiaSkyStoneNavigationWebcam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/PermissionValidatorWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Lift/CloseGrabber.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Lift/LiftIn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Lift/LiftOut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Lift/OpenGrabber.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/TestMotorAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/FoundationHookClose.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/FoundationHookOpen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/MecanumDriveAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/MecanumToAngle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/MecanumToPosition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/intake/Intake.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/intake/IntakeDown.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/intake/IntakeStop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/intake/IntakeUp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/VuMark.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/control/controllers/cruiseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/detectors/SkyStoneDetector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/OnBotJava-release-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/OnBotJava-release.aar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/RobotServer-release-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/RobotServer-release.aar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/arm64-v8a/libVuforia.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/TeamCode.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/TeamCode.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Team9889Linear.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Team9889Linear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Teleop.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Teleop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/Autonomous.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/Autonomous.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/McanumDriveAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/modes/NJITAuto.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/modes/NJITAuto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Robot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/ScoringLift.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/ScoringLift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +63,6 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="192.168.49.1:5555" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -27,17 +75,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="215" column="59" selection-start-line="215" selection-start-column="59" selection-end-line="215" selection-end-column="59" />
+            <state relative-caret-position="246">
+              <caret line="267" selection-start-line="267" selection-end-line="267" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1586#2285#1" />
-                <element signature="e#2421#3256#1" />
-                <element signature="e#3642#3796#1" />
-                <element signature="e#3900#4214#0" />
-                <element signature="e#4220#5605#0" />
-                <element signature="e#5611#6240#0" />
-                <element signature="e#6246#7546#0" />
               </folding>
             </state>
           </provider>
@@ -46,11 +87,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/Autonomous.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="612">
+              <caret line="41" column="2" selection-start-line="41" selection-start-column="2" selection-end-line="41" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -58,70 +96,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Teleop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/MecanumToPosition.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="21" column="72" selection-start-line="21" selection-start-column="72" selection-end-line="21" selection-end-column="72" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4074#4075#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/control/controllers/cruiseController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="29" column="62" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/detectors/SkyStoneDetector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4816">
-              <caret line="286" column="5" selection-start-line="286" selection-start-column="5" selection-end-line="286" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2667#2675#0" expanded="true" />
-                <element signature="e#2731#2739#0" expanded="true" />
-                <element signature="e#3185#3186#0" expanded="true" />
-                <element signature="e#3222#3223#0" expanded="true" />
-                <element signature="e#3399#3400#0" expanded="true" />
-                <element signature="e#3440#3441#0" expanded="true" />
-                <element signature="e#3602#3603#0" expanded="true" />
-                <element signature="e#3638#3639#0" expanded="true" />
-                <element signature="e#3789#3790#0" expanded="true" />
-                <element signature="e#3822#3823#0" expanded="true" />
-                <element signature="e#4012#4013#0" expanded="true" />
-                <element signature="e#4054#4055#0" expanded="true" />
-                <element signature="e#4244#4245#0" expanded="true" />
-                <element signature="e#4286#4287#0" expanded="true" />
-                <element signature="e#4474#4475#0" expanded="true" />
-                <element signature="e#4516#4517#0" expanded="true" />
-                <element signature="e#4704#4705#0" expanded="true" />
-                <element signature="e#4746#4747#0" expanded="true" />
-                <element signature="e#8820#8821#0" expanded="true" />
-                <element signature="e#8861#8862#0" expanded="true" />
-                <element signature="e#9018#9019#0" expanded="true" />
-                <element signature="e#9052#9053#0" expanded="true" />
-                <element signature="e#9235#9236#0" expanded="true" />
-                <element signature="e#9275#9276#0" expanded="true" />
-                <element signature="e#9429#9430#0" expanded="true" />
-                <element signature="e#9465#9466#0" expanded="true" />
-                <element signature="e#9457#9458#0" expanded="true" />
-                <element signature="e#9497#9498#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1003">
+              <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -129,45 +105,32 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Camera.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="34" column="81" selection-start-line="34" selection-start-column="81" selection-end-line="34" selection-end-column="81" />
+            <state relative-caret-position="-221">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2219#2220#0" expanded="true" />
-                <element signature="e#2254#2255#0" expanded="true" />
-                <element signature="e#2641#2642#0" expanded="true" />
-                <element signature="e#2705#2706#0" expanded="true" />
-                <element signature="e#2737#2738#0" expanded="true" />
-                <element signature="e#2801#2802#0" expanded="true" />
-                <element signature="e#2839#2840#0" expanded="true" />
-                <element signature="e#2885#2886#0" expanded="true" />
-                <element signature="e#2923#2924#0" expanded="true" />
-                <element signature="e#2969#2970#0" expanded="true" />
-                <element signature="e#3007#3008#0" expanded="true" />
-                <element signature="e#3034#3035#0" expanded="true" />
-                <element signature="e#3081#3082#0" expanded="true" />
-                <element signature="e#3113#3114#0" expanded="true" />
-                <element signature="e#4068#4069#0" expanded="true" />
-                <element signature="e#4102#4103#0" expanded="true" />
-                <element signature="e#4148#4149#0" expanded="true" />
-                <element signature="e#4179#4180#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/CameraViewDisplay.java">
+        <entry file="file://$PROJECT_DIR$/FtcRobotController/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="54" />
+            <state relative-caret-position="148">
+              <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2700#3110#0" expanded="true" />
-                <element signature="e#3109#3110#0" expanded="true" />
-                <element signature="e#3372#3723#0" expanded="true" />
-                <element signature="e#3722#3723#0" expanded="true" />
+                <element signature="e#0#2#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="128">
+              <caret line="246" column="77" selection-start-line="246" selection-start-column="77" selection-end-line="246" selection-end-column="77" />
             </state>
           </provider>
         </entry>
@@ -181,30 +144,51 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/build.common.gradle" />
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/ScoringLift.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/test/teleOp/RevExtensions2.java" />
-        <option value="$PROJECT_DIR$/TeamCode/build.gradle" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/detectors/HopperDetector.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/test/drive/MecanumDriveTrainTest.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Robot.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/TestMotorAction.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Intake.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/control/controllers/cruiseController.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/AutoModeBase.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Teleop.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Team9889Linear.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Constants.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/MecanumToPosition.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/Autonomous.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/detectors/SkyStoneDetector.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/CameraViewDisplay.java" />
+        <option value="$PROJECT_DIR$/DogeCV/src/main/java/com/disnodeteam/dogecv/detectors/DogeCVDetector.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/detectors/SkyStoneDetector.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/TeamCode/build.gradle" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/McanumDriveAction.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Action.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Team9889Linear.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/modes/NJITAuto.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/MecanumToPosition.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/control/controllers/cruiseController.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Camera.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/VuMark.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/ScoringLift.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/intake/IntakeDown.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/intake/Intake.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/intake/IntakeStop.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Lift/CloseGrabber.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Lift/OpenGrabber.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/FoundationHook.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/FoundationHookOpen.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/FoundationHookClose.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/MecanumToAngle.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/intake/IntakeUp.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/MecanumDriveAction.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Constants.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Robot.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Teleop.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Lift/LiftIn.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Lift/LiftOut.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/Autonomous.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java" />
       </list>
     </option>
   </component>
@@ -220,110 +204,61 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="CC_9889_2019_2020" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CC_9889_2019_2020" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="CC_9889_2019_2020" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CC_9889_2019_2020" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="CC_9889_2019_2020" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CC_9889_2019_2020" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="CC_9889_2019_2020" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CC_9889_2019_2020" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="CC_9889_2019_2020" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CC_9889_2019_2020" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team9889" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="CC_9889_2019_2020" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CC_9889_2019_2020" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="team9889" type="462c0819:PsiDirectoryNode" />
-              <item name="ftc2019" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="CC_9889_2019_2020" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CC_9889_2019_2020" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="team9889" type="462c0819:PsiDirectoryNode" />
               <item name="ftc2019" type="462c0819:PsiDirectoryNode" />
-              <item name="auto" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team9889" type="462c0819:PsiDirectoryNode" />
-              <item name="ftc2019" type="462c0819:PsiDirectoryNode" />
-              <item name="auto" type="462c0819:PsiDirectoryNode" />
-              <item name="actions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team9889" type="462c0819:PsiDirectoryNode" />
-              <item name="ftc2019" type="462c0819:PsiDirectoryNode" />
-              <item name="auto" type="462c0819:PsiDirectoryNode" />
-              <item name="actions" type="462c0819:PsiDirectoryNode" />
-              <item name="drive" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team9889" type="462c0819:PsiDirectoryNode" />
-              <item name="ftc2019" type="462c0819:PsiDirectoryNode" />
-              <item name="auto" type="462c0819:PsiDirectoryNode" />
-              <item name="modes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="CC_9889_2019_2020" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CC_9889_2019_2020" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -332,60 +267,25 @@
               <item name="ftc2019" type="462c0819:PsiDirectoryNode" />
               <item name="subsystems" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team9889" type="462c0819:PsiDirectoryNode" />
-              <item name="ftc2019" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team9889" type="462c0819:PsiDirectoryNode" />
-              <item name="ftc2019" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="teleOp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team9889" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkyStone-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkyStone-master" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="TeamCode" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="team9889" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="detectors" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.team9889.ftc2019.auto.actions.Lift" />
+      <recent name="com.team9889.ftc2019.auto.actions.intake" />
+      <recent name="com.team9889.ftc2019.auto.actions.drive" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -507,11 +407,38 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2685325" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2677761" />
+      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Build Variants" order="4" side_tool="true" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Designer" order="6" />
+      <window_info id="Resources Explorer" order="7" />
+      <window_info id="Capture Tool" order="8" />
+      <window_info anchor="bottom" id="Run" order="0" sideWeight="0.49924356" weight="0.3289689" />
+      <window_info anchor="bottom" id="Logcat" order="1" weight="0.3289689" />
+      <window_info anchor="bottom" id="TODO" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" />
+      <window_info anchor="bottom" id="Terminal" order="4" weight="0.3289689" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50075644" side_tool="true" weight="0.3289689" />
+      <window_info anchor="bottom" id="Version Control" order="6" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.3289689" />
+      <window_info anchor="bottom" id="Find" order="8" weight="0.3289689" />
+      <window_info anchor="bottom" id="Android Profiler" order="9" show_stripe_button="false" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Gradle" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Assistant" order="5" weight="0.32980332" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.2677761" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -535,177 +462,127 @@
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info anchor="right" id="Assistant" order="5" weight="0.32980332" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/test/subsystems/camera/TestHopperDetector.java" />
-    <entry file="file://$PROJECT_DIR$/gradlew">
+    <entry file="file://$PROJECT_DIR$/DogeCV/src/main/java/com/disnodeteam/dogecv/OpenCVPipeline.java" />
+    <entry file="file://$PROJECT_DIR$/DogeCV/src/main/java/com/disnodeteam/dogecv/detectors/DogeCVDetector.java" />
+    <entry file="file://$PROJECT_DIR$/TeamCode/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-459" />
+        <state relative-caret-position="266">
+          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#2#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+        <state relative-caret-position="232">
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
           <folding>
             <element signature="e#0#128#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openftc/rev-extensions-2/1.2/5545537f553286e6217406b694b4084c42f74546/rev-extensions-2-1.2-sources.jar!/org/openftc/revextensions2/RevBulkData.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openftc/easyopencv/1.2/a3f565c4c492ff4c196512c9b9ee5095794beb80/easyopencv-1.2-sources.jar!/org/openftc/easyopencv/OpenCvPipeline.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-119">
-          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
+        <state relative-caret-position="102">
+          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openftc/rev-extensions-2/1.2/5545537f553286e6217406b694b4084c42f74546/rev-extensions-2-1.2-sources.jar!/org/openftc/revextensions2/RevExtensions2.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.dogecv/dogecv/2020.4-alpha/382e9e962f946e0d60e4e394fcb27ad08febe9ef/dogecv-2020.4-alpha-sources.jar!/com/disnodeteam/dogecv/detectors/DogeCVDetector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="37" column="6" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="6" />
+        <state relative-caret-position="128">
+          <caret line="23" column="51" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/ScoringLift.java">
+    <entry file="file://$PROJECT_DIR$/DogeCV-master/DogeCV/src/main/java/com/disnodeteam/dogecv/detectors/skystone/StoneDetector.java" />
+    <entry file="file://$PROJECT_DIR$/DogeCV-master/DogeCV/src/main/java/com/disnodeteam/dogecv/detectors/skystone/SkystoneDetector.java" />
+    <entry file="file://$PROJECT_DIR$/DogeCV-master/DogeCV/src/main/java/com/disnodeteam/dogecv/DogeCV.java" />
+    <entry file="file://$PROJECT_DIR$/DogeCV-master/DogeCV/src/main/java/com/disnodeteam/dogecv/DigitalCamera.java" />
+    <entry file="file://$PROJECT_DIR$/DogeCV-master/DogeCV/src/main/java/com/disnodeteam/dogecv/detectors/BlankDetector.java" />
+    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/external/hardware/camera/Camera.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
+        <state relative-caret-position="-247">
+          <caret line="55" column="5" lean-forward="true" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Drive.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Action.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="597">
+          <caret line="41" column="32" lean-forward="true" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/hardware/CameraFlash.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.common.gradle">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/AutoModeBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="107" column="13" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#656#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FtcRobotController/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#2#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="e#0#2#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/external/samples/BasicOpMode_Iterative.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EasyOpenCV-master/examples/src/main/java/org/openftc/easyopencv/examples/InternalCameraExample.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2601">
-          <folding>
-            <element signature="e#0#10951#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EasyOpenCV-master/doc/images/build-common-gradle.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EasyOpenCV-master/doc/images/gradle-sync.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EasyOpenCV-master/doc/images/jcenter.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EasyOpenCV-master/doc/images/teamcode-gradle.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EasyOpenCV-master/easyopencv/src/main/java/org/openftc/easyopencv/OpenCvCamera.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2752">
-          <folding>
-            <element signature="e#0#8797#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="427">
+          <caret line="77" column="5" lean-forward="true" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/modes/NJITAuto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/test/teleOp/RevExtensions2.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Wait.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/test/teleOp/MotorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-151">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/McanumDriveAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-391">
+        <state relative-caret-position="136">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/test/drive/MecanumDriveTrainTest.java">
+    <entry file="file://$PROJECT_DIR$/DogeCV-master/DogeCV/src/main/java/com/disnodeteam/dogecv/detectors/DogeCVDetector.java" />
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/TestMotorAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+        <state relative-caret-position="187">
+          <caret line="22" column="43" lean-forward="true" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/control/kinematics/TankDriveKinematicModel.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/MecanumToPosition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="62" column="26" lean-forward="true" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="26" />
+        <state relative-caret-position="2">
+          <caret line="68" column="10" selection-start-line="68" selection-start-column="10" selection-end-line="68" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/com/qualcomm/robotcore/hardware/DcMotorController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="103" column="89" lean-forward="true" selection-start-line="103" selection-start-column="89" selection-end-line="103" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/com/qualcomm/robotcore/hardware/DcMotor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="39" column="39" lean-forward="true" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/com/qualcomm/robotcore/hardware/DcMotorSimple.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="37" column="46" lean-forward="true" selection-start-line="37" selection-start-column="46" selection-end-line="37" selection-end-column="46" />
+          <caret line="37" column="45" lean-forward="true" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -716,51 +593,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Robot.java">
+    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/com/qualcomm/robotcore/hardware/DcMotorImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="86" column="24" lean-forward="true" selection-start-line="86" selection-start-column="24" selection-end-line="86" selection-end-column="24" />
+        <state relative-caret-position="323">
+          <caret line="232" column="57" selection-start-line="232" selection-start-column="57" selection-end-line="232" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/hardware/Motor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="30" column="77" lean-forward="true" selection-start-line="30" selection-start-column="77" selection-end-line="30" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Team9889Linear.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="118" column="5" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/detectors/SkyStoneDetector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-85">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/hardware/Motor.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/VuMark.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+        <state relative-caret-position="175">
+          <caret line="39" column="18" lean-forward="true" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/com/qualcomm/robotcore/hardware/DcMotorImpl.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/intake/IntakeDown.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="232" column="27" selection-start-line="232" selection-start-column="27" selection-end-line="232" selection-end-column="27" />
+        <state relative-caret-position="325">
+          <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#437#438#0" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
+            <element signature="e#394#395#0" expanded="true" />
+            <element signature="e#422#423#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/control/controllers/FeedBackController.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/intake/Intake.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="32" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#331#332#0" expanded="true" />
+            <element signature="e#387#388#0" expanded="true" />
+            <element signature="e#429#430#0" expanded="true" />
+            <element signature="e#473#474#0" expanded="true" />
+          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/control/controllers/PID.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="58" column="28" lean-forward="true" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SkyStone-master.iml">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Intake.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="55" column="28" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
+        <state relative-caret-position="-68">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding>
             <element signature="method#SetLeftIntakeHeight#0;class#Intake#0" />
             <element signature="method#SetRightIntakeHeight#0;class#Intake#0" />
@@ -769,185 +674,191 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/TestMotorAction.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/intake/IntakeStop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="255">
+          <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#919#920#0" expanded="true" />
-            <element signature="e#961#962#0" expanded="true" />
+            <element signature="e#293#294#0" expanded="true" />
+            <element signature="e#349#350#0" expanded="true" />
+            <element signature="e#391#392#0" expanded="true" />
+            <element signature="e#435#436#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/com/qualcomm/robotcore/eventloop/opmode/OpMode.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Lift/OpenGrabber.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="140" column="20" selection-start-line="140" selection-start-column="20" selection-end-line="140" selection-end-column="20" />
+        <state relative-caret-position="240">
+          <caret line="19" column="52" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
           <folding>
-            <element signature="e#4991#4992#0" expanded="true" />
-            <element signature="e#5052#5053#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#465#466#0" expanded="true" />
+            <element signature="e#509#510#0" expanded="true" />
+            <element signature="e#558#559#0" expanded="true" />
+            <element signature="e#607#608#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/AutoModeBase.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Lift/CloseGrabber.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="55" selection-start-line="55" selection-end-line="65" selection-end-column="5" />
+        <state relative-caret-position="85">
+          <caret line="10" selection-start-line="10" selection-end-line="36" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#429#430#0" expanded="true" />
+            <element signature="e#449#450#0" expanded="true" />
+            <element signature="e#394#395#0" expanded="true" />
+            <element signature="e#422#423#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Team9889Linear.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/FoundationHookOpen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="106" column="5" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
+        <state relative-caret-position="376">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#469#470#0" expanded="true" />
+            <element signature="e#513#514#0" expanded="true" />
+            <element signature="e#562#563#0" expanded="true" />
+            <element signature="e#611#612#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/FoundationHookClose.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" column="68" selection-start-line="19" selection-start-column="68" selection-end-line="19" selection-end-column="68" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/control/controllers/cruiseController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="29" column="62" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
+        <state relative-caret-position="246">
+          <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Teleop.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/intake/IntakeUp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
+        <state relative-caret-position="289">
+          <caret line="19" column="51" selection-start-line="19" selection-start-column="51" selection-end-line="19" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/ScoringLift.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="42" column="49" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
+          <folding>
+            <element signature="e#1102#1103#0" expanded="true" />
+            <element signature="e#1160#1161#0" expanded="true" />
+            <element signature="e#1195#1196#0" expanded="true" />
+            <element signature="e#1253#1254#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="39" column="97" lean-forward="true" selection-start-line="39" selection-start-column="97" selection-end-line="39" selection-end-column="97" />
+        <state relative-caret-position="229">
+          <caret line="92" column="35" selection-start-line="92" selection-start-column="35" selection-end-line="92" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Lift/LiftIn.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="215" column="59" selection-start-line="215" selection-start-column="59" selection-end-line="215" selection-end-column="59" />
+        <state relative-caret-position="323">
+          <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/Lift/LiftOut.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1586#2285#1" />
-            <element signature="e#2421#3256#1" />
-            <element signature="e#3642#3796#1" />
-            <element signature="e#3900#4214#0" />
-            <element signature="e#4220#5605#0" />
-            <element signature="e#5611#6240#0" />
-            <element signature="e#6246#7546#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/MecanumToPosition.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Robot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="21" column="72" selection-start-line="21" selection-start-column="72" selection-end-line="21" selection-end-column="72" />
+        <state relative-caret-position="1666">
+          <caret line="117" column="74" selection-start-line="117" selection-start-column="74" selection-end-line="117" selection-end-column="74" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4074#4075#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/MecanumDriveAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="935">
+          <caret line="63" column="51" selection-start-line="63" selection-start-column="51" selection-end-line="63" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/actions/drive/MecanumToAngle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="64" column="143" selection-start-line="64" selection-start-column="143" selection-end-line="64" selection-end-column="143" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/auto/Autonomous.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+        <state relative-caret-position="612">
+          <caret line="41" column="2" selection-start-line="41" selection-start-column="2" selection-end-line="41" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/external/samples/ConceptVuforiaSkyStoneNavigation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1182">
+          <caret line="87" column="13" selection-start-line="87" selection-start-column="13" selection-end-line="87" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/MecanumDrive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="267" selection-start-line="267" selection-end-line="267" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/detectors/HopperDetector.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/Teleop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4955">
-          <caret line="298" column="58" lean-forward="true" selection-start-line="298" selection-start-column="58" selection-end-line="298" selection-end-column="58" />
+        <state relative-caret-position="1003">
+          <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/detectors/SkyStoneDetector.java">
+    <entry file="file://$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4816">
-          <caret line="286" column="5" selection-start-line="286" selection-start-column="5" selection-end-line="286" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2667#2675#0" expanded="true" />
-            <element signature="e#2731#2739#0" expanded="true" />
-            <element signature="e#3185#3186#0" expanded="true" />
-            <element signature="e#3222#3223#0" expanded="true" />
-            <element signature="e#3399#3400#0" expanded="true" />
-            <element signature="e#3440#3441#0" expanded="true" />
-            <element signature="e#3602#3603#0" expanded="true" />
-            <element signature="e#3638#3639#0" expanded="true" />
-            <element signature="e#3789#3790#0" expanded="true" />
-            <element signature="e#3822#3823#0" expanded="true" />
-            <element signature="e#4012#4013#0" expanded="true" />
-            <element signature="e#4054#4055#0" expanded="true" />
-            <element signature="e#4244#4245#0" expanded="true" />
-            <element signature="e#4286#4287#0" expanded="true" />
-            <element signature="e#4474#4475#0" expanded="true" />
-            <element signature="e#4516#4517#0" expanded="true" />
-            <element signature="e#4704#4705#0" expanded="true" />
-            <element signature="e#4746#4747#0" expanded="true" />
-            <element signature="e#8820#8821#0" expanded="true" />
-            <element signature="e#8861#8862#0" expanded="true" />
-            <element signature="e#9018#9019#0" expanded="true" />
-            <element signature="e#9052#9053#0" expanded="true" />
-            <element signature="e#9235#9236#0" expanded="true" />
-            <element signature="e#9275#9276#0" expanded="true" />
-            <element signature="e#9429#9430#0" expanded="true" />
-            <element signature="e#9465#9466#0" expanded="true" />
-            <element signature="e#9457#9458#0" expanded="true" />
-            <element signature="e#9497#9498#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/CameraViewDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2700#3110#0" expanded="true" />
-            <element signature="e#3109#3110#0" expanded="true" />
-            <element signature="e#3372#3723#0" expanded="true" />
-            <element signature="e#3722#3723#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="128">
+          <caret line="246" column="77" selection-start-line="246" selection-start-column="77" selection-end-line="246" selection-end-column="77" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/subsystems/Camera.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="34" column="81" selection-start-line="34" selection-start-column="81" selection-end-line="34" selection-end-column="81" />
+        <state relative-caret-position="-221">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2219#2220#0" expanded="true" />
-            <element signature="e#2254#2255#0" expanded="true" />
-            <element signature="e#2641#2642#0" expanded="true" />
-            <element signature="e#2705#2706#0" expanded="true" />
-            <element signature="e#2737#2738#0" expanded="true" />
-            <element signature="e#2801#2802#0" expanded="true" />
-            <element signature="e#2839#2840#0" expanded="true" />
-            <element signature="e#2885#2886#0" expanded="true" />
-            <element signature="e#2923#2924#0" expanded="true" />
-            <element signature="e#2969#2970#0" expanded="true" />
-            <element signature="e#3007#3008#0" expanded="true" />
-            <element signature="e#3034#3035#0" expanded="true" />
-            <element signature="e#3081#3082#0" expanded="true" />
-            <element signature="e#3113#3114#0" expanded="true" />
-            <element signature="e#4068#4069#0" expanded="true" />
-            <element signature="e#4102#4103#0" expanded="true" />
-            <element signature="e#4148#4149#0" expanded="true" />
-            <element signature="e#4179#4180#0" expanded="true" />
           </folding>
         </state>
       </provider>

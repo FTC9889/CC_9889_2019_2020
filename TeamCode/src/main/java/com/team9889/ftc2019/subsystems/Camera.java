@@ -1,34 +1,28 @@
 package com.team9889.ftc2019.subsystems;
 
+import android.graphics.Bitmap;
+
+import com.team9889.lib.VuMark;
 import com.team9889.lib.detectors.SkyStoneDetector;
+import com.vuforia.Image;
+import com.vuforia.PIXEL_FORMAT;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
 
 /**
  * Created by MannoMation on 10/27/2018.
  */
 
 public class Camera extends Subsystem{
-    private SkyStoneDetector detector;
-
-    public enum GoldPositions{
-        LEFT, CENTER, RIGHT, UNKNOWN
-    }
-
-    private GoldPositions gold = GoldPositions.UNKNOWN;
-
-    public enum CameraPositions{
-        FRONTCENTER, FRONTRIGHT, FRONTLEFT,
-        FRONTHOPPER, BACKHOPPER,
-        STORED, UPRIGHT,
-        TWO_GOLD, TELEOP
-    }
-
+    public SkyStoneDetector detector;
 
     @Override
     public void init(boolean auto) {
         if (auto) {
-            setCameraPosition(CameraPositions.STORED);
+            detector = new SkyStoneDetector();
         }
     }
 
@@ -55,59 +49,34 @@ public class Camera extends Subsystem{
         yPosition = yPos;
     }
 
-    public double getGoldPosition(){
-        return detector.getXPosition();
+    public void getImage(){
+        Image bmp = VuMark.getImage();
+        Mat tmp = null;
+
+        if(bmp != null) {
+            tmp = new Mat(bmp.getHeight(), bmp.getWidth(), CvType.CV_8UC1);
+        }
+        detector.process(tmp);
     }
 
-    public GoldPositions getGold() {
-        return gold;
-    }
+    public double getSkyStonePosition(){
+        getImage();
 
-    public void setGold(GoldPositions gold) {
-        this.gold = gold;
-    }
+        double skyStonePosition = detector.getXPosition();
 
-    public void setCameraPosition(CameraPositions position){
-        switch (position){
-            case STORED:
-                setXYAxisPosition(0, 0.1);
-                break;
-
-            case UPRIGHT:
-                setXYAxisPosition(0, 0.5);
-                break;
-
-            case BACKHOPPER:
-                setXYAxisPosition(1,0.9);
-                break;
-
-            case FRONTRIGHT:
-                setXYAxisPosition(.265, .75);
-                break;
-
-            case FRONTCENTER:
-                setXYAxisPosition(.075, 0.8);
-                break;
-
-            case FRONTLEFT:
-                setXYAxisPosition(.0, 0.);
-
-            case FRONTHOPPER:
-                setXYAxisPosition(0, 1);
-                break;
-
-            case TWO_GOLD:
-                setXYAxisPosition(0, 0.6);
-                break;
-
-            case TELEOP:
-                setXYAxisPosition(1, .95);
+        if (skyStonePosition < 100){
+            return 1;
+        }else if (skyStonePosition > 99 && skyStonePosition < 200){
+            return 2;
+        }
+        else {
+            return 3;
         }
     }
 
 //    @Override
     public void stop() {
-        
+
     }
 
     @Override

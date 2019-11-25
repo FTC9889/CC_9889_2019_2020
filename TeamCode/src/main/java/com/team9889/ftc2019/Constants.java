@@ -29,6 +29,7 @@ public class Constants {
         public final static String kRightDriveMasterId = "rf";
         public final static String kLeftDriveSlaveId = "lb";
         public final static String kRightDriveSlaveId = "rb";
+        public final static String kFoundationHook = "foundationhook";
 
         public final static double WheelbaseWidth = 14.5;
         public final static double WheelDiameter = 3.93701;
@@ -39,7 +40,7 @@ public class Constants {
          */
         public final static double ENCODER_TO_DISTANCE_RATIO = (WheelDiameter * Math.PI) / 537.6;
         public final static double AngleToInchRatio = (Math.PI / 180.) * (WheelbaseWidth / 2.);
-        public final static double InchToTick = (Math.PI * WheelDiameter) * 537.6;
+        public final static double InchToTick = 537.6 / (Math.PI * 4.1);
     }
 
     public static void main(String[] args) {
@@ -88,6 +89,8 @@ public class Constants {
     public static class LiftConstants {
         public final static String kLeftLift = "leftlift";
         public final static String kRightLift = "rightlift";
+        public final static String kGrabber = "grabber";
+        public final static String kLinearBar = "linearbar";
     }
 
     /*---------------------

@@ -32,7 +32,25 @@ public class Teleop extends Team9889Linear {
         while (opModeIsActive()){
             loopTimer.reset();
 
-            robot.getMecanumDrive().setFieldCentricPower(-gamepad1.left_stick_x, gamepad1.left_stick_y, -gamepad1.right_stick_x);
+            robot.getMecanumDrive().setFieldCentricPower(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
+
+            if (gamepad1.right_trigger > 0.05)
+                Robot.getLift().SetLiftPower(gamepad1.right_trigger);
+            else if (gamepad1.left_trigger > 0.05)
+                Robot.getLift().SetLiftPower(-gamepad1.left_trigger);
+            else {
+                Robot.getLift().SetLiftPower(0);
+            }
+
+            if (gamepad1.x){
+                telemetry.addData("Sky Stone Position", Robot.getCamera().getSkyStonePosition());
+            }
+
+            if (gamepad1.dpad_left){
+                Robot.getLift().GrabberOpen();
+            }else if (gamepad1.dpad_right){
+                Robot.getLift().GrabberClose();
+            }
 
             if (gamepad1.a){
                 robot.getIntake().Intake();
@@ -47,10 +65,23 @@ public class Teleop extends Team9889Linear {
             else if (gamepad1.left_bumper)
                 Robot.getIntake().IntakeUp();
 
+            if (gamepad2.left_bumper){
+                Robot.getMecanumDrive().CloseFoundationHook();
+            }else if (gamepad2.right_bumper){
+                Robot.getMecanumDrive().OpenFoundationHook();
+            }
+
+            if (gamepad2.a){
+                Robot.linearBar.setPower(1);
+            }else if (gamepad2.b){
+                Robot.linearBar.setPower(-1);
+            }else
+                Robot.linearBar.setPower(0);
+
             telemetry.addData("gamepad", gamepad1);
 
             telemetry.addData("Loop Time", loopTimer.milliseconds());
-            //telemetry.addData("angle", robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
+            telemetry.addData("angle", robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
 
             telemetry.addData("x", gamepad1.left_stick_x);
             telemetry.addData("y", gamepad1.left_stick_y);

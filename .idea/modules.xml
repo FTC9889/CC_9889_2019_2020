@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/CC_9889_2019_2020.iml" filepath="$PROJECT_DIR$/CC_9889_2019_2020.iml" />
       <module fileurl="file://$PROJECT_DIR$/FtcRobotController/FtcRobotController.iml" filepath="$PROJECT_DIR$/FtcRobotController/FtcRobotController.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SkyStone-master.iml" filepath="$PROJECT_DIR$/SkyStone-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/TeamCode/TeamCode.iml" filepath="$PROJECT_DIR$/TeamCode/TeamCode.iml" />
     </modules>
   </component>
