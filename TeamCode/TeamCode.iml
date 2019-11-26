@@ -91,7 +91,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: org.openftc:rev-extensions-2:1.2@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.dogecv:dogecv:2020.4-alpha@aar" level="project" />
-    <orderEntry type="library" name="Gradle: org.openftc:easyopencv:1.2@aar" level="project" />
+    <orderEntry type="library" name="Gradle: org.openftc:easyopencv:1.3@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.openftc:opencv-repackaged:4.1.0-A@aar" level="project" />
     <orderEntry type="library" name="Gradle: :RobotCore-release:@aar" level="project" />
     <orderEntry type="library" name="Gradle: :Hardware-release:@aar" level="project" />
@@ -100,5 +100,6 @@
     <orderEntry type="library" name="Gradle: :tfod-release:@aar" level="project" />
     <orderEntry type="library" name="Gradle: :tensorflow-lite-0.0.0-nightly:@aar" level="project" />
     <orderEntry type="module" module-name="FtcRobotController" />
+    <orderEntry type="library" name="Gradle: android-android-28" level="project" />
   </component>
 </module>
