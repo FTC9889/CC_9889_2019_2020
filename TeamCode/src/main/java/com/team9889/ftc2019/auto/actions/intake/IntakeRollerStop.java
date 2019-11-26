@@ -1,15 +1,12 @@
-package com.team9889.ftc2019.auto.actions.Lift;
+package com.team9889.ftc2019.auto.actions.intake;
 
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.Robot;
 
 /**
  * Created by Eric on 11/22/2019.
  */
-public class LiftIn extends Action {
-    private ElapsedTime timer = new ElapsedTime();
-
+public class IntakeRollerStop extends Action {
     @Override
     public void setup(String args) {
 
@@ -17,21 +14,21 @@ public class LiftIn extends Action {
 
     @Override
     public void start() {
-        timer.reset();
+        Robot.getInstance().getIntake().RollerStop();
     }
 
     @Override
     public void update() {
-        Robot.getInstance().linearBar.setPower(1);
+        Robot.getInstance().update();
     }
 
     @Override
     public boolean isFinished() {
-        return timer.milliseconds() > 2700;
+        return true;
     }
 
     @Override
     public void done() {
-        Robot.getInstance().linearBar.setPower(0);
+
     }
 }

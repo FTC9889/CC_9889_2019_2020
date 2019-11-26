@@ -30,7 +30,7 @@ public class MecanumToAngle extends Action {
 
     @Override
     public void start() {
-        cc = new cruiseController(.04, .12);
+        cc = new cruiseController(.07, .12);
         timer.reset();
         gyro = Robot.getInstance().getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES);
         lastGyro = gyro;

@@ -6,9 +6,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="031be3f4-1337-4d6c-ac57-67448f70bdf5" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/test/local/CruiseControllerTest.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/test/local/ImuLocalTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+<<<<<<< Updated upstream
+      <change afterPath="$PROJECT_DIR$/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/ftc2019/test/vision/TestScanForSkyStonesPipeline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/detectors/ScanForSkyStonesPipeline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FtcRobotController/FtcRobotController.iml" beforeDir="false" afterPath="$PROJECT_DIR$/FtcRobotController/FtcRobotController.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/TeamCode.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/TeamCode.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/cruiseCode/CruiseCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/com/team9889/lib/cruiseCode/CruiseCode.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> Stashed changes
+>>>>>>> development
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

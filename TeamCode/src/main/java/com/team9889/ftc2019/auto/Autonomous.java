@@ -31,13 +31,22 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous
 public class Autonomous extends Team9889Linear {
     boolean stop = false;
+    int skyStonePosition = 1;
 
     @Override
     public void runOpMode() throws InterruptedException {
         waitForStart(true);
 
         while (opModeIsActive() && !stop) {
-//          Grab Sky Stone
+            if (positionOfSkyStone < 40) {
+                skyStonePosition = 1;
+            }else if (positionOfSkyStone > 39 && positionOfSkyStone < 150){
+                skyStonePosition = 2;
+            }else if (positionOfSkyStone > 149){
+                skyStonePosition = 3;
+            }
+
+            //          Grab Sky Stone
             runAction(new MecanumDriveAction(0, 1, 0, 1000));
             ThreadAction(new IntakeDown());
             runAction(new MecanumToAngle(-25, 600));
