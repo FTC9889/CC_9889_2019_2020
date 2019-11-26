@@ -28,26 +28,29 @@ public class Intake extends Subsystem {
         Robot.getInstance().intakeRight.setPower(power);
     }
     public void Intake(){
-        SetIntakePower(0.75);
+        SetIntakePower(0.5);
+        RollerIn();
     }
     public void Outtake(){
         SetIntakePower(-0.3);
+        RollerOut();
     }
     public void Stop(){
         SetIntakePower(0);
+        RollerStop();
     }
 
     public void SetRollerPower(double power){
         Robot.getInstance().roller.setPower(power);
     }
     public void RollerIn(){
-        SetRollerPower(0.5);
+        SetRollerPower(1);
     }
     public void RollerStop(){
         SetRollerPower(0);
     }
     public void RollerOut(){
-        SetRollerPower(-0.5);
+        SetRollerPower(-1);
     }
 
 

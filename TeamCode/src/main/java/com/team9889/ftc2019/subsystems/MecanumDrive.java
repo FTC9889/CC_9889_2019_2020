@@ -53,8 +53,6 @@ public class MecanumDrive extends Subsystem {
 
     @Override
     public void update() {
-
-
         if (setStraightPositionActive){
             if ((Robot.getInstance().fLDrive.getPosition() + Robot.getInstance().fRDrive.getPosition() / 2) - xEncoderOffset < Math.abs(xPositionTicks)) {
                 xSpeed = .5;
@@ -167,8 +165,8 @@ public class MecanumDrive extends Subsystem {
             timerOffset = Robot.timer.milliseconds();
             gyro = getAngle().getTheda(AngleUnit.RADIANS);
         }
-        double xMod = x * Math.cos(/*getAngle().getTheda(AngleUnit.RADIANS)*/ gyro) - y * Math.sin(/*getAngle().getTheda(AngleUnit.RADIANS)*/ gyro);
-        double yMod = x * Math.sin(/*getAngle().getTheda(AngleUnit.RADIANS)*/ gyro) + y * Math.cos(/*getAngle().getTheda(AngleUnit.RADIANS)*/ gyro);
+        double xMod = x * Math.cos(gyro) - y * Math.sin(gyro);
+        double yMod = x * Math.sin(gyro) + y * Math.cos(gyro);
         setPower(xMod, yMod, rotation);
     }
 

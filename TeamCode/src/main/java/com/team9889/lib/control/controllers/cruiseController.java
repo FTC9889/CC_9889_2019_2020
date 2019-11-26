@@ -24,7 +24,7 @@ public class cruiseController extends FeedBackController{
         error = wanted - current;
 
         if (Math.abs(error) > Math.abs(wanted) / 3){
-            output = tuner * (wanted / Math.abs(error) * 5 + (wanted / Math.abs(wanted) * 0.1));
+            output = tuner * (Math.abs(current) / wanted * 16 + (wanted / Math.abs(wanted) * 0.1));
         }
         else {
             output = tuner * (wanted / Math.abs(current) / 2);

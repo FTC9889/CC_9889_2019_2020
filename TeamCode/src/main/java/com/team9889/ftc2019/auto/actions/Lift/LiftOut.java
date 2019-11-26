@@ -27,7 +27,7 @@ public class LiftOut extends Action {
 
     @Override
     public boolean isFinished() {
-        return timer.milliseconds() > 2000;
+        return timer.milliseconds() > 2700;
     }
 
     @Override

@@ -1,0 +1,86 @@
+package com.team9889.ftc2019.auto.modes;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.team9889.ftc2019.Team9889Linear;
+import com.team9889.ftc2019.auto.actions.Lift.CloseGrabber;
+import com.team9889.ftc2019.auto.actions.Lift.LiftIn;
+import com.team9889.ftc2019.auto.actions.Lift.LiftOut;
+import com.team9889.ftc2019.auto.actions.Lift.OpenGrabber;
+import com.team9889.ftc2019.auto.actions.Wait;
+import com.team9889.ftc2019.auto.actions.drive.FoundationHookClose;
+import com.team9889.ftc2019.auto.actions.drive.FoundationHookOpen;
+import com.team9889.ftc2019.auto.actions.drive.MecanumDriveSimpleAction;
+import com.team9889.ftc2019.auto.actions.drive.MecanumToAngle;
+import com.team9889.ftc2019.auto.actions.intake.Intake;
+import com.team9889.ftc2019.auto.actions.intake.IntakeDown;
+import com.team9889.ftc2019.auto.actions.intake.IntakeRollerOn;
+import com.team9889.ftc2019.auto.actions.intake.IntakeRollerStop;
+import com.team9889.ftc2019.auto.actions.intake.IntakeStop;
+import com.team9889.ftc2019.auto.actions.intake.IntakeUp;
+
+/**
+ * Created by Eric on 11/26/2019.
+ */
+
+@Autonomous
+public class RedAuto extends Team9889Linear {
+    int skyStonePosition = 1;
+
+    @Override
+    public void runOpMode() throws InterruptedException {
+
+        waitForStart(true);
+
+        if (positionOfSkyStone < 40) {
+            skyStonePosition = 1;
+        }else if (positionOfSkyStone > 39 && positionOfSkyStone < 120){
+            skyStonePosition = 2;
+        }else if (positionOfSkyStone > 119){
+            skyStonePosition = 3;
+        }
+
+        runAction(new MecanumDriveSimpleAction(1, 0));
+        ThreadAction(new IntakeDown());
+        if (skyStonePosition == 1) {
+//          Pickup Sky Stone
+//            runAction(new MecanumToAngle(-25, 2000));
+            runAction(new Intake());
+            runAction(new MecanumDriveSimpleAction(25, -23));
+            runAction(new IntakeStop());
+            runAction(new Wait(250));
+            runAction(new Intake());
+
+//          Drive To Foundation
+            runAction(new MecanumDriveSimpleAction(-10, -23));
+            runAction(new MecanumDriveSimpleAction(0, -90));
+            runAction(new IntakeStop());
+            ThreadAction(new IntakeRollerOn());
+            runAction(new MecanumDriveSimpleAction(-75, -90));
+            ThreadAction(new CloseGrabber());
+            runAction(new IntakeRollerStop());
+            runAction(new MecanumDriveSimpleAction(0, -180));
+            runAction(new MecanumDriveSimpleAction(-10, -180));
+            ThreadAction(new FoundationHookClose());
+            runAction(new MecanumDriveSimpleAction(-3, -180));
+            ThreadAction(new MecanumDriveSimpleAction(110, -180));
+            runAction(new IntakeUp());
+            runAction(new LiftOut());
+            runAction(new Wait(250));
+            runAction(new OpenGrabber());
+            runAction(new Wait(250));
+            ThreadAction(new LiftIn());
+            runAction(new IntakeUp());
+            runAction(new FoundationHookOpen());
+            Robot.getMecanumDrive().setPower(.7, 0, 0);
+            runAction(new Wait(1500));
+            Robot.getMecanumDrive().setPower(0, 0, 0);
+            runAction(new MecanumDriveSimpleAction(-20, -180));
+            Robot.getMecanumDrive().setPower(.7, 0, 0);
+            runAction(new Wait(1000));
+            Robot.getMecanumDrive().setPower(0, 0, 0);
+
+        }else if (skyStonePosition == 2){
+
+        }
+    }
+}
