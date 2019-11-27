@@ -10,7 +10,6 @@ import com.team9889.ftc2019.auto.actions.Wait;
 import com.team9889.ftc2019.auto.actions.drive.FoundationHookClose;
 import com.team9889.ftc2019.auto.actions.drive.FoundationHookOpen;
 import com.team9889.ftc2019.auto.actions.drive.MecanumDriveSimpleAction;
-import com.team9889.ftc2019.auto.actions.drive.MecanumToAngle;
 import com.team9889.ftc2019.auto.actions.intake.Intake;
 import com.team9889.ftc2019.auto.actions.intake.IntakeDown;
 import com.team9889.ftc2019.auto.actions.intake.IntakeRollerOn;
@@ -23,7 +22,7 @@ import com.team9889.ftc2019.auto.actions.intake.IntakeUp;
  */
 
 @Autonomous
-public class RedAuto extends Team9889Linear {
+public class BlueAuto extends Team9889Linear {
     int skyStonePosition = 1;
 
     @Override
@@ -31,11 +30,11 @@ public class RedAuto extends Team9889Linear {
 
         waitForStart(true);
 
-        if (positionOfSkyStone < 40) {
+        if (positionOfSkyStone < 110) {
             skyStonePosition = 1;
-        }else if (positionOfSkyStone > 39 && positionOfSkyStone < 120){
+        }else if (positionOfSkyStone > 109 && positionOfSkyStone < 180){
             skyStonePosition = 2;
-        }else if (positionOfSkyStone > 119){
+        }else if (positionOfSkyStone > 179){
             skyStonePosition = 3;
         }
 
@@ -45,31 +44,31 @@ public class RedAuto extends Team9889Linear {
 //          Pickup Sky Stone
 //            runAction(new MecanumToAngle(-25, 2000));
             runAction(new Intake());
-            runAction(new MecanumDriveSimpleAction(25, -23));
+            runAction(new MecanumDriveSimpleAction(25, -15));
             runAction(new IntakeStop());
             runAction(new Wait(250));
             runAction(new Intake());
 
 //          Drive To Foundation
-            runAction(new MecanumDriveSimpleAction(-10, -23));
-            runAction(new MecanumDriveSimpleAction(0, -90));
+            runAction(new MecanumDriveSimpleAction(-10, -15));
+            runAction(new MecanumDriveSimpleAction(0, 85));
             runAction(new IntakeStop());
             ThreadAction(new IntakeRollerOn());
-            runAction(new MecanumDriveSimpleAction(-75, -90));
-        }else if (skyStonePosition == 3){
-            runAction(new Intake());
-            runAction(new MecanumDriveSimpleAction(29, -30));
-            runAction(new IntakeStop());
-            runAction(new Wait(250));
-            runAction(new Intake());
-
-//          Drive To Foundation
-            runAction(new MecanumDriveSimpleAction(-10, -30));
-            runAction(new MecanumDriveSimpleAction(0, -90));
-            runAction(new IntakeStop());
-            ThreadAction(new IntakeRollerOn());
-            runAction(new MecanumDriveSimpleAction(-77, -90));
+            runAction(new MecanumDriveSimpleAction(-60, 85));
         }else if (skyStonePosition == 2){
+            runAction(new Intake());
+            runAction(new MecanumDriveSimpleAction(29, 25));
+            runAction(new IntakeStop());
+            runAction(new Wait(250));
+            runAction(new Intake());
+
+//          Drive To Foundation
+            runAction(new MecanumDriveSimpleAction(-10, 25));
+            runAction(new MecanumDriveSimpleAction(0, 85));
+            runAction(new IntakeStop());
+            ThreadAction(new IntakeRollerOn());
+            runAction(new MecanumDriveSimpleAction(-77, 85));
+        }else if (skyStonePosition == 3){
             runAction(new Intake());
             runAction(new MecanumDriveSimpleAction(33, -37));
             runAction(new IntakeStop());
@@ -81,16 +80,16 @@ public class RedAuto extends Team9889Linear {
             runAction(new MecanumDriveSimpleAction(0, -90));
             runAction(new IntakeStop());
             ThreadAction(new IntakeRollerOn());
-            runAction(new MecanumDriveSimpleAction(-84, -90));
+            runAction(new MecanumDriveSimpleAction(-80, -90));
         }
 
         ThreadAction(new CloseGrabber());
         runAction(new IntakeRollerStop());
-        runAction(new MecanumDriveSimpleAction(0, -180));
-        runAction(new MecanumDriveSimpleAction(-10, -180));
+        runAction(new MecanumDriveSimpleAction(0, 180));
+        runAction(new MecanumDriveSimpleAction(-10, 180));
         ThreadAction(new FoundationHookClose());
-        runAction(new MecanumDriveSimpleAction(-3, -180));
-        ThreadAction(new MecanumDriveSimpleAction(110, -180));
+        runAction(new MecanumDriveSimpleAction(-3, 180));
+        ThreadAction(new MecanumDriveSimpleAction(110, 180));
         runAction(new IntakeUp());
         runAction(new LiftOut());
         runAction(new Wait(250));
@@ -99,16 +98,16 @@ public class RedAuto extends Team9889Linear {
         ThreadAction(new LiftIn());
         runAction(new IntakeUp());
         runAction(new FoundationHookOpen());
-        Robot.getMecanumDrive().setPower(.7, 0, 0);
+        Robot.getMecanumDrive().setPower(-.7, 0, 0);
         runAction(new Wait(1500));
         Robot.getMecanumDrive().setPower(0, 0, 0);
-        runAction(new MecanumDriveSimpleAction(-15, -180));
-        Robot.getMecanumDrive().setPower(-.7, 0, 0);
+        runAction(new MecanumDriveSimpleAction(-15, 180));
+        Robot.getMecanumDrive().setPower(.7, 0, 0);
         runAction(new Wait(1000));
         Robot.getMecanumDrive().setPower(0, 0, 0);
-        runAction(new MecanumDriveSimpleAction(-8, -180));
-        Robot.getMecanumDrive().setPower(.7, 0, 0);
-        runAction(new Wait(1500));
+        runAction(new MecanumDriveSimpleAction(-8, 180));
+        Robot.getMecanumDrive().setPower(-.7, 0, 0);
+        runAction(new Wait(1250));
         Robot.getMecanumDrive().setPower(0, 0, 0);
 
         runAction(new MecanumDriveSimpleAction(0, 0));
