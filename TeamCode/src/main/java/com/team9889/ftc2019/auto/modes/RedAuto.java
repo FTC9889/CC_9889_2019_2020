@@ -55,7 +55,7 @@ public class RedAuto extends Team9889Linear {
             runAction(new MecanumDriveSimpleAction(0, -90));
             runAction(new IntakeStop());
             ThreadAction(new IntakeRollerOn());
-            runAction(new MecanumDriveSimpleAction(-75, -90));
+            runAction(new MecanumDriveSimpleAction(-70, -90));
         }else if (skyStonePosition == 3){
             runAction(new Intake());
             runAction(new MecanumDriveSimpleAction(29, -30));
@@ -100,7 +100,7 @@ public class RedAuto extends Team9889Linear {
         runAction(new IntakeUp());
         runAction(new FoundationHookOpen());
         Robot.getMecanumDrive().setPower(.7, 0, 0);
-        runAction(new Wait(1500));
+        runAction(new Wait(1750));
         Robot.getMecanumDrive().setPower(0, 0, 0);
         runAction(new MecanumDriveSimpleAction(-15, -180));
         Robot.getMecanumDrive().setPower(-.7, 0, 0);

@@ -65,6 +65,8 @@ public class Constants {
 
         public final static String kIntakeRollerId = "roller";
 
+        public final static String kIntakeBlockDetectorId = "blockdetector";
+
         final static double kIntakeTicksPerRev = 537.6;  //NeveRest Orbital 20
         final static double kIntakeSpoolDiameter = 2;
         public final static double kIntakeTicksToInchRatio = kIntakeSpoolDiameter * Math.PI / kIntakeTicksPerRev;
@@ -93,6 +95,8 @@ public class Constants {
         public final static String kRightLift = "rightlift";
         public final static String kGrabber = "grabber";
         public final static String kLinearBar = "linearbar";
+
+        public final static String kDownLimit = "liftlimitdown";
     }
 
     /*---------------------

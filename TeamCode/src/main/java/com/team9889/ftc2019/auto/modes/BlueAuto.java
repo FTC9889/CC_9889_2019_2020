@@ -54,7 +54,7 @@ public class BlueAuto extends Team9889Linear {
             runAction(new MecanumDriveSimpleAction(0, 85));
             runAction(new IntakeStop());
             ThreadAction(new IntakeRollerOn());
-            runAction(new MecanumDriveSimpleAction(-60, 85));
+            runAction(new MecanumDriveSimpleAction(-65, 85));
         }else if (skyStonePosition == 2){
             runAction(new Intake());
             runAction(new MecanumDriveSimpleAction(29, 25));
@@ -67,20 +67,20 @@ public class BlueAuto extends Team9889Linear {
             runAction(new MecanumDriveSimpleAction(0, 85));
             runAction(new IntakeStop());
             ThreadAction(new IntakeRollerOn());
-            runAction(new MecanumDriveSimpleAction(-77, 85));
+            runAction(new MecanumDriveSimpleAction(-75, 85));
         }else if (skyStonePosition == 3){
             runAction(new Intake());
-            runAction(new MecanumDriveSimpleAction(33, -37));
+            runAction(new MecanumDriveSimpleAction(33, 32));
             runAction(new IntakeStop());
             runAction(new Wait(250));
             runAction(new Intake());
 
 //          Drive To Foundation
-            runAction(new MecanumDriveSimpleAction(-10, -37));
-            runAction(new MecanumDriveSimpleAction(0, -90));
+            runAction(new MecanumDriveSimpleAction(-10, 30));
+            runAction(new MecanumDriveSimpleAction(0, 85));
             runAction(new IntakeStop());
             ThreadAction(new IntakeRollerOn());
-            runAction(new MecanumDriveSimpleAction(-80, -90));
+            runAction(new MecanumDriveSimpleAction(-86, 85));
         }
 
         ThreadAction(new CloseGrabber());

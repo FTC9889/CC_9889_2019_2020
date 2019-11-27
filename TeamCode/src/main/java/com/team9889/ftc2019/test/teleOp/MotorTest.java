@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team9889.ftc2019.Constants;
-import com.team9889.ftc2019.subsystems.Drive;
 import com.team9889.ftc2019.subsystems.Robot;
 import com.team9889.lib.hardware.Motor;
 
@@ -29,7 +28,6 @@ public class MotorTest extends LinearOpMode {
 
         while (opModeIsActive()){
             robot.update();
-            Drive.setThrottleSteerPower(-gamepad1.left_stick_y, gamepad1.right_stick_x);
 
 
             telemetry.addData("encoder", Robot.getInstance().fRDrive.getPosition());

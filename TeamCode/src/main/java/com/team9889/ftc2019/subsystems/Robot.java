@@ -1,8 +1,11 @@
 package com.team9889.ftc2019.subsystems;
 
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
@@ -10,6 +13,7 @@ import com.team9889.ftc2019.Constants;
 import com.team9889.ftc2019.test.teleOp.RevExtensions2;
 import com.team9889.lib.control.kinematics.TankDriveKinematicModel;
 import com.team9889.lib.hardware.Motor;
+import com.team9889.lib.hardware.RevColorDistance;
 import com.team9889.lib.hardware.RevIMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -34,10 +38,12 @@ public class Robot{
     public Motor intakeLeft, intakeRight;
     public Servo intakeLeftS, intakeRightS;
     public CRServo roller;
+    public DistanceSensor blockDetector;
 
     public Motor leftLift, rightLift;
     public Servo grabber;
     public CRServo linearBar;
+    public ColorSensor downLimit;
 //    public Motor hangingLiftMotor;
 //    public Motor intakeMotor, intakeExtender;
 //
@@ -110,6 +116,8 @@ public class Robot{
         intakeRightS = hardwareMap.get(Servo.class, Constants.IntakeConstants.kIntakeRightServoId);
         roller = hardwareMap.crservo.get(Constants.IntakeConstants.kIntakeRollerId);
 
+        blockDetector = hardwareMap.get(DistanceSensor.class, Constants.IntakeConstants.kIntakeBlockDetectorId);
+
         //Lift
         leftLift = new Motor(hardwareMap, Constants.LiftConstants.kLeftLift, 1,
                 DcMotorSimple.Direction.FORWARD, true, true, true);
@@ -118,6 +126,8 @@ public class Robot{
 
         grabber = hardwareMap.get(Servo.class, Constants.LiftConstants.kGrabber);
         linearBar = hardwareMap.crservo.get(Constants.LiftConstants.kLinearBar);
+
+        downLimit = hardwareMap.get(ColorSensor.class, Constants.LiftConstants.kDownLimit);
 
 //        if(auto)
             imu = new RevIMU("imu", hardwareMap);
