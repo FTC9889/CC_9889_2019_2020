@@ -41,8 +41,7 @@ public class Robot{
     public DistanceSensor blockDetector;
 
     public Motor leftLift, rightLift;
-    public Servo grabber;
-    public CRServo linearBar;
+    public Servo grabber, linearBar;
     public ColorSensor downLimit;
 //    public Motor hangingLiftMotor;
 //    public Motor intakeMotor, intakeExtender;
@@ -125,7 +124,7 @@ public class Robot{
                 DcMotorSimple.Direction.REVERSE, true, true, true);
 
         grabber = hardwareMap.get(Servo.class, Constants.LiftConstants.kGrabber);
-        linearBar = hardwareMap.crservo.get(Constants.LiftConstants.kLinearBar);
+        linearBar = hardwareMap.get(Servo.class, Constants.LiftConstants.kLinearBar);
 
         downLimit = hardwareMap.get(ColorSensor.class, Constants.LiftConstants.kDownLimit);
 

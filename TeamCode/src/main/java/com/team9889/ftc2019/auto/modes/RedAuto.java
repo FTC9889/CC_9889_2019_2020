@@ -51,7 +51,7 @@ public class RedAuto extends Team9889Linear {
             runAction(new Intake());
 
 //          Drive To Foundation
-            runAction(new MecanumDriveSimpleAction(-10, -23));
+            runAction(new MecanumDriveSimpleAction(-8, -23));
             runAction(new MecanumDriveSimpleAction(0, -90));
             runAction(new IntakeStop());
             ThreadAction(new IntakeRollerOn());
@@ -87,7 +87,7 @@ public class RedAuto extends Team9889Linear {
         ThreadAction(new CloseGrabber());
         runAction(new IntakeRollerStop());
         runAction(new MecanumDriveSimpleAction(0, -180));
-        runAction(new MecanumDriveSimpleAction(-10, -180));
+        runAction(new MecanumDriveSimpleAction(-12, -180));
         ThreadAction(new FoundationHookClose());
         runAction(new MecanumDriveSimpleAction(-3, -180));
         ThreadAction(new MecanumDriveSimpleAction(110, -180));

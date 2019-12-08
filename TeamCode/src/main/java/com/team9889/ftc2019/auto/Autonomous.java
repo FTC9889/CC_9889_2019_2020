@@ -1,5 +1,6 @@
 package com.team9889.ftc2019.auto;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -29,6 +30,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
  */
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous
+@Deprecated
+@Disabled
 public class Autonomous extends Team9889Linear {
     boolean stop = false;
     int skyStonePosition = 1;

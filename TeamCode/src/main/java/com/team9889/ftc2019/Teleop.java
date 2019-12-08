@@ -32,6 +32,7 @@ public class Teleop extends Team9889Linear {
     private boolean liftMoving = false;
     private boolean blockDetectorFirst = true;
     private boolean liftFirst = true;
+    private boolean linearBarIn = false;
 
     @Override
     public void runOpMode() {
@@ -44,6 +45,10 @@ public class Teleop extends Team9889Linear {
         telemetry.addData("Inited", "");
         telemetry.update();
         waitForStart();
+
+        Robot.getLift().GrabberOpen();
+        Robot.getIntake().IntakeDown();
+        Robot.getMecanumDrive().OpenFoundationHook();
 
         while (opModeIsActive()){
             loopTimer.reset();
@@ -75,10 +80,9 @@ public class Teleop extends Team9889Linear {
             if (gamepad1.dpad_right){
                 Robot.getLift().GrabberClose();
                 grabberOpen = false;
-            }else if (gamepad1.dpad_left && !grabberOpen || linearBar){
+            }else if (gamepad1.dpad_left || linearBar){
                 if (first) {
                     Robot.getLift().GrabberOpen();
-                    Robot.linearBar.setPower(1);
                     grabberOpen = true;
                     first = false;
                     linearBar = true;
@@ -86,22 +90,35 @@ public class Teleop extends Team9889Linear {
                     liftFirst = true;
                     linearBarTimer.reset();
                     liftTimer.reset();
-                }
-                else if (linearBarTimer.milliseconds() > 2500){
-                    Robot.linearBar.setPower(0);
-                    first = true;
-                    linearBar = false;
-                    liftGoingDown = true;
-                    Robot.getLift().SetLiftPower(-1);
-                }else if (liftTimer.milliseconds() > 400 && lift){
-                    Robot.getLift().SetLiftPower(0);
-                    lift = false;
-                }else if (liftTimer.milliseconds() > 200 && liftFirst) {
-                    Robot.getLift().SetLiftPower(.7);
-                    liftTimer.reset();
-                    liftFirst = false;
-                }
 
+                    if (Robot.linearBar.getPosition() > 0){
+                        linearBarIn = false;
+                    }
+                    else {
+                        linearBarIn = true;
+                    }
+                }else if (!linearBarIn) {
+                    if (linearBarTimer.milliseconds() > 1000) {
+                        first = true;
+                        linearBar = false;
+                        liftGoingDown = true;
+                        linearBarIn = true;
+                        Robot.getLift().SetLiftPower(-1);
+                    } else if (liftTimer.milliseconds() > 400 && lift) {
+                        Robot.getLift().SetLiftPower(0);
+                        lift = false;
+                    } else if (liftTimer.milliseconds() > 200 && liftFirst) {
+                        Robot.getLift().SetLiftPower(.7);
+                        Robot.getLift().LinearBarIn();
+                        liftTimer.reset();
+                        liftFirst = false;
+                    }
+                }else {
+                    first = true;
+                    lift = false;
+                    linearBar = false;
+                    Robot.getLift().LinearBarIn();
+                }
             }
 
 //          Intake
@@ -131,11 +148,10 @@ public class Teleop extends Team9889Linear {
 
 //          Linear Bar
             if (gamepad2.left_bumper){
-                Robot.linearBar.setPower(1);
+                Robot.getLift().LinearBarIn();
             }else if (gamepad2.right_bumper){
-                Robot.linearBar.setPower(-1);
-            }else if (!linearBar)
-                Robot.linearBar.setPower(0);
+                Robot.getLift().LinearBarOut();
+            }
 
 //          Intake Roller
             if (gamepad2.a){
@@ -147,7 +163,7 @@ public class Teleop extends Team9889Linear {
             }
 
 //          Slow Down Button
-            if (gamepad2.x && xButtonTimer.milliseconds() > 500){
+            if (gamepad2.x && xButtonTimer.milliseconds() > 500 || gamepad1.x && xButtonTimer.milliseconds() > 500){
                 driveSlow = !driveSlow;
                 xButtonTimer.reset();
             }
@@ -186,6 +202,8 @@ public class Teleop extends Team9889Linear {
             telemetry.addData("Loop Time", loopTimer.milliseconds());
             telemetry.addData("angle", robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
             telemetry.addData("Slow Drive", driveSlow);
+
+            telemetry.addData("hi", Robot.linearBar.getPosition());
 
             telemetry.update();
             robot.update();

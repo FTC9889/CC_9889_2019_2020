@@ -1,5 +1,6 @@
 package com.team9889.ftc2019.test.teleOp;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.team9889.ftc2019.subsystems.Robot;
@@ -11,6 +12,8 @@ import static java.lang.Math.round;
  */
 
 @TeleOp
+@Deprecated
+@Disabled
 public class SkyStoneDetect extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {

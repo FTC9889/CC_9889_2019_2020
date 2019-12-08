@@ -1,5 +1,6 @@
 package com.team9889.ftc2019.test.drive;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.team9889.ftc2019.subsystems.Robot;
@@ -9,6 +10,8 @@ import com.team9889.ftc2019.subsystems.Robot;
  */
 
 @TeleOp
+@Deprecated
+@Disabled
 public class MecanumDriveTrainTest extends LinearOpMode {
 
     @Override

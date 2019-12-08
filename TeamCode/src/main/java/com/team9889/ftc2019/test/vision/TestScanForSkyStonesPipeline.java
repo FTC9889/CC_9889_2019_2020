@@ -1,5 +1,6 @@
 package com.team9889.ftc2019.test.vision;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.team9889.lib.detectors.ScanForSkyStonesPipeline;
@@ -12,6 +13,8 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
  * Created by joshua9889 on 11/25/2019.
  */
 @TeleOp(group = "Test")
+@Deprecated
+@Disabled
 public class TestScanForSkyStonesPipeline extends LinearOpMode {
 
     OpenCvInternalCamera phoneCam;

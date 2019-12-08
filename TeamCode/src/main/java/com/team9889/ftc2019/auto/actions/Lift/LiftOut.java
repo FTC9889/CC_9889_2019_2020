@@ -8,7 +8,6 @@ import com.team9889.ftc2019.subsystems.Robot;
  * Created by Eric on 11/22/2019.
  */
 public class LiftOut extends Action {
-    private ElapsedTime timer = new ElapsedTime();
 
     @Override
     public void setup(String args) {
@@ -17,21 +16,20 @@ public class LiftOut extends Action {
 
     @Override
     public void start() {
-        timer.reset();
+        Robot.getInstance().getLift().LinearBarOut();
     }
 
     @Override
     public void update() {
-        Robot.getInstance().linearBar.setPower(-1);
+
     }
 
     @Override
     public boolean isFinished() {
-        return timer.milliseconds() > 2700;
+        return true;
     }
 
     @Override
     public void done() {
-        Robot.getInstance().linearBar.setPower(0);
     }
 }

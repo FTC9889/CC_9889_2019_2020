@@ -97,6 +97,10 @@ public class Constants {
         public final static String kLinearBar = "linearbar";
 
         public final static String kDownLimit = "liftlimitdown";
+
+        public final static Double LiftTicksPerRevolution = 145.6;
+
+        public final static double LiftInchToTick = (LiftTicksPerRevolution / (Math.PI * 1.5)) / 1.5;
     }
 
     /*---------------------

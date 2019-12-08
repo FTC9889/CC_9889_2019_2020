@@ -1,5 +1,6 @@
 package com.team9889.ftc2019.test.teleOp;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -11,6 +12,8 @@ import com.team9889.lib.hardware.Motor;
  * Created by Eric on 7/26/2019.
  */
 @TeleOp
+@Deprecated
+@Disabled
 public class MotorTest extends LinearOpMode {
     private ElapsedTime timer = new ElapsedTime();
 
