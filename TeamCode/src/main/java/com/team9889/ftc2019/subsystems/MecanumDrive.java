@@ -257,9 +257,9 @@ public class MecanumDrive extends Subsystem {
     }
 
     public void OpenFoundationHook(){
-        Robot.getInstance().foundationHook.setPosition(.83);
+        Robot.getInstance().foundationHook.setPosition(.9);
     }
     public void CloseFoundationHook(){
-        Robot.getInstance().foundationHook.setPosition(0.45);
+        Robot.getInstance().foundationHook.setPosition(0.5);
     }
 }

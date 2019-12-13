@@ -17,6 +17,8 @@ public class Constants {
     public final static String kRevHubMaster = "4";
     public final static String kRevHubSlave = "1";
 
+    public final static String kWebcam = "Webcam";
+
     /*---------------------
     |                     |
     |     Drivetrain!     |

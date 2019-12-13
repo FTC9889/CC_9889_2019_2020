@@ -17,6 +17,7 @@ import com.team9889.lib.hardware.RevColorDistance;
 import com.team9889.lib.hardware.RevIMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.revextensions2.ExpansionHubEx;
 import org.openftc.revextensions2.RevBulkData;
 //import org.openftc.revextensions2.RevExtensions2;
@@ -31,7 +32,8 @@ import java.util.Date;
 
 public class Robot{
 
-    // motors (remember to stop motors)
+    public WebcamName webcam;
+
     public Motor fLDrive, fRDrive, bLDrive, bRDrive;
     public Servo foundationHook;
 
@@ -43,15 +45,6 @@ public class Robot{
     public Motor leftLift, rightLift;
     public Servo grabber, linearBar;
     public ColorSensor downLimit;
-//    public Motor hangingLiftMotor;
-//    public Motor intakeMotor, intakeExtender;
-//
-//    public CRServo hangingHook;
-//    public Servo intakeRotator, intakeGate, markerDumper;
-//    public Servo xAxis, yAxis;
-//
-//    public DigitalChannel hangingLowerLimit;
-//    public DigitalChannel intakeInSwitch;
 
     RevBulkData bulkDataMaster, bulkDataSlave;
     ExpansionHubEx revHubMaster, revHubSlave;
@@ -93,6 +86,8 @@ public class Robot{
 
         revHubMaster = hardwareMap.get(ExpansionHubEx.class, Constants.kRevHubMaster);
         revHubSlave = hardwareMap.get(ExpansionHubEx.class, Constants.kRevHubSlave);
+
+        webcam = hardwareMap.get(WebcamName.class, Constants.kWebcam);
 
         fLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveMasterId, 1,
                 DcMotorSimple.Direction.FORWARD, true, false, true);

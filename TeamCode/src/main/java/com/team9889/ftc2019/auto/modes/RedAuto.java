@@ -99,6 +99,7 @@ public class RedAuto extends Team9889Linear {
         ThreadAction(new LiftIn());
         runAction(new IntakeUp());
         runAction(new FoundationHookOpen());
+        runAction(new Wait(3000));
         Robot.getMecanumDrive().setPower(.7, 0, 0);
         runAction(new Wait(1750));
         Robot.getMecanumDrive().setPower(0, 0, 0);

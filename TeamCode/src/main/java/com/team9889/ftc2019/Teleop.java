@@ -60,16 +60,16 @@ public class Teleop extends Team9889Linear {
                 robot.getMecanumDrive().setFieldCentricPower(gamepad1.left_stick_x / 3, -gamepad1.left_stick_y / 3, gamepad1.right_stick_x / 3);
 
 //          Lift
-            if (gamepad1.right_trigger > 0.05) {
+            if (gamepad1.right_trigger > 0.1) {
                 Robot.getLift().SetLiftPower(gamepad1.right_trigger);
             }
-            else if (gamepad1.left_trigger > 0.05 && !liftDownLimit) {
+            else if (gamepad1.left_trigger > 0.1 && !liftDownLimit) {
                 Robot.getLift().SetLiftPower(-gamepad1.left_trigger);
             }
-            else if (gamepad2.right_trigger > 0.05) {
+            else if (gamepad2.right_trigger > 0.1) {
                 Robot.getLift().SetLiftPower(gamepad2.right_trigger);
             }
-            else if (gamepad2.left_trigger > 0.05 && !liftDownLimit) {
+            else if (gamepad2.left_trigger > 0.1 && !liftDownLimit) {
                 Robot.getLift().SetLiftPower(-gamepad2.left_trigger);
             }
             else if (!lift && !liftGoingDown){
@@ -112,6 +112,8 @@ public class Teleop extends Team9889Linear {
                         Robot.getLift().LinearBarIn();
                         liftTimer.reset();
                         liftFirst = false;
+                    } else {
+                        lift = false;
                     }
                 }else {
                     first = true;
@@ -169,19 +171,19 @@ public class Teleop extends Team9889Linear {
             }
 
             if (intaking && blockDetectorFirst) {
-                if (Robot.blockDetector.getDistance(DistanceUnit.INCH) < 3) {
+                if (Robot.blockDetector.getDistance(DistanceUnit.INCH) < 4) {
                     Robot.getIntake().Stop();
                     Robot.getLift().GrabberClose();
                     grabberOpen = false;
                     blockDetectorFirst = false;
                 }
             }else if (!blockDetectorFirst)
-                if (Robot.blockDetector.getDistance(DistanceUnit.INCH) > 3){
+                if (Robot.blockDetector.getDistance(DistanceUnit.INCH) > 4){
                     blockDetectorFirst = true;
                 }
 
             if (liftGoingDown) {
-                if (Robot.downLimit.green() > 1000) {
+                if (Robot.downLimit.green() > 350) {
                     liftDownLimit = true;
                     liftGoingDown = false;
                 } else {
@@ -203,7 +205,7 @@ public class Teleop extends Team9889Linear {
             telemetry.addData("angle", robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
             telemetry.addData("Slow Drive", driveSlow);
 
-            telemetry.addData("hi", Robot.linearBar.getPosition());
+            telemetry.addData("hi", Robot.downLimit.green());
 
             telemetry.update();
             robot.update();

@@ -11,6 +11,7 @@ import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.Robot;
 import com.team9889.lib.detectors.ScanForSkyStonesPipeline;
 
+import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
@@ -37,7 +38,7 @@ public abstract class Team9889Linear extends LinearOpMode {
     // Background
     private View relativeLayout;
 
-    OpenCvInternalCamera phoneCam;
+    OpenCvCamera phoneCam;
     public double positionOfSkyStone;
 
     public void waitForStart(boolean autonomous) {
@@ -51,11 +52,11 @@ public abstract class Team9889Linear extends LinearOpMode {
         matchTime.reset();
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+        phoneCam = OpenCvCameraFactory.getInstance().createWebcam(Robot.webcam, cameraMonitorViewId);
         phoneCam.openCameraDevice();
         ScanForSkyStonesPipeline pipeline = new ScanForSkyStonesPipeline();
         phoneCam.setPipeline(pipeline);
-        phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+        phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPSIDE_DOWN);
 
 
         if(autonomous){
