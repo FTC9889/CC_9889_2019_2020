@@ -59,6 +59,7 @@ public class Robot{
     TankDriveKinematicModel model = new TankDriveKinematicModel();
 
     public static ElapsedTime timer = new ElapsedTime();
+    public static ElapsedTime gyroTimer = new ElapsedTime();
 
     public double[] pose = new double[4];
 
@@ -76,6 +77,8 @@ public class Robot{
     private ScoringLift mLift = new ScoringLift();
     private Camera mCamera = new Camera();
 
+    public double gyroAfterAuto;
+
     public RevIMU imu = null;
 
     double timerOffset = 0;
@@ -88,6 +91,7 @@ public class Robot{
 
     public void init(HardwareMap hardwareMap, boolean auto){
         timer.reset();
+        gyroTimer.reset();
         this.hardwareMap = hardwareMap;
 
         Date currentData = new Date();
@@ -134,12 +138,12 @@ public class Robot{
 
         downLimit = hardwareMap.get(ColorSensor.class, Constants.LiftConstants.kDownLimit);
         if (auto){
-            imu = new RevIMU("imu", hardwareMap);
             getIntake().IntakeUp();
             getLift().GrabberOpen();
             getMecanumDrive().OpenFoundationHook();
             update();
         }
+        imu = new RevIMU("imu", hardwareMap);
     }
 
     boolean first = true;
@@ -169,8 +173,8 @@ public class Robot{
 //            motor.update(bulkDataMaster, bulkDataSlave);
 //        }
 
-        if(Robot.timer.milliseconds() > 100 + timerOffset){
-            timerOffset = Robot.timer.milliseconds();
+        if(Robot.gyroTimer.milliseconds() > 100){
+            gyroTimer.reset();
             gyro = getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
         }
 

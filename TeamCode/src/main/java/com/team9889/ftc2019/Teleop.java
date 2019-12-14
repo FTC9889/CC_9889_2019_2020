@@ -63,6 +63,8 @@ public class Teleop extends Team9889Linear {
         Robot.getIntake().IntakeDown();
         Robot.getMecanumDrive().OpenFoundationHook();
 
+        Robot.getLift().LinearBarIn();
+
         try {
             angleFileReader = new FileReader(fileName);
             angleBufferedReader = new BufferedReader(angleFileReader);
@@ -233,7 +235,8 @@ public class Teleop extends Team9889Linear {
             telemetry.addData("angle", robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
             telemetry.addData("Slow Drive", driveSlow);
 
-            telemetry.addData("hi", Robot.downLimit.green());
+            telemetry.addData("Gyro After Auto", robot.gyroAfterAuto);
+            telemetry.addData("Gyro", robot.gyro - Robot.gyroAfterAuto);
 
             telemetry.update();
             robot.update();

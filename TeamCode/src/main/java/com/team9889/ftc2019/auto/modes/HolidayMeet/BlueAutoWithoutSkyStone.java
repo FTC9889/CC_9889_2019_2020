@@ -17,6 +17,8 @@ import com.team9889.ftc2019.auto.actions.intake.IntakeRollerStop;
 import com.team9889.ftc2019.auto.actions.intake.IntakeStop;
 import com.team9889.ftc2019.auto.actions.intake.IntakeUp;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
 /**
  * Created by Eric on 11/26/2019.
  */
@@ -47,9 +49,9 @@ public class BlueAutoWithoutSkyStone extends Team9889Linear {
 
         ThreadAction(new CloseGrabber());
         runAction(new MecanumDriveSimpleAction(0, 180));
-        runAction(new MecanumDriveSimpleAction(-6, 180));
+        runAction(new MecanumDriveSimpleAction(-1, 180));
         ThreadAction(new FoundationHookClose());
-        runAction(new MecanumDriveSimpleAction(-3, 180));
+        runAction(new MecanumDriveSimpleAction(-2, 180));
         runAction(new IntakeUp());
         ThreadAction(new IntakeRollerOn());
 
@@ -57,7 +59,7 @@ public class BlueAutoWithoutSkyStone extends Team9889Linear {
         runAction(new Wait(250));
         Robot.getLift().SetLiftPower(0);
 
-        runAction(new MecanumDriveSimpleAction(30, 190));
+        runAction(new MecanumDriveSimpleAction(30, 200));
         runAction(new LiftOut());
         runAction(new MecanumDriveSimpleAction(0, 270, 1.8, 2000));
 
@@ -86,11 +88,22 @@ public class BlueAutoWithoutSkyStone extends Team9889Linear {
         runAction(new MecanumDriveSimpleAction(0, 50, .9, 2000));
         ThreadAction(new IntakeDown());
         ThreadAction(new Intake());
-        runAction(new MecanumDriveSimpleAction(12, 50));
+        runAction(new MecanumDriveSimpleAction(14, 50));
         runAction(new MecanumDriveSimpleAction(5, 50, 20000, 1, 1));
         runAction(new IntakeStop());
         runAction(new MecanumDriveSimpleAction(-18, 50));
-        ThreadAction(new Intake());
+
+        runAction(new MecanumDriveSimpleAction(0, -90));
+
+        runAction(new MecanumDriveSimpleAction(8, -90));
+
+        Robot.getIntake().SetIntakePower(-.2);
+        Robot.getIntake().SetRollerPower(-1);
+
+        runAction(new Wait(4000));
+        runAction(new MecanumDriveSimpleAction(-8, -90));
+
+        runAction(new Wait(10000));
 
         /*
         runAction(new MecanumDriveSimpleAction(0, 90, 1, 1000));
@@ -125,5 +138,7 @@ public class BlueAutoWithoutSkyStone extends Team9889Linear {
         runAction(new Wait(500));
         runAction(new MecanumDriveSimpleAction(15, 90));
         */
+
+        Robot.gyroAfterAuto = Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
     }
 }

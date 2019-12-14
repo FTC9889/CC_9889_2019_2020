@@ -18,6 +18,8 @@ import com.team9889.ftc2019.auto.actions.intake.IntakeStop;
 import com.team9889.ftc2019.auto.actions.intake.IntakeStopBlockIn;
 import com.team9889.ftc2019.auto.actions.intake.IntakeUp;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
 import java.util.Set;
 
 /**
@@ -126,11 +128,17 @@ public class RedAutoWithoutSkyStone extends Team9889Linear {
         runAction(new OpenGrabber());
         runAction(new Wait(500));
 
+        Robot.gyroAfterAuto = Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+
         Robot.getLift().SetLiftPower(-.7);
         runAction(new Wait(250));
         Robot.getLift().SetLiftPower(0);
 
+        Robot.gyroAfterAuto = Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+
         Robot.getMecanumDrive().setPower(1, 0, 0);
         runAction(new MecanumDriveSimpleAction(15, -90));
+
+        Robot.gyroAfterAuto = Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
     }
 }
