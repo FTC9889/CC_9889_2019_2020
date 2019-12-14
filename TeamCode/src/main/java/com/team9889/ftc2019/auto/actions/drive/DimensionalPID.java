@@ -15,9 +15,10 @@ import com.team9889.lib.control.motion.TrapezoidalMotionProfile;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 /**
- * Created by Eric on 11/26/2019.
+ * Created by Eric on 12/13/2019.
  */
-public class MecanumDriveSimpleAction extends Action {
+
+public class DimensionalPID extends Action {
 
     TrapezoidalMotionProfile profile;
     MotionProfileFollower follower = new MotionProfileFollower(0.002, 0, 0.0225, 0.005);
@@ -27,9 +28,7 @@ public class MecanumDriveSimpleAction extends Action {
     boolean offsetAxis = false;
 
     MecanumDrive mDrive = Robot.getInstance().getMecanumDrive();
-    private double distance, angle, angleSpeed;
-    private double speedMultiply = 1.75;
-    private int timeOut = 30000;
+    private double distance, angle;
     private double[] offsets = new double[]{
             0, 0, 0, 0
     };
@@ -39,28 +38,9 @@ public class MecanumDriveSimpleAction extends Action {
             1000, 1000, 1000, 1000
     };
 
-    public MecanumDriveSimpleAction(double distance, double angle) {
+    public DimensionalPID(double distance, double angle) {
         this.distance = distance;
         this.angle = angle;
-        this.angleSpeed = 1;
-    }
-    public MecanumDriveSimpleAction(double distance, double angle, double angleSpeed) {
-        this.distance = distance;
-        this.angle = angle;
-        this.angleSpeed = angleSpeed;
-    }
-    public MecanumDriveSimpleAction(double distance, double angle, double angleSpeed, int timeOut) {
-        this.distance = distance;
-        this.angle = angle;
-        this.angleSpeed = angleSpeed;
-        this.timeOut = timeOut;
-    }
-    public MecanumDriveSimpleAction(double distance, double angle, int timeOut, double speedMultiply, double angleSpeed) {
-        this.distance = distance;
-        this.angle = angle;
-        this.angleSpeed = 1;
-        this.timeOut = timeOut;
-        this.speedMultiply = speedMultiply;
     }
 
     @Override
@@ -68,10 +48,10 @@ public class MecanumDriveSimpleAction extends Action {
 
     @Override
     public void start() {
-        offsets[0] = Robot.getInstance().bRDrive.getPosition();
-        offsets[1] = Robot.getInstance().bLDrive.getPosition();
-        offsets[2] = Robot.getInstance().fRDrive.getPosition();
-        offsets[3] = Robot.getInstance().fLDrive.getPosition();
+        offsets[0] = mDrive.backRight;
+        offsets[1] = mDrive.backLeft;
+        offsets[2] = mDrive.frontRight;
+        offsets[3] = mDrive.frontLeft;
 
         profile = new TrapezoidalMotionProfile(distance,
                 new ProfileParameters(
@@ -90,10 +70,12 @@ public class MecanumDriveSimpleAction extends Action {
 
     @Override
     public void update() {
-        currentPosition[0] = Robot.getInstance().bRDrive.getPosition() - offsets[0];
-        currentPosition[1] = Robot.getInstance().bLDrive.getPosition() - offsets[1];
-        currentPosition[2] = Robot.getInstance().fRDrive.getPosition() - offsets[2];
-        currentPosition[3] = Robot.getInstance().fLDrive.getPosition() - offsets[3];
+        currentPosition[0] = mDrive.backRight - offsets[0];
+        currentPosition[1] = mDrive.backLeft - offsets[1];
+        currentPosition[2] = mDrive.frontRight - offsets[2];
+        currentPosition[3] = mDrive.frontLeft - offsets[3];
+
+
 
         double averageDistance = 0;
         for (int i = 0; i < currentPosition.length; i++) {
@@ -112,7 +94,7 @@ public class MecanumDriveSimpleAction extends Action {
         Log.d("-------------- Angles: ", currentAngle + ", " + angle);
         double rotation = turnPID.update(currentAngle, angle);
 
-        mDrive.setPower(0, speed * speedMultiply, rotation / angleSpeed);
+        mDrive.setPower(0, speed, rotation);
     }
 
     int angleCounter = 0;
@@ -120,7 +102,7 @@ public class MecanumDriveSimpleAction extends Action {
     public boolean isFinished() {
         if (Math.abs(turnPID.getError()) < 3) angleCounter++;
 
-        return follower.isFinished() && angleCounter > 3 || timeOut < timer.milliseconds();
+        return follower.isFinished() && angleCounter > 3;
     }
 
     @Override

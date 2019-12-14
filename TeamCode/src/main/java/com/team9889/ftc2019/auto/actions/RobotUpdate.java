@@ -1,12 +1,11 @@
-package com.team9889.ftc2019.auto.actions.intake;
+package com.team9889.ftc2019.auto.actions;
 
-import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.Robot;
 
 /**
- * Created by Eric on 11/22/2019.
+ * Created by Eric on 12/13/2019.
  */
-public class Intake extends Action {
+public class RobotUpdate extends Action{
     @Override
     public void setup(String args) {
 
@@ -14,8 +13,7 @@ public class Intake extends Action {
 
     @Override
     public void start() {
-        Robot.getInstance().getIntake().SetIntakePower(.5);
-        Robot.getInstance().getIntake().SetRollerPower(1);
+
     }
 
     @Override
@@ -25,7 +23,7 @@ public class Intake extends Action {
 
     @Override
     public boolean isFinished() {
-        return true;
+        return false;
     }
 
     @Override

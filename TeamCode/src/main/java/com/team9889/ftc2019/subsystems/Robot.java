@@ -18,10 +18,14 @@ import com.team9889.lib.hardware.RevIMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.openftc.revextensions2.ExpansionHubEx;
 import org.openftc.revextensions2.RevBulkData;
 //import org.openftc.revextensions2.RevExtensions2;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -74,6 +78,13 @@ public class Robot{
 
     public RevIMU imu = null;
 
+    double timerOffset = 0;
+
+    public double gyro;
+
+    String angleFileName = "gyro.txt";
+    java.io.FileWriter angleFileWriter;
+    BufferedWriter angleBufferedWriter;
 
     public void init(HardwareMap hardwareMap, boolean auto){
         timer.reset();
@@ -122,16 +133,13 @@ public class Robot{
         linearBar = hardwareMap.get(Servo.class, Constants.LiftConstants.kLinearBar);
 
         downLimit = hardwareMap.get(ColorSensor.class, Constants.LiftConstants.kDownLimit);
-
-//        if(auto)
+        if (auto){
             imu = new RevIMU("imu", hardwareMap);
-
-            if (auto){
-                getIntake().IntakeUp();
-                getLift().GrabberOpen();
-                getMecanumDrive().OpenFoundationHook();
-                update();
-            }
+            getIntake().IntakeUp();
+            getLift().GrabberOpen();
+            getMecanumDrive().OpenFoundationHook();
+            update();
+        }
     }
 
     boolean first = true;
@@ -160,6 +168,24 @@ public class Robot{
 //        for (Motor motor:Arrays.asList(fLDrive, fRDrive, bLDrive, bRDrive, intake)) {
 //            motor.update(bulkDataMaster, bulkDataSlave);
 //        }
+
+        if(Robot.timer.milliseconds() > 100 + timerOffset){
+            timerOffset = Robot.timer.milliseconds();
+            gyro = getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+        }
+
+        //          angle file
+        try {
+            angleFileWriter = new FileWriter(angleFileName);
+            angleBufferedWriter = new BufferedWriter(angleFileWriter);
+
+            angleBufferedWriter.newLine();
+            angleBufferedWriter.write(Double.toString(gyro));
+
+            angleBufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void outputToTelemetry(Telemetry telemetry) {

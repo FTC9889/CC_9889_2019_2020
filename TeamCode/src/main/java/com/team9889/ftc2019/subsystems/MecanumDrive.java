@@ -7,7 +7,6 @@ import com.team9889.lib.hardware.RevIMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.opencv.core.Mat;
 
 /**
  * Created by Eric on 9/7/2019.
@@ -24,9 +23,6 @@ public class MecanumDrive extends Subsystem {
     public double x, y, xSpeed, ySpeed, lastXSpeed, lastYSpeed = 0;
     public double curve, circ, distance, unit, nextMilestone, travelTotal, travelDuringMilestone = 0;
     private double speed = 1;
-
-    private double gyro;
-
     private double curveTimerOffset = 0;
 
     private boolean xDirectionRight;
@@ -40,6 +36,8 @@ public class MecanumDrive extends Subsystem {
     public int frontLeftInt, frontRightInt, backLeftInt, backRightInt;
 
     public double xAutoPower, yAutoPower;
+
+    public double angleOffset = 0;
 
     @Override
     public void init(boolean auto) {
@@ -161,12 +159,9 @@ public class MecanumDrive extends Subsystem {
 
     public void setFieldCentricPower(double x, double y, double rotation){
         double timerOffset = 0;
-        if(Robot.timer.milliseconds() > 100 + timerOffset){
-            timerOffset = Robot.timer.milliseconds();
-            gyro = getAngle().getTheda(AngleUnit.RADIANS);
-        }
-        double xMod = x * Math.cos(gyro) - y * Math.sin(gyro);
-        double yMod = x * Math.sin(gyro) + y * Math.cos(gyro);
+
+        double xMod = x * Math.cos(Robot.getInstance().gyro - angleOffset) - y * Math.sin(Robot.getInstance().gyro - angleOffset);
+        double yMod = x * Math.sin(Robot.getInstance().gyro - angleOffset) + y * Math.cos(Robot.getInstance().gyro - angleOffset);
         setPower(xMod, yMod, rotation);
     }
 
@@ -260,6 +255,6 @@ public class MecanumDrive extends Subsystem {
         Robot.getInstance().foundationHook.setPosition(.9);
     }
     public void CloseFoundationHook(){
-        Robot.getInstance().foundationHook.setPosition(0.5);
+        Robot.getInstance().foundationHook.setPosition(0.45);
     }
 }

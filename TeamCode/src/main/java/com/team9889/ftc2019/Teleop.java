@@ -9,6 +9,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.internal.usb.exception.RobotUsbTimeoutException;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * Created by MannoMation on 1/14/2019.
  */
@@ -34,6 +40,13 @@ public class Teleop extends Team9889Linear {
     private boolean liftFirst = true;
     private boolean linearBarIn = false;
 
+//  gyro file
+    private double readAngle;
+    String line;
+    String fileName = "gyro.txt";
+    java.io.FileReader angleFileReader;
+    BufferedReader angleBufferedReader;
+
     @Override
     public void runOpMode() {
         telemetry.addData("Started Init", "");
@@ -50,6 +63,21 @@ public class Teleop extends Team9889Linear {
         Robot.getIntake().IntakeDown();
         Robot.getMecanumDrive().OpenFoundationHook();
 
+        try {
+            angleFileReader = new FileReader(fileName);
+            angleBufferedReader = new BufferedReader(angleFileReader);
+
+            while((line = angleBufferedReader.readLine()) != null){
+                readAngle = Double.parseDouble(line);
+            }
+
+            angleBufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Robot.getMecanumDrive().angleOffset = Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS) - readAngle;
+
         while (opModeIsActive()){
             loopTimer.reset();
 
@@ -61,19 +89,19 @@ public class Teleop extends Team9889Linear {
 
 //          Lift
             if (gamepad1.right_trigger > 0.1) {
-                Robot.getLift().SetLiftPower(gamepad1.right_trigger);
+                Robot.getLift().SetLiftPower(-gamepad1.right_trigger);
             }
             else if (gamepad1.left_trigger > 0.1 && !liftDownLimit) {
-                Robot.getLift().SetLiftPower(-gamepad1.left_trigger);
+                Robot.getLift().SetLiftPower(gamepad1.left_trigger);
             }
             else if (gamepad2.right_trigger > 0.1) {
-                Robot.getLift().SetLiftPower(gamepad2.right_trigger);
+                Robot.getLift().SetLiftPower(-gamepad2.right_trigger);
             }
             else if (gamepad2.left_trigger > 0.1 && !liftDownLimit) {
-                Robot.getLift().SetLiftPower(-gamepad2.left_trigger);
+                Robot.getLift().SetLiftPower(gamepad2.left_trigger);
             }
             else if (!lift && !liftGoingDown){
-                Robot.getLift().SetLiftPower(0.2);
+                Robot.getLift().SetLiftPower(-0.2);
             }
 
 //          Grabber
@@ -103,12 +131,12 @@ public class Teleop extends Team9889Linear {
                         linearBar = false;
                         liftGoingDown = true;
                         linearBarIn = true;
-                        Robot.getLift().SetLiftPower(-1);
+                        Robot.getLift().SetLiftPower(1);
                     } else if (liftTimer.milliseconds() > 400 && lift) {
                         Robot.getLift().SetLiftPower(0);
                         lift = false;
                     } else if (liftTimer.milliseconds() > 200 && liftFirst) {
-                        Robot.getLift().SetLiftPower(.7);
+                        Robot.getLift().SetLiftPower(-.7);
                         Robot.getLift().LinearBarIn();
                         liftTimer.reset();
                         liftFirst = false;

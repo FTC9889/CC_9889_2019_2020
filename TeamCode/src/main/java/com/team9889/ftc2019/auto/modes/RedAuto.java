@@ -16,6 +16,7 @@ import com.team9889.ftc2019.auto.actions.intake.IntakeDown;
 import com.team9889.ftc2019.auto.actions.intake.IntakeRollerOn;
 import com.team9889.ftc2019.auto.actions.intake.IntakeRollerStop;
 import com.team9889.ftc2019.auto.actions.intake.IntakeStop;
+import com.team9889.ftc2019.auto.actions.intake.IntakeStopBlockIn;
 import com.team9889.ftc2019.auto.actions.intake.IntakeUp;
 
 /**
@@ -30,14 +31,16 @@ public class RedAuto extends Team9889Linear {
     public void runOpMode() throws InterruptedException {
 
         waitForStart(true);
-
+/*
         if (positionOfSkyStone < 40) {
             skyStonePosition = 1;
         }else if (positionOfSkyStone > 39 && positionOfSkyStone < 120){
             skyStonePosition = 2;
         }else if (positionOfSkyStone > 119){
             skyStonePosition = 3;
-        }
+        }*/
+
+        skyStonePosition = 3;
 
         runAction(new MecanumDriveSimpleAction(3, 0));
         ThreadAction(new IntakeDown());
@@ -58,7 +61,7 @@ public class RedAuto extends Team9889Linear {
             runAction(new MecanumDriveSimpleAction(-70, -90));
         }else if (skyStonePosition == 3){
             runAction(new Intake());
-            runAction(new MecanumDriveSimpleAction(29, -30));
+            runAction(new MecanumDriveSimpleAction(29, -23));
             runAction(new IntakeStop());
             runAction(new Wait(250));
             runAction(new Intake());
@@ -67,7 +70,8 @@ public class RedAuto extends Team9889Linear {
             runAction(new MecanumDriveSimpleAction(-10, -30));
             runAction(new MecanumDriveSimpleAction(0, -90));
             runAction(new IntakeStop());
-            ThreadAction(new IntakeRollerOn());
+            runAction(new IntakeRollerOn());
+            ThreadAction(new IntakeStopBlockIn());
             runAction(new MecanumDriveSimpleAction(-77, -90));
         }else if (skyStonePosition == 2){
             runAction(new Intake());
@@ -81,42 +85,38 @@ public class RedAuto extends Team9889Linear {
             runAction(new MecanumDriveSimpleAction(0, -90));
             runAction(new IntakeStop());
             ThreadAction(new IntakeRollerOn());
-            runAction(new MecanumDriveSimpleAction(-84, -90));
+            runAction(new MecanumDriveSimpleAction(-80, -90));
         }
 
         ThreadAction(new CloseGrabber());
-        runAction(new IntakeRollerStop());
         runAction(new MecanumDriveSimpleAction(0, -180));
         runAction(new MecanumDriveSimpleAction(-12, -180));
         ThreadAction(new FoundationHookClose());
         runAction(new MecanumDriveSimpleAction(-3, -180));
-        ThreadAction(new MecanumDriveSimpleAction(110, -180));
+        ThreadAction(new MecanumDriveSimpleAction(85, -180));
         runAction(new IntakeUp());
+        ThreadAction(new IntakeRollerOn());
         runAction(new LiftOut());
-        runAction(new Wait(250));
+        runAction(new Wait(1000));
+        runAction(new IntakeRollerStop());
         runAction(new OpenGrabber());
         runAction(new Wait(250));
         ThreadAction(new LiftIn());
         runAction(new IntakeUp());
         runAction(new FoundationHookOpen());
-        runAction(new Wait(3000));
+        runAction(new Wait(1500));
         Robot.getMecanumDrive().setPower(.7, 0, 0);
-        runAction(new Wait(1750));
+        runAction(new Wait(1250));
         Robot.getMecanumDrive().setPower(0, 0, 0);
         runAction(new MecanumDriveSimpleAction(-15, -180));
         Robot.getMecanumDrive().setPower(-.7, 0, 0);
         runAction(new Wait(1000));
         Robot.getMecanumDrive().setPower(0, 0, 0);
-        runAction(new MecanumDriveSimpleAction(-8, -180));
+        runAction(new MecanumDriveSimpleAction(-6, -180));
         Robot.getMecanumDrive().setPower(.7, 0, 0);
         runAction(new Wait(1500));
         Robot.getMecanumDrive().setPower(0, 0, 0);
 
-        runAction(new MecanumDriveSimpleAction(0, 0));
-        runAction(new MecanumDriveSimpleAction(0, 0));
-        runAction(new MecanumDriveSimpleAction(0, 0));
-        runAction(new Wait(250));
-        runAction(new MecanumDriveSimpleAction(0, 0));
-        runAction(new MecanumDriveSimpleAction(0, 0));
+        runAction(new MecanumDriveSimpleAction(0, -90));
     }
 }
