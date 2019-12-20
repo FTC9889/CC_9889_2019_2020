@@ -23,6 +23,6 @@ public class RedAutoFoundation extends Team9889Linear {
 
         runAction(new Wait(500));
         runAction(new MecanumDriveSimpleAction(25, -170));
-        runAction(new MecanumDriveSimpleAction(0, -90, 1.8, 2000));
+        runAction(new MecanumDriveSimpleAction(0, -90, 2000));
     }
 }

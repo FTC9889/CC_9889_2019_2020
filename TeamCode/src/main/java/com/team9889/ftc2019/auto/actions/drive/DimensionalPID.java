@@ -65,10 +65,12 @@ public class DimensionalPID extends Action {
         offsets[3] = mDrive.frontLeft;
         Log.i("hi", "test");
 
+        distance = distance.replace(" ", "");
         eachMovement = distance.split(";");
+
         Log.i("hi", "test2");
 
-        for(int i = 0; i < eachMovement.length; i++){
+        for(int i = 0; i < eachMovement.length - 1; i++){
             fullDistance += Math.abs(Double.parseDouble(eachMovement[i].split(",")[0])) + Math.abs(Double.parseDouble(eachMovement[i].split(",")[1]));
         }
 
@@ -89,6 +91,8 @@ public class DimensionalPID extends Action {
 
     @Override
     public void update() {
+        Log.i("update", "");
+
         currentPosition[0] = mDrive.backRight - offsets[0];
         currentPosition[1] = mDrive.backLeft - offsets[1];
         currentPosition[2] = mDrive.frontRight - offsets[2];
@@ -97,7 +101,7 @@ public class DimensionalPID extends Action {
         angle = Double.parseDouble(eachMovement[movement].split(",")[2]);
 
         double averageDistance = 0;
-        for (int i = 0; i < currentPosition.length; i++) {
+        for (int i = 0; i < currentPosition.length - 1; i++) {
             averageDistance += Math.abs(currentPosition[i]);
         }
 
@@ -135,7 +139,7 @@ public class DimensionalPID extends Action {
     public boolean isFinished() {
         if (Math.abs(turnPID.getError()) < 3) angleCounter++;
 
-        return follower.isFinished() && angleCounter > 3 && movement > eachMovement.length;
+        return follower.isFinished() && angleCounter > 3 && movement > eachMovement.length - 1;
     }
 
     @Override

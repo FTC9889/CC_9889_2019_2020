@@ -179,17 +179,17 @@ public class Robot{
         }
 
         //          angle file
-        try {
-            angleFileWriter = new FileWriter(angleFileName);
-            angleBufferedWriter = new BufferedWriter(angleFileWriter);
-
-            angleBufferedWriter.newLine();
-            angleBufferedWriter.write(Double.toString(gyro));
-
-            angleBufferedWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            angleFileWriter = new FileWriter(angleFileName);
+//            angleBufferedWriter = new BufferedWriter(angleFileWriter);
+//
+//            angleBufferedWriter.newLine();
+//            angleBufferedWriter.write(Double.toString(gyro));
+//
+//            angleBufferedWriter.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void outputToTelemetry(Telemetry telemetry) {

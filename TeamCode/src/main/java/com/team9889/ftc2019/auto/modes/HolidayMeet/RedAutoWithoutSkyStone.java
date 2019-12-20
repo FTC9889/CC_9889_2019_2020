@@ -45,7 +45,7 @@ public class RedAutoWithoutSkyStone extends Team9889Linear {
 
 //          Drive To Foundation
          runAction(new MecanumDriveSimpleAction(-7, -23));
-         runAction(new MecanumDriveSimpleAction(0, -90, 1, 1000));
+         runAction(new MecanumDriveSimpleAction(0, -90,1000));
          runAction(new IntakeStop());
          ThreadAction(new IntakeRollerOn());
          runAction(new MecanumDriveSimpleAction(-28, -90));
@@ -68,7 +68,7 @@ public class RedAutoWithoutSkyStone extends Team9889Linear {
 
         runAction(new MecanumDriveSimpleAction(25, -170));
         runAction(new LiftOut());
-        runAction(new MecanumDriveSimpleAction(0, -90, 1.8, 2000));
+        runAction(new MecanumDriveSimpleAction(0, -90, 2000));
 
 
 
@@ -94,7 +94,7 @@ public class RedAutoWithoutSkyStone extends Team9889Linear {
         Robot.getMecanumDrive().setPower(0, 0, 0);
         runAction(new MecanumDriveSimpleAction(20, -90));
 
-        runAction(new MecanumDriveSimpleAction(0, -48, .9, 2000));
+        runAction(new MecanumDriveSimpleAction(0, -48, 2000));
         ThreadAction(new IntakeDown());
         ThreadAction(new Intake());
         runAction(new MecanumDriveSimpleAction(13, -48));
@@ -103,7 +103,7 @@ public class RedAutoWithoutSkyStone extends Team9889Linear {
         runAction(new MecanumDriveSimpleAction(-18, -48));
         ThreadAction(new Intake());
 
-        runAction(new MecanumDriveSimpleAction(0, -90, 1, 1000));
+        runAction(new MecanumDriveSimpleAction(0, -90, 1000));
         ThreadAction(new IntakeStop());
         runAction(new IntakeRollerOn());
         runAction(new MecanumDriveSimpleAction(-22, -90));

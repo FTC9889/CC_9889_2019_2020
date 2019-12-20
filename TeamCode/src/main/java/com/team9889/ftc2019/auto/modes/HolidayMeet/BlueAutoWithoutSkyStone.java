@@ -42,7 +42,7 @@ public class BlueAutoWithoutSkyStone extends Team9889Linear {
 
 //          Drive To Foundation
          runAction(new MecanumDriveSimpleAction(-7, 23));
-         runAction(new MecanumDriveSimpleAction(0, 87, 1, 1000));
+         runAction(new MecanumDriveSimpleAction(0, 87, 1000));
          runAction(new IntakeStop());
          ThreadAction(new IntakeRollerOn());
          runAction(new MecanumDriveSimpleAction(-35, 87));
@@ -61,7 +61,7 @@ public class BlueAutoWithoutSkyStone extends Team9889Linear {
 
         runAction(new MecanumDriveSimpleAction(30, 200));
         runAction(new LiftOut());
-        runAction(new MecanumDriveSimpleAction(0, 270, 1.8, 2000));
+        runAction(new MecanumDriveSimpleAction(0, 270, 2000));
 
         Robot.getMecanumDrive().setPower(1, 0, 0);
         runAction(new Wait(500));
@@ -85,7 +85,7 @@ public class BlueAutoWithoutSkyStone extends Team9889Linear {
         Robot.getMecanumDrive().setPower(0, 0, 0);
         runAction(new MecanumDriveSimpleAction(20, 90));
 
-        runAction(new MecanumDriveSimpleAction(0, 50, .9, 2000));
+        runAction(new MecanumDriveSimpleAction(0, 50, 2000));
         ThreadAction(new IntakeDown());
         ThreadAction(new Intake());
         runAction(new MecanumDriveSimpleAction(14, 50));

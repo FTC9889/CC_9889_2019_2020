@@ -54,35 +54,33 @@ public abstract class Team9889Linear extends LinearOpMode {
         telemetry.setMsTransmissionInterval(autonomous ? 50:1000);
         matchTime.reset();
 
-        /*
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        phoneCam = OpenCvCameraFactory.getInstance().createWebcam(Robot.webcam, cameraMonitorViewId);
-        phoneCam.openCameraDevice();
-        ScanForSkyStonesPipeline pipeline = new ScanForSkyStonesPipeline();
-        phoneCam.setPipeline(pipeline);
-        phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPSIDE_DOWN);
-         */
-
         if(autonomous){
             setBackground(Color.GREEN);
 
-            try {
-                PrintWriter writer = new PrintWriter("gyro.txt");
-                writer.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+            phoneCam = OpenCvCameraFactory.getInstance().createWebcam(Robot.webcam, cameraMonitorViewId);
+            phoneCam.openCameraDevice();
+            ScanForSkyStonesPipeline pipeline = new ScanForSkyStonesPipeline();
+            phoneCam.setPipeline(pipeline);
+            phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPSIDE_DOWN);
 
 
             // Autonomous Init Loop code
             while(isInInitLoop()){
                 telemetry.addData("Waiting for Start","");
-                //positionOfSkyStone = pipeline.getPositionOfSkyStone();
-                //telemetry.addData("Position", pipeline.getPositionOfSkyStone());
+                positionOfSkyStone = pipeline.getPositionOfSkyStone();
+                telemetry.addData("Position", pipeline.getPositionOfSkyStone());
                 Robot.outputToTelemetry(telemetry);
                 telemetry.update();
             }
-            //phoneCam.stopStreaming();
+            Runnable ShutDownCameraThread = new Runnable() {
+                @Override
+                public void run() {
+                    phoneCam.stopStreaming();
+                }
+            };
+
+            new Thread(ShutDownCameraThread).start();
         } else {
             // Teleop Init Loop code
             while(isInInitLoop()){

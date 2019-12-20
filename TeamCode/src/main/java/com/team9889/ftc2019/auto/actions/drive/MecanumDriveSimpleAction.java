@@ -20,7 +20,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 public class MecanumDriveSimpleAction extends Action {
 
     TrapezoidalMotionProfile profile;
-    MotionProfileFollower follower = new MotionProfileFollower(0.002, 0, 0.0225, 0.005);
+    MotionProfileFollower follower = new MotionProfileFollower(0.003, 0, 0.0225, 0.005);
 
     PID turnPID = new PID(0.03, 0, 0.3);
 
@@ -28,7 +28,7 @@ public class MecanumDriveSimpleAction extends Action {
 
     MecanumDrive mDrive = Robot.getInstance().getMecanumDrive();
     private double distance, angle, angleSpeed;
-    private double speedMultiply = 1.75;
+//    private double speedMultiply = 1.75;
     private int timeOut = 30000;
     private double[] offsets = new double[]{
             0, 0, 0, 0
@@ -44,15 +44,10 @@ public class MecanumDriveSimpleAction extends Action {
         this.angle = angle;
         this.angleSpeed = 1;
     }
-    public MecanumDriveSimpleAction(double distance, double angle, double angleSpeed) {
+    public MecanumDriveSimpleAction(double distance, double angle, int timeOut) {
         this.distance = distance;
         this.angle = angle;
-        this.angleSpeed = angleSpeed;
-    }
-    public MecanumDriveSimpleAction(double distance, double angle, double angleSpeed, int timeOut) {
-        this.distance = distance;
-        this.angle = angle;
-        this.angleSpeed = angleSpeed;
+        this.angleSpeed = 1;
         this.timeOut = timeOut;
     }
     public MecanumDriveSimpleAction(double distance, double angle, int timeOut, double speedMultiply, double angleSpeed) {
@@ -60,7 +55,7 @@ public class MecanumDriveSimpleAction extends Action {
         this.angle = angle;
         this.angleSpeed = 1;
         this.timeOut = timeOut;
-        this.speedMultiply = speedMultiply;
+//        this.speedMultiply = speedMultiply;
     }
 
     @Override
@@ -109,10 +104,10 @@ public class MecanumDriveSimpleAction extends Action {
         if (offsetAxis) currentAngle = Math.signum(currentAngle) > 0 ? currentAngle - 180 : currentAngle + 180;
 
 
-        Log.d("-------------- Angles: ", currentAngle + ", " + angle);
+//        Log.e("-------------- Angles: ", currentAngle + ", " + angle);
         double rotation = turnPID.update(currentAngle, angle);
 
-        mDrive.setPower(0, speed * speedMultiply, rotation / angleSpeed);
+        mDrive.setPower(0, speed, rotation);
     }
 
     int angleCounter = 0;
