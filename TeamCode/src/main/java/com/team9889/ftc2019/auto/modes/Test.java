@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.team9889.ftc2019.Team9889Linear;
 import com.team9889.ftc2019.auto.actions.Wait;
+import com.team9889.ftc2019.auto.actions.drive.DimensionalPID;
 import com.team9889.ftc2019.auto.actions.drive.MecanumDriveAction;
 
 /**
@@ -11,8 +12,6 @@ import com.team9889.ftc2019.auto.actions.drive.MecanumDriveAction;
  */
 
 @Autonomous
-@Deprecated
-@Disabled
 public class Test extends Team9889Linear {
     private boolean stop = false;
 
@@ -22,12 +21,9 @@ public class Test extends Team9889Linear {
         waitForStart();
 
         while (opModeIsActive() && !stop){
-            runAction(new MecanumDriveAction(0, 24, 0, 3000));
+//            Robot.getMecanumDrive().setFieldCentricPower(-.18, .6, .5);
 
-            runAction(new Wait(5000));
-            runAction(new MecanumDriveAction(0, -12, 0, 3000));
-
-            stop = true;
+            runAction(new DimensionalPID("5, 5, 0; 20, 0, 0"));
         }
     }
 }
