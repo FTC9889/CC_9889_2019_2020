@@ -3,7 +3,11 @@ package com.team9889.ftc2019.auto;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team9889.ftc2019.Team9889Linear;
 import com.team9889.ftc2019.auto.actions.Action;
+import com.team9889.ftc2019.auto.modes.RedAuto;
 import com.team9889.lib.android.FileReader;
+
+import java.lang.reflect.Array;
+import java.util.List;
 
 /**
  * Created by joshua9889 on 8/5/2017.
@@ -11,36 +15,44 @@ import com.team9889.lib.android.FileReader;
 
 public abstract class AutoModeBase extends Team9889Linear {
 
-    private Side currentAutoRunning = AutoModeBase.Side.CRATER;
-    private boolean doubleSample = false;
-    private boolean scoreSample = true;
+    // Autonomous Settings
+    private Side currentAutoRunning = AutoModeBase.Side.RED;
+    private SkyStonePosition currentSkyStonePosition = SkyStonePosition.RIGHT;
 
+    // Timer for autonomous
     protected ElapsedTime autoTimer = new ElapsedTime();
 
     protected enum Side {
-        CRATER, DEPOT;
+        RED, BLUE;
 
-        private static String depotString = "Depot";
-        private static String craterString = "Crater";
+        private static String redString = "Red";
+        private static String blueString = "Blue";
 
-        private static int CRATER_Num = 1;
-        private static int DEPOT_Num = -1;
+        private static int RED_Num = 1;
+        private static int BLUE_Num = -1;
 
-        public static int getNum(com.team9889.ftc2019.auto.AutoModeBase.Side side){
-            return side == CRATER ? CRATER_Num : DEPOT_Num;
+        public static int getNum(Side side){
+            return side == RED ? RED_Num : BLUE_Num;
         }
 
         public static Side fromText(String side) {
-            return side.equals(craterString) ? CRATER : DEPOT;
+            return side.equals(redString) ? RED : BLUE;
         }
     }
 
+    // Stone positions relative to the robot starting position
+    public enum SkyStonePosition {
+        LEFT, MIDDLE, RIGHT
+    }
+
+    // Test getting the Side number
     public static void main(String... args) {
-        com.team9889.ftc2019.auto.AutoModeBase.Side side = AutoModeBase.Side.DEPOT;
+        com.team9889.ftc2019.auto.AutoModeBase.Side side = AutoModeBase.Side.BLUE;
 
         System.out.println(AutoModeBase.Side.getNum(side));
     }
 
+    // Checks for a saved file to see what auto we are running (not completely implemented yet)
     private void setCurrentAutoRunning(){
         String filename = "autonomousSettings.txt";
         FileReader settingsFile = new FileReader(filename);
@@ -49,22 +61,57 @@ public abstract class AutoModeBase extends Team9889Linear {
         settingsFile.close();
 
         this.currentAutoRunning = Side.fromText(settings[0]);
-        this.doubleSample = String.valueOf(settings[1]).equals("true");
-        this.scoreSample = String.valueOf(settings[2]).equals("true");
     }
 
+    // Method to implement in the auto to run the autonomous
+    public abstract void run(Side side, SkyStonePosition stonePosition);
+
+    @Override
+    public void runOpMode() throws InterruptedException{
+        setCurrentAutoRunning();
+
+        waitForStart(true);
+        autoTimer.reset();
+
+        // From Camera -> To Stone Position
+        if (positionOfSkyStone < 40)
+            currentSkyStonePosition = SkyStonePosition.LEFT;
+        else if (positionOfSkyStone > 100 && positionOfSkyStone < 190)
+            currentSkyStonePosition = SkyStonePosition.MIDDLE;
+        else if (positionOfSkyStone > 190)
+            currentSkyStonePosition = SkyStonePosition.RIGHT;
+
+        // If the opmode is still running, run auto
+        if (opModeIsActive() && !isStopRequested()) {
+            run(currentAutoRunning, currentSkyStonePosition);
+        }
+
+        // Stop all movement
+        finalAction();
+    }
+
+
+    /**
+     * Run a single action, once, thread-blocking
+     * @param action Action Class wanting to run
+     */
     public void runAction(Action action){
-        if(opModeIsActive())
+        if(opModeIsActive() && !isStopRequested())
             action.start();
 
-        while (!action.isFinished() && opModeIsActive()) {
+        while (!action.isFinished() && opModeIsActive() && !isStopRequested()) {
             action.update();
         }
 
-        if(opModeIsActive())
+        if(opModeIsActive() && !isStopRequested())
             action.done();
     }
 
+    /**
+     * Run a single action, once, in a new thread
+     * Caution to make sure that you don't run more one action on the same subsystem
+     * @param action Action Class wanting to run
+     */
     public void ThreadAction(final Action action){
         Runnable runnable = new Runnable() {
             @Override
@@ -77,19 +124,35 @@ public abstract class AutoModeBase extends Team9889Linear {
             new Thread(runnable).start();
     }
 
-    @Override
-    public void runOpMode() throws InterruptedException{
-        setCurrentAutoRunning();
+    /**
+     * Run multiple actions at the same time, stop when all actions are completed
+     * @param actions A List of Action objects
+     *
+     * @example ParallelActions(Arrays.asList (
+     *                          new MecanumDriveSimpleAction ( 0, - 20, 1000),
+     *                         new Intake()
+     *                 ));
+     */
+    public void ParallelActions(List<Action> actions) {
+        if(opModeIsActive() && !isStopRequested())
+            for (Action action : actions) {
+                action.start();
+            }
 
-        waitForStart(true);
-        autoTimer.reset();
-
-        if (opModeIsActive() && !isStopRequested()) {
-            run(currentAutoRunning, doubleSample, scoreSample);
+        boolean all_finished = false;
+        while (!all_finished && opModeIsActive() && !isStopRequested()) {
+            all_finished = false;
+            for (Action action : actions) {
+                if (!action.isFinished()) {
+                    action.update();
+                    all_finished = true;
+                }
+            }
         }
 
-        finalAction();
+        for (Action action : actions) {
+            action.done();
+        }
     }
 
-    public abstract void run(Side side, boolean doubleSample, boolean scoreSample);
 }

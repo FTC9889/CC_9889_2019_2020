@@ -2,6 +2,8 @@ package com.team9889.ftc2019.auto.modes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.team9889.ftc2019.Team9889Linear;
+import com.team9889.ftc2019.auto.AutoModeBase;
+import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.auto.actions.Lift.CloseGrabber;
 import com.team9889.ftc2019.auto.actions.Lift.LiftIn;
 import com.team9889.ftc2019.auto.actions.Lift.LiftOut;
@@ -18,33 +20,19 @@ import com.team9889.ftc2019.auto.actions.intake.IntakeStop;
 import com.team9889.ftc2019.auto.actions.intake.IntakeStopBlockIn;
 import com.team9889.ftc2019.auto.actions.intake.IntakeUp;
 
+import java.util.Arrays;
+
 /**
  * Created by Eric on 11/26/2019.
  */
 
 @Autonomous
-public class RedAuto extends Team9889Linear {
-    enum SkyStonePosition {
-        LEFT, MIDDLE, RIGHT
-    }
-
-    SkyStonePosition position = SkyStonePosition.RIGHT;
+public class RedAuto extends AutoModeBase {
 
     @Override
-    public void runOpMode() throws InterruptedException {
-
-        waitForStart(true);
-
-        if (positionOfSkyStone < 40) {
-            position = SkyStonePosition.LEFT;
-        }else if (positionOfSkyStone > 100 && positionOfSkyStone < 190){
-            position = SkyStonePosition.MIDDLE;
-        }else if (positionOfSkyStone > 190){
-            position = SkyStonePosition.RIGHT;
-        }
-
+    public void run(Side side, AutoModeBase.SkyStonePosition stonePosition) {
         ThreadAction(new IntakeDown());
-        switch (position){
+        switch (stonePosition){
             case LEFT:
                 runAction(new MecanumDriveSimpleAction(23, 0));
                 runAction(new MecanumDriveSimpleAction(0, -20, 1000));
