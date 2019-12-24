@@ -31,9 +31,12 @@ public class RedAuto extends AutoModeBase {
             case LEFT:
                 runAction(new MecanumDriveSimpleAction(36, -35));
                 runAction(new MecanumDriveSimpleAction(-8, -35));
+
                 ThreadAction(new IntakeStop());
                 runAction(new Wait(500));
-                Robot.getIntake().SetIntakePower(1);
+
+                Robot.getIntake().SetIntakePower(1); // Can be replaced with ThreadAction(new Intake(true, true));
+
                 ThreadAction(new IntakeRollerOn());
                 ThreadAction(new IntakeStopBlockIn());
 

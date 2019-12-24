@@ -99,11 +99,14 @@ public class Robot{
 
         RobotLog.a("Robot Init Started at " + format.format(currentData));
 
+        // Rev Hubs
         revHubMaster = hardwareMap.get(ExpansionHubEx.class, Constants.kRevHubMaster);
         revHubSlave = hardwareMap.get(ExpansionHubEx.class, Constants.kRevHubSlave);
 
+        // Camera
         webcam = hardwareMap.get(WebcamName.class, Constants.kWebcam);
 
+        // Drive
         fLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveMasterId, 1,
                 DcMotorSimple.Direction.FORWARD, true, false, true);
         bLDrive = new Motor(hardwareMap, Constants.DriveConstants.kLeftDriveSlaveId, 1,
@@ -137,28 +140,26 @@ public class Robot{
         linearBar = hardwareMap.get(Servo.class, Constants.LiftConstants.kLinearBar);
 
         downLimit = hardwareMap.get(ColorSensor.class, Constants.LiftConstants.kDownLimit);
+
+        // Gyro
+        imu = new RevIMU("imu", hardwareMap);
+
         if (auto){
-            getIntake().IntakeUp();
-            getLift().GrabberOpen();
-            getMecanumDrive().OpenFoundationHook();
             update();
         }
-        imu = new RevIMU("imu", hardwareMap);
     }
 
-    boolean first = true;
+    private boolean first = true;
     public void update(){
         mMecanumDrive.update();
 
         bulkDataMaster = revHubMaster.getBulkInputData();
 //        bulkDataSlave = revHubSlave.getBulkInputData();
-//        Motor.numHardwareUsesThisUpdate+=2;
 
         fRDrive.update(bulkDataMaster);
         bRDrive.update(bulkDataMaster);
         fLDrive.update(bulkDataMaster);
         bLDrive.update(bulkDataMaster);
-//        intake.update(bulkDataSlave);
 
         if(!first)
             pose = model.calculateAbs((fRDrive.getPosition() - lastRightPosition) * Constants.DriveConstants.ENCODER_TO_DISTANCE_RATIO,
@@ -169,27 +170,10 @@ public class Robot{
         lastLeftPosition = fLDrive.getPosition();
         lastRightPosition = fRDrive.getPosition();
 
-//        for (Motor motor:Arrays.asList(fLDrive, fRDrive, bLDrive, bRDrive, intake)) {
-//            motor.update(bulkDataMaster, bulkDataSlave);
-//        }
-
         if(Robot.gyroTimer.milliseconds() > 100){
             gyroTimer.reset();
             gyro = getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
         }
-
-        //          angle file
-//        try {
-//            angleFileWriter = new FileWriter(angleFileName);
-//            angleBufferedWriter = new BufferedWriter(angleFileWriter);
-//
-//            angleBufferedWriter.newLine();
-//            angleBufferedWriter.write(Double.toString(gyro));
-//
-//            angleBufferedWriter.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public void outputToTelemetry(Telemetry telemetry) {
@@ -204,9 +188,7 @@ public class Robot{
     public MecanumDrive getMecanumDrive(){
         return mMecanumDrive;
     }
-//    public Dumper getDumper(){
-//        return null;
-//    }
+
     public Intake getIntake(){
         return mIntake;
     }
@@ -214,9 +196,7 @@ public class Robot{
     public ScoringLift getLift(){
         return mLift;
     }
-//    public HangingLift getHangingLift(){
-//        return null;
-//    }
+
     public Camera getCamera(){
         return mCamera;
     }

@@ -29,7 +29,10 @@ public class ScoringLift extends Subsystem{
 
     @Override
     public void init(boolean auto) {
-        LinearBarIn();
+        if(auto) {
+            GrabberOpen();
+            LinearBarIn();
+        }
     }
 
     @Override

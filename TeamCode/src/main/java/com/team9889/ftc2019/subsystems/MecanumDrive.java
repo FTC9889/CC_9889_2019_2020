@@ -41,7 +41,8 @@ public class MecanumDrive extends Subsystem {
 
     @Override
     public void init(boolean auto) {
-
+        if(auto)
+            OpenFoundationHook();
     }
 
     @Override
