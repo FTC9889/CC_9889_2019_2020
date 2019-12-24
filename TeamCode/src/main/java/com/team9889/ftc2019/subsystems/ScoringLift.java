@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
 import com.team9889.ftc2019.Constants;
-import com.team9889.ftc2019.states.LiftStates;
 import com.team9889.lib.CruiseLib;
 import com.team9889.lib.RunningAverage;
 import com.team9889.lib.control.controllers.PID;
@@ -30,7 +29,7 @@ public class ScoringLift extends Subsystem{
 
     @Override
     public void init(boolean auto) {
-
+        LinearBarIn();
     }
 
     @Override

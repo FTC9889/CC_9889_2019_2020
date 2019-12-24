@@ -22,19 +22,18 @@ public class IntakeStopBlockIn extends Action {
     @Override
     public void update()
     {
-        Robot.getInstance().update();
-        if (Robot.getInstance().blockDetector.getDistance(DistanceUnit.INCH) < 4){
-            Robot.getInstance().getIntake().SetRollerPower(0);
-        }
+
     }
 
     @Override
     public boolean isFinished() {
-        return Robot.getInstance().intakeLeft.getVelocity() == 0;
+        return Robot.getInstance().blockDetector.getDistance(DistanceUnit.INCH) < 4;
     }
 
     @Override
     public void done() {
-
+        Robot.getInstance().getIntake().SetIntakePower(0);
+        Robot.getInstance().getIntake().SetRollerPower(0);
+        Robot.getInstance().getLift().GrabberClose();
     }
 }

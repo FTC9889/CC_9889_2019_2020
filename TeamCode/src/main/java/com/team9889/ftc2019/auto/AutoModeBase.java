@@ -54,13 +54,13 @@ public abstract class AutoModeBase extends Team9889Linear {
 
     // Checks for a saved file to see what auto we are running (not completely implemented yet)
     private void setCurrentAutoRunning(){
-        String filename = "autonomousSettings.txt";
-        FileReader settingsFile = new FileReader(filename);
+//        String filename = "autonomousSettings.txt";
+//        FileReader settingsFile = new FileReader(filename);
+//
+//        String[] settings = settingsFile.lines();
+//        settingsFile.close();
 
-        String[] settings = settingsFile.lines();
-        settingsFile.close();
-
-        this.currentAutoRunning = Side.fromText(settings[0]);
+//        this.currentAutoRunning = Side.fromText(settings[0]);
     }
 
     // Method to implement in the auto to run the autonomous
@@ -74,11 +74,11 @@ public abstract class AutoModeBase extends Team9889Linear {
         autoTimer.reset();
 
         // From Camera -> To Stone Position
-        if (positionOfSkyStone < 40)
+        if (positionOfSkyStone < 120 && positionOfSkyStone > 39)
             currentSkyStonePosition = SkyStonePosition.LEFT;
-        else if (positionOfSkyStone > 100 && positionOfSkyStone < 190)
+        else if (positionOfSkyStone > 120)
             currentSkyStonePosition = SkyStonePosition.MIDDLE;
-        else if (positionOfSkyStone > 190)
+        else if (positionOfSkyStone < 40)
             currentSkyStonePosition = SkyStonePosition.RIGHT;
 
         // If the opmode is still running, run auto
@@ -129,7 +129,7 @@ public abstract class AutoModeBase extends Team9889Linear {
      * @param actions A List of Action objects
      *
      * @example ParallelActions(Arrays.asList (
-     *                          new MecanumDriveSimpleAction ( 0, - 20, 1000),
+     *                         new MecanumDriveSimpleAction ( 0, - 20, 1000),
      *                         new Intake()
      *                 ));
      */

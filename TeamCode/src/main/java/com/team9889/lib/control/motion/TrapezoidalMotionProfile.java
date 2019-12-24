@@ -24,7 +24,7 @@ public class TrapezoidalMotionProfile implements MotionProfile {
     // Demo
     public static void main(String... args){
         TrapezoidalMotionProfile profile =
-                new TrapezoidalMotionProfile(-48, new ProfileParameters(22.937, 15.646));
+                new TrapezoidalMotionProfile(50, new ProfileParameters(((2 * Math.PI * ((5475.764) / 19.2)) / 60.0) * 0.9, 50));
         FileWriter log = new FileWriter(profile.getClass().getSimpleName() + ".csv");
 
         int step = 1000;

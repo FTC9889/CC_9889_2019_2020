@@ -20,8 +20,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 public class MecanumDriveSimpleAction extends Action {
 
     TrapezoidalMotionProfile profile;
-    MotionProfileFollower follower = new MotionProfileFollower(0.003, 0, 0.0225, 0.005);
-
+    MotionProfileFollower follower = new MotionProfileFollower(0.0, 0, 0.0185, 0.004);
     PID turnPID = new PID(0.03, 0, 0.3);
 
     boolean offsetAxis = false;
@@ -70,7 +69,7 @@ public class MecanumDriveSimpleAction extends Action {
 
         profile = new TrapezoidalMotionProfile(distance,
                 new ProfileParameters(
-                        ((2 * Math.PI * ((5475.764) / 20)) / 60.0) * 0.8,
+                        ((2 * Math.PI * ((5475.764) / 19.2)) / 60.0) * 0.9,
                         50));
 
         follower.setProfile(profile);
