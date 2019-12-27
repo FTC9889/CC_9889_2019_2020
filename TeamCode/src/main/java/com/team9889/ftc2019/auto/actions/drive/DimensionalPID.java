@@ -20,7 +20,7 @@ import org.opencv.core.Mat;
 /**
  * Created by Eric on 12/13/2019.
  */
-
+@Deprecated
 public class DimensionalPID extends Action {
 
     TrapezoidalMotionProfile profile;
@@ -57,12 +57,20 @@ public class DimensionalPID extends Action {
     @Override
     public void setup(String args) {}
 
+    private double[] readEncoders() {
+        double[] values = new double[4];
+
+        values[0] = Robot.getInstance().bRDrive.getPosition();
+        values[1] = Robot.getInstance().bLDrive.getPosition();
+        values[2] = Robot.getInstance().fRDrive.getPosition();
+        values[3] = Robot.getInstance().fLDrive.getPosition();
+
+        return values;
+    }
+
     @Override
     public void start() {
-        offsets[0] = mDrive.backRight;
-        offsets[1] = mDrive.backLeft;
-        offsets[2] = mDrive.frontRight;
-        offsets[3] = mDrive.frontLeft;
+        offsets = readEncoders();
         Log.i("hi", "test");
 
         distance = distance.replace(" ", "");
@@ -93,10 +101,10 @@ public class DimensionalPID extends Action {
     public void update() {
         Log.i("update", "");
 
-        currentPosition[0] = mDrive.backRight - offsets[0];
-        currentPosition[1] = mDrive.backLeft - offsets[1];
-        currentPosition[2] = mDrive.frontRight - offsets[2];
-        currentPosition[3] = mDrive.frontLeft - offsets[3];
+        currentPosition[0] = readEncoders()[0] - offsets[0];
+        currentPosition[1] = readEncoders()[1] - offsets[1];
+        currentPosition[2] = readEncoders()[2] - offsets[2];
+        currentPosition[3] = readEncoders()[3] - offsets[3];
 
         angle = Double.parseDouble(eachMovement[movement].split(",")[2]);
 
@@ -118,13 +126,13 @@ public class DimensionalPID extends Action {
         double rotation = turnPID.update(currentAngle, angle);
 
         if (CruiseLib.isBetween(Robot.getInstance().fLDrive.getPosition(),
-                Robot.getInstance().getMecanumDrive().frontLeft - 5, Robot.getInstance().getMecanumDrive().frontLeft + 5)
+                readEncoders()[0] - 5, readEncoders()[0] + 5)
                 && CruiseLib.isBetween(Robot.getInstance().fRDrive.getPosition(),
-                Robot.getInstance().getMecanumDrive().frontRight - 5, Robot.getInstance().getMecanumDrive().frontRight + 5)
+                readEncoders()[1] - 5, readEncoders()[1] + 5)
                 && CruiseLib.isBetween(Robot.getInstance().bLDrive.getPosition(),
-                Robot.getInstance().getMecanumDrive().backLeft - 5, Robot.getInstance().getMecanumDrive().backLeft + 5)
+                readEncoders()[2] - 5, readEncoders()[2] + 5)
                 && CruiseLib.isBetween(Robot.getInstance().bRDrive.getPosition(),
-                Robot.getInstance().getMecanumDrive().backRight - 5, Robot.getInstance().getMecanumDrive().backRight + 5)){
+                readEncoders()[3], readEncoders()[3] + 5)){
 
             //Add offset here
 

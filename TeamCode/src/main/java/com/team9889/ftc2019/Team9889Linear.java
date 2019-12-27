@@ -85,6 +85,7 @@ public abstract class Team9889Linear extends LinearOpMode {
             // Teleop Init Loop code
             while(isInInitLoop()){
                 telemetry.addData("Waiting for Start","");
+                Robot.getMecanumDrive().outputToTelemetry(telemetry);
                 telemetry.update();
             }
         }

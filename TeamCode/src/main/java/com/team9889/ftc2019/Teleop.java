@@ -121,12 +121,7 @@ public class Teleop extends Team9889Linear {
                     linearBarTimer.reset();
                     liftTimer.reset();
 
-                    if (Robot.linearBar.getPosition() > 0){
-                        linearBarIn = false;
-                    }
-                    else {
-                        linearBarIn = true;
-                    }
+                    linearBarIn = !(Robot.linearBar.getPosition() > 0);
                 }else if (!linearBarIn) {
                     if (linearBarTimer.milliseconds() > 1000) {
                         first = true;

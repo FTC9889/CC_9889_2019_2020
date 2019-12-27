@@ -91,7 +91,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
    @exception  IllegalArgumentException Array length must be a multiple of m.
    */
 
-   public Matrix (double vals[], int m) throws IllegalArgumentException {
+   public Matrix (double[] vals, int m) throws IllegalArgumentException {
       this.m = m;
       n = (m != 0 ? vals.length/m : 0);
       if (m*n != vals.length) {

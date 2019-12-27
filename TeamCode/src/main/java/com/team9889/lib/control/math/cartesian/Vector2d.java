@@ -46,24 +46,28 @@ public class Vector2d {
         getPosition().y = y;
     }
 
-    public Vector2d add(Vector2d pos){
-        return new Vector2d(this.getX()+pos.getX(), this.getY()+pos.getY());
-    }
-
     public static Vector2d add(Vector2d v1, Vector2d v2){
-        return new Vector2d(v1.getX()+v2.getY(), v1.getY()+v2.getY());
+        return new Vector2d(v1.getX()+v2.getX(), v1.getY()+v2.getY());
     }
 
-    public Vector2d subtract(Vector2d pos){
-        return subtract(this, pos);
+    public Vector2d add(Vector2d pos){
+        return Vector2d.add(this, pos);
     }
 
     public static Vector2d subtract(Vector2d v1, Vector2d v2){
         return new Vector2d(v1.getX()-v2.getX(), v1.getY()-v2.getY());
     }
 
+    public Vector2d subtract(Vector2d pos){
+        return subtract(this, pos);
+    }
+
+    public static Vector2d multiple(Vector2d vector, double scaler){
+        return new Vector2d(vector.getX() * scaler, vector.getY() * scaler);
+    }
+
     public Vector2d multiple(double scaler){
-        return new Vector2d(this.getX() * scaler, this.getY() * scaler);
+        return multiple(this, scaler);
     }
 
     public Vector2d multiple(Vector2d pos){
@@ -122,5 +126,10 @@ public class Vector2d {
         double x2 = getX()*getX();
         double y2 = getY()*getY();
         return Math.sqrt(x2+y2);
+    }
+
+    @Override
+    public String toString() {
+        return "X: " + getX() + " | Y: " + getY();
     }
 }

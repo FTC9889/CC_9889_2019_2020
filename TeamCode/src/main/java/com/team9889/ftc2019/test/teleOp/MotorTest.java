@@ -40,9 +40,9 @@ public class MotorTest extends LinearOpMode {
                     robot.fLDrive.getPosition() * Constants.DriveConstants.ENCODER_TO_DISTANCE_RATIO);
             telemetry.addData("front right position",
                     robot.fRDrive.getPosition() * Constants.DriveConstants.ENCODER_TO_DISTANCE_RATIO);
-            telemetry.addData("x", robot.pose[0]);
-            telemetry.addData("y", robot.pose[1]);
-            telemetry.addData("angle", robot.pose[3]);
+//            telemetry.addData("x", robot.pose[0]);
+//            telemetry.addData("y", robot.pose[1]);
+//            telemetry.addData("angle", robot.pose[3]);
             telemetry.update();
             timer.reset();
             Motor.numHardwareUsesThisUpdate = 0;

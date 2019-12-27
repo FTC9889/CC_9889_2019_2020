@@ -1,11 +1,7 @@
 package com.team9889.ftc2019.auto.modes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.team9889.ftc2019.Team9889Linear;
-import com.team9889.ftc2019.auto.actions.Wait;
-import com.team9889.ftc2019.auto.actions.drive.DimensionalPID;
-import com.team9889.ftc2019.auto.actions.drive.MecanumDriveAction;
 import com.team9889.ftc2019.auto.actions.drive.MecanumDriveSimpleAction;
 
 /**

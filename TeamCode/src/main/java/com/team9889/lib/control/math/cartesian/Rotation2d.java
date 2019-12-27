@@ -1,6 +1,7 @@
 package com.team9889.lib.control.math.cartesian;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 
 /**
@@ -81,7 +82,7 @@ public class Rotation2d {
 
     @Override
     public String toString() {
-        return String.valueOf(getTheda(AngleUnit.DEGREES)) + " Degrees";
+        return getTheda(AngleUnit.DEGREES) + " Degrees";
     }
 
     public double cos() {

@@ -30,4 +30,23 @@ public class Pose {
     public void setRotation2d(Rotation2d rotation2d) {
         this.rotation2d = rotation2d;
     }
+
+    public static Pose add(Pose p1, Pose p2) {
+        Vector2d addedVector = Vector2d.add(p1.getVector2D(), p2.getVector2D());
+        Rotation2d addedRotation = Rotation2d.add(p1.getRotation2d(), p2.getRotation2d());
+
+        return new Pose(addedVector, addedRotation);
+    }
+
+    public static Pose subtract(Pose p1, Pose p2) {
+        Vector2d addedVector = Vector2d.subtract(p1.getVector2D(), p2.getVector2D());
+        Rotation2d addedRotation = Rotation2d.subtract(p1.getRotation2d(), p2.getRotation2d());
+
+        return new Pose(addedVector, addedRotation);
+    }
+
+    @Override
+    public String toString() {
+        return getVector2D().toString() + " | " + getRotation2d().toString();
+    }
 }

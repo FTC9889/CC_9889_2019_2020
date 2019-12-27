@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.team9889.ftc2019.Team9889Linear;
 import com.team9889.ftc2019.auto.actions.RobotUpdate;
 import com.team9889.ftc2019.auto.actions.Wait;
-import com.team9889.ftc2019.auto.actions.drive.FoundationHookClose;
+import com.team9889.ftc2019.auto.actions.foundation.FoundationHookClose;
 import com.team9889.ftc2019.auto.actions.drive.MecanumDriveSimpleAction;
 
 /**

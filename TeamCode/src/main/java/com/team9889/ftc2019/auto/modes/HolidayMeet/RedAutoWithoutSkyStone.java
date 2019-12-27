@@ -7,20 +7,17 @@ import com.team9889.ftc2019.auto.actions.Lift.LiftIn;
 import com.team9889.ftc2019.auto.actions.Lift.LiftOut;
 import com.team9889.ftc2019.auto.actions.Lift.OpenGrabber;
 import com.team9889.ftc2019.auto.actions.Wait;
-import com.team9889.ftc2019.auto.actions.drive.FoundationHookClose;
-import com.team9889.ftc2019.auto.actions.drive.FoundationHookOpen;
+import com.team9889.ftc2019.auto.actions.foundation.FoundationHookClose;
+import com.team9889.ftc2019.auto.actions.foundation.FoundationHookOpen;
 import com.team9889.ftc2019.auto.actions.drive.MecanumDriveSimpleAction;
 import com.team9889.ftc2019.auto.actions.intake.Intake;
 import com.team9889.ftc2019.auto.actions.intake.IntakeDown;
 import com.team9889.ftc2019.auto.actions.intake.IntakeRollerOn;
 import com.team9889.ftc2019.auto.actions.intake.IntakeRollerStop;
 import com.team9889.ftc2019.auto.actions.intake.IntakeStop;
-import com.team9889.ftc2019.auto.actions.intake.IntakeStopBlockIn;
 import com.team9889.ftc2019.auto.actions.intake.IntakeUp;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-
-import java.util.Set;
 
 /**
  * Created by Eric on 11/26/2019.

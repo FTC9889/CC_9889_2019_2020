@@ -46,7 +46,7 @@ public class FileWriter {
 
     public void write(Object object){
         charset = Charset.forName("US-ASCII");
-        String printString = String.valueOf(object) + "\n";
+        String printString = object + "\n";
         try {
             writer.write(printString.getBytes(charset));
         } catch (IOException e) {
@@ -55,7 +55,7 @@ public class FileWriter {
     }
 
     public void write(int priority, Object object){
-        String printString = priority + " " + String.valueOf(object);
+        String printString = priority + " " + object;
         write(printString);
     }
 

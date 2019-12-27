@@ -45,6 +45,22 @@ public class Constants {
         public final static double InchToTick = 537.6 / (Math.PI * 4.1);
     }
 
+    public static class OdometryConstants {
+        private static double WheelDiameter = 35 / 25.4;  // https://www.rotacaster.com.au/shop/35mm-rotacaster-wheels/index
+        public final static double ENCODER_TO_DISTANCE_RATIO = (WheelDiameter * Math.PI) / 1440.0; // https://www.rotacaster.com.au/shop/35mm-rotacaster-wheels/index  Step 4
+
+        /**
+         * Distance between the two odometry wheels
+         */
+        public static double l = 2.75;
+
+
+        /**
+         * Distance away from center of robot
+         */
+        public static double w = 7.5;
+    }
+
     public static void main(String[] args) {
         double test = 1/DriveConstants.ENCODER_TO_DISTANCE_RATIO;
         double ratio = test/59.417845420974258687049938325739;

@@ -36,13 +36,12 @@ public class MecanumDriveTrainTest extends LinearOpMode {
             else if (gamepad1.x){
                 robot.getMecanumDrive().x = 0;
                 robot.getMecanumDrive().y = 0;
-                robot.getMecanumDrive().travelTotal = 0;
+//                robot.getMecanumDrive().travelTotal = 0;
             }
 
-            telemetry.addData("test", robot.getMecanumDrive().test);
             telemetry.addData("xSpeed", robot.getMecanumDrive().xSpeed);
             telemetry.addData("ySpeed", robot.getMecanumDrive().ySpeed);
-            telemetry.addData("travel", robot.getMecanumDrive().travelTotal);
+//            telemetry.addData("travel", robot.getMecanumDrive().travelTotal);
 
             telemetry.update();
             robot.update();

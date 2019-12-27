@@ -55,13 +55,8 @@ public class Robot{
 
     public HardwareMap hardwareMap;
 
-    private int lastLeftPosition, lastRightPosition;
-    TankDriveKinematicModel model = new TankDriveKinematicModel();
-
     public static ElapsedTime timer = new ElapsedTime();
     public static ElapsedTime gyroTimer = new ElapsedTime();
-
-    public double[] pose = new double[4];
 
     private static Robot mInstance = null;
 
@@ -81,17 +76,15 @@ public class Robot{
 
     public RevIMU imu = null;
 
-    double timerOffset = 0;
-
     public double gyro;
+    private Thread trackerThread;
 
-    String angleFileName = "gyro.txt";
-    java.io.FileWriter angleFileWriter;
-    BufferedWriter angleBufferedWriter;
+    private boolean mAuto = false;
 
     public void init(HardwareMap hardwareMap, boolean auto){
         timer.reset();
         gyroTimer.reset();
+        this.mAuto = auto;
         this.hardwareMap = hardwareMap;
 
         Date currentData = new Date();
@@ -139,48 +132,57 @@ public class Robot{
         grabber = hardwareMap.get(Servo.class, Constants.LiftConstants.kGrabber);
         linearBar = hardwareMap.get(Servo.class, Constants.LiftConstants.kLinearBar);
 
-        downLimit = hardwareMap.get(ColorSensor.class, Constants.LiftConstants.kDownLimit);
+//        downLimit = hardwareMap.get(ColorSensor.class, Constants.LiftConstants.kDownLimit);
 
         // Gyro
         imu = new RevIMU("imu", hardwareMap);
 
-        if (auto){
-            update();
-        }
+        Runnable trackerRunnable = new Runnable() {
+            @Override
+            public void run() {
+                while (!Thread.interrupted())
+                    Robot.getInstance().update();
+            }
+        };
+
+        trackerThread = new Thread(trackerRunnable);
+        trackerThread.start();
+
+        getMecanumDrive().init(auto);
+        getIntake().init(auto);
+        getCamera().init(auto);
+        getLift().init(auto);
     }
 
-    private boolean first = true;
     public void update(){
-        mMecanumDrive.update();
-
         bulkDataMaster = revHubMaster.getBulkInputData();
-//        bulkDataSlave = revHubSlave.getBulkInputData();
+        bulkDataSlave = revHubSlave.getBulkInputData();
 
         fRDrive.update(bulkDataMaster);
         bRDrive.update(bulkDataMaster);
         fLDrive.update(bulkDataMaster);
         bLDrive.update(bulkDataMaster);
 
-        if(!first)
-            pose = model.calculateAbs((fRDrive.getPosition() - lastRightPosition) * Constants.DriveConstants.ENCODER_TO_DISTANCE_RATIO,
-                    (fLDrive.getPosition() - lastLeftPosition) * Constants.DriveConstants.ENCODER_TO_DISTANCE_RATIO);
-        else
-            first = false;
+        intakeLeft.update(bulkDataSlave);
+        intakeRight.update(bulkDataSlave);
 
-        lastLeftPosition = fLDrive.getPosition();
-        lastRightPosition = fRDrive.getPosition();
-
-        if(Robot.gyroTimer.milliseconds() > 100){
+        if(Robot.gyroTimer.milliseconds() > 100 && !mAuto){
             gyroTimer.reset();
-            gyro = getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+            getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+        } else { // Update every time in order for odometry to work properly
+            getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
         }
+
+        mMecanumDrive.update();
     }
 
     public void outputToTelemetry(Telemetry telemetry) {
-
+        getMecanumDrive().outputToTelemetry(telemetry);
     }
 
     public void stop(){
+        trackerThread.interrupt();
+
         for (Motor motor:Arrays.asList(fLDrive, fRDrive, bLDrive, bRDrive, intakeLeft, intakeRight)) {
             motor.setPower(0);
         }
