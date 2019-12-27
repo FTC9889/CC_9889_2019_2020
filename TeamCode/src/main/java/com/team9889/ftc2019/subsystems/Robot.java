@@ -1,5 +1,6 @@
 package com.team9889.ftc2019.subsystems;
 
+import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -40,6 +41,7 @@ public class Robot{
 
     public Motor fLDrive, fRDrive, bLDrive, bRDrive;
     public Servo foundationHook;
+    public DistanceSensor foundationDetector;
 
     public Motor intakeLeft, intakeRight;
     public Servo intakeLeftS, intakeRightS;
@@ -48,7 +50,7 @@ public class Robot{
 
     public Motor leftLift, rightLift;
     public Servo grabber, linearBar;
-    public ColorSensor downLimit;
+    public RevTouchSensor downLimit;
 
     RevBulkData bulkDataMaster, bulkDataSlave;
     ExpansionHubEx revHubMaster, revHubSlave;
@@ -111,6 +113,8 @@ public class Robot{
 
         foundationHook = hardwareMap.get(Servo.class, Constants.DriveConstants.kFoundationHook);
 
+        foundationDetector = hardwareMap.get(DistanceSensor.class, Constants.kFoundationDetector);
+
         //Intake
         intakeLeft = new Motor(hardwareMap, Constants.IntakeConstants.kIntakeLeftMotorId, 1,
                 DcMotorSimple.Direction.FORWARD, false, true, false);
@@ -125,16 +129,15 @@ public class Robot{
 
         //Lift
         leftLift = new Motor(hardwareMap, Constants.LiftConstants.kLeftLift, 1,
-                DcMotorSimple.Direction.FORWARD, true, true, true);
+                DcMotorSimple.Direction.FORWARD, true, false, true);
         rightLift = new Motor(hardwareMap, Constants.LiftConstants.kRightLift, 1,
                 DcMotorSimple.Direction.REVERSE, true, true, true);
 
         grabber = hardwareMap.get(Servo.class, Constants.LiftConstants.kGrabber);
         linearBar = hardwareMap.get(Servo.class, Constants.LiftConstants.kLinearBar);
 
-//        downLimit = hardwareMap.get(ColorSensor.class, Constants.LiftConstants.kDownLimit);
+        downLimit = hardwareMap.get(RevTouchSensor.class, Constants.LiftConstants.kDownLimit);
 
-        // Gyro
         imu = new RevIMU("imu", hardwareMap);
 
         Runnable trackerRunnable = new Runnable() {
@@ -165,6 +168,9 @@ public class Robot{
 
         intakeLeft.update(bulkDataSlave);
         intakeRight.update(bulkDataSlave);
+
+        leftLift.update(bulkDataSlave);
+        rightLift.update(bulkDataSlave);
 
         if(Robot.gyroTimer.milliseconds() > 100 && !mAuto){
             gyroTimer.reset();

@@ -1,5 +1,7 @@
 package com.team9889.ftc2019.subsystems;
 
+import android.util.Log;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -22,7 +24,7 @@ import java.util.Set;
 
 public class ScoringLift extends Subsystem{
 
-    PID liftPID = new PID(.3, 0, 0);
+    PID liftPID = new PID(.3, 0, 0.01);
 
     private double wantedHeight = 0;
     private boolean goToHeight = false;
@@ -42,14 +44,13 @@ public class ScoringLift extends Subsystem{
 
     @Override
     public void update() {
-        if (goToHeight){
-            SetLiftHeight(wantedHeight);
-        }
+
     }
 
     public double getLiftHeightInches(){
-        return (Robot.getInstance().leftLift.getPosition() + Robot.getInstance().rightLift.getPosition() / 2)
-                * Constants.LiftConstants.LiftInchToTick;
+        double height = Robot.getInstance().rightLift.getPosition() / Constants.LiftConstants.LiftInchToTick;
+        Log.e("Height", String.valueOf(height));
+        return height;
     }
 
     public void SetLiftPower(double power){
@@ -58,10 +59,9 @@ public class ScoringLift extends Subsystem{
     }
 
     public void SetLiftHeight(double height){
-        wantedHeight = height;
-        goToHeight = true;
+        wantedHeight = height * Constants.LiftConstants.LiftInchToTick;
 
-        liftPID.update(getLiftHeightInches(), height);
+        liftPID.update(Robot.getInstance().rightLift.getPosition(), height);
         SetLiftPower(liftPID.getOutput());
 
         if (CruiseLib.isBetween(getLiftHeightInches(), height - .2, height + .2)){
