@@ -35,17 +35,29 @@ public class Drive3DimensionalPID extends Action {
         this.tolerancePose = tolerancePose;
     }
 
+    public Drive3DimensionalPID (Pose2d wantedPose, Pose2d tolerancePose, double maxVel) {
+        this.wantedPose = wantedPose;
+        this.tolerancePose = tolerancePose;
+        this.maxVel = maxVel;
+    }
+
+    public Drive3DimensionalPID (Pose2d wantedPose, double maxVel) {
+        this.wantedPose = wantedPose;
+        this.tolerancePose = new Pose2d(2,2,2);
+        this.maxVel = maxVel;
+    }
+
     // Controllers
-    private PID xPID = new PID(-0.12, -0.000001, 0.08, 0.025);
-    private PID yPID = new PID(-0.12, -0.000001, 0.08, 0.025);
-    private PID turnPID = new PID(0.02, 0, 0.3, 0);
+    private PID xPID = new PID(-0.12, 0, 0.08);
+    private PID yPID = new PID(-0.12, 0, 0.08);
+    private PID turnPID = new PID(0.04, 0, 0.8);
 
     // Max Speed
     double maxVel = 0.5;
 
     // Wanted Pose of the Robot
-    private Pose2d wantedPose = new Pose2d(0, 0, 0);
-    private Pose2d tolerancePose = new Pose2d(3, 3, 3);
+    private Pose2d wantedPose;
+    private Pose2d tolerancePose;
 
     // Angle adjustment
     private double angle = 0;
@@ -68,6 +80,8 @@ public class Drive3DimensionalPID extends Action {
 
     @Override
     public void start() {
+        maxVel = maxVel - 0.1;
+
         angle = Math.toDegrees(wantedPose.getHeading());
 
         if (Math.abs(angle) > 175) {
@@ -96,8 +110,8 @@ public class Drive3DimensionalPID extends Action {
 
     @Override
     public boolean isFinished() {
-        if (Math.abs(xPID.getError()) < Math.abs(tolerancePose.getX())) xCounter++; else xCounter = 0;
-        if (Math.abs(yPID.getError()) < Math.abs(tolerancePose.getX())) yCounter++; else yCounter = 0;
+        if (Math.abs(xPID.getError()) < Math.abs(tolerancePose.getX())) xCounter++;
+        if (Math.abs(yPID.getError()) < Math.abs(tolerancePose.getY())) yCounter++;
         if (Math.abs(turnPID.getError()) < Math.abs(Math.toDegrees(tolerancePose.getHeading()))) angleCounter++; else angleCounter = 0;
 
         return (xCounter > 3 && yCounter > 3 && angleCounter > 3) || timeOut < timer.milliseconds();

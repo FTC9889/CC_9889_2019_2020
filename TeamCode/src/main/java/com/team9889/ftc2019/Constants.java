@@ -19,6 +19,9 @@ public class Constants {
 
     public final static String kWebcam = "Webcam";
 
+    public final static String kTMShooter = "tmshooter";
+    public final static String kFoundationDetector = "fd";
+
     /*---------------------
     |                     |
     |     Drivetrain!     |
@@ -46,6 +49,8 @@ public class Constants {
     }
 
     public static class OdometryConstants {
+        public final static String kOdometryLift = "ol";
+
         private static double WheelDiameter = 35 / 25.4;  // https://www.rotacaster.com.au/shop/35mm-rotacaster-wheels/index
         public final static double ENCODER_TO_DISTANCE_RATIO = (WheelDiameter * Math.PI) / 1440.0; // https://www.rotacaster.com.au/shop/35mm-rotacaster-wheels/index  Step 4
 
@@ -82,6 +87,7 @@ public class Constants {
         public final static String kIntakeRightServoId = "ris";
 
         public final static String kIntakeRollerId = "roller";
+        public final static String kCapStone = "cps";
 
         public final static String kIntakeBlockDetectorId = "blockdetector";
 
@@ -115,6 +121,7 @@ public class Constants {
         public final static String kLinearBar = "linearbar";
 
         public final static String kDownLimit = "liftlimitdown";
+        public final static String kLiftBrake = "liftbrake";
 
         public final static Double LiftTicksPerRevolution = 145.6;
 

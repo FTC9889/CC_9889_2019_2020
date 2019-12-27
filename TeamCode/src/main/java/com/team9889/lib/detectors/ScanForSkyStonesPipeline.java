@@ -26,8 +26,8 @@ public class ScanForSkyStonesPipeline extends OpenCvPipeline {
      */
     public ScanForSkyStonesPipeline(){
         this.debug = false;
-        this.upperPercentLimit = 0.4;
-        this.lowerPercentLimit = 0.64;
+        this.upperPercentLimit = 0.0;
+        this.lowerPercentLimit = 0.3;
         this.threshold = 60;
     }
 

@@ -47,6 +47,9 @@ public class Teleop extends Team9889Linear {
     java.io.FileReader angleFileReader;
     BufferedReader angleBufferedReader;
 
+//  lift automation
+    private int numSkyStones = 0;
+
     @Override
     public void runOpMode() {
         telemetry.addData("Started Init", "");
@@ -208,7 +211,7 @@ public class Teleop extends Team9889Linear {
                 }
 
             if (liftGoingDown) {
-                if (Robot.downLimit.green() > 350) {
+                if (Robot.downLimit.isPressed()) {
                     liftDownLimit = true;
                     liftGoingDown = false;
                 } else {
@@ -218,6 +221,18 @@ public class Teleop extends Team9889Linear {
                 liftDownLimit = false;
             }
 
+//          Lift
+            if (gamepad2.dpad_left){
+                numSkyStones--;
+            }else if (gamepad2.dpad_right){
+                numSkyStones++;
+            }
+
+            if (gamepad1.dpad_up){
+                robot.getLift().SetLiftHeight(4 * numSkyStones);
+            }
+
+//          Grabber
             if (gamepad2.right_stick_button){
                 Robot.getLift().GrabberOpen();
                 grabberOpen = true;
@@ -232,6 +247,17 @@ public class Teleop extends Team9889Linear {
 
             telemetry.addData("Gyro After Auto", robot.gyroAfterAuto);
             telemetry.addData("Gyro", robot.gyro - Robot.gyroAfterAuto);
+
+            telemetry.addData("Number of SkyStones", numSkyStones);
+
+            telemetry.addData("left lift height", -robot.leftLift.getPosition());
+            telemetry.addData("right lift height", -robot.rightLift.getPosition());
+            telemetry.addData("left intake", -robot.intakeLeft.getPosition());
+            telemetry.addData("right intake", -robot.intakeRight.getPosition());
+
+
+            //TODO test magnet sensor
+            telemetry.addData("Magnet", robot.downLimit.isPressed());
 
             telemetry.update();
             robot.update();
