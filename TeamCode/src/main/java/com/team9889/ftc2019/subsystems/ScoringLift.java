@@ -28,6 +28,7 @@ public class ScoringLift extends Subsystem{
 
     private double wantedHeight = 0;
     private boolean goToHeight = false;
+    public boolean isDown = false;
 
     @Override
     public void init(boolean auto) {
@@ -39,7 +40,7 @@ public class ScoringLift extends Subsystem{
 
     @Override
     public void outputToTelemetry(Telemetry telemetry) {
-
+        telemetry.addData("Down Limit", isDown);
     }
 
     @Override
@@ -54,8 +55,8 @@ public class ScoringLift extends Subsystem{
     }
 
     public void SetLiftPower(double power){
-        Robot.getInstance().leftLift.setPower(power);
-        Robot.getInstance().rightLift.setPower(power);
+            Robot.getInstance().leftLift.setPower(power);
+            Robot.getInstance().rightLift.setPower(power);
     }
 
     public void SetLiftHeight(double height){
@@ -85,5 +86,9 @@ public class ScoringLift extends Subsystem{
     }
     public void GrabberClose(){
         Robot.getInstance().grabber.setPosition(0);
+    }
+
+    public boolean isDown() {
+        return Robot.getInstance().downLimit.isPressed();
     }
 }

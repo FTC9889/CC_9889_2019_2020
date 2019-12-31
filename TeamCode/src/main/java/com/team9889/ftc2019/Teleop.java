@@ -1,18 +1,13 @@
 package com.team9889.ftc2019;
 
-import android.graphics.Color;
-
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.robotcore.internal.usb.exception.RobotUsbTimeoutException;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -47,23 +42,21 @@ public class Teleop extends Team9889Linear {
     java.io.FileReader angleFileReader;
     BufferedReader angleBufferedReader;
 
-//  lift automation
+    //  lift automation
     private int numSkyStones = 0;
+
+    boolean automateScoring = false;
+    ElapsedTime automatedScoringTimer = new ElapsedTime();
+
 
     @Override
     public void runOpMode() {
-        telemetry.addData("Started Init", "");
-        telemetry.update();
+        DriverStation driverStation = new DriverStation(gamepad1, gamepad2);
+        waitForStart(false);
 
-        com.team9889.ftc2019.subsystems.Robot robot = com.team9889.ftc2019.subsystems.Robot.getInstance();
-        robot.init(hardwareMap, false);
-
-        telemetry.addData("Inited", "");
-        telemetry.update();
-        waitForStart();
+        Robot.odometryLifter.setPosition(0.5);
 
         Robot.getLift().GrabberOpen();
-        Robot.getIntake().IntakeDown();
         Robot.getMecanumDrive().OpenFoundationHook();
 
         Robot.getLift().LinearBarIn();
@@ -86,117 +79,75 @@ public class Teleop extends Team9889Linear {
         while (opModeIsActive()){
             loopTimer.reset();
 
-//          Drive
-            if (!driveSlow)
-                robot.getMecanumDrive().setFieldCentricPower(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
-            else if (driveSlow)
-                robot.getMecanumDrive().setFieldCentricPower(gamepad1.left_stick_x / 3, -gamepad1.left_stick_y / 3, gamepad1.right_stick_x / 3);
+            // Drive
+            double slowDownFactor = driverStation.getSlowDownFactor();
+            Robot.getMecanumDrive().setFieldCentricPower(
+                    driverStation.getX() / slowDownFactor,
+                    driverStation.getY() / slowDownFactor,
+                    driverStation.getSteer() / slowDownFactor);
 
-//          Lift
-            if (gamepad1.right_trigger > 0.1) {
-                Robot.getLift().SetLiftPower(-gamepad1.right_trigger);
-            }
-            else if (gamepad1.left_trigger > 0.1 && !liftDownLimit) {
-                Robot.getLift().SetLiftPower(gamepad1.left_trigger);
-            }
-            else if (gamepad2.right_trigger > 0.1) {
-                Robot.getLift().SetLiftPower(-gamepad2.right_trigger);
-            }
-            else if (gamepad2.left_trigger > 0.1 && !liftDownLimit) {
-                Robot.getLift().SetLiftPower(gamepad2.left_trigger);
-            }
-            else if (!lift && !liftGoingDown){
-                Robot.getLift().SetLiftPower(-0.2);
-            }
+            if(!automateScoring) {
+                Robot.getLift().SetLiftPower(driverStation.getLiftPower(liftDownLimit));
 
-//          Grabber
-            if (gamepad1.dpad_right){
-                Robot.getLift().GrabberClose();
-                grabberOpen = false;
-            }else if (gamepad1.dpad_left || linearBar){
-                if (first) {
+                if (driverStation.getLinearBarIn(first))
+                    Robot.getLift().LinearBarIn();
+                else
+                    Robot.getLift().LinearBarOut();
+
+                if (driverStation.getStartIntaking()){
+                    Robot.getIntake().Intake();
+                    Robot.getLift().GrabberOpen();
+                    intaking = true;
+                }else if (driverStation.getStopIntaking()){
+                    Robot.getIntake().Stop();
+                    intaking = false;
+                }else if (driverStation.getStartOuttaking()){
+                    Robot.getIntake().Outtake();
+                    intaking = false;
+                }
+
+                if (driverStation.getGrabberOpen(first)){
                     Robot.getLift().GrabberOpen();
                     grabberOpen = true;
-                    first = false;
-                    linearBar = true;
-                    lift = true;
-                    liftFirst = true;
-                    linearBarTimer.reset();
-                    liftTimer.reset();
-
-                    linearBarIn = !(Robot.linearBar.getPosition() > 0);
-                }else if (!linearBarIn) {
-                    if (linearBarTimer.milliseconds() > 1000) {
-                        first = true;
-                        linearBar = false;
-                        liftGoingDown = true;
-                        linearBarIn = true;
-                        Robot.getLift().SetLiftPower(1);
-                    } else if (liftTimer.milliseconds() > 400 && lift) {
-                        Robot.getLift().SetLiftPower(0);
-                        lift = false;
-                    } else if (liftTimer.milliseconds() > 200 && liftFirst) {
-                        Robot.getLift().SetLiftPower(-.7);
-                        Robot.getLift().LinearBarIn();
-                        liftTimer.reset();
-                        liftFirst = false;
-                    } else {
-                        lift = false;
-                    }
                 }else {
-                    first = true;
-                    lift = false;
-                    linearBar = false;
-                    Robot.getLift().LinearBarIn();
+                    Robot.getLift().GrabberClose();
+                    grabberOpen = false;
                 }
+
+                automateScoring = driverStation.scoreStone() && !driverStation.getLinearBarIn(true);
+                automatedScoringTimer.reset();
+                first = true;
+            } else {
+                if(automatedScoringTimer.milliseconds() < 500) {
+                    Robot.getLift().GrabberOpen();
+                } else if(automatedScoringTimer.milliseconds() < 750 && automatedScoringTimer.milliseconds() > 250) {
+                    Robot.getLift().SetLiftPower(-0.7);
+                } else if(automatedScoringTimer.milliseconds() < 1250+200 && automatedScoringTimer.milliseconds() > 750) {
+                    Robot.getLift().SetLiftPower(0);
+                    Robot.getLift().LinearBarIn();
+                } else if(!Robot.getLift().isDown() && (automatedScoringTimer.milliseconds() > 1250+200 && automatedScoringTimer.milliseconds() < 2000+200)) {
+                    Robot.getLift().SetLiftPower(1);
+                } else {
+                    Robot.getLift().SetLiftPower(0);
+                    automateScoring = false;
+                }
+                first = false;
             }
 
-//          Intake
-            if (gamepad1.a){
-                robot.getIntake().Intake();
-                intaking = true;
-            }else if (gamepad1.b){
-                robot.getIntake().Stop();
-                intaking = false;
-            }else if (gamepad1.y){
-                robot.getIntake().Outtake();
-                intaking = false;
-            }
+            if(matchTime.seconds() > 120-30 && driverStation.releaseTapeMeasure())
+                Robot.tapeMeasureDeploy.setPosition(0.5);
 
-//          Intake Servos
-            if (gamepad1.right_bumper)
+            // Intake Servos
+            if(driverStation.getIntake())
                 Robot.getIntake().IntakeDown();
-            else if (gamepad1.left_bumper)
+            else
                 Robot.getIntake().IntakeUp();
 
-//          Foundation Hook
-            if (gamepad2.dpad_down){
+            // Foundation Hook
+            if (driverStation.getFoundationClose())
                 Robot.getMecanumDrive().CloseFoundationHook();
-            }else if (gamepad2.dpad_up){
+            else
                 Robot.getMecanumDrive().OpenFoundationHook();
-            }
-
-//          Linear Bar
-            if (gamepad2.left_bumper){
-                Robot.getLift().LinearBarIn();
-            }else if (gamepad2.right_bumper){
-                Robot.getLift().LinearBarOut();
-            }
-
-//          Intake Roller
-            if (gamepad2.a){
-                Robot.getIntake().RollerIn();
-            }else if (gamepad2.b){
-                Robot.getIntake().RollerStop();
-            }else if (gamepad2.y){
-                Robot.getIntake().RollerOut();
-            }
-
-//          Slow Down Button
-            if (gamepad2.x && xButtonTimer.milliseconds() > 500 || gamepad1.x && xButtonTimer.milliseconds() > 500){
-                driveSlow = !driveSlow;
-                xButtonTimer.reset();
-            }
 
             if (intaking && blockDetectorFirst) {
                 if (Robot.blockDetector.getDistance(DistanceUnit.INCH) < 4) {
@@ -210,57 +161,33 @@ public class Teleop extends Team9889Linear {
                     blockDetectorFirst = true;
                 }
 
-            if (liftGoingDown) {
-                if (Robot.downLimit.isPressed()) {
-                    liftDownLimit = true;
-                    liftGoingDown = false;
-                } else {
-                    liftDownLimit = false;
-                }
-            }else {
-                liftDownLimit = false;
-            }
+            if(gamepad2.a)
+                Robot.getIntake().DeployCapStone();
+            else
+                Robot.getIntake().StopCapStone();
 
-//          Lift
-            if (gamepad2.dpad_left){
-                numSkyStones--;
-            }else if (gamepad2.dpad_right){
-                numSkyStones++;
-            }
 
-            if (gamepad1.dpad_up){
-                robot.getLift().SetLiftHeight(4 * numSkyStones);
-            }
-
-//          Grabber
-            if (gamepad2.right_stick_button){
-                Robot.getLift().GrabberOpen();
-                grabberOpen = true;
-            }else if (gamepad2.left_stick_button){
-                Robot.getLift().GrabberClose();
-                grabberOpen = false;
-            }
 
             telemetry.addData("Loop Time", loopTimer.milliseconds());
-            telemetry.addData("angle", robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
+            telemetry.addData("angle", Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
             telemetry.addData("Slow Drive", driveSlow);
 
-            telemetry.addData("Gyro After Auto", robot.gyroAfterAuto);
-            telemetry.addData("Gyro", robot.gyro - Robot.gyroAfterAuto);
+            telemetry.addData("Gyro After Auto", Robot.gyroAfterAuto);
+            telemetry.addData("Gyro", Robot.gyro - Robot.gyroAfterAuto);
 
             telemetry.addData("Number of SkyStones", numSkyStones);
 
-            telemetry.addData("left lift height", -robot.leftLift.getPosition());
-            telemetry.addData("right lift height", -robot.rightLift.getPosition());
-            telemetry.addData("left intake", -robot.intakeLeft.getPosition());
-            telemetry.addData("right intake", -robot.intakeRight.getPosition());
+            telemetry.addData("left lift height", -Robot.leftLift.getPosition());
+            telemetry.addData("right lift height", -Robot.rightLift.getPosition());
+            telemetry.addData("left intake", -Robot.intakeLeft.getPosition());
+            telemetry.addData("right intake", -Robot.intakeRight.getPosition());
 
 
-            //TODO test magnet sensor
-            telemetry.addData("Magnet", robot.downLimit.isPressed());
+
+            telemetry.addData("Magnet", Robot.downLimit.isPressed());
 
             telemetry.update();
-            robot.update();
+            Robot.update();
         }
     }
 }

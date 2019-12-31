@@ -1,6 +1,7 @@
 package com.team9889.ftc2019.test.teleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
@@ -8,6 +9,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  */
 
 @Autonomous(group = "testing")
+@Disabled
+@Deprecated
 public class RevExtensions2 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {

@@ -6,10 +6,9 @@ import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.MecanumDrive;
 import com.team9889.ftc2019.subsystems.Robot;
 import com.team9889.lib.CruiseLib;
+import com.team9889.lib.android.FileReader;
 import com.team9889.lib.control.controllers.PID;
 import com.team9889.lib.control.math.cartesian.Pose;
-import com.team9889.lib.control.math.cartesian.Rotation2d;
-import com.team9889.lib.control.math.cartesian.Vector2d;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
@@ -48,12 +47,12 @@ public class Drive3DimensionalPID extends Action {
     }
 
     // Controllers
-    private PID xPID = new PID(-0.12, 0, 0.08);
-    private PID yPID = new PID(-0.12, 0, 0.08);
-    private PID turnPID = new PID(0.04, 0, 0.8);
+    private PID xPID = new PID(-0.12, 0, 5.0);
+    private PID yPID = new PID(-0.12, 0, 5.0);
+    private PID turnPID = new PID(0.03, 0, 0.1);
 
     // Max Speed
-    double maxVel = 0.5;
+    double maxVel = 0.7;
 
     // Wanted Pose of the Robot
     private Pose2d wantedPose;
@@ -73,14 +72,17 @@ public class Drive3DimensionalPID extends Action {
     // Drivetrain object
     private MecanumDrive mDrive = Robot.getInstance().getMecanumDrive();
 
+
     @Override
     public void setup(String args) {
 
     }
 
+    boolean debugging = true;
+
     @Override
     public void start() {
-        maxVel = maxVel - 0.1;
+        if(debugging) loadPidConstantsFromFile();
 
         angle = Math.toDegrees(wantedPose.getHeading());
 
@@ -110,8 +112,8 @@ public class Drive3DimensionalPID extends Action {
 
     @Override
     public boolean isFinished() {
-        if (Math.abs(xPID.getError()) < Math.abs(tolerancePose.getX())) xCounter++;
-        if (Math.abs(yPID.getError()) < Math.abs(tolerancePose.getY())) yCounter++;
+        if (Math.abs(xPID.getError()) < Math.abs(tolerancePose.getX())) xCounter++; else xCounter = 0;
+        if (Math.abs(yPID.getError()) < Math.abs(tolerancePose.getY())) yCounter++; else xCounter = 0;
         if (Math.abs(turnPID.getError()) < Math.abs(Math.toDegrees(tolerancePose.getHeading()))) angleCounter++; else angleCounter = 0;
 
         return (xCounter > 3 && yCounter > 3 && angleCounter > 3) || timeOut < timer.milliseconds();
@@ -120,5 +122,35 @@ public class Drive3DimensionalPID extends Action {
     @Override
     public void done() {
         mDrive.setPower(0,0 ,0);
+    }
+
+    public void loadPidConstantsFromFile() {
+        FileReader pidFile = new FileReader("drive3dPID.csv");
+
+        String[] lines = pidFile.lines();
+        double[][] pid_constants = new double[3][3];
+
+        for (int i = 0; i < lines.length; i++) {
+            // Remove unneeded characters
+            lines[i] = lines[i].replace(" ", ""); // Remove spaces
+            lines[i] = lines[i].replace("\t", ""); // Remove tabs
+            lines[i] = lines[i].replace("\n", ""); // Remove newlines
+
+            String[] parameters = lines[i].split(",");
+
+            for (int j = 0; j < parameters.length; j++) {
+                pid_constants[i][j] = Double.parseDouble(parameters[j]);
+            }
+        }
+
+        System.out.println(pid_constants[0][0] + ", " + pid_constants[0][1] + ", " + pid_constants[0][2]);
+        System.out.println(pid_constants[1][0] + ", " + pid_constants[1][1] + ", " + pid_constants[1][2]);
+        System.out.println(pid_constants[2][0] + ", " + pid_constants[2][1] + ", " + pid_constants[2][2]);
+
+        xPID = new PID(pid_constants[0][0] ,  pid_constants[0][1] ,pid_constants[0][2]);
+        yPID = new PID(pid_constants[1][0] ,  pid_constants[1][1] ,pid_constants[1][2]);
+        turnPID = new PID(pid_constants[2][0] ,  pid_constants[2][1] ,pid_constants[2][2]);
+
+        pidFile.close();
     }
 }

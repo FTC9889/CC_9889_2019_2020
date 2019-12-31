@@ -57,7 +57,7 @@ def main():
         plt.legend()
         plt.show()
     else:
-        plt.plot(plots[0], plots[1])
+        plt.plot(plots[0], plots[1], "or")
         plt.show()
 
 main()

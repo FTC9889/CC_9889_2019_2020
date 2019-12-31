@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
 import com.team9889.ftc2019.Constants;
 import com.team9889.ftc2019.test.teleOp.RevExtensions2;
+import com.team9889.lib.android.FileWriter;
 import com.team9889.lib.control.kinematics.TankDriveKinematicModel;
 import com.team9889.lib.hardware.Motor;
 import com.team9889.lib.hardware.RevColorDistance;
@@ -25,7 +26,6 @@ import org.openftc.revextensions2.RevBulkData;
 //import org.openftc.revextensions2.RevExtensions2;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -51,6 +51,12 @@ public class Robot{
     public Motor leftLift, rightLift;
     public Servo grabber, linearBar;
     public RevTouchSensor downLimit;
+
+    public Servo odometryLifter;
+
+    public Servo tapeMeasureDeploy;
+
+    public CRServo teamMarkerDeployServo;
 
     RevBulkData bulkDataMaster, bulkDataSlave;
     ExpansionHubEx revHubMaster, revHubSlave;
@@ -82,6 +88,10 @@ public class Robot{
     private Thread trackerThread;
 
     private boolean mAuto = false;
+
+
+    boolean debugging = true;
+    com.team9889.lib.android.FileWriter writer = new FileWriter("Drive3.csv");
 
     public void init(HardwareMap hardwareMap, boolean auto){
         timer.reset();
@@ -138,18 +148,30 @@ public class Robot{
 
         downLimit = hardwareMap.get(RevTouchSensor.class, Constants.LiftConstants.kDownLimit);
 
+        odometryLifter = hardwareMap.get(Servo.class, Constants.OdometryConstants.kOdometryLift);
+
+        teamMarkerDeployServo = hardwareMap.get(CRServo.class, Constants.IntakeConstants.kCapStone);
+
+        tapeMeasureDeploy = hardwareMap.get(Servo.class, Constants.kTMShooter);
+        tapeMeasureDeploy.setPosition(1);
+
         imu = new RevIMU("imu", hardwareMap);
 
-        Runnable trackerRunnable = new Runnable() {
-            @Override
-            public void run() {
-                while (!Thread.interrupted())
-                    Robot.getInstance().update();
-            }
-        };
+        if(debugging) writer.write("x,y,theda");
 
-        trackerThread = new Thread(trackerRunnable);
-        trackerThread.start();
+
+        if(auto) {
+            Runnable trackerRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    while (!Thread.interrupted())
+                        Robot.getInstance().update();
+                }
+            };
+
+            trackerThread = new Thread(trackerRunnable);
+            trackerThread.start();
+        }
 
         getMecanumDrive().init(auto);
         getIntake().init(auto);
@@ -172,6 +194,8 @@ public class Robot{
         leftLift.update(bulkDataSlave);
         rightLift.update(bulkDataSlave);
 
+        getLift().isDown = bulkDataSlave.getDigitalInputState(6);
+
         if(Robot.gyroTimer.milliseconds() > 100 && !mAuto){
             gyroTimer.reset();
             getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
@@ -180,6 +204,12 @@ public class Robot{
         }
 
         mMecanumDrive.update();
+
+        if(debugging)
+            writer.write(getMecanumDrive().getCurrentPose().getX() + ","
+                    + getMecanumDrive().getCurrentPose().getY() + ","
+                    + getMecanumDrive().getCurrentPose().getHeading()
+            );
     }
 
     public void outputToTelemetry(Telemetry telemetry) {
@@ -188,6 +218,8 @@ public class Robot{
 
     public void stop(){
         trackerThread.interrupt();
+        if(debugging) writer.close();
+
 
         for (Motor motor:Arrays.asList(fLDrive, fRDrive, bLDrive, bRDrive, intakeLeft, intakeRight)) {
             motor.setPower(0);

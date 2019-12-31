@@ -1,6 +1,7 @@
-package com.team9889.ftc2019.auto.modes;
+package com.team9889.ftc2019.test.drive;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.team9889.ftc2019.Team9889Linear;
 import com.team9889.ftc2019.auto.actions.drive.MecanumDriveSimpleAction;
 
@@ -9,6 +10,7 @@ import com.team9889.ftc2019.auto.actions.drive.MecanumDriveSimpleAction;
  */
 
 @Autonomous
+@Disabled
 public class Test extends Team9889Linear {
     private boolean stop = false;
 

@@ -19,7 +19,7 @@ public class Constants {
 
     public final static String kWebcam = "Webcam";
 
-    public final static String kTMShooter = "tmshooter";
+    public final static String kTMShooter = "tmshooter"; // Hub 4, port 3
     public final static String kFoundationDetector = "fd";
 
     /*---------------------
@@ -49,7 +49,7 @@ public class Constants {
     }
 
     public static class OdometryConstants {
-        public final static String kOdometryLift = "ol";
+        public final static String kOdometryLift = "ol"; // Hub 1, port 3
 
         private static double WheelDiameter = 35 / 25.4;  // https://www.rotacaster.com.au/shop/35mm-rotacaster-wheels/index
         public final static double ENCODER_TO_DISTANCE_RATIO = (WheelDiameter * Math.PI) / 1440.0; // https://www.rotacaster.com.au/shop/35mm-rotacaster-wheels/index  Step 4
@@ -94,17 +94,6 @@ public class Constants {
         final static double kIntakeTicksPerRev = 537.6;  //NeveRest Orbital 20
         final static double kIntakeSpoolDiameter = 2;
         public final static double kIntakeTicksToInchRatio = kIntakeSpoolDiameter * Math.PI / kIntakeTicksPerRev;
-    }
-
-    /*---------------------
-    |                     |
-    |       Dumper!       |
-    |                     |
-    ---------------------*/
-
-    //Settings for Dumper
-    public static class DumperConstants {
-        public final static String kDumperRotatorId = "dumperrotator";
     }
 
     /*---------------------

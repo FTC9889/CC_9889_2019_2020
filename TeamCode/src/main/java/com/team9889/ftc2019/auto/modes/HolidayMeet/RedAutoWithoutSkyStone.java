@@ -1,6 +1,7 @@
 package com.team9889.ftc2019.auto.modes.HolidayMeet;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.team9889.ftc2019.Team9889Linear;
 import com.team9889.ftc2019.auto.actions.Lift.CloseGrabber;
 import com.team9889.ftc2019.auto.actions.Lift.LiftIn;
@@ -24,6 +25,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
  */
 
 @Autonomous
+@Disabled
 public class RedAutoWithoutSkyStone extends Team9889Linear {
     int skyStonePosition = 1;
 

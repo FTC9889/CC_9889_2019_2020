@@ -33,6 +33,7 @@ public class RedAuto extends AutoModeBase {
         ThreadAction(new IntakeDown());
         runAction(new Drive3DimensionalPID(new Pose2d(4, 0, 0)));
         ThreadAction(new Intake());
+
         switch (stonePosition){
             case LEFT:
                 //pick up skystone
