@@ -47,12 +47,12 @@ public class Drive3DimensionalPID extends Action {
     }
 
     // Controllers
-    private PID xPID = new PID(-0.12, 0, 5.0);
-    private PID yPID = new PID(-0.12, 0, 5.0);
+    private PID xPID = new PID(-0.1, 0, 0);
+    private PID yPID = new PID(-0.1, 0, 0);
     private PID turnPID = new PID(0.03, 0, 0.1);
 
     // Max Speed
-    double maxVel = 0.7;
+    double maxVel = 0.5;
 
     // Wanted Pose of the Robot
     private Pose2d wantedPose;
@@ -78,7 +78,7 @@ public class Drive3DimensionalPID extends Action {
 
     }
 
-    boolean debugging = true;
+    boolean debugging = false;
 
     @Override
     public void start() {

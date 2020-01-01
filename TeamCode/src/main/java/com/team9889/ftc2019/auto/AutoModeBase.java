@@ -74,11 +74,11 @@ public abstract class AutoModeBase extends Team9889Linear {
         autoTimer.reset();
 
         // From Camera -> To Stone Position
-        if (positionOfSkyStone < 120 && positionOfSkyStone > 39)
+        if (positionOfSkyStone < 120 && positionOfSkyStone > 59)
             currentSkyStonePosition = SkyStonePosition.LEFT;
         else if (positionOfSkyStone > 120)
             currentSkyStonePosition = SkyStonePosition.MIDDLE;
-        else if (positionOfSkyStone < 40)
+        else if (positionOfSkyStone < 60)
             currentSkyStonePosition = SkyStonePosition.RIGHT;
 
         // If the opmode is still running, run auto

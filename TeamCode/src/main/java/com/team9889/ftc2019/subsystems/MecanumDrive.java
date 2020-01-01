@@ -32,6 +32,7 @@ public class MecanumDrive extends Subsystem {
     @Override
     public void init(boolean auto) {
         if(auto) {
+            Robot.getInstance().odometryLifter.setPosition(1);
             OpenFoundationHook();
             setCurrentPose(new Pose2d());
         }

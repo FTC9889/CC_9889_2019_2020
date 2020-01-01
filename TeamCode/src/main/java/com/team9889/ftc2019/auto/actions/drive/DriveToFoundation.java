@@ -57,7 +57,7 @@ public class DriveToFoundation extends Action {
 
         double rotation = turnPID.update(currentAngle, angle);
 
-        mDrive.setPower(0, -.2, rotation);
+        mDrive.setPower(0, -.3, rotation);
     }
 
     int angleCounter = 0;

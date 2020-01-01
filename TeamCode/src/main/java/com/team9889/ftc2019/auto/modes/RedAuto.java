@@ -3,23 +3,21 @@ package com.team9889.ftc2019.auto.modes;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.team9889.ftc2019.auto.AutoModeBase;
-import com.team9889.ftc2019.auto.actions.Lift.CloseGrabber;
-import com.team9889.ftc2019.auto.actions.Lift.LiftIn;
-import com.team9889.ftc2019.auto.actions.Lift.LiftOut;
-import com.team9889.ftc2019.auto.actions.Lift.LiftUp;
-import com.team9889.ftc2019.auto.actions.Lift.OpenGrabber;
 import com.team9889.ftc2019.auto.actions.Wait;
 import com.team9889.ftc2019.auto.actions.drive.Drive3DimensionalPID;
 import com.team9889.ftc2019.auto.actions.drive.DriveToFoundation;
 import com.team9889.ftc2019.auto.actions.foundation.FoundationHookClose;
 import com.team9889.ftc2019.auto.actions.foundation.FoundationHookOpen;
-import com.team9889.ftc2019.auto.actions.drive.MecanumDriveSimpleAction;
 import com.team9889.ftc2019.auto.actions.intake.Intake;
 import com.team9889.ftc2019.auto.actions.intake.IntakeDown;
 import com.team9889.ftc2019.auto.actions.intake.IntakeRollerOn;
 import com.team9889.ftc2019.auto.actions.intake.IntakeRollerStop;
-import com.team9889.ftc2019.auto.actions.intake.IntakeStop;
 import com.team9889.ftc2019.auto.actions.intake.IntakeStopBlockIn;
+import com.team9889.ftc2019.auto.actions.lift.CloseGrabber;
+import com.team9889.ftc2019.auto.actions.lift.LiftIn;
+import com.team9889.ftc2019.auto.actions.lift.LiftOut;
+import com.team9889.ftc2019.auto.actions.lift.LiftUp;
+import com.team9889.ftc2019.auto.actions.lift.OpenGrabber;
 
 /**
  * Created by Eric on 11/26/2019.
@@ -30,6 +28,9 @@ public class RedAuto extends AutoModeBase {
 
     @Override
     public void run(Side side, AutoModeBase.SkyStonePosition stonePosition) {
+
+        Side Side_ = Side.RED;
+
         ThreadAction(new IntakeDown());
         runAction(new Drive3DimensionalPID(new Pose2d(4, 0, 0)));
         ThreadAction(new Intake());
@@ -38,26 +39,40 @@ public class RedAuto extends AutoModeBase {
             case LEFT:
                 //pick up skystone
 //                runAction(new Drive3DimensionalPID(new Pose2d(27, -14, Math.toRadians(-35))));
-                runAction(new Drive3DimensionalPID(new Pose2d(33, -17, Math.toRadians(-35)), .35));
-                runAction(new Drive3DimensionalPID(new Pose2d(25, -10, Math.toRadians(-90))));
+                runAction(new Drive3DimensionalPID(new Pose2d(33, -17 * Side.getNum(Side_), Math.toRadians(-35 * Side.getNum(Side_))), .35));
+                runAction(new Drive3DimensionalPID(new Pose2d(25, -17 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))));
                 runAction(new Intake(false));
 
                 runAction(new Wait(500));
-                runAction(new Intake(true));
+                runAction(new Intake(true, true));
                 ThreadAction(new IntakeStopBlockIn());
                 break;
 
             case MIDDLE:
+                runAction(new Drive3DimensionalPID(new Pose2d(34, -8 * Side.getNum(Side_), Math.toRadians(-35 * Side.getNum(Side_))), .35));
+                runAction(new Drive3DimensionalPID(new Pose2d(25, -8 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))));
+                runAction(new Intake(false));
+
+                runAction(new Wait(500));
+                runAction(new Intake(true, true));
+                ThreadAction(new IntakeStopBlockIn());
                 break;
 
             case RIGHT:
+                runAction(new Drive3DimensionalPID(new Pose2d(33, -2 * Side.getNum(Side_), Math.toRadians(-30 * Side.getNum(Side_))), .35));
+                runAction(new Drive3DimensionalPID(new Pose2d(25, -5 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))));
+                runAction(new Intake(false));
+
+                runAction(new Wait(500));
+                runAction(new Intake(true, true));
+                ThreadAction(new IntakeStopBlockIn());
                 break;
         }
 
         //drive to foundation
-        runAction(new Drive3DimensionalPID(new Pose2d(25, 85, Math.toRadians(-90)), .8));
+        runAction(new Drive3DimensionalPID(new Pose2d(25, 85 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), .8));
         runAction(new Wait(200));
-        runAction(new Drive3DimensionalPID(new Pose2d(30, 85, Math.toRadians(180))));
+        runAction(new Drive3DimensionalPID(new Pose2d(30, 85 * Side.getNum(Side_), Math.toRadians(180 * Side.getNum(Side_)))));
 
         runAction(new CloseGrabber());
         runAction(new DriveToFoundation(3000));
@@ -73,9 +88,9 @@ public class RedAuto extends AutoModeBase {
         runAction(new IntakeRollerOn());
         ThreadAction(new LiftOut());
 
-        runAction(new Drive3DimensionalPID(new Pose2d(22, 56, Math.toRadians(-90))));
+        runAction(new Drive3DimensionalPID(new Pose2d(18, 56 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))));
 
-        runAction(new Drive3DimensionalPID(new Pose2d(24, 56, Math.toRadians(-90))));
+        runAction(new Drive3DimensionalPID(new Pose2d(20, 56 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))));
         runAction(new IntakeRollerStop());
         ThreadAction(new OpenGrabber());
         ThreadAction(new FoundationHookOpen());
@@ -88,31 +103,56 @@ public class RedAuto extends AutoModeBase {
         //grab second skystone
         switch (stonePosition){
             case LEFT:
-                runAction(new Drive3DimensionalPID(new Pose2d(23, 21.5, Math.toRadians(-90)), .8));
+                runAction(new Drive3DimensionalPID(new Pose2d(20, 15 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), .8));
 
                 runAction(new Intake(true));
 
-                runAction(new Drive3DimensionalPID(new Pose2d(30, 9, Math.toRadians(-40))));
-                runAction(new Drive3DimensionalPID(new Pose2d(23, 20, Math.toRadians(-90))));
+                runAction(new Drive3DimensionalPID(new Pose2d(20, 15 * Side.getNum(Side_), Math.toRadians(-40 * Side.getNum(Side_)))));
+                runAction(new Drive3DimensionalPID(new Pose2d(30, 7 * Side.getNum(Side_), Math.toRadians(-40 * Side.getNum(Side_))), .35));
+                runAction(new Drive3DimensionalPID(new Pose2d(23, 20 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))));
 
                 runAction(new Intake(false));
                 runAction(new Wait(500));
-                runAction(new Intake(true));
+                runAction(new Intake(true, true));
                 ThreadAction(new IntakeStopBlockIn());
 
                 break;
 
             case MIDDLE:
+                runAction(new Drive3DimensionalPID(new Pose2d(20, 16 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), .8));
+
+                runAction(new Intake(true));
+
+                runAction(new Drive3DimensionalPID(new Pose2d(20, 16 * Side.getNum(Side_), Math.toRadians(-40 * Side.getNum(Side_)))));
+                runAction(new Drive3DimensionalPID(new Pose2d(28, 15 * Side.getNum(Side_), Math.toRadians(-40 * Side.getNum(Side_))), .35));
+                runAction(new Drive3DimensionalPID(new Pose2d(23, 20 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))));
+
+                runAction(new Intake(false));
+                runAction(new Wait(500));
+                runAction(new Intake(true, true));
+                ThreadAction(new IntakeStopBlockIn());
                 break;
 
             case RIGHT:
+                runAction(new Drive3DimensionalPID(new Pose2d(20, 35 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), .8));
+
+                runAction(new Intake(true));
+
+                runAction(new Drive3DimensionalPID(new Pose2d(20, 28 * Side.getNum(Side_), Math.toRadians(-40 * Side.getNum(Side_)))));
+                runAction(new Drive3DimensionalPID(new Pose2d(29, 19 * Side.getNum(Side_), Math.toRadians(-40 * Side.getNum(Side_))), .35));
+                runAction(new Drive3DimensionalPID(new Pose2d(23, 20 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))));
+
+                runAction(new Intake(false));
+                runAction(new Wait(500));
+                runAction(new Intake(true, true));
+                ThreadAction(new IntakeStopBlockIn());
                 break;
         }
 
         //score second skystone
         runAction(new Drive3DimensionalPID(
-                new Pose2d(rememberPoseScoringBlock.getX() - 1,
-                        rememberPoseScoringBlock.getY() + 2, Math.toRadians(-90)),
+                new Pose2d(rememberPoseScoringBlock.getX() - 2,
+                        (rememberPoseScoringBlock.getY() + 2) * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))),
                 new Pose2d(1.4, 1.4, 2)));
 
         runAction(new Wait(500));
@@ -122,11 +162,16 @@ public class RedAuto extends AutoModeBase {
         runAction(new LiftUp(14));
         runAction(new LiftOut());
         runAction(new Wait(1500));
+
+        Robot.getLift().SetLiftPower(.1);
+        runAction(new Wait(500));
+        Robot.getLift().SetLiftPower(0);
+
         runAction(new OpenGrabber());
         ThreadAction(new LiftUp(20));
         runAction(new LiftIn());
-        runAction(new Drive3DimensionalPID(new Pose2d(rememberPoseScoringBlock.getX(), 85, Math.toRadians(-90)), .8));
+        runAction(new Drive3DimensionalPID(new Pose2d(rememberPoseScoringBlock.getX(), 85 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), .8));
         Robot.getLift().SetLiftPower(.5);
-        runAction(new Drive3DimensionalPID(new Pose2d(rememberPoseScoringBlock.getX(), 40, Math.toRadians(-90)), .8));
+        runAction(new Drive3DimensionalPID(new Pose2d(rememberPoseScoringBlock.getX(), 45 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), .8));
     }
 }

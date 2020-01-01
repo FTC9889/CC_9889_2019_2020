@@ -1,6 +1,7 @@
 package com.team9889.ftc2019.subsystems;
 
 import com.qualcomm.hardware.rev.RevTouchSensor;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -90,7 +91,7 @@ public class Robot{
     private boolean mAuto = false;
 
 
-    boolean debugging = true;
+    boolean debugging = false;
     com.team9889.lib.android.FileWriter writer = new FileWriter("Drive3.csv");
 
     public void init(HardwareMap hardwareMap, boolean auto){
@@ -159,24 +160,33 @@ public class Robot{
 
         if(debugging) writer.write("x,y,theda");
 
-
-        if(auto) {
-            Runnable trackerRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    while (!Thread.interrupted())
-                        Robot.getInstance().update();
-                }
-            };
-
-            trackerThread = new Thread(trackerRunnable);
-            trackerThread.start();
-        }
+        startOdometryThread();
 
         getMecanumDrive().init(auto);
         getIntake().init(auto);
         getCamera().init(auto);
         getLift().init(auto);
+    }
+
+    public void startOdometryThread() {
+        Runnable trackerRunnable = new Runnable() {
+            @Override
+            public void run() {
+                while (!Thread.interrupted() && Thread.currentThread().isAlive())
+                    Robot.getInstance().update();
+            }
+        };
+
+        trackerThread = new Thread(trackerRunnable);
+        trackerThread.start();
+    }
+
+    public void stopOdometryThread() {
+        if(!trackerThread.isInterrupted() && trackerThread.isAlive()) {
+            try { Thread.sleep(10); } catch (InterruptedException e) {}
+            trackerThread.interrupt();
+            try { Thread.sleep(10); } catch (InterruptedException e) {}
+        }
     }
 
     public void update(){
@@ -217,13 +227,13 @@ public class Robot{
     }
 
     public void stop(){
-        trackerThread.interrupt();
         if(debugging) writer.close();
-
 
         for (Motor motor:Arrays.asList(fLDrive, fRDrive, bLDrive, bRDrive, intakeLeft, intakeRight)) {
             motor.setPower(0);
         }
+
+        stopOdometryThread();
     }
     public MecanumDrive getMecanumDrive(){
         return mMecanumDrive;
