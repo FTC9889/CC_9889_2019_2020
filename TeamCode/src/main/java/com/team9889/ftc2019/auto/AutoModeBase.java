@@ -3,6 +3,7 @@ package com.team9889.ftc2019.auto;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team9889.ftc2019.Team9889Linear;
 import com.team9889.ftc2019.auto.actions.Action;
+import com.team9889.ftc2019.auto.actions.RobotUpdate;
 import com.team9889.ftc2019.auto.modes.RedAuto;
 import com.team9889.lib.android.FileReader;
 
@@ -17,7 +18,7 @@ public abstract class AutoModeBase extends Team9889Linear {
 
     // Autonomous Settings
     private Side currentAutoRunning = AutoModeBase.Side.RED;
-    private SkyStonePosition currentSkyStonePosition = SkyStonePosition.RIGHT;
+    protected SkyStonePosition currentSkyStonePosition = SkyStonePosition.RIGHT;
 
     // Timer for autonomous
     protected ElapsedTime autoTimer = new ElapsedTime();
@@ -71,12 +72,13 @@ public abstract class AutoModeBase extends Team9889Linear {
         setCurrentAutoRunning();
 
         waitForStart(true);
+        ThreadAction(new RobotUpdate());
         autoTimer.reset();
 
         // From Camera -> To Stone Position
         if (positionOfSkyStone < 120 && positionOfSkyStone > 59)
             currentSkyStonePosition = SkyStonePosition.LEFT;
-        else if (positionOfSkyStone > 120)
+        else if (positionOfSkyStone > 119)
             currentSkyStonePosition = SkyStonePosition.MIDDLE;
         else if (positionOfSkyStone < 60)
             currentSkyStonePosition = SkyStonePosition.RIGHT;

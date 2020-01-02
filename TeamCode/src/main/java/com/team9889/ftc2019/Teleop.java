@@ -125,7 +125,7 @@ public class Teleop extends Team9889Linear {
                 } else if(automatedScoringTimer.milliseconds() < 1250+200 && automatedScoringTimer.milliseconds() > 750) {
                     Robot.getLift().SetLiftPower(0);
                     Robot.getLift().LinearBarIn();
-                } else if(!Robot.getLift().isDown() && (automatedScoringTimer.milliseconds() > 1250+200 && automatedScoringTimer.milliseconds() < 2000+200)) {
+                } else if(!Robot.getLift().isDown() && (automatedScoringTimer.milliseconds() > 1250+200 && automatedScoringTimer.milliseconds() < 2000+700)) {
                     Robot.getLift().SetLiftPower(1);
                 } else {
                     Robot.getLift().SetLiftPower(0);

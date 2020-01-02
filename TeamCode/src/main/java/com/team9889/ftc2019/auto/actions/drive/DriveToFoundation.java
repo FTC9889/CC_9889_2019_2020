@@ -20,12 +20,11 @@ public class DriveToFoundation extends Action {
         this.timeOut = timeOut;
     }
 
-    PID turnPID = new PID(0.02, 0, 0.3);
+    private PID turnPID = new PID(0.02, 0, 0.3);
 
-    boolean offsetAxis = false;
-
-    MecanumDrive mDrive = Robot.getInstance().getMecanumDrive();
-    private double distance, angle = 177, angleSpeed;
+    private MecanumDrive mDrive = Robot.getInstance().getMecanumDrive();
+    private double angle = 180;
+    private int angleCounter = 0;
     private int timeOut = 30000;
     private ElapsedTime timer = new ElapsedTime();
 
@@ -34,38 +33,29 @@ public class DriveToFoundation extends Action {
 
     @Override
     public void start() {
-//        if(mDrive.gyroAngle.getTheda(AngleUnit.DEGREES) > 0)
-//            angle = -18;
-//        else
-//            angle = 180;
-
-        if (Math.abs(angle) > 175) {
-            angle = Math.signum(angle) > 0 ? -(angle - 180) : -(angle + 180);
-            offsetAxis = true;
-        }
+        Robot.getInstance().foundationHook.setPosition(.7);
 
         timer.reset();
-
-        Robot.getInstance().foundationHook.setPosition(.7);
     }
 
     @Override
     public void update() {
-        double currentAngle = mDrive.gyroAngle.getTheda(AngleUnit.DEGREES);
+        double currentAngle = mDrive.gyroAngle.getTheda(AngleUnit.RADIANS);
+        double dx = Math.cos(Math.toRadians(angle) - currentAngle);
+        double dy = Math.sin(Math.toRadians(angle) - currentAngle);
+        double turn = Math.toDegrees(Math.atan2(dy, dx));
+        turn *= -1;
 
-        if (offsetAxis) currentAngle = Math.signum(currentAngle) > 0 ? currentAngle - 180 : currentAngle + 180;
-
-        double rotation = turnPID.update(currentAngle, angle);
+        double rotation = turnPID.update(turn, 0);
 
         mDrive.setPower(0, -.3, rotation);
     }
 
-    int angleCounter = 0;
     @Override
     public boolean isFinished() {
         if (Math.abs(turnPID.getError()) < 3) angleCounter++;
 
-        return (Robot.getInstance().foundationDetector.getDistance(DistanceUnit.INCH) <= 2.2 && angleCounter > 3) || timeOut < timer.milliseconds();
+        return (Robot.getInstance().foundationDetector.getDistance(DistanceUnit.INCH) <= 2.2 && angleCounter > 3) || timer.milliseconds() > timeOut;
     }
 
     @Override

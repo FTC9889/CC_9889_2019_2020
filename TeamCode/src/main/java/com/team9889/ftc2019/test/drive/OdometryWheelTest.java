@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team9889.ftc2019.Team9889Linear;
 import com.team9889.ftc2019.auto.AutoModeBase;
+import com.team9889.ftc2019.auto.actions.RobotUpdate;
 import com.team9889.ftc2019.auto.actions.drive.Drive3DimensionalPID;
 import com.team9889.lib.android.FileWriter;
 import com.team9889.lib.control.math.cartesian.Pose;
@@ -24,15 +25,19 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 public class OdometryWheelTest extends AutoModeBase {
     @Override
     public void run(Side side, SkyStonePosition stonePosition) {
-        Robot.getMecanumDrive().setCurrentPose(new Pose2d());
+//        Robot.getMecanumDrive().setCurrentPose(new Pose2d());
+//
+//        runAction(new Drive3DimensionalPID(new Pose2d(30, 20, Math.toRadians(45))));
+//        runAction(new Drive3DimensionalPID(new Pose2d(60, 0, Math.toRadians(0))));
+//        runAction(new Drive3DimensionalPID(new Pose2d(30, 0, Math.toRadians(-90))));
+//        runAction(new Drive3DimensionalPID(new Pose2d(0, 0, 0)));
+//        runAction(new Drive3DimensionalPID(new Pose2d(0, 0, 0), new Pose2d(1, 1, 2)));
 
-        runAction(new Drive3DimensionalPID(new Pose2d(30, 20, Math.toRadians(45))));
-        runAction(new Drive3DimensionalPID(new Pose2d(60, 0, Math.toRadians(0))));
-        runAction(new Drive3DimensionalPID(new Pose2d(30, 0, Math.toRadians(-90))));
-        runAction(new Drive3DimensionalPID(new Pose2d(0, 0, 0)));
-        runAction(new Drive3DimensionalPID(new Pose2d(0, 0, 0), new Pose2d(1, 1, 2)));
-
-
-
+        ThreadAction(new RobotUpdate());
+        while (opModeIsActive()) {
+            telemetry.addData("X", Robot.getMecanumDrive().X_OdometryPosition());
+            telemetry.addData("Y", Robot.getMecanumDrive().Y_OdometryPosition());
+            telemetry.update();
+        }
     }
 }

@@ -1,9 +1,7 @@
-package com.team9889.ftc2019.auto.actions.Lift;
+package com.team9889.ftc2019.auto.actions.lift;
 
-import com.team9889.ftc2019.Constants;
 import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.Robot;
-import com.team9889.lib.CruiseLib;
 
 /**
  * Created by Eric on 12/27/2019.

@@ -54,11 +54,11 @@ public class MecanumDrive extends Subsystem {
         Y_Position_Offset = Y_OdometryPosition();
     }
 
-    private double X_OdometryPosition() {
+    public double X_OdometryPosition() {
         return ((-Robot.getInstance().intakeRight.getPosition()) - X_Position_Offset) * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO;
     }
 
-    private double Y_OdometryPosition() {
+    public double Y_OdometryPosition() {
         return (Robot.getInstance().intakeLeft.getPosition() - Y_Position_Offset) * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO;
     }
 

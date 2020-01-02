@@ -8,7 +8,6 @@ import com.team9889.ftc2019.subsystems.Robot;
 import com.team9889.lib.CruiseLib;
 import com.team9889.lib.android.FileReader;
 import com.team9889.lib.control.controllers.PID;
-import com.team9889.lib.control.math.cartesian.Pose;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
@@ -57,6 +56,7 @@ public class Drive3DimensionalPID extends Action {
     // Wanted Pose of the Robot
     private Pose2d wantedPose;
     private Pose2d tolerancePose;
+    private double wantedAngle;
 
     // Angle adjustment
     private double angle = 0;
@@ -83,14 +83,6 @@ public class Drive3DimensionalPID extends Action {
     @Override
     public void start() {
         if(debugging) loadPidConstantsFromFile();
-
-        angle = Math.toDegrees(wantedPose.getHeading());
-
-        if (Math.abs(angle) > 175) {
-            angle = Math.signum(angle) > 0 ? -(angle - 180) : -(angle + 180);
-            offsetAxis = true;
-        }
-
         timer.reset();
     }
 
@@ -99,9 +91,13 @@ public class Drive3DimensionalPID extends Action {
         double x = xPID.update(wantedPose.getX(), mDrive.getCurrentPose().getX());
         double y = yPID.update(wantedPose.getY(), mDrive.getCurrentPose().getY());
 
-        double currentAngle = mDrive.gyroAngle.getTheda(AngleUnit.DEGREES);
-        if (offsetAxis) currentAngle = Math.signum(currentAngle) > 0 ? currentAngle - 180 : currentAngle + 180;
-        double rotation = turnPID.update(currentAngle, angle);
+        double currentAngle = mDrive.gyroAngle.getTheda(AngleUnit.RADIANS);
+        double dx = Math.cos(wantedPose.getHeading() - currentAngle);
+        double dy = Math.sin(wantedPose.getHeading() - currentAngle);
+        double turn = Math.toDegrees(Math.atan2(dy, dx));
+        turn *= -1;
+
+        double rotation = turnPID.update(turn, 0);
 
         x = CruiseLib.limitValue(x, maxVel);
         y = CruiseLib.limitValue(y, maxVel);

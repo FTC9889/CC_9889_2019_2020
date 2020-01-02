@@ -43,6 +43,8 @@ public class Robot{
     public Motor fLDrive, fRDrive, bLDrive, bRDrive;
     public Servo foundationHook;
     public DistanceSensor foundationDetector;
+    public RevIMU imu = null;
+
 
     public Motor intakeLeft, intakeRight;
     public Servo intakeLeftS, intakeRightS;
@@ -50,7 +52,7 @@ public class Robot{
     public DistanceSensor blockDetector;
 
     public Motor leftLift, rightLift;
-    public Servo grabber, linearBar;
+    public Servo grabber, linearBar, liftBrake;
     public RevTouchSensor downLimit;
 
     public Servo odometryLifter;
@@ -83,13 +85,10 @@ public class Robot{
 
     public double gyroAfterAuto;
 
-    public RevIMU imu = null;
-
     public double gyro;
     private Thread trackerThread;
 
     private boolean mAuto = false;
-
 
     boolean debugging = false;
     com.team9889.lib.android.FileWriter writer = new FileWriter("Drive3.csv");
@@ -146,6 +145,7 @@ public class Robot{
 
         grabber = hardwareMap.get(Servo.class, Constants.LiftConstants.kGrabber);
         linearBar = hardwareMap.get(Servo.class, Constants.LiftConstants.kLinearBar);
+        liftBrake = hardwareMap.get(Servo.class, Constants.LiftConstants.kLiftBrake);
 
         downLimit = hardwareMap.get(RevTouchSensor.class, Constants.LiftConstants.kDownLimit);
 
@@ -160,60 +160,35 @@ public class Robot{
 
         if(debugging) writer.write("x,y,theda");
 
-        startOdometryThread();
-
         getMecanumDrive().init(auto);
         getIntake().init(auto);
         getCamera().init(auto);
         getLift().init(auto);
     }
 
-    public void startOdometryThread() {
-        Runnable trackerRunnable = new Runnable() {
-            @Override
-            public void run() {
-                while (!Thread.interrupted() && Thread.currentThread().isAlive())
-                    Robot.getInstance().update();
-            }
-        };
-
-        trackerThread = new Thread(trackerRunnable);
-        trackerThread.start();
-    }
-
-    public void stopOdometryThread() {
-        if(!trackerThread.isInterrupted() && trackerThread.isAlive()) {
-            try { Thread.sleep(10); } catch (InterruptedException e) {}
-            trackerThread.interrupt();
-            try { Thread.sleep(10); } catch (InterruptedException e) {}
-        }
-    }
-
     public void update(){
-        bulkDataMaster = revHubMaster.getBulkInputData();
-        bulkDataSlave = revHubSlave.getBulkInputData();
-
-        fRDrive.update(bulkDataMaster);
-        bRDrive.update(bulkDataMaster);
-        fLDrive.update(bulkDataMaster);
-        bLDrive.update(bulkDataMaster);
-
-        intakeLeft.update(bulkDataSlave);
-        intakeRight.update(bulkDataSlave);
-
-        leftLift.update(bulkDataSlave);
-        rightLift.update(bulkDataSlave);
-
-        getLift().isDown = bulkDataSlave.getDigitalInputState(6);
-
         if(Robot.gyroTimer.milliseconds() > 100 && !mAuto){
             gyroTimer.reset();
             getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
         } else { // Update every time in order for odometry to work properly
             getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
-        }
 
-        mMecanumDrive.update();
+            bulkDataMaster = revHubMaster.getBulkInputData();
+            bulkDataSlave = revHubSlave.getBulkInputData();
+
+            fRDrive.update(bulkDataMaster);
+            bRDrive.update(bulkDataMaster);
+            fLDrive.update(bulkDataMaster);
+            bLDrive.update(bulkDataMaster);
+
+            intakeLeft.update(bulkDataSlave);
+            intakeRight.update(bulkDataSlave);
+
+            leftLift.update(bulkDataSlave);
+            rightLift.update(bulkDataSlave);
+
+            mMecanumDrive.update();
+        }
 
         if(debugging)
             writer.write(getMecanumDrive().getCurrentPose().getX() + ","
@@ -232,8 +207,6 @@ public class Robot{
         for (Motor motor:Arrays.asList(fLDrive, fRDrive, bLDrive, bRDrive, intakeLeft, intakeRight)) {
             motor.setPower(0);
         }
-
-        stopOdometryThread();
     }
     public MecanumDrive getMecanumDrive(){
         return mMecanumDrive;

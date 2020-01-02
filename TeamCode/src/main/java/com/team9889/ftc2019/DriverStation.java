@@ -41,7 +41,7 @@ public class DriverStation {
         else if(g2DownPower > 0.1 && !isDown)
             return g2DownPower;
         else
-            return -0.2;
+            return 0;
     }
 
     boolean getReleaseStone(){
@@ -114,12 +114,15 @@ public class DriverStation {
         return grabberOpen;
     }
 
+    private boolean linearBarToggle = false;
     private boolean linearBarIn = true;
     boolean getLinearBarIn(boolean override) {
-        if(gamepad2.right_bumper)
-            linearBarIn = true;
-        else if(gamepad2.left_bumper)
-            linearBarIn = false;
+        if((gamepad2.right_bumper || gamepad1.left_bumper) && linearBarToggle) {
+            linearBarIn = !linearBarIn;
+            linearBarToggle = false;
+        }
+        else if(!gamepad2.right_bumper && !gamepad1.left_bumper)
+            linearBarToggle = true;
 
         if(!override)
             linearBarIn = true;

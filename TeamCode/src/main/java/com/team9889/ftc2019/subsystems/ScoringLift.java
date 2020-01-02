@@ -55,8 +55,13 @@ public class ScoringLift extends Subsystem{
     }
 
     public void SetLiftPower(double power){
-            Robot.getInstance().leftLift.setPower(power);
-            Robot.getInstance().rightLift.setPower(power);
+        if (Math.abs(power) < 0.002)
+            LiftBrakeEngaged();
+        else
+            LiftBrakeDisengaged();
+
+        Robot.getInstance().leftLift.setPower(power);
+        Robot.getInstance().rightLift.setPower(power);
     }
 
     public void SetLiftHeight(double height){
@@ -86,6 +91,13 @@ public class ScoringLift extends Subsystem{
     }
     public void GrabberClose(){
         Robot.getInstance().grabber.setPosition(0);
+    }
+
+    public void LiftBrakeEngaged(){
+        Robot.getInstance().liftBrake.setPosition(.6);
+    }
+    public void LiftBrakeDisengaged(){
+        Robot.getInstance().liftBrake.setPosition(.55);
     }
 
     public boolean isDown() {

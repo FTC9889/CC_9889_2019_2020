@@ -3,6 +3,7 @@ package com.team9889.ftc2019.auto.modes;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.team9889.ftc2019.auto.AutoModeBase;
+import com.team9889.ftc2019.auto.actions.RobotUpdate;
 import com.team9889.ftc2019.auto.actions.Wait;
 import com.team9889.ftc2019.auto.actions.drive.Drive3DimensionalPID;
 import com.team9889.ftc2019.auto.actions.drive.DriveToFoundation;
@@ -28,7 +29,6 @@ public class RedAuto extends AutoModeBase {
 
     @Override
     public void run(Side side, AutoModeBase.SkyStonePosition stonePosition) {
-
         Side Side_ = Side.RED;
 
         ThreadAction(new IntakeDown());
@@ -49,7 +49,7 @@ public class RedAuto extends AutoModeBase {
                 break;
 
             case MIDDLE:
-                runAction(new Drive3DimensionalPID(new Pose2d(34, -8 * Side.getNum(Side_), Math.toRadians(-35 * Side.getNum(Side_))), .35));
+                runAction(new Drive3DimensionalPID(new Pose2d(36, -8 * Side.getNum(Side_), Math.toRadians(-35 * Side.getNum(Side_))), .35));
                 runAction(new Drive3DimensionalPID(new Pose2d(25, -8 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))));
                 runAction(new Intake(false));
 
