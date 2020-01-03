@@ -21,7 +21,7 @@ public class Drive3DimensionalPID extends Action {
      */
     public Drive3DimensionalPID (Pose2d wantedPose) {
         this.wantedPose = wantedPose;
-        this.tolerancePose = new Pose2d(2,2,2);
+        this.tolerancePose = new Pose2d(2,2,Math.toRadians(3));
     }
 
     /**
@@ -41,7 +41,7 @@ public class Drive3DimensionalPID extends Action {
 
     public Drive3DimensionalPID (Pose2d wantedPose, double maxVel) {
         this.wantedPose = wantedPose;
-        this.tolerancePose = new Pose2d(2,2,2);
+        this.tolerancePose = new Pose2d(2,2,Math.toRadians(2));
         this.maxVel = maxVel;
     }
 
@@ -101,7 +101,7 @@ public class Drive3DimensionalPID extends Action {
 
         x = CruiseLib.limitValue(x, maxVel);
         y = CruiseLib.limitValue(y, maxVel);
-        rotation = CruiseLib.limitValue(rotation, 0.75);
+        rotation = CruiseLib.limitValue(rotation, maxVel);
 
         mDrive.setFieldCentricAutoPower(y, x, rotation);
     }

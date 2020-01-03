@@ -10,6 +10,8 @@ import com.team9889.ftc2019.Team9889Linear;
 import com.team9889.ftc2019.auto.AutoModeBase;
 import com.team9889.ftc2019.auto.actions.RobotUpdate;
 import com.team9889.ftc2019.auto.actions.drive.Drive3DimensionalPID;
+import com.team9889.ftc2019.auto.actions.intake.Intake;
+import com.team9889.ftc2019.auto.actions.intake.IntakeDown;
 import com.team9889.lib.android.FileWriter;
 import com.team9889.lib.control.math.cartesian.Pose;
 import com.team9889.lib.control.math.cartesian.Rotation2d;
@@ -34,10 +36,20 @@ public class OdometryWheelTest extends AutoModeBase {
 //        runAction(new Drive3DimensionalPID(new Pose2d(0, 0, 0), new Pose2d(1, 1, 2)));
 
         ThreadAction(new RobotUpdate());
-        while (opModeIsActive()) {
-            telemetry.addData("X", Robot.getMecanumDrive().X_OdometryPosition());
-            telemetry.addData("Y", Robot.getMecanumDrive().Y_OdometryPosition());
-            telemetry.update();
-        }
+
+//        while (opModeIsActive()) {
+//            telemetry.addData("Pose: ", Robot.getMecanumDrive().getCurrentPose().toString());
+//            telemetry.addData("X", Robot.getMecanumDrive().X_OdometryPosition());
+//            telemetry.addData("Y", Robot.getMecanumDrive().Y_OdometryPosition());
+//            telemetry.update();
+//        }
+
+        ThreadAction(new IntakeDown());
+        ThreadAction(new Intake());
+
+        runAction(new Drive3DimensionalPID(new Pose2d(36, 17, Math.toRadians(35)), new Pose2d(1, 1, Math.toRadians(1)),.35));
+        runAction(new Drive3DimensionalPID(new Pose2d(25, 17, Math.toRadians(90)), new Pose2d(1, 1, Math.toRadians(1))));
+        runAction(new Intake(false));
+        runAction(new Drive3DimensionalPID(new Pose2d(0, 0, 0), new Pose2d(1, 1, Math.toRadians(1))));
     }
 }

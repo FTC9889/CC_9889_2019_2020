@@ -17,14 +17,12 @@ public class OpenGrabber extends Action {
 
     @Override
     public void start() {
-        Robot.getInstance().getLift().GrabberOpen();
         timer.reset();
+        Robot.getInstance().getLift().GrabberOpen();
     }
 
     @Override
-    public void update() {
-        Robot.getInstance().update();
-    }
+    public void update() {}
 
     @Override
     public boolean isFinished() {
@@ -32,7 +30,5 @@ public class OpenGrabber extends Action {
     }
 
     @Override
-    public void done() {
-
-    }
+    public void done() {}
 }

@@ -17,14 +17,12 @@ public class CloseGrabber extends Action {
 
     @Override
     public void start() {
-        Robot.getInstance().getLift().GrabberClose();
         timer.reset();
+        Robot.getInstance().getLift().GrabberClose();
     }
 
     @Override
-    public void update() {
-        Robot.getInstance().update();
-    }
+    public void update() {}
 
     @Override
     public boolean isFinished() {

@@ -17,14 +17,12 @@ public class FoundationHookOpen extends Action {
 
     @Override
     public void start() {
-        Robot.getInstance().getMecanumDrive().OpenFoundationHook();
         timer.reset();
+        Robot.getInstance().getMecanumDrive().OpenFoundationHook();
     }
 
     @Override
-    public void update() {
-        Robot.getInstance().update();
-    }
+    public void update() {}
 
     @Override
     public boolean isFinished() {
@@ -32,7 +30,5 @@ public class FoundationHookOpen extends Action {
     }
 
     @Override
-    public void done() {
-
-    }
+    public void done() {}
 }

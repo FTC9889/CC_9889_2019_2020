@@ -18,9 +18,7 @@ public class IntakeStop extends Action {
     }
 
     @Override
-    public void update() {
-        Robot.getInstance().update();
-    }
+    public void update() {}
 
     @Override
     public boolean isFinished() {

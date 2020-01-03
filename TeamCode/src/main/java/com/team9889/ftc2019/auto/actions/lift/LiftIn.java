@@ -19,9 +19,7 @@ public class LiftIn extends Action {
     }
 
     @Override
-    public void update() {
-
-    }
+    public void update() {}
 
     @Override
     public boolean isFinished()
@@ -30,6 +28,5 @@ public class LiftIn extends Action {
     }
 
     @Override
-    public void done() {
-    }
+    public void done() {}
 }

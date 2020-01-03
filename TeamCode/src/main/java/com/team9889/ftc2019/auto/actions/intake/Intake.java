@@ -1,5 +1,6 @@
 package com.team9889.ftc2019.auto.actions.intake;
 
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.Robot;
 
@@ -7,6 +8,8 @@ import com.team9889.ftc2019.subsystems.Robot;
  * Created by Eric on 11/22/2019.
  */
 public class Intake extends Action {
+
+    private ElapsedTime timer = new ElapsedTime();
 
     private boolean intake = true;
     private boolean fullSpeed = false;
@@ -33,25 +36,24 @@ public class Intake extends Action {
 
     @Override
     public void start() {
-
-        if (intake) {
-            Robot.getInstance().getIntake().SetIntakePower(fullSpeed ? 1.0 : 0.5);
-            Robot.getInstance().getIntake().SetRollerPower(1);
-        } else {
-            Robot.getInstance().getIntake().SetIntakePower(0);
-            Robot.getInstance().getIntake().SetRollerPower(0);
-        }
-
+        timer.reset();
     }
 
     @Override
     public void update() {
-        Robot.getInstance().update();
+        if(timer.milliseconds() > 100 && timer.milliseconds() < 200) {
+            if(intake) Robot.getInstance().getIntake().SetIntakePower(fullSpeed ? 1.0 : 0.5);
+            else Robot.getInstance().getIntake().SetIntakePower(0);
+        }
+        else if(timer.milliseconds() > 200) {
+            if (intake) Robot.getInstance().getIntake().SetRollerPower(1);
+            else Robot.getInstance().getIntake().SetRollerPower(0);
+        }
     }
 
     @Override
     public boolean isFinished() {
-        return true;
+        return timer.milliseconds() > 300;
     }
 
     @Override

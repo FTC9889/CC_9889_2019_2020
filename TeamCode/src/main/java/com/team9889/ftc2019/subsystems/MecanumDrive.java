@@ -55,11 +55,11 @@ public class MecanumDrive extends Subsystem {
     }
 
     public double X_OdometryPosition() {
-        return ((-Robot.getInstance().intakeRight.getPosition()) - X_Position_Offset) * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO;
+        return (-Robot.getInstance().intakeRight.getPosition() * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO) - X_Position_Offset;
     }
 
     public double Y_OdometryPosition() {
-        return (Robot.getInstance().intakeLeft.getPosition() - Y_Position_Offset) * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO;
+        return (Robot.getInstance().intakeLeft.getPosition() * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO) - Y_Position_Offset;
     }
 
     public Pose2d getCurrentPose() {
@@ -136,13 +136,13 @@ public class MecanumDrive extends Subsystem {
 
     public class Odometry extends TwoTrackingWheelLocalizer {
 
-        private static final double LATERAL_DISTANCE = 7.5;
-        private static final double FORWARD_OFFSET = 2.75;
+        private static final double LATERAL_DISTANCE = 7.25;
+        private static final double FORWARD_OFFSET = 2.75 + (1.0/16.0);
 
         Odometry() {
             super(Arrays.asList(
-                    new Pose2d(0, LATERAL_DISTANCE, Math.toRadians(90)), // Right
-                    new Pose2d(FORWARD_OFFSET, LATERAL_DISTANCE, Math.toRadians(0)) // Sideways
+                    new Pose2d(0.25, LATERAL_DISTANCE, Math.toRadians(90)),
+                    new Pose2d(FORWARD_OFFSET + 0.25, LATERAL_DISTANCE + 0.25, Math.toRadians(0))
             ));
         }
 

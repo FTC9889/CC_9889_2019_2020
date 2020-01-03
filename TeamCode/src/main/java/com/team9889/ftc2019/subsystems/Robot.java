@@ -86,12 +86,10 @@ public class Robot{
     public double gyroAfterAuto;
 
     public double gyro;
-    private Thread trackerThread;
-
     private boolean mAuto = false;
 
     boolean debugging = false;
-    com.team9889.lib.android.FileWriter writer = new FileWriter("Drive3.csv");
+    private com.team9889.lib.android.FileWriter writer = new FileWriter("Drive3.csv");
 
     public void init(HardwareMap hardwareMap, boolean auto){
         timer.reset();
@@ -158,7 +156,7 @@ public class Robot{
 
         imu = new RevIMU("imu", hardwareMap);
 
-        if(debugging) writer.write("x,y,theda");
+        if(debugging) writer.write("clock,x,y,theda");
 
         getMecanumDrive().init(auto);
         getIntake().init(auto);
@@ -166,6 +164,8 @@ public class Robot{
         getLift().init(auto);
     }
 
+
+    private ElapsedTime updateTimer = new ElapsedTime();
     public void update(){
         if(Robot.gyroTimer.milliseconds() > 100 && !mAuto){
             gyroTimer.reset();
@@ -173,13 +173,13 @@ public class Robot{
         } else { // Update every time in order for odometry to work properly
             getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
 
-            bulkDataMaster = revHubMaster.getBulkInputData();
+//            bulkDataMaster = revHubMaster.getBulkInputData();
             bulkDataSlave = revHubSlave.getBulkInputData();
 
-            fRDrive.update(bulkDataMaster);
-            bRDrive.update(bulkDataMaster);
-            fLDrive.update(bulkDataMaster);
-            bLDrive.update(bulkDataMaster);
+//            fRDrive.update(bulkDataMaster);
+//            bRDrive.update(bulkDataMaster);
+//            fLDrive.update(bulkDataMaster);
+//            bLDrive.update(bulkDataMaster);
 
             intakeLeft.update(bulkDataSlave);
             intakeRight.update(bulkDataSlave);
@@ -191,10 +191,12 @@ public class Robot{
         }
 
         if(debugging)
-            writer.write(getMecanumDrive().getCurrentPose().getX() + ","
+            writer.write(updateTimer.milliseconds() + "," + getMecanumDrive().getCurrentPose().getX() + ","
                     + getMecanumDrive().getCurrentPose().getY() + ","
                     + getMecanumDrive().getCurrentPose().getHeading()
             );
+
+        updateTimer.reset();
     }
 
     public void outputToTelemetry(Telemetry telemetry) {
