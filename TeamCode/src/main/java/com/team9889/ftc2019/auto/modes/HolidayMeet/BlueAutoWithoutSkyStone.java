@@ -141,6 +141,6 @@ public class BlueAutoWithoutSkyStone extends Team9889Linear {
         runAction(new MecanumDriveSimpleAction(15, 90));
         */
 
-        Robot.gyroAfterAuto = Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+//        Robot.gyroAfterAuto = Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
     }
 }

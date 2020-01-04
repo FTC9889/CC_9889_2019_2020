@@ -1,22 +1,16 @@
 package com.team9889.ftc2019.subsystems;
 
 import com.qualcomm.hardware.rev.RevTouchSensor;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
 import com.team9889.ftc2019.Constants;
-import com.team9889.ftc2019.test.teleOp.RevExtensions2;
 import com.team9889.lib.android.FileWriter;
-import com.team9889.lib.control.kinematics.TankDriveKinematicModel;
 import com.team9889.lib.hardware.Motor;
-import com.team9889.lib.hardware.RevColorDistance;
 import com.team9889.lib.hardware.RevIMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -24,13 +18,12 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.openftc.revextensions2.ExpansionHubEx;
 import org.openftc.revextensions2.RevBulkData;
-//import org.openftc.revextensions2.RevExtensions2;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+
+//import org.openftc.revextensions2.RevExtensions2;
 
 /**
  * Created by Eric on 7/26/2019.
@@ -83,9 +76,6 @@ public class Robot{
     private ScoringLift mLift = new ScoringLift();
     private Camera mCamera = new Camera();
 
-    public double gyroAfterAuto;
-
-    public double gyro;
     private boolean mAuto = false;
 
     boolean debugging = false;

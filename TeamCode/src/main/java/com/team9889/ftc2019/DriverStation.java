@@ -81,7 +81,7 @@ public class DriverStation {
         } else if(!gamepad1.x)
             slowDownToggle = true;
 
-        return slowDown ? 3 : 1;
+        return slowDown ? 2 : 1;
     }
 
     private boolean foundationToggle = false;
@@ -108,7 +108,7 @@ public class DriverStation {
         if(gamepad1.dpad_right)
             grabberOpen = false;
 
-        if(!override)
+        if(!override || gamepad1.a || gamepad1.y)
             grabberOpen = true;
 
         return grabberOpen;
@@ -120,8 +120,7 @@ public class DriverStation {
         if((gamepad2.right_bumper || gamepad1.left_bumper) && linearBarToggle) {
             linearBarIn = !linearBarIn;
             linearBarToggle = false;
-        }
-        else if(!gamepad2.right_bumper && !gamepad1.left_bumper)
+        } else if(!gamepad2.right_bumper && !gamepad1.left_bumper)
             linearBarToggle = true;
 
         if(!override)
@@ -134,7 +133,15 @@ public class DriverStation {
         return gamepad1.dpad_left;
     }
 
+    boolean capStone() {
+        return gamepad2.a;
+    }
+
     boolean releaseTapeMeasure() {
         return gamepad2.dpad_down;
+    }
+
+    boolean resetIMU() {
+        return gamepad1.right_stick_button && gamepad1.left_stick_button;
     }
 }

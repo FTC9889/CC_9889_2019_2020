@@ -18,7 +18,7 @@ public class RedAutoFoundation extends Team9889Linear {
     @Override
     public void runOpMode() throws InterruptedException {
         waitForStart(true);
-        ThreadAction(new RobotUpdate());
+//        ThreadAction(new RobotUpdate());
 
         runAction(new MecanumDriveSimpleAction(-20, 0));
         runAction(new FoundationHookClose());

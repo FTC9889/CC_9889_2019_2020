@@ -35,8 +35,6 @@ public class OdometryWheelTest extends AutoModeBase {
 //        runAction(new Drive3DimensionalPID(new Pose2d(0, 0, 0)));
 //        runAction(new Drive3DimensionalPID(new Pose2d(0, 0, 0), new Pose2d(1, 1, 2)));
 
-        ThreadAction(new RobotUpdate());
-
 //        while (opModeIsActive()) {
 //            telemetry.addData("Pose: ", Robot.getMecanumDrive().getCurrentPose().toString());
 //            telemetry.addData("X", Robot.getMecanumDrive().X_OdometryPosition());

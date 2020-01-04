@@ -2,12 +2,10 @@ package com.team9889.ftc2019.subsystems;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.TwoTrackingWheelLocalizer;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team9889.ftc2019.Constants;
+import com.team9889.lib.android.FileReader;
 import com.team9889.lib.android.FileWriter;
-import com.team9889.lib.control.math.cartesian.Pose;
 import com.team9889.lib.control.math.cartesian.Rotation2d;
-import com.team9889.lib.control.math.cartesian.Vector2d;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -25,9 +23,11 @@ public class MecanumDrive extends Subsystem {
     public Pose2d currentPose = new Pose2d();
     public Rotation2d gyroAngle = new Rotation2d();
     private double X_Position_Offset = 0, Y_Position_Offset = 0;
-    public double angleOffset = 0;
+    public double angleFromAuton = 0;
 
     private Odometry odometry = new Odometry();
+
+    private String filename = "gyro.txt";
 
     @Override
     public void init(boolean auto) {
@@ -35,6 +35,8 @@ public class MecanumDrive extends Subsystem {
             Robot.getInstance().odometryLifter.setPosition(1);
             OpenFoundationHook();
             setCurrentPose(new Pose2d());
+        } else {
+            readAngleFromFile();
         }
     }
 
@@ -81,11 +83,31 @@ public class MecanumDrive extends Subsystem {
         }
     }
 
+    public void writeAngleToFile() {
+        FileWriter angleWriter = new FileWriter(filename);
+        angleWriter.write(gyroAngle.getTheda(AngleUnit.RADIANS));
+        angleWriter.close();
+    }
+
+    public void readAngleFromFile() {
+        try {
+            FileReader angleReader = new FileReader(filename);
+            String[] rows = angleReader.lines();
+            String value = rows[rows.length - 1];
+            angleFromAuton = Double.parseDouble(value);
+            angleReader.close();
+        } catch (NumberFormatException e) {
+            angleFromAuton = 0;
+        }
+    }
+
     public void setFieldCentricPower(double x, double y, double rotation){
         double angle = getAngle().getTheda(AngleUnit.RADIANS);
 
-        double xMod = x * Math.cos(angle + Robot.getInstance().gyroAfterAuto) - y * Math.sin(angle + Robot.getInstance().gyroAfterAuto);
-        double yMod = x * Math.sin(angle + Robot.getInstance().gyroAfterAuto) + y * Math.cos(angle + Robot.getInstance().gyroAfterAuto);
+        double angleFromAuto = Robot.getInstance().getMecanumDrive().angleFromAuton;
+        double xMod = x * Math.cos(angle + angleFromAuto) - y * Math.sin(angle + angleFromAuto);
+        double yMod = x * Math.sin(angle + angleFromAuto) + y * Math.cos(angle + angleFromAuto);
+
         setPower(xMod, yMod, rotation);
     }
 

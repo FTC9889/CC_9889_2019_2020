@@ -41,7 +41,7 @@ public class Drive3DimensionalPID extends Action {
 
     public Drive3DimensionalPID (Pose2d wantedPose, double maxVel) {
         this.wantedPose = wantedPose;
-        this.tolerancePose = new Pose2d(2,2,Math.toRadians(2));
+        this.tolerancePose = new Pose2d(2,2,Math.toRadians(3));
         this.maxVel = maxVel;
     }
 
@@ -49,6 +49,7 @@ public class Drive3DimensionalPID extends Action {
     private PID xPID = new PID(-0.1, 0, 0);
     private PID yPID = new PID(-0.1, 0, 0);
     private PID turnPID = new PID(0.03, 0, 0.1);
+    private boolean debugging = false;
 
     // Max Speed
     double maxVel = 0.5;
@@ -56,11 +57,6 @@ public class Drive3DimensionalPID extends Action {
     // Wanted Pose of the Robot
     private Pose2d wantedPose;
     private Pose2d tolerancePose;
-    private double wantedAngle;
-
-    // Angle adjustment
-    private double angle = 0;
-    private boolean offsetAxis = false;
 
     // End Conditions
     private int timeOut = 30000; //  Milliseconds
@@ -72,13 +68,10 @@ public class Drive3DimensionalPID extends Action {
     // Drivetrain object
     private MecanumDrive mDrive = Robot.getInstance().getMecanumDrive();
 
-
     @Override
     public void setup(String args) {
 
     }
-
-    boolean debugging = false;
 
     @Override
     public void start() {
@@ -110,7 +103,10 @@ public class Drive3DimensionalPID extends Action {
     public boolean isFinished() {
         if (Math.abs(xPID.getError()) < Math.abs(tolerancePose.getX())) xCounter++; else xCounter = 0;
         if (Math.abs(yPID.getError()) < Math.abs(tolerancePose.getY())) yCounter++; else xCounter = 0;
-        if (Math.abs(turnPID.getError()) < Math.abs(Math.toDegrees(tolerancePose.getHeading()))) angleCounter++; else angleCounter = 0;
+
+        if (Math.abs(turnPID.getError()) < Math.abs(Math.toDegrees(tolerancePose.getHeading())))
+            angleCounter++;
+        else angleCounter = 0;
 
         return (xCounter > 3 && yCounter > 3 && angleCounter > 3) || timeOut < timer.milliseconds();
     }

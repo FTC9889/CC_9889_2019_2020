@@ -87,7 +87,7 @@ public class ScoringLift extends Subsystem{
     }
 
     public void GrabberOpen(){
-        Robot.getInstance().grabber.setPosition(1);
+        Robot.getInstance().grabber.setPosition(0.5);
     }
     public void GrabberClose(){
         Robot.getInstance().grabber.setPosition(0);

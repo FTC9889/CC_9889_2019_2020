@@ -72,8 +72,9 @@ public abstract class AutoModeBase extends Team9889Linear {
         setCurrentAutoRunning();
 
         waitForStart(true);
-        ThreadAction(new RobotUpdate());
         autoTimer.reset();
+
+        ThreadAction(new RobotUpdate(autoTimer));
 
         // From Camera -> To Stone Position
         if (positionOfSkyStone < 120 && positionOfSkyStone > 59)
