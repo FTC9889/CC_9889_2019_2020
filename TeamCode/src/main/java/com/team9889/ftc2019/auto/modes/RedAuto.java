@@ -136,7 +136,7 @@ public class RedAuto extends AutoModeBase {
                 runAction(new Intake(true));
 
                 runAction(new Drive3DimensionalPID(new Pose2d(20, 10 * Side.getNum(Side_), Math.toRadians(-40 * Side.getNum(Side_)))));
-                runAction(new Drive3DimensionalPID(new Pose2d(33, 2 * Side.getNum(Side_), Math.toRadians(-40 * Side.getNum(Side_)))));
+                runAction(new Drive3DimensionalPID(new Pose2d(33, 5 * Side.getNum(Side_), Math.toRadians(-40 * Side.getNum(Side_)))));
                 runAction(new Drive3DimensionalPID(new Pose2d(20, 20 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))));
 
                 runAction(new Intake(false));

@@ -35,15 +35,19 @@ public class IntakeStopBlockIn extends Action {
                 Robot.getInstance().getIntake().SetRollerPower(0);
             } else if(timer.milliseconds() > 250 + 300 && timer.milliseconds() < 250 + 350) {
                 Robot.getInstance().getLift().GrabberClose();
+            } else if (timer.milliseconds() > 250 + 350){
+                Robot.getInstance().getIntake().SetIntakePower(-.4);
             }
         }
     }
 
     @Override
     public boolean isFinished() {
-        return timer.milliseconds() > 250 + 350;
+        return timer.milliseconds() > 600 + 3000;
     }
 
     @Override
-    public void done() {}
+    public void done() {
+        Robot.getInstance().getIntake().SetIntakePower(0);
+    }
 }
