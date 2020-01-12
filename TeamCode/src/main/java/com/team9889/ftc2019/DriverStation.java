@@ -49,7 +49,7 @@ public class DriverStation {
     }
 
     boolean getStartIntaking(){
-        return gamepad1.a;
+        return gamepad1.a || gamepad1.start;
     }
 
     boolean getStopIntaking() {

@@ -80,10 +80,10 @@ public class ScoringLift extends Subsystem{
     }
 
     public void LinearBarIn(){
-        SetLinearBarPosition(-1);
+        SetLinearBarPosition(1);
     }
     public void LinearBarOut(){
-        SetLinearBarPosition(1);
+        SetLinearBarPosition(-1);
     }
 
     public void GrabberOpen(){

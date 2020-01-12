@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.Robot;
 import com.team9889.lib.detectors.ScanForSkyStonesPipeline;
+import com.team9889.lib.detectors.TeleOpStonePipeline;
 
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -43,6 +44,7 @@ public abstract class Team9889Linear extends LinearOpMode {
 
     OpenCvCamera phoneCam;
     public double positionOfSkyStone;
+    TeleOpStonePipeline pipeline = new TeleOpStonePipeline();
 
     public void waitForStart(boolean autonomous) {
         int relativeLayoutId = hardwareMap.appContext.getResources().
@@ -53,23 +55,23 @@ public abstract class Team9889Linear extends LinearOpMode {
 
         telemetry.setMsTransmissionInterval(autonomous ? 50:1000);
         matchTime.reset();
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        phoneCam = OpenCvCameraFactory.getInstance().createWebcam(Robot.webcam, cameraMonitorViewId);
 
         if(autonomous){
             setBackground(Color.GREEN);
 
-            int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-            phoneCam = OpenCvCameraFactory.getInstance().createWebcam(Robot.webcam, cameraMonitorViewId);
             phoneCam.openCameraDevice();
-            ScanForSkyStonesPipeline pipeline = new ScanForSkyStonesPipeline();
-            phoneCam.setPipeline(pipeline);
+            ScanForSkyStonesPipeline scanForSkyStonesPipeline = new ScanForSkyStonesPipeline();
+            phoneCam.setPipeline(scanForSkyStonesPipeline);
             phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPSIDE_DOWN);
 
 
             // Autonomous Init Loop code
             while(isInInitLoop()){
                 telemetry.addData("Waiting for Start","");
-                positionOfSkyStone = pipeline.getPositionOfSkyStone();
-                telemetry.addData("Position", pipeline.getPositionOfSkyStone());
+                positionOfSkyStone = scanForSkyStonesPipeline.getPositionOfSkyStone();
+                telemetry.addData("Position", scanForSkyStonesPipeline.getPositionOfSkyStone());
                 Robot.outputToTelemetry(telemetry);
                 telemetry.update();
             }
@@ -82,6 +84,10 @@ public abstract class Team9889Linear extends LinearOpMode {
 
             new Thread(ShutDownCameraThread).start();
         } else {
+            phoneCam.openCameraDevice();
+            phoneCam.setPipeline(pipeline);
+            phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPSIDE_DOWN);
+
             // Teleop Init Loop code
             while(isInInitLoop()){
                 telemetry.addData("Waiting for Start","");

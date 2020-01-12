@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.team9889.ftc2019.auto.AutoModeBase;
 import com.team9889.ftc2019.auto.actions.Wait;
 import com.team9889.ftc2019.auto.actions.drive.Drive3DimensionalPID;
+import com.team9889.ftc2019.auto.actions.drive.DriveFollowPath;
 import com.team9889.ftc2019.auto.actions.drive.DriveToFoundation;
 import com.team9889.ftc2019.auto.actions.foundation.FoundationHookClose;
 import com.team9889.ftc2019.auto.actions.foundation.FoundationHookOpen;
@@ -19,6 +20,8 @@ import com.team9889.ftc2019.auto.actions.lift.LiftOut;
 import com.team9889.ftc2019.auto.actions.lift.LiftUp;
 import com.team9889.ftc2019.auto.actions.lift.OpenGrabber;
 
+import org.opencv.core.Mat;
+
 /**
  * Created by Eric on 11/26/2019.
  */
@@ -31,7 +34,7 @@ public class RedAuto extends AutoModeBase {
         Side Side_ = Side.RED;
 
         ThreadAction(new IntakeDown());
-        runAction(new Drive3DimensionalPID(new Pose2d(4, 0, 0)));
+//        runAction(new Drive3DimensionalPID(new Pose2d(4, 0, 0)));
         ThreadAction(new Intake());
 
         //pick up first skystone
@@ -57,8 +60,18 @@ public class RedAuto extends AutoModeBase {
                 break;
 
             case LEFT:
-                runAction(new Drive3DimensionalPID(new Pose2d(33, -16 * Side.getNum(Side_), Math.toRadians(-35 * Side.getNum(Side_)))));
-                runAction(new Drive3DimensionalPID(new Pose2d(25, -17 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))));
+                runAction(new DriveFollowPath(new Pose2d[]{
+                        new Pose2d(4, 0, 0),
+                        new Pose2d(33, -16, Math.toRadians(-35)),
+                        new Pose2d(25, -17, Math.toRadians(-90))
+                }, new double[]{
+                        2,
+                        2,
+                        6
+                }));
+
+//                runAction(new Drive3DimensionalPID(new Pose2d(33, -16 * Side.getNum(Side_), Math.toRadians(-35 * Side.getNum(Side_)))));
+//                runAction(new Drive3DimensionalPID(new Pose2d(25, -17 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))));
                 runAction(new Intake(false));
 
                 runAction(new Wait(500));
@@ -68,9 +81,14 @@ public class RedAuto extends AutoModeBase {
         }
 
         //drive to foundation
-        runAction(new Drive3DimensionalPID(new Pose2d(25, 85 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), .8));
-        runAction(new Wait(200));
-        runAction(new Drive3DimensionalPID(new Pose2d(25, 85 * Side.getNum(Side_), Math.toRadians(180 * Side.getNum(Side_)))));
+//        runAction(new Drive3DimensionalPID(new Pose2d(25, 85 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), .8));
+//        runAction(new Wait(200));
+//        runAction(new Drive3DimensionalPID(new Pose2d(25, 85 * Side.getNum(Side_), Math.toRadians(180 * Side.getNum(Side_)))));
+
+//        runAction(new DriveFollowPath(new Pose2d[]{
+//                 new Pose2d(25, 85, Math.toRadians( -90)),
+//                 new Pose2d(25, 85, Math.toRadians( 180))
+//        }, .8));
 
         runAction(new CloseGrabber());
         runAction(new DriveToFoundation(3000));
@@ -135,9 +153,15 @@ public class RedAuto extends AutoModeBase {
 
                 runAction(new Intake(true));
 
-                runAction(new Drive3DimensionalPID(new Pose2d(20, 10 * Side.getNum(Side_), Math.toRadians(-40 * Side.getNum(Side_)))));
-                runAction(new Drive3DimensionalPID(new Pose2d(33, 5 * Side.getNum(Side_), Math.toRadians(-40 * Side.getNum(Side_)))));
-                runAction(new Drive3DimensionalPID(new Pose2d(20, 20 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))));
+                runAction(new DriveFollowPath(new Pose2d[]{
+                    new Pose2d(20, 10 * Side.getNum(Side_), Math.toRadians(-40 * Side.getNum(Side_))),
+                    new Pose2d(33, 5 * Side.getNum(Side_), Math.toRadians(-40 * Side.getNum(Side_))),
+                    new Pose2d(20, 20 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_)))
+                }, new double[]{
+                      5,
+                      2,
+                      5
+                }));
 
                 runAction(new Intake(false));
                 runAction(new Wait(500));

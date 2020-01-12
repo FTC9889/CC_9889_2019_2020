@@ -52,11 +52,42 @@ public class Teleop extends Team9889Linear {
             // If not resetting imu, normal operation
             if(!driverStation.resetIMU()) {
                 // Drive
-                double slowDownFactor = driverStation.getSlowDownFactor();
-                Robot.getMecanumDrive().setFieldCentricPower(
-                        driverStation.getX() / slowDownFactor,
-                        driverStation.getY() / slowDownFactor,
-                        driverStation.getSteer() / slowDownFactor);
+
+                if(Math.abs(driverStation.getX()) < 0.01 && Math.abs(driverStation.getY()) < 0.01 &&
+                        Math.abs(driverStation.getSteer()) < 0.01 && gamepad1.start) {
+                    // if y<20 -> slower foward
+                    // if y>35 -> half speed
+                    // if y>50 -> full
+
+                    // if x > 20 -> left
+                    // if x near 20 -> center
+                    // if x < 20 -> right
+
+                    double forward = 0;
+                    double turn = 0;
+
+                    if(pipeline.getMinPoint().y > 25)
+                        forward = 1;
+                    else if(pipeline.getMinPoint().y < 25)
+                        forward = 0.3;
+
+                    int center = 25;
+                    if (pipeline.getMinPoint().x > center + 5)
+                        turn = -0.2;
+                    else if (pipeline.getMinPoint().x < center - 5)
+                        turn = 0.2;
+                    else
+                        turn = 0;
+
+
+                    Robot.getMecanumDrive().setPower(0, forward, turn);
+                } else {
+                    double slowDownFactor = driverStation.getSlowDownFactor();
+                    Robot.getMecanumDrive().setFieldCentricPower(
+                            driverStation.getX() / slowDownFactor,
+                            driverStation.getY() / slowDownFactor,
+                            driverStation.getSteer() / slowDownFactor);
+                }
 
                 if (!automateScoring && !automateCapStone) {
                     Robot.getLift().SetLiftPower(driverStation.getLiftPower(liftDownLimit));
@@ -162,6 +193,7 @@ public class Teleop extends Team9889Linear {
                 Robot.getMecanumDrive().readAngleFromFile();
             }
 
+            telemetry.addData("Point", pipeline.getMinPoint().toString());
             telemetry.addData("Loop Time", loopTimer.milliseconds());
             telemetry.addData("angle", Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
             telemetry.addData("Slow Drive", driveSlow);
@@ -179,5 +211,14 @@ public class Teleop extends Team9889Linear {
 
             Robot.update();
         }
+
+        Runnable ShutDownCameraThread = new Runnable() {
+            @Override
+            public void run() {
+                phoneCam.stopStreaming();
+            }
+        };
+
+        new Thread(ShutDownCameraThread).start();
     }
 }
