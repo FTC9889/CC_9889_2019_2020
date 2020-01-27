@@ -7,22 +7,29 @@ import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.MecanumDrive;
 import com.team9889.ftc2019.subsystems.Robot;
 import com.team9889.lib.CruiseLib;
+import com.team9889.lib.FollowPath;
 import com.team9889.lib.control.controllers.PID;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Eric on 1/10/2020.
  */
 public class DriveFollowPath extends Action {
-    Pose2d[] poses;
-    double[] r;
-    Pose2d[] tolerancePoses;
-    float[] maxVels;
+    List<FollowPath> path;
+//    double[] r;
+//    Pose2d[] tolerancePose;
+//    double[] maxVels;
     int pose = 0;
     int rNum = 0;
     int tNum = 0;
     int vNum = 0;
+
+    double xAverage;
+    double yAverage;
 
     double startOfNextLineX, endOfNextLineX;
     double startOfNextLineY, endOfNextLineY;
@@ -47,63 +54,77 @@ public class DriveFollowPath extends Action {
     private int xCounter = 0;
     private int yCounter = 0;
 
+    private double time;
+    private ElapsedTime tempTimer = new ElapsedTime();
+
     // Drivetrain object
     private MecanumDrive mDrive = Robot.getInstance().getMecanumDrive();
 
-    public DriveFollowPath(Pose2d[] poses){
-        this.poses = poses;
-        this.r = new double[]{8.5};
-        this.tolerancePoses = new Pose2d[]{new Pose2d(2,2,Math.toRadians(3))};
-        this.maxVels = new float[]{.5f};
-    }
+//    public DriveFollowPath(Pose2d[] path){
+//        this.path = path;
+//        this.r = new double[]{8.5};
+//        this.tolerancePoses = new Pose2d[]{new Pose2d(2,2,Math.toRadians(3))};
+//        this.maxVels = new float[]{.5f};
+//    }
+//
+//    public DriveFollowPath(Pose2d[] path, double[] r){
+//        this.path = path;
+//        this.r = r;
+//        this.tolerancePoses = new Pose2d[]{new Pose2d(2,2,Math.toRadians(3))};
+//        this.maxVels = new float[]{.5f};
+//    }
+//
+//    public DriveFollowPath(Pose2d[] path, double[] r, Pose2d[] tolerancePose){
+//        this.path = path;
+//        this.r = r;
+//        this.tolerancePoses = tolerancePose;
+//        this.maxVels = new float[]{.5f};
+//    }
+//
+//    public DriveFollowPath(Pose2d[] path, double[] r, Pose2d[] tolerancePose, float[] maxVel){
+//        this.path = path;
+//        this.r = r;
+//        this.tolerancePoses = tolerancePose;
+//        this.maxVels = maxVel;
+//    }
+//
+//    public DriveFollowPath(Pose2d[] path, Pose2d[] tolerancePose){
+//        this.path = path;
+//        this.r = new double[]{8.5};
+//        this.tolerancePoses = tolerancePose;
+//        this.maxVels = new float[]{.5f};
+//    }
+//
+//    public DriveFollowPath(Pose2d[] path, float[] maxVel){
+//        this.path = path;
+//        this.r = new double[]{8.5};
+//        this.tolerancePoses = new Pose2d[]{new Pose2d(2,2,Math.toRadians(3))};
+//        this.maxVels = maxVel;
+//    }
+//
+//    public DriveFollowPath(Pose2d[] path, Pose2d[] tolerancePose, float[] maxVel){
+//        this.path = path;
+//        this.r = new double[]{8.5};
+//        this.tolerancePoses = tolerancePose;
+//        this.maxVels = maxVel;
+//    }
+//
+//    public DriveFollowPath(Pose2d[] path, double[] r, float[] maxVel){
+//        this.path = path;
+//        this.r = r;
+//        this.tolerancePoses = new Pose2d[]{new Pose2d(2,2,Math.toRadians(3))};
+//        this.maxVels = maxVel;
+//    }
 
-    public DriveFollowPath(Pose2d[] poses, double[] r){
-        this.poses = poses;
-        this.r = r;
-        this.tolerancePoses = new Pose2d[]{new Pose2d(2,2,Math.toRadians(3))};
-        this.maxVels = new float[]{.5f};
-    }
+    public DriveFollowPath(List<FollowPath> path){
+//        for (int i = 0; i < path.size(); i++){
+//            this.path = path;
+//            tolerancePoses[i] = path.get(i).getTollerancePose();
+//            r[i] = path.get(i).getRadius();
+//            maxVels[i] = path.get(i).getMaxVelocity();
+//        }
 
-    public DriveFollowPath(Pose2d[] poses, double[] r, Pose2d[] tolerancePose){
-        this.poses = poses;
-        this.r = r;
-        this.tolerancePoses = tolerancePose;
-        this.maxVels = new float[]{.5f};
-    }
-
-    public DriveFollowPath(Pose2d[] poses, double[] r, Pose2d[] tolerancePose, float[] maxVel){
-        this.poses = poses;
-        this.r = r;
-        this.tolerancePoses = tolerancePose;
-        this.maxVels = maxVel;
-    }
-
-    public DriveFollowPath(Pose2d[] poses, Pose2d[] tolerancePose){
-        this.poses = poses;
-        this.r = new double[]{8.5};
-        this.tolerancePoses = tolerancePose;
-        this.maxVels = new float[]{.5f};
-    }
-
-    public DriveFollowPath(Pose2d[] poses, float[] maxVel){
-        this.poses = poses;
-        this.r = new double[]{8.5};
-        this.tolerancePoses = new Pose2d[]{new Pose2d(2,2,Math.toRadians(3))};
-        this.maxVels = maxVel;
-    }
-
-    public DriveFollowPath(Pose2d[] poses, Pose2d[] tolerancePose, float[] maxVel){
-        this.poses = poses;
-        this.r = new double[]{8.5};
-        this.tolerancePoses = tolerancePose;
-        this.maxVels = maxVel;
-    }
-
-    public DriveFollowPath(Pose2d[] poses, double[] r, float[] maxVel){
-        this.poses = poses;
-        this.r = r;
-        this.tolerancePoses = new Pose2d[]{new Pose2d(2,2,Math.toRadians(3))};
-        this.maxVels = maxVel;
+        this.path = path;
     }
 
     @Override
@@ -113,50 +134,54 @@ public class DriveFollowPath extends Action {
 
     @Override
     public void start() {
-        startOfNextLineX = poses[0].getX();
-        startOfNextLineY = poses[0].getY();
+        startOfNextLineX = path.get(0).getPose().getX();
+        startOfNextLineY = path.get(0).getPose().getY();
 
-        endOfNextLineX = poses[1].getX();
-        endOfNextLineY = poses[1].getY();
+        endOfNextLineX = path.get(1).getPose().getX();
+        endOfNextLineY = path.get(1).getPose().getY();
 
-        wantedPose = poses[pose];
-        tolerancePose = tolerancePoses[tNum];
-        maxVel = maxVels[vNum];
+        wantedPose = path.get(pose).getPose();
+        tolerancePose = path.get(tNum).getTollerancePose();
+        maxVel = path.get(vNum).getMaxVelocity();
+
+        tempTimer.reset();
     }
 
     @Override
     public void update() {
+        time = tempTimer.milliseconds();
+
 //      x and y = robot position
         double x = Robot.getInstance().getMecanumDrive().getCurrentPose().getX();
         double y = Robot.getInstance().getMecanumDrive().getCurrentPose().getY();
 
-        tolerancePose = tolerancePoses[tNum];
-        maxVel = maxVels[vNum];
+        tolerancePose = path.get(tNum).getTollerancePose();
+        maxVel = path.get(vNum).getMaxVelocity();
 
-        if(rNum > r.length-1){
-            rNum = r.length-1;
+        if(rNum > path.size()-1){
+            rNum = path.size()-1;
         }
 
 
-        if (Math.sqrt(Math.pow(poses[pose].getX() - x, 2) + Math.pow(poses[pose].getY() - y, 2)) <= r[rNum] &&
+        if (Math.sqrt(Math.pow(path.get(pose).getPose().getX() - x, 2) + Math.pow(path.get(pose).getPose().getY() - y, 2)) <= path.get(rNum).getRadius() &&
 //                Math.abs(pDistance(x, y, endOfNextLineX, endOfNextLineY, startOfNextLineX, startOfNextLineY)) <= r[rNum] &&
-                pose < poses.length-1){
+                pose < path.size()-1){
             pose++;
             rNum++;
             tNum++;
             vNum++;
 
-            startOfNextLineX = poses[pose].getX();
-            startOfNextLineY = poses[pose].getY();
+            startOfNextLineX = path.get(pose).getPose().getX();
+            startOfNextLineY = path.get(pose).getPose().getY();
 
-            endOfNextLineX = poses[pose].getX();
-            endOfNextLineY = poses[pose].getY();
+            endOfNextLineX = path.get(pose).getPose().getX();
+            endOfNextLineY = path.get(pose).getPose().getY();
 
-            wantedPose = poses[pose];
+            wantedPose = path.get(pose).getPose();
         }
 
-        RobotLog.a("Distance From wanted pose: " + String.valueOf(Math.sqrt(Math.pow(poses[pose].getX() - x, 2) + Math.pow(poses[pose].getY() - y, 2))));
-        RobotLog.a("Distance From line: " + String.valueOf(pDistance(x, y, endOfNextLineX, endOfNextLineY, startOfNextLineX, startOfNextLineY)));
+//        RobotLog.a("Distance From wanted pose: " + String.valueOf(Math.sqrt(Math.pow(path[pose].getX() - x, 2) + Math.pow(path[pose].getY() - y, 2))));
+//        RobotLog.a("Distance From line: " + String.valueOf(pDistance(x, y, endOfNextLineX, endOfNextLineY, startOfNextLineX, startOfNextLineY)));
 
         double x_power = xPID.update(wantedPose.getX(), x);
         double y_power = yPID.update(wantedPose.getY(), y);
@@ -169,8 +194,14 @@ public class DriveFollowPath extends Action {
 
         double rotation = turnPID.update(turn, 0);
 
-        x_power = CruiseLib.limitValue(x_power, maxVel);
-        y_power = CruiseLib.limitValue(y_power, maxVel);
+
+        // \/ \/ \/ \/ \/ \/ \/
+
+        //TODO check min value
+
+        // /\ /\ /\ /\ /\ /\ /\
+        x_power = CruiseLib.limitValue(x_power, maxVel, -maxVel);
+        y_power = CruiseLib.limitValue(y_power, maxVel, -maxVel);
         rotation = CruiseLib.limitValue(rotation, maxVel);
 
         mDrive.setFieldCentricAutoPower(y_power, x_power, rotation);
@@ -187,7 +218,7 @@ public class DriveFollowPath extends Action {
             angleCounter++;
         else angleCounter = 0;
 
-        return (xCounter > 3 && yCounter > 3 && angleCounter > 3 && pose == poses.length-1) || timeOut < timer.milliseconds();
+        return (xCounter > 3 && yCounter > 3 && angleCounter > 3 && pose == path.size()-1) || timeOut < timer.milliseconds();
     }
 
     @Override
@@ -196,10 +227,10 @@ public class DriveFollowPath extends Action {
     }
 
     public static void main(String[] args){
-        DriveFollowPath path = new DriveFollowPath(new Pose2d[]{new Pose2d(5, 0, 0), new Pose2d(10, 0, 0)}, new double[]{5, 5});
+//        DriveFollowPath path = new DriveFollowPath(new Pose2d[]{new Pose2d(5, 0, 0), new Pose2d(10, 0, 0)}, new double[]{5, 5});
 
-        System.out.println(path.pDistance(0, 0, -5, 0, 5, 0));
-        System.out.println(path.pDistance(3, 1, 5, 0, 10, 0));
+//        System.out.println(path.pDistance(0, 0, -5, 0, 5, 0));
+//        System.out.println(path.pDistance(3, 1, 5, 0, 10, 0));
 
 
     }

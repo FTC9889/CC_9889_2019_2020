@@ -1,5 +1,6 @@
 package com.team9889.ftc2019.auto.actions.lift;
 
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.Robot;
 
@@ -7,10 +8,12 @@ import com.team9889.ftc2019.subsystems.Robot;
  * Created by Eric on 12/27/2019.
  */
 public class LiftUp extends Action {
-    private double height;
+    private double height, power;
+    private ElapsedTime timer = new ElapsedTime();
 
-    public LiftUp(double height){
-        this.height = height;
+    public LiftUp(double time, double power){
+        this.height = time;
+        this.power = power;
     }
 
     @Override
@@ -20,17 +23,17 @@ public class LiftUp extends Action {
 
     @Override
     public void start() {
-        Robot.getInstance().getLift().SetLiftPower(-.5 * Math.signum(height));
+        timer.reset();
     }
 
     @Override
     public void update() {
-
+        Robot.getInstance().getLift().SetLiftPower(power);
     }
 
     @Override
     public boolean isFinished() {
-        return Robot.getInstance().getLift().getLiftHeightInches() - 1 > height;
+        return timer.milliseconds() > height;
     }
 
     @Override
