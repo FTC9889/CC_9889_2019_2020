@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
 import com.team9889.ftc2019.Constants;
+import com.team9889.ftc2019.DriverStation;
 import com.team9889.lib.android.FileWriter;
 import com.team9889.lib.hardware.Motor;
 import com.team9889.lib.hardware.RevIMU;
@@ -157,12 +158,20 @@ public class Robot{
 
     private ElapsedTime updateTimer = new ElapsedTime();
     public void update(){
-        if(Robot.gyroTimer.milliseconds() > 100 && !mAuto){
+        RobotLog.v("loop time " + (timer.milliseconds()));
+
+//        if(Robot.gyroTimer.milliseconds() > 100 && !mAuto){
+//            gyroTimer.reset();
+//            getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+//        } else { // Update every time in order for odometry to work properly
+//            getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+
+        if(Robot.gyroTimer.milliseconds() > 100) {
             gyroTimer.reset();
             getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
-        } else { // Update every time in order for odometry to work properly
-            getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+        }
 
+        if (mAuto){
 //            bulkDataMaster = revHubMaster.getBulkInputData();
             bulkDataSlave = revHubSlave.getBulkInputData();
 

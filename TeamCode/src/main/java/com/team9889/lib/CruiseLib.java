@@ -1,9 +1,12 @@
 package com.team9889.lib;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.team9889.lib.control.math.cartesian.Rotation2d;
 import com.team9889.lib.control.math.cartesian.Vector2d;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
+import java.util.ArrayList;
 
 /**
  * Created by Joshua on 6/23/17.
@@ -156,5 +159,12 @@ public class CruiseLib {
         for (String anArray : array) {
             System.out.println(anArray);
         }
+    }
+
+    public static class FollowPath{
+//        Pose2d pose;
+        double r;
+//        Pose2d tolerancePose;
+        float maxVel;
     }
 }

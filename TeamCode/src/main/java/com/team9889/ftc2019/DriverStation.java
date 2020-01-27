@@ -28,9 +28,9 @@ public class DriverStation {
 
     double getLiftPower(boolean isDown) {
         double g1UpPower = gamepad1.right_trigger;
-        double g2UpPower = gamepad2.right_trigger;
+        double g2UpPower = gamepad2.left_trigger;
         double g1DownPower = gamepad1.left_trigger;
-        double g2DownPower = gamepad2.left_trigger;
+        double g2DownPower = gamepad2.right_trigger;
 
         if(g1UpPower > 0.1)
             return -g1UpPower;

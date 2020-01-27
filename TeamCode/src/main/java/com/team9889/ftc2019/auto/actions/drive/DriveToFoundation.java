@@ -14,8 +14,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  */
 public class DriveToFoundation extends Action {
 
-    public DriveToFoundation(int timeOut){
+    public DriveToFoundation(int timeOut, double angle){
         this.timeOut = timeOut;
+        this.angle = angle;
     }
 
     private PID turnPID = new PID(0.02, 0, 0.3);

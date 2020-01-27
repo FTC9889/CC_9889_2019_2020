@@ -1,5 +1,7 @@
 package com.team9889.ftc2019.subsystems;
 
+import com.team9889.lib.CruiseLib;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 /**
@@ -42,7 +44,7 @@ public class Intake extends Subsystem {
     }
 
     public void SetRollerPower(double power){
-        Robot.getInstance().roller.setPower(power);
+        Robot.getInstance().roller.setPower(CruiseLib.limitValue(power, .5, -.5));
     }
     public void RollerIn(){
         SetRollerPower(1);
@@ -68,7 +70,7 @@ public class Intake extends Subsystem {
 
     //TODO test these two heights
     public void IntakeDown(){
-        SetIntakeHeight(1, 0);
+        SetIntakeHeight(.64, 0);
     }
     public void IntakeUp(){
         SetIntakeHeight(0, 1);

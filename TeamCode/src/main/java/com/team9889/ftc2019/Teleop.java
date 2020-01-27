@@ -90,7 +90,7 @@ public class Teleop extends Team9889Linear {
                 }
 
                 if (!automateScoring && !automateCapStone) {
-                    Robot.getLift().SetLiftPower(driverStation.getLiftPower(liftDownLimit));
+                    Robot.getLift().SetLiftPower(driverStation.getLiftPower(Robot.downLimit.isPressed()));
 
                     if (driverStation.getLinearBarIn(first))
                         Robot.getLift().LinearBarIn();
@@ -109,7 +109,9 @@ public class Teleop extends Team9889Linear {
                         intaking = false;
                     }
 
-                    if (driverStation.getGrabberOpen(first)) {
+                    if (Robot.downLimit.isPressed() && driverStation.getGrabberOpen(first)){
+                        Robot.grabber.setPosition(1);
+                    }else if (driverStation.getGrabberOpen(first)) {
                         Robot.getLift().GrabberOpen();
                     } else {
                         Robot.getLift().GrabberClose();
@@ -193,9 +195,10 @@ public class Teleop extends Team9889Linear {
                 Robot.getMecanumDrive().readAngleFromFile();
             }
 
-            telemetry.addData("Point", pipeline.getMinPoint().toString());
+
+//            telemetry.addData("Point", pipeline.getMinPoint().toString());
             telemetry.addData("Loop Time", loopTimer.milliseconds());
-            telemetry.addData("angle", Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
+//            telemetry.addData("angle", Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
             telemetry.addData("Slow Drive", driveSlow);
 
             telemetry.addData("Gyro After Auto", Robot.getMecanumDrive().angleFromAuton);
