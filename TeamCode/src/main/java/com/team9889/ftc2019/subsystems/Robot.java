@@ -55,6 +55,8 @@ public class Robot{
 
     public CRServo teamMarkerDeployServo;
 
+    public boolean redAuto;
+
     RevBulkData bulkDataMaster, bulkDataSlave;
     ExpansionHubEx revHubMaster, revHubSlave;
 
@@ -147,6 +149,9 @@ public class Robot{
 
         imu = new RevIMU("imu", hardwareMap);
 
+        if (auto)
+            debugging = true;
+
         if(debugging) writer.write("clock,x,y,theda");
 
         getMecanumDrive().init(auto);
@@ -160,17 +165,15 @@ public class Robot{
     public void update(){
         RobotLog.v("loop time " + (timer.milliseconds()));
 
-//        if(Robot.gyroTimer.milliseconds() > 100 && !mAuto){
-//            gyroTimer.reset();
-//            getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
-//        } else { // Update every time in order for odometry to work properly
-//            getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
 
-        if(Robot.gyroTimer.milliseconds() > 100) {
-            gyroTimer.reset();
-            getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+        if (redAuto && mAuto) {
+                getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+        }else {
+            if (Robot.gyroTimer.milliseconds() > 100) {
+                gyroTimer.reset();
+                getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+            }
         }
-
         if (mAuto){
 //            bulkDataMaster = revHubMaster.getBulkInputData();
             bulkDataSlave = revHubSlave.getBulkInputData();

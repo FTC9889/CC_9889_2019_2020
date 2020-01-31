@@ -44,6 +44,7 @@ public class BlueAuto extends AutoModeBase {
 
             Side Side_ = Side.BLUE;
             List<FollowPath> pose = new ArrayList<>();
+            Robot.redAuto = false;
 
 
             Robot.grabber.setPosition(1);
@@ -83,14 +84,15 @@ public class BlueAuto extends AutoModeBase {
             runAction(new DriveFollowPath(pose));
             pose.clear();
 
+            Robot.getIntake().SetIntakePower(0);
             runAction(new DriveToFoundation(2000, 180 * Side.getNum(Side_)));
             runAction(new FoundationHookClose());
 
             ThreadAction(new LiftUp(250, -.4));
             ThreadAction(new LiftOut());
 
-            pose.add(new FollowPath(new Pose2d(30, 50 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 1), 7.5, .8));
-            pose.add(new FollowPath(new Pose2d(30, 50 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 1), 3, .5));
+            pose.add(new FollowPath(new Pose2d(25, 50 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 1), 7.5, .8));
+            pose.add(new FollowPath(new Pose2d(25, 50 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 1), 3, .5));
             runAction(new DriveFollowPath(pose));
             pose.clear();
 
@@ -105,16 +107,16 @@ public class BlueAuto extends AutoModeBase {
             switch (stonePosition){
                 case RIGHT:
                     pose.add(new FollowPath(new Pose2d(30, 5 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 7.5, .8));
-                    pose.add(new FollowPath(new Pose2d(45, -7 * Side.getNum(Side_), Math.toRadians(-45 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .8));
-                    pose.add(new FollowPath(new Pose2d(30, -10 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .5));
+                    pose.add(new FollowPath(new Pose2d(45, 0 * Side.getNum(Side_), Math.toRadians(-45 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .8));
+                    pose.add(new FollowPath(new Pose2d(30, 0 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .5));
                     runAction(new DriveFollowPath(pose));
                     pose.clear();
                     break;
 
                 case MIDDLE:
-                    pose.add(new FollowPath(new Pose2d(30, 10 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .8));
-                    pose.add(new FollowPath(new Pose2d(45, 0 * Side.getNum(Side_), Math.toRadians(-35 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .8));
-                    pose.add(new FollowPath(new Pose2d(30, 0 * Side.getNum(Side_), Math.toRadians(-35 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .5));
+                    pose.add(new FollowPath(new Pose2d(30, 0 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .8));
+                    pose.add(new FollowPath(new Pose2d(45, -6 * Side.getNum(Side_), Math.toRadians(-35 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .8));
+                    pose.add(new FollowPath(new Pose2d(30, -6 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .5));
                     runAction(new DriveFollowPath(pose));
                     pose.clear();
                     break;
@@ -122,18 +124,19 @@ public class BlueAuto extends AutoModeBase {
                 case LEFT:
                     pose.add(new FollowPath(new Pose2d(30, -5 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 7.5, .8));
                     pose.add(new FollowPath(new Pose2d(30, -5 * Side.getNum(Side_), Math.toRadians(-65 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 7.5, .8));
-                    pose.add(new FollowPath(new Pose2d(45, -25 * Side.getNum(Side_), Math.toRadians(-65 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .8));
-                    pose.add(new FollowPath(new Pose2d(30, -22 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .5));
+                    pose.add(new FollowPath(new Pose2d(45, -15 * Side.getNum(Side_), Math.toRadians(-65 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .8));
+                    pose.add(new FollowPath(new Pose2d(30, -15 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .5));
                     runAction(new DriveFollowPath(pose));
                     pose.clear();
                     break;
             }
 
-            pose.add(new FollowPath(new Pose2d(26, 45 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 7, .7));
-            pose.add(new FollowPath(new Pose2d(26, 45 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 4, .5));
+            pose.add(new FollowPath(new Pose2d(24, 45 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 7, .7));
+            pose.add(new FollowPath(new Pose2d(24, 45 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 4, .5));
             runAction(new DriveFollowPath(pose));
             pose.clear();
 
+            Robot.getIntake().SetIntakePower(0);
             ThreadAction(new LiftUp(500, -.8));
             ThreadAction(new LiftOut());
             runAction(new DriveToFoundation(2000, -90 * Side.getNum(Side_)));
@@ -146,7 +149,7 @@ public class BlueAuto extends AutoModeBase {
             runAction(new Wait(250));
 
             runAction(new LiftIn());
-            Robot.getLift().SetLiftPower(.6);
+            Robot.getLift().SetLiftPower(1);
             runAction(new Wait(250));
             Robot.getLift().SetLiftPower(0);
 
@@ -157,17 +160,17 @@ public class BlueAuto extends AutoModeBase {
                 case MIDDLE:
                     pose.add(new FollowPath(new Pose2d(30, -5 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 7.5, .8));
                     pose.add(new FollowPath(new Pose2d(30, -5 * Side.getNum(Side_), Math.toRadians(-75 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 7.5, .8));
-                    pose.add(new FollowPath(new Pose2d(45, -10 * Side.getNum(Side_), Math.toRadians(-75 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 4, .8));
-                    pose.add(new FollowPath(new Pose2d(30, -10 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .5));
+                    pose.add(new FollowPath(new Pose2d(45, -15 * Side.getNum(Side_), Math.toRadians(-75 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 4, .8));
+                    pose.add(new FollowPath(new Pose2d(30, -15 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .5));
                     runAction(new DriveFollowPath(pose));
                     pose.clear();
                     break;
 
                 case LEFT:
-                    pose.add(new FollowPath(new Pose2d(30, 15, Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 7.5, .8));
-                    pose.add(new FollowPath(new Pose2d(30, 15 * Side.getNum(Side_), Math.toRadians(0 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 7.5, .8));
-                    pose.add(new FollowPath(new Pose2d(45, 15 * Side.getNum(Side_), Math.toRadians(0 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .8));
-                    pose.add(new FollowPath(new Pose2d(30, 15, Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .5));
+                    pose.add(new FollowPath(new Pose2d(30, 30 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 7.5, .8));
+                    pose.add(new FollowPath(new Pose2d(30, 20 * Side.getNum(Side_), Math.toRadians(0 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 7.5, .8));
+                    pose.add(new FollowPath(new Pose2d(40, 20 * Side.getNum(Side_), Math.toRadians(0 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .8));
+                    pose.add(new FollowPath(new Pose2d(30, 17 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 3, .5));
                     runAction(new DriveFollowPath(pose));
                     pose.clear();
                     break;
@@ -178,11 +181,12 @@ public class BlueAuto extends AutoModeBase {
             runAction(new DriveFollowPath(pose));
             pose.clear();
 
+            Robot.getIntake().SetIntakePower(0);
             runAction(new LiftUp(250, -1));
             ThreadAction(new LiftOut());
 
-            pose.add(new FollowPath(new Pose2d(30, 75 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 8, 1));
-            pose.add(new FollowPath(new Pose2d(30, 75 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(4, 4, 3), 8, 1));
+            pose.add(new FollowPath(new Pose2d(22, 75 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 8, 1));
+            pose.add(new FollowPath(new Pose2d(22, 75 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(4, 4, 3), 8, 1));
             runAction(new DriveFollowPath(pose));
             pose.clear();
 
@@ -192,8 +196,8 @@ public class BlueAuto extends AutoModeBase {
             runAction(new LiftIn());
             ThreadAction(new LiftUp(2000, .3));
 
-            pose.add(new FollowPath(new Pose2d(26, 36 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 8, .7));
-            pose.add(new FollowPath(new Pose2d(26, 36 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 8, .7));
+            pose.add(new FollowPath(new Pose2d(28, 36 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 8, .7));
+            pose.add(new FollowPath(new Pose2d(28, 36 * Side.getNum(Side_), Math.toRadians(-90 * Side.getNum(Side_))), new Pose2d(2, 2, 3), 8, .7));
             runAction(new DriveFollowPath(pose));
             pose.clear();
 
