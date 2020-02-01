@@ -194,12 +194,6 @@ public class DriveFollowPath extends Action {
 
         double rotation = turnPID.update(turn, 0);
 
-
-        // \/ \/ \/ \/ \/ \/ \/
-
-        //TODO check min value
-
-        // /\ /\ /\ /\ /\ /\ /\
         x_power = CruiseLib.limitValue(x_power, maxVel, -maxVel);
         y_power = CruiseLib.limitValue(y_power, maxVel, -maxVel);
         rotation = CruiseLib.limitValue(rotation, maxVel);

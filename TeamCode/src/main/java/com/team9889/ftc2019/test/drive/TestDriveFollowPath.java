@@ -22,6 +22,8 @@ public class TestDriveFollowPath extends AutoModeBase {
 
         List<FollowPath> pose = new ArrayList<>();
 
+//      NEW CODE
+
         pose.add(new FollowPath(new Pose2d(10, 0, Math.toRadians(0)), new Pose2d(2, 2, 3), 8.5, .5));
         pose.add(new FollowPath(new Pose2d(20, 12, 0), new Pose2d(2, 2, 3), 8.5, .5));
         pose.add(new FollowPath(new Pose2d(50, 0, Math.toRadians(90)), new Pose2d(3, 3, 3), 8.5, .5));
@@ -29,6 +31,8 @@ public class TestDriveFollowPath extends AutoModeBase {
         runAction(new DriveFollowPath(pose));
         pose.clear();
 
+//      OLD CODE
+//
 //        runAction(new DriveFollowPath(
 //                new Pose2d[]{
 //                        new Pose2d(12, 24, 0),

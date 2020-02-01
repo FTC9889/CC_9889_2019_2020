@@ -238,6 +238,7 @@ public class RedAuto extends AutoModeBase {
         runAction(new DriveFollowPath(pose));
         pose.clear();
 
+        Robot.getIntake().SetIntakePower(0);
         runAction(new DriveToFoundation(2000, 180));
         runAction(new FoundationHookClose());
 
@@ -267,16 +268,16 @@ public class RedAuto extends AutoModeBase {
                 break;
 
             case MIDDLE:
-                pose.add(new FollowPath(new Pose2d(30, 0, Math.toRadians(-90)), new Pose2d(2, 2, 3), 3, .8));
-                pose.add(new FollowPath(new Pose2d(45, -13, Math.toRadians(-65)), new Pose2d(2, 2, 3), 3, .5));
-                pose.add(new FollowPath(new Pose2d(30, -13, Math.toRadians(-90)), new Pose2d(2, 2, 3), 3, .5));
+                pose.add(new FollowPath(new Pose2d(30, -3, Math.toRadians(-90)), new Pose2d(2, 2, 3), 3, .8));
+                pose.add(new FollowPath(new Pose2d(45, -11, Math.toRadians(-65)), new Pose2d(2, 2, 3), 3, .5));
+                pose.add(new FollowPath(new Pose2d(30, -11, Math.toRadians(-90)), new Pose2d(2, 2, 3), 3, .5));
                 runAction(new DriveFollowPath(pose));
                 pose.clear();
                 break;
 
             case LEFT:
-                pose.add(new FollowPath(new Pose2d(30, -5, Math.toRadians(-90)), new Pose2d(2, 2, 3), 7.5, .8));
-                pose.add(new FollowPath(new Pose2d(30, -5, Math.toRadians(-65)), new Pose2d(2, 2, 3), 7.5, .8));
+                pose.add(new FollowPath(new Pose2d(30, -15, Math.toRadians(-90)), new Pose2d(2, 2, 3), 7.5, .8));
+                pose.add(new FollowPath(new Pose2d(30, -15, Math.toRadians(-65)), new Pose2d(2, 2, 3), 7.5, .8));
                 pose.add(new FollowPath(new Pose2d(45, -25, Math.toRadians(-65)), new Pose2d(2, 2, 3), 3, .8));
                 pose.add(new FollowPath(new Pose2d(30, -22, Math.toRadians(-90)), new Pose2d(2, 2, 3), 3, .5));
                 runAction(new DriveFollowPath(pose));
@@ -289,6 +290,7 @@ public class RedAuto extends AutoModeBase {
         runAction(new DriveFollowPath(pose));
         pose.clear();
 
+        Robot.getIntake().SetIntakePower(0);
         ThreadAction(new LiftUp(250, -.8));
         ThreadAction(new LiftOut());
         runAction(new DriveToFoundation(2000, -90));
@@ -334,6 +336,7 @@ public class RedAuto extends AutoModeBase {
         runAction(new DriveFollowPath(pose));
         pose.clear();
 
+        Robot.getIntake().SetIntakePower(0);
         runAction(new LiftUp(250, -1));
         ThreadAction(new LiftOut());
 
