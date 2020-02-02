@@ -238,9 +238,10 @@ public class RedAuto extends AutoModeBase {
         runAction(new DriveFollowPath(pose));
         pose.clear();
 
-        Robot.getIntake().SetIntakePower(0);
+        Robot.getIntake().SetIntakePower(-.3);
         runAction(new DriveToFoundation(2000, 180));
         runAction(new FoundationHookClose());
+        Robot.getIntake().SetIntakePower(0);
 
         ThreadAction(new LiftUp(250, -.4));
         ThreadAction(new LiftOut());
