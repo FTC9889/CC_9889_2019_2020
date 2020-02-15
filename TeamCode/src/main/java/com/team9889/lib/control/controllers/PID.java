@@ -33,6 +33,8 @@ public class PID extends FeedBackController {
 
     private double error = 1000000;
 
+    double derivative;
+
 
     @Override
     public double update(double current, double wanted) {
@@ -51,7 +53,9 @@ public class PID extends FeedBackController {
             integral = integral + (error *currentTime);
             if (integral > maxIntegral)
                 integral = 0;
-            double derivative = (error - error_prior)/currentTime;
+            if (currentTime != 0)
+                derivative = (error - error_prior)/currentTime;
+
             output = (p * error) + (i * integral) + (d * derivative);
         }
 

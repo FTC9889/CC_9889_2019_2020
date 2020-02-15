@@ -1,5 +1,8 @@
 package com.team9889.ftc2019.auto.actions.drive;
 
+import android.os.health.PidHealthStats;
+import android.util.Log;
+
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
@@ -36,7 +39,8 @@ public class DriveFollowPath extends Action {
 
 
     // Controllers
-    private PID xPID = new PID(-0.1, 0, 0);
+    // XPID tuned
+    private PID xPID = new PID(-0.2, 0, -16);
     private PID yPID = new PID(-0.1, 0, 0);
     private PID turnPID = new PID(0.03, 0, 0.1);
 
@@ -117,14 +121,12 @@ public class DriveFollowPath extends Action {
 //    }
 
     public DriveFollowPath(List<FollowPath> path){
-//        for (int i = 0; i < path.size(); i++){
-//            this.path = path;
-//            tolerancePoses[i] = path.get(i).getTollerancePose();
-//            r[i] = path.get(i).getRadius();
-//            maxVels[i] = path.get(i).getMaxVelocity();
-//        }
-
         this.path = path;
+    }
+
+    public DriveFollowPath(List<FollowPath> path, PID xPID){
+        this.path = path;
+        this.xPID = xPID;
     }
 
     @Override
@@ -186,6 +188,8 @@ public class DriveFollowPath extends Action {
         double x_power = xPID.update(wantedPose.getX(), x);
         double y_power = yPID.update(wantedPose.getY(), y);
 
+        Log.i("X Power", "" + x_power);
+
         double currentAngle = mDrive.gyroAngle.getTheda(AngleUnit.RADIANS);
         double dx = Math.cos(wantedPose.getHeading() - currentAngle);
         double dy = Math.sin(wantedPose.getHeading() - currentAngle);
@@ -194,8 +198,8 @@ public class DriveFollowPath extends Action {
 
         double rotation = turnPID.update(turn, 0);
 
-        x_power = CruiseLib.limitValue(x_power, maxVel, -maxVel);
-        y_power = CruiseLib.limitValue(y_power, maxVel, -maxVel);
+        x_power = CruiseLib.limitValue(x_power, -0.05, -maxVel, 0.05, maxVel);
+        y_power = CruiseLib.limitValue(y_power, -0.05, -maxVel, 0.05, maxVel);
         rotation = CruiseLib.limitValue(rotation, maxVel);
 
         mDrive.setFieldCentricAutoPower(y_power, x_power, rotation);
