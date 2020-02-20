@@ -75,12 +75,7 @@ public class Intake extends Subsystem {
     public void IntakeUp(){
         SetIntakeHeight(0, 1);
     }
-
-    public void DeployCapStone() {
-        Robot.getInstance().teamMarkerDeployServo.setPower(1);
-    }
-
-    public void StopCapStone() {
-        Robot.getInstance().teamMarkerDeployServo.setPower(0);
+    public void IntakeFlip(){
+        SetIntakeHeight(.46, .5);
     }
 }

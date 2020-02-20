@@ -133,8 +133,19 @@ public class DriverStation {
         return gamepad1.dpad_left;
     }
 
-    boolean capStone() {
-        return gamepad2.a;
+    private boolean capStoneToggle = true;
+    private boolean capStoneDeployed = false;
+    boolean capStone(boolean override) {
+        if ((gamepad2.a) && capStoneToggle) {
+            capStoneDeployed = !capStoneDeployed;
+            capStoneToggle = false;
+        } else if (!gamepad2.a)
+            capStoneToggle = true;
+
+        if(!override)
+            capStoneToggle = true;
+
+        return capStoneDeployed;
     }
 
     boolean releaseTapeMeasure() {

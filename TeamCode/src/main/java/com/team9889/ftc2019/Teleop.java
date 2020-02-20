@@ -120,31 +120,7 @@ public class Teleop extends Team9889Linear {
                     automateScoring = driverStation.scoreStone() && !driverStation.getLinearBarIn(true);
                     automatedScoringTimer.reset();
 
-                    automateCapStone = driverStation.capStone();
-                    automatedCapStoneTimer.reset();
                     first = true;
-                } else if (automateCapStone) {
-                    if (Robot.blockDetector.getDistance(DistanceUnit.INCH) < 4) {
-                        if (automatedCapStoneTimer.milliseconds() < 200) {
-                            stoneWasThere = true;
-                            Robot.getLift().GrabberOpen();
-                            Robot.getIntake().Stop();
-                            Robot.getLift().SetLiftPower(-1);
-                        } else if (automatedCapStoneTimer.milliseconds() > 199 && automatedCapStoneTimer.milliseconds() < 3500) {
-                            Robot.getLift().SetLiftPower(0);
-                            Robot.getIntake().DeployCapStone();
-                        } else if (automatedCapStoneTimer.milliseconds() > 3499 && automatedCapStoneTimer.milliseconds() < 3700) {
-                            Robot.getLift().SetLiftPower(1);
-                            Robot.getIntake().StopCapStone();
-                        } else if (automatedCapStoneTimer.milliseconds() > 3699 && automatedCapStoneTimer.milliseconds() < 4000
-                                || automatedCapStoneTimer.milliseconds() > 3499 && Robot.downLimit.isPressed()) {
-                            Robot.getLift().GrabberClose();
-                            Robot.getLift().SetLiftPower(0);
-                            automateCapStone = false;
-                            stoneWasThere = false;
-                        }
-
-                    }
                 } else {
                     if (automatedScoringTimer.milliseconds() < 500) {
                         Robot.getLift().GrabberOpen();
@@ -163,12 +139,20 @@ public class Teleop extends Team9889Linear {
                     first = false;
                 }
 
+                if (driverStation.capStone(true)){
+                    Robot.teamMarkerDeployServo.setPosition(-1);
+                }else {
+                    Robot.teamMarkerDeployServo.setPosition(.96);
+                }
+
                 if (matchTime.seconds() > 120 - 30 && driverStation.releaseTapeMeasure())
                     Robot.tapeMeasureDeploy.setPosition(0.5);
 
                 // Intake Servos
                 if (driverStation.getIntake())
                     Robot.getIntake().IntakeDown();
+                else if (gamepad1.dpad_down)
+                    Robot.getIntake().IntakeFlip();
                 else
                     Robot.getIntake().IntakeUp();
 

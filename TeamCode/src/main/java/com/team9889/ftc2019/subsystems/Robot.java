@@ -53,7 +53,7 @@ public class Robot{
 
     public Servo tapeMeasureDeploy;
 
-    public CRServo teamMarkerDeployServo;
+    public Servo teamMarkerDeployServo;
 
     public boolean redAuto;
 
@@ -142,7 +142,7 @@ public class Robot{
 
         odometryLifter = hardwareMap.get(Servo.class, Constants.OdometryConstants.kOdometryLift);
 
-        teamMarkerDeployServo = hardwareMap.get(CRServo.class, Constants.IntakeConstants.kCapStone);
+        teamMarkerDeployServo = hardwareMap.get(Servo.class, Constants.IntakeConstants.kCapStone);
 
         tapeMeasureDeploy = hardwareMap.get(Servo.class, Constants.kTMShooter);
         tapeMeasureDeploy.setPosition(1);

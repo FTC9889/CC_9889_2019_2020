@@ -42,7 +42,7 @@ public class MecanumDrive extends Subsystem {
 
     @Override
     public void outputToTelemetry(Telemetry telemetry) {
-//        telemetry.addData("Pose of Robot", getCurrentPose().toString());
+        telemetry.addData("Pose of Robot", getCurrentPose().toString());
     }
 
     @Override
@@ -58,7 +58,7 @@ public class MecanumDrive extends Subsystem {
     }
 
     public double Right_OdometryPosition() {
-        return (-Robot.getInstance().intakeRight.getPosition() * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO) - Right_Position_Offset;
+        return (-Robot.getInstance().intakeLeft.getPosition() * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO) - Right_Position_Offset;
     }
 
     public double Left_OdometryPosition() {
@@ -66,7 +66,7 @@ public class MecanumDrive extends Subsystem {
     }
 
     public double Y_OdometryPosition() {
-        return (Robot.getInstance().intakeLeft.getPosition() * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO) - Y_Position_Offset;
+        return (Robot.getInstance().intakeRight.getPosition() * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO) - Y_Position_Offset;
     }
 
     public Pose2d getCurrentPose() {
@@ -169,7 +169,7 @@ public class MecanumDrive extends Subsystem {
         Odometry() {
             super(Arrays.asList(
                     new Pose2d(-1.375, -LATERAL_DISTANCE - 0.25, Math.toRadians(0)),
-                    new Pose2d(FORWARD_OFFSET + 0.25, LATERAL_DISTANCE + 0.25, Math.toRadians(0)),
+                    new Pose2d(FORWARD_OFFSET + 0.25, LATERAL_DISTANCE + 0.25, Math.toRadians(180)),
                     new Pose2d(0.25, LATERAL_DISTANCE, Math.toRadians(90))
             ));
         }
@@ -177,7 +177,6 @@ public class MecanumDrive extends Subsystem {
         @Override
         public List<Double> getWheelPositions() {
             return Arrays.asList(
-
                     Robot.getInstance().getMecanumDrive().Left_OdometryPosition(),
                     Robot.getInstance().getMecanumDrive().Right_OdometryPosition(),
                     Robot.getInstance().getMecanumDrive().Y_OdometryPosition()

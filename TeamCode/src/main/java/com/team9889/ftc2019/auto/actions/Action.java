@@ -1,5 +1,10 @@
 package com.team9889.ftc2019.auto.actions;
 
+import com.team9889.ftc2019.Team9889Linear;
+import com.team9889.ftc2019.auto.AutoModeBase;
+
+import java.util.List;
+
 /**
  * Created by joshua9889 on 8/26/2018.
  */
