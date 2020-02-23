@@ -1,5 +1,7 @@
 package com.team9889.ftc2019.subsystems;
 
+import android.util.Log;
+
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.ThreeTrackingWheelLocalizer;
 import com.team9889.ftc2019.Constants;
@@ -29,6 +31,8 @@ public class MecanumDrive extends Subsystem {
 
     private String filename = "gyro.txt";
 
+    private boolean first = true;
+
     @Override
     public void init(boolean auto) {
         if(auto) {
@@ -42,6 +46,12 @@ public class MecanumDrive extends Subsystem {
 
     @Override
     public void outputToTelemetry(Telemetry telemetry) {
+        Log.i("Pose Of Robot", "" + getCurrentPose());
+        telemetry.addData("Left", "" + Left_OdometryPosition());
+        telemetry.addData("Right", "" + Right_OdometryPosition());
+        telemetry.addData("Side", "" + Y_OdometryPosition());
+        telemetry.addData("Right Offset", "" + Right_Position_Offset);
+
         telemetry.addData("Pose of Robot", getCurrentPose().toString());
     }
 
@@ -49,6 +59,11 @@ public class MecanumDrive extends Subsystem {
     public void update() {
         odometry.update();
         currentPose = odometry.getPoseEstimate();
+
+//        if (first){
+//            resetOdometryEncoders();
+//            first = false;
+//        }
     }
 
     private void resetOdometryEncoders() {
@@ -58,11 +73,11 @@ public class MecanumDrive extends Subsystem {
     }
 
     public double Right_OdometryPosition() {
-        return (-Robot.getInstance().intakeLeft.getPosition() * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO) - Right_Position_Offset;
+        return (Robot.getInstance().intakeLeft.getPosition() * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO) - Right_Position_Offset;
     }
 
     public double Left_OdometryPosition() {
-        return (-Robot.getInstance().leftLift.getPosition() * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO) - Left_Position_Offset;
+        return (Robot.getInstance().leftLift.getPosition() * Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO) - Left_Position_Offset;
     }
 
     public double Y_OdometryPosition() {
@@ -168,8 +183,8 @@ public class MecanumDrive extends Subsystem {
 
         Odometry() {
             super(Arrays.asList(
-                    new Pose2d(-1.375, -LATERAL_DISTANCE - 0.25, Math.toRadians(0)),
-                    new Pose2d(FORWARD_OFFSET + 0.25, LATERAL_DISTANCE + 0.25, Math.toRadians(180)),
+                    new Pose2d(-1.375, -LATERAL_DISTANCE - 0.25, Math.toRadians(180)),
+                    new Pose2d(FORWARD_OFFSET, LATERAL_DISTANCE + 0.25, Math.toRadians(0)),
                     new Pose2d(0.25, LATERAL_DISTANCE, Math.toRadians(90))
             ));
         }

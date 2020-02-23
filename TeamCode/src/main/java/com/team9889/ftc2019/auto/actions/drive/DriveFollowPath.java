@@ -6,7 +6,6 @@ import android.util.Log;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
-import com.team9889.ftc2019.auto.AutoModeBase;
 import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.MecanumDrive;
 import com.team9889.ftc2019.subsystems.Robot;
@@ -18,6 +17,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Eric on 1/10/2020.
@@ -61,6 +61,8 @@ public class DriveFollowPath extends Action {
 
     private double time;
     private ElapsedTime tempTimer = new ElapsedTime();
+
+    double currentAngle;
 
     // Drivetrain object
     private MecanumDrive mDrive = Robot.getInstance().getMecanumDrive();
@@ -187,25 +189,51 @@ public class DriveFollowPath extends Action {
 //        RobotLog.a("Distance From line: " + String.valueOf(pDistance(x, y, endOfNextLineX, endOfNextLineY, startOfNextLineX, startOfNextLineY)));
 
         double x_power = xPID.update(wantedPose.getX(), x);
+
         double y_power = yPID.update(wantedPose.getY(), y);
 
         Log.i("X Power", "" + x_power);
 
-        double currentAngle = mDrive.gyroAngle.getTheda(AngleUnit.RADIANS);
-        double dx = Math.cos(wantedPose.getHeading() - currentAngle);
-        double dy = Math.sin(wantedPose.getHeading() - currentAngle);
-        double turn = Math.toDegrees(Math.atan2(dy, dx));
-        turn *= -1;
+        if (Robot.getInstance().getMecanumDrive().getCurrentPose().getHeading() > 180){
+            currentAngle = Math.toRadians(Robot.getInstance().getMecanumDrive().getCurrentPose().getHeading() - 360);
+//                    + (Robot.getInstance().getMecanumDrive().getCurrentPose().getHeading() - 180));
+        }else if (Robot.getInstance().getMecanumDrive().getCurrentPose().getHeading() < -180){
+            currentAngle = Math.toRadians(-Robot.getInstance().getMecanumDrive().getCurrentPose().getHeading()
+                    - (Robot.getInstance().getMecanumDrive().getCurrentPose().getHeading() + 180));
+        }else {
+            currentAngle = Math.toRadians(Robot.getInstance().getMecanumDrive().getCurrentPose().getHeading());
+        }
+
+//        currentAngle = mDrive.gyroAngle.getTheda(AngleUnit.RADIANS);
+//        double dx = Math.cos(wantedPose.getHeading() - currentAngle);
+//        double dy = Math.sin(wantedPose.getHeading() - currentAngle);
+//        double turn = Math.toDegrees(Math.atan2(dy, dx));
+
+        double wP;
+        if (wantedPose.getHeading() < 0){
+            wP = wantedPose.getHeading() + 360;
+        }else
+            wP = wantedPose.getHeading();
+
+//        double turn = wP - Robot.getInstance().getMecanumDrive().getCurrentPose().getHeading();
+        double turn = wP - currentAngle;
+//        turn *= -1;
 
         double rotation = turnPID.update(turn, 0);
 
-        x_power = CruiseLib.limitValue(x_power, -0.05, -maxVel, 0.05, maxVel);
-        y_power = CruiseLib.limitValue(y_power, -0.05, -maxVel, 0.05, maxVel);
+        if (Math.abs(xPID.getError()) > 1)
+            x_power = CruiseLib.limitValue(x_power, -0.15, -maxVel, 0.15, maxVel);
+        else
+            x_power = 0;
+
+        if (Math.abs(yPID.getError()) > 1)
+            y_power = CruiseLib.limitValue(y_power, -0.15, -maxVel, 0.15, maxVel);
+        else
+            y_power = 0;
+
         rotation = CruiseLib.limitValue(rotation, maxVel);
 
         mDrive.setFieldCentricAutoPower(y_power, x_power, rotation);
-
-
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.team9889.ftc2019.subsystems;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -166,14 +167,19 @@ public class Robot{
         RobotLog.v("loop time " + (timer.milliseconds()));
 
 
-        if (redAuto && mAuto) {
-                getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
-        }else {
+//        if (redAuto && mAuto) {
+//                getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+//        }else {
             if (Robot.gyroTimer.milliseconds() > 100) {
                 gyroTimer.reset();
                 getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+
+//                if (getMecanumDrive().currentPose.getX() > getMecanumDrive().currentPose.getY())
+//                    getMecanumDrive().setCurrentPose(new Pose2d(getMecanumDrive().currentPose.getY(), getMecanumDrive().currentPose.getY(), getMecanumDrive().gyroAngle.getTheda(AngleUnit.DEGREES)));
+//                else if (getMecanumDrive().currentPose.getY() > getMecanumDrive().currentPose.getX())
+//                    getMecanumDrive().setCurrentPose(new Pose2d(getMecanumDrive().currentPose.getX(), getMecanumDrive().currentPose.getX(), getMecanumDrive().gyroAngle.getTheda(AngleUnit.DEGREES)));
             }
-        }
+//        }
         if (mAuto){
 //            bulkDataMaster = revHubMaster.getBulkInputData();
             bulkDataSlave = revHubSlave.getBulkInputData();

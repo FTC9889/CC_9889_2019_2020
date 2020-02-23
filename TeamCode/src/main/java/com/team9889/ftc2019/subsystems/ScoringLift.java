@@ -94,10 +94,10 @@ public class ScoringLift extends Subsystem{
     }
 
     public void LiftBrakeEngaged(){
-        Robot.getInstance().liftBrake.setPosition(.6);
+        Robot.getInstance().liftBrake.setPosition(.66);
     }
     public void LiftBrakeDisengaged(){
-        Robot.getInstance().liftBrake.setPosition(.55);
+        Robot.getInstance().liftBrake.setPosition(.61);
     }
 
     public boolean isDown() {
