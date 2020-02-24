@@ -31,7 +31,7 @@ public class MecanumDrive extends Subsystem {
 
     private String filename = "gyro.txt";
 
-    private boolean first = true;
+    public boolean first = true, updated = false;
 
     @Override
     public void init(boolean auto) {
@@ -47,17 +47,29 @@ public class MecanumDrive extends Subsystem {
     @Override
     public void outputToTelemetry(Telemetry telemetry) {
         Log.i("Pose Of Robot", "" + getCurrentPose());
-        telemetry.addData("Left", "" + Left_OdometryPosition());
-        telemetry.addData("Right", "" + Right_OdometryPosition());
+        telemetry.addData("Left Encoder", "" + Robot.getInstance().leftLift.getPosition());
+        telemetry.addData("Right Encoder", "" + Robot.getInstance().intakeRight.getPosition());
         telemetry.addData("Side", "" + Y_OdometryPosition());
         telemetry.addData("Right Offset", "" + Right_Position_Offset);
 
         telemetry.addData("Pose of Robot", getCurrentPose().toString());
+
+        Log.i("Right Offset", "" + Right_Position_Offset);
+        Log.i("Left Offset", "" + Left_Position_Offset);
+        Log.i("Side Offset", "" + Y_Position_Offset);
+
+
     }
 
     @Override
     public void update() {
         odometry.update();
+        if (updated) {
+            setCurrentPose(new Pose2d(odometry.getPoseEstimate().getX(),
+                    odometry.getPoseEstimate().getY(),
+                    gyroAngle.getTheda(AngleUnit.RADIANS)));
+            updated = false;
+        }
         currentPose = odometry.getPoseEstimate();
 
 //        if (first){
@@ -179,13 +191,13 @@ public class MecanumDrive extends Subsystem {
     public class Odometry extends ThreeTrackingWheelLocalizer {
 
         private static final double LATERAL_DISTANCE = 7.25;
-        private static final double FORWARD_OFFSET = 2.75 + (1.0/16.0);
+        private static final double FORWARD_OFFSET = 2.5 + (1.0/16.0);
 
         Odometry() {
             super(Arrays.asList(
                     new Pose2d(-1.375, -LATERAL_DISTANCE - 0.25, Math.toRadians(180)),
                     new Pose2d(FORWARD_OFFSET, LATERAL_DISTANCE + 0.25, Math.toRadians(0)),
-                    new Pose2d(0.25, LATERAL_DISTANCE, Math.toRadians(90))
+                    new Pose2d(0.25, LATERAL_DISTANCE, Math.toRadians(-90))
             ));
         }
 

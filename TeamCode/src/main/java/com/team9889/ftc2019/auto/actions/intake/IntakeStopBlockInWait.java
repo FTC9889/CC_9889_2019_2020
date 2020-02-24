@@ -9,9 +9,14 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 /**
  * Created by Eric on 11/22/2019.
  */
-public class IntakeStopBlockInRed extends Action {
+public class IntakeStopBlockInWait extends Action {
     private boolean finished = false;
-    private ElapsedTime timer = new ElapsedTime();
+    private int time;
+    private ElapsedTime timer = new ElapsedTime(), waitTimer = new ElapsedTime();
+
+    public IntakeStopBlockInWait(int time){
+        this.time = time;
+    }
 
     @Override
     public void setup(String args) {
@@ -21,19 +26,28 @@ public class IntakeStopBlockInRed extends Action {
     @Override
     public void start() {
         timer.reset();
-
-        Robot.getInstance().getIntake().SetIntakePower(.5);
-        Robot.getInstance().getIntake().SetRollerPower(.5);
+        waitTimer.reset();
     }
 
     @Override
     public void update() {
-
+        if (waitTimer.milliseconds() > time){
+            Robot.getInstance().getIntake().SetIntakePower(.5);
+            Robot.getInstance().getIntake().SetRollerPower(.5);
+        }
     }
 
     @Override
     public boolean isAtPose() {
-            return Robot.getInstance().blockDetector.getDistance(DistanceUnit.INCH) < 4;
+        if (waitTimer.milliseconds() > time) {
+            if (timer.milliseconds() > 130) {
+                timer.reset();
+                return Robot.getInstance().blockDetector.getDistance(DistanceUnit.INCH) < 4;
+            } else
+                return false;
+        }
+        else
+            return false;
     }
 
     @Override

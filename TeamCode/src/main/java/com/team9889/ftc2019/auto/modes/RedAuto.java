@@ -1,5 +1,7 @@
 package com.team9889.ftc2019.auto.modes;
 
+import android.util.Log;
+
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -8,6 +10,7 @@ import com.team9889.ftc2019.auto.actions.Wait;
 import com.team9889.ftc2019.auto.actions.drive.Drive3DimensionalPID;
 import com.team9889.ftc2019.auto.actions.drive.DriveFollowPath;
 import com.team9889.ftc2019.auto.actions.drive.DriveToFoundation;
+import com.team9889.ftc2019.auto.actions.drive.Foundation;
 import com.team9889.ftc2019.auto.actions.foundation.FoundationHookClose;
 import com.team9889.ftc2019.auto.actions.foundation.FoundationHookOpen;
 import com.team9889.ftc2019.auto.actions.intake.Intake;
@@ -16,10 +19,15 @@ import com.team9889.ftc2019.auto.actions.intake.IntakeRollerOn;
 import com.team9889.ftc2019.auto.actions.intake.IntakeRollerStop;
 import com.team9889.ftc2019.auto.actions.intake.IntakeStopBlockIn;
 import com.team9889.ftc2019.auto.actions.lift.CloseGrabber;
+import com.team9889.ftc2019.auto.actions.lift.Lift;
 import com.team9889.ftc2019.auto.actions.lift.LiftIn;
+import com.team9889.ftc2019.auto.actions.lift.LiftLinearBar;
 import com.team9889.ftc2019.auto.actions.lift.LiftOut;
 import com.team9889.ftc2019.auto.actions.lift.LiftUp;
+import com.team9889.ftc2019.auto.actions.lift.LiftWait;
+import com.team9889.ftc2019.auto.actions.lift.LinearWait;
 import com.team9889.ftc2019.auto.actions.lift.OpenGrabber;
+import com.team9889.ftc2019.auto.actions.lift.OpenGrabberWait;
 import com.team9889.lib.FollowPath;
 
 import org.opencv.core.Mat;
@@ -51,13 +59,43 @@ public class RedAuto extends AutoModeBase {
                 break;
 
             case LEFT:
-                pose.add(new FollowPath(new Pose2d(7, 0 * Side.getNum(Side_), Math.toRadians(0) * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
-                pose.add(new FollowPath(new Pose2d(36, -25 * Side.getNum(Side_), Math.toRadians(-35) * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, 1));
-                pose.add(new FollowPath(new Pose2d(24, -10 * Side.getNum(Side_), Math.toRadians(-90) * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, 1));
+                pose.add(new FollowPath(new Pose2d(4, 0 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, 1));
+                pose.add(new FollowPath(new Pose2d(38, -15 * Side.getNum(Side_), -30 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+                pose.add(new FollowPath(new Pose2d(30, -15 * Side.getNum(Side_), -30 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+                pose.add(new FollowPath(new Pose2d(24, -10 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, 1));
                 break;
         }
+        pose.add(new FollowPath(new Pose2d(24, 39 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 6, 1));
+        pose.add(new FollowPath(new Pose2d(32, 72 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+        pose.add(new FollowPath(new Pose2d(36, 82 * Side.getNum(Side_), -180 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+
         runAction(new DriveFollowPath(pose));
         pose.clear();
+
+        runAction(new DriveToFoundation(3000, -180));
+
+        ThreadAction(new LiftWait(0, -.5, 200));
+        ThreadAction(new LiftWait(1500, .5, 300));
+        ThreadAction(new LinearWait(150, true));
+        ThreadAction(new OpenGrabberWait(1000, true));
+        ThreadAction(new LinearWait(1500, false));
+        ThreadAction(new Foundation(false, 55, false));
+        runAction(new FoundationHookClose());
+
+        ThreadAction(new IntakeStopBlockIn());
+        pose.add(new FollowPath(new Pose2d(24, 50 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+        pose.add(new FollowPath(new Pose2d(24, 20 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, 1));
+        pose.add(new FollowPath(new Pose2d(27, 10 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, 1));
+        pose.add(new FollowPath(new Pose2d(36, 4 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+        runAction(new DriveFollowPath(pose));
+        pose.clear();
+
+        ThreadAction(new Lift(-.5, 200, 50, true));
+        pose.add(new FollowPath(new Pose2d(24, 10 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+        pose.add(new FollowPath(new Pose2d(24, 50 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+
+
+        runAction(new DriveFollowPath(pose));
 
         pose.add(new FollowPath(new Pose2d(0, 0 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
 

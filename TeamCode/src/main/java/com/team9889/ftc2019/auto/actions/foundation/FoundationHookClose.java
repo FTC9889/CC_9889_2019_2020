@@ -25,7 +25,7 @@ public class FoundationHookClose extends Action {
     public void update() {}
 
     @Override
-    public boolean isFinished() {
+    public boolean isAtPose() {
         return timer.milliseconds() > 500;
     }
 

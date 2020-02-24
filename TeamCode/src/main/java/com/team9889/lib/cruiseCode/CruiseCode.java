@@ -104,7 +104,7 @@ public class CruiseCode {
     private void runAction(Action action){
         action.start();
 
-        while (!action.isFinished())
+        while (!action.isAtPose())
             action.update();
 
         action.done();

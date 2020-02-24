@@ -33,7 +33,7 @@ public class Wait extends Action {
     public void update() {}
 
     @Override
-    public boolean isFinished() {
+    public boolean isAtPose() {
         return t.milliseconds()>timeToWaitMilli;
     }
 

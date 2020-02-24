@@ -52,7 +52,7 @@ public class Intake extends Action {
     }
 
     @Override
-    public boolean isFinished() {
+    public boolean isAtPose() {
         return timer.milliseconds() > 300;
     }
 

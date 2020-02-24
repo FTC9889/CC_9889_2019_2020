@@ -27,7 +27,7 @@ public class IntakeUp extends Action {
     }
 
     @Override
-    public boolean isFinished() {
+    public boolean isAtPose() {
         return timer.milliseconds() > 1000;
     }
 

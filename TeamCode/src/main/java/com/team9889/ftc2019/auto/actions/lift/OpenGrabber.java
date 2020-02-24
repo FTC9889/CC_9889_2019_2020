@@ -25,7 +25,7 @@ public class OpenGrabber extends Action {
     public void update() {}
 
     @Override
-    public boolean isFinished() {
+    public boolean isAtPose() {
         return timer.milliseconds() > 500;
     }
 

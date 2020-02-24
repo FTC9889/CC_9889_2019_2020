@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.RobotLog;
 import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.Robot;
 import com.team9889.lib.detectors.ScanForSkyStonesPipeline;
@@ -15,13 +14,6 @@ import com.team9889.lib.detectors.TeleOpStonePipeline;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
-
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by joshua9889 on 3/28/2018.
@@ -135,7 +127,7 @@ public abstract class Team9889Linear extends LinearOpMode {
         if(opModeIsActive())
             action.start();
 
-        while (!action.isFinished() && opModeIsActive()) {
+        while (!action.isAtPose() && opModeIsActive()) {
             action.update();
         }
 

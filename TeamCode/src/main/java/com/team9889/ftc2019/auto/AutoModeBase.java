@@ -4,10 +4,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team9889.ftc2019.Team9889Linear;
 import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.auto.actions.RobotUpdate;
-import com.team9889.ftc2019.auto.modes.RedAuto;
-import com.team9889.lib.android.FileReader;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 /**
@@ -102,7 +99,7 @@ public abstract class AutoModeBase extends Team9889Linear {
         if(opModeIsActive() && !isStopRequested())
             action.start();
 
-        while (!action.isFinished() && opModeIsActive() && !isStopRequested()) {
+        while (!action.isAtPose() && opModeIsActive() && !isStopRequested()) {
             action.update();
             Robot.outputToTelemetry(telemetry);
             telemetry.update();
@@ -149,7 +146,7 @@ public abstract class AutoModeBase extends Team9889Linear {
         while (!all_finished && opModeIsActive() && !isStopRequested()) {
             all_finished = false;
             for (Action action : actions) {
-                if (!action.isFinished()) {
+                if (!action.isAtPose()) {
                     action.update();
                     all_finished = true;
                 }

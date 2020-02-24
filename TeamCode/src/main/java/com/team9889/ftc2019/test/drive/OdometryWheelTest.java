@@ -52,8 +52,14 @@ public class OdometryWheelTest extends AutoModeBase {
 //            telemetry.update();
 //        }
 
-        pose.add(new FollowPath(new Pose2d(20, 0, 0), new Pose2d(2, 2, 3), 4, 1));
-        pose.add(new FollowPath(new Pose2d(20, 0, 0), new Pose2d(2, 2, 3), 4, 1));
-        runAction(new DriveFollowPath(pose));
+//        pose.add(new FollowPath(new Pose2d(20, 0, 0), new Pose2d(2, 2, 3), 4, 1));
+//        pose.add(new FollowPath(new Pose2d(20, 0, 0), new Pose2d(2, 2, 3), 4, 1));
+//        runAction(new DriveFollowPath(pose));
+
+        while (opModeIsActive()) {
+            telemetry.addData("Pose", Robot.getMecanumDrive().getCurrentPose());
+            Robot.outputToTelemetry(telemetry);
+            telemetry.update();
+        }
     }
 }

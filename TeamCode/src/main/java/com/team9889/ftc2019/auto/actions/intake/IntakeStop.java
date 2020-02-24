@@ -21,7 +21,7 @@ public class IntakeStop extends Action {
     public void update() {}
 
     @Override
-    public boolean isFinished() {
+    public boolean isAtPose() {
         return true;
     }
 

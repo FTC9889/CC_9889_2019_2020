@@ -173,11 +173,14 @@ public class Robot{
             if (Robot.gyroTimer.milliseconds() > 100) {
                 gyroTimer.reset();
                 getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+                getMecanumDrive().updated = true;
 
 //                if (getMecanumDrive().currentPose.getX() > getMecanumDrive().currentPose.getY())
 //                    getMecanumDrive().setCurrentPose(new Pose2d(getMecanumDrive().currentPose.getY(), getMecanumDrive().currentPose.getY(), getMecanumDrive().gyroAngle.getTheda(AngleUnit.DEGREES)));
 //                else if (getMecanumDrive().currentPose.getY() > getMecanumDrive().currentPose.getX())
 //                    getMecanumDrive().setCurrentPose(new Pose2d(getMecanumDrive().currentPose.getX(), getMecanumDrive().currentPose.getX(), getMecanumDrive().gyroAngle.getTheda(AngleUnit.DEGREES)));
+
+//                getMecanumDrive().setCurrentPose(new Pose2d(getMecanumDrive().getCurrentPose().getX(), getMecanumDrive().getCurrentPose().getY(), getMecanumDrive().gyroAngle.getTheda(AngleUnit.RADIANS)));
             }
 //        }
         if (mAuto){

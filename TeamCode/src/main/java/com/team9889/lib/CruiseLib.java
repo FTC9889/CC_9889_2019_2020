@@ -53,7 +53,7 @@ public class CruiseLib {
 
     public static double limitValue(double val, double negMin, double negMax,
                                     double posMin, double posMax){
-        if(val<negMin)
+        if(val>negMin && val<0)
             return negMin;
         else if(val>negMax && val<0)
             return negMax;

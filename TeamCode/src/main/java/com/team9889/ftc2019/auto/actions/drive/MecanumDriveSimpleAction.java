@@ -112,7 +112,7 @@ public class MecanumDriveSimpleAction extends Action {
 
     int angleCounter = 0;
     @Override
-    public boolean isFinished() {
+    public boolean isAtPose() {
         if (Math.abs(turnPID.getError()) < 3) angleCounter++;
 
         return follower.isFinished() && angleCounter > 3 || timeOut < timer.milliseconds();

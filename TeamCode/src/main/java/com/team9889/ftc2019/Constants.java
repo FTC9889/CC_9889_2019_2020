@@ -51,7 +51,7 @@ public class Constants {
     public static class OdometryConstants {
         public final static String kOdometryLift = "ol"; // Hub 1, port 3
 
-        private static double WheelDiameter = 35 / 25.4;  // https://www.rotacaster.com.au/shop/35mm-rotacaster-wheels/index
+        private static double WheelDiameter = 38.4 / 25.4;  // https://www.rotacaster.com.au/shop/35mm-rotacaster-wheels/index
         public final static double ENCODER_TO_DISTANCE_RATIO = (WheelDiameter * Math.PI) / 1440; // https://www.rotacaster.com.au/shop/35mm-rotacaster-wheels/index  Step 4
     }
 

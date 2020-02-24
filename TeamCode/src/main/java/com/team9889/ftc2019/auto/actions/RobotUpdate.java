@@ -32,7 +32,7 @@ public class RobotUpdate extends Action{
     }
 
     @Override
-    public boolean isFinished() {
+    public boolean isAtPose() {
         return false;
     }
 

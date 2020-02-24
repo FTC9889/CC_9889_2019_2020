@@ -32,7 +32,7 @@ public class LiftUp extends Action {
     }
 
     @Override
-    public boolean isFinished() {
+    public boolean isAtPose() {
         return timer.milliseconds() > height;
     }
 

@@ -1,4 +1,4 @@
-package com.team9889.ftc2019.auto.actions.lift;
+package com.team9889.ftc2019.auto.actions.drive;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.team9889.ftc2019.auto.actions.Action;
@@ -8,34 +8,34 @@ import com.team9889.lib.CruiseLib;
 /**
  * Created by Eric on 2/17/2020.
  */
-public class LiftLinearBar extends Action {
-    private boolean linearBarIn, poseBool = false, xBool = false, yBool = false, xGreaterThan, yGreaterThan, finished;
+public class Foundation extends Action {
+    private boolean foundationDown, poseBool = false, xBool = false, yBool = false, xGreaterThan, yGreaterThan, finished;
     private Pose2d pose;
     private double tolerance, x, y;
 
-    public LiftLinearBar(boolean linearBarIn){
-        this.linearBarIn = linearBarIn;
+    public Foundation(boolean foundationDown){
+        this.foundationDown = foundationDown;
         poseBool = false;
         xBool = false;
         yBool = false;
     }
 
-    public LiftLinearBar(boolean linearBarIn, Pose2d pose, double tolerance){
-        this.linearBarIn = linearBarIn;
+    public Foundation(boolean foundationDown, Pose2d pose, double tolerance){
+        this.foundationDown = foundationDown;
         this.pose = pose;
         this.tolerance = tolerance;
         poseBool = true;
     }
 
-    public LiftLinearBar(boolean linearBarIn, boolean xGreaterThan, double x){
-        this.linearBarIn = linearBarIn;
+    public Foundation(boolean foundationDown, boolean xGreaterThan, double x){
+        this.foundationDown = foundationDown;
         this.x = x;
         this.xGreaterThan = xGreaterThan;
         xBool = true;
     }
 
-    public LiftLinearBar(boolean linearBarIn, double y, boolean yGreaterThan){
-        this.linearBarIn = linearBarIn;
+    public Foundation(boolean foundationDown, double y, boolean yGreaterThan){
+        this.foundationDown = foundationDown;
         this.y = y;
         this.yGreaterThan = yGreaterThan;
         yBool = true;
@@ -94,10 +94,10 @@ public class LiftLinearBar extends Action {
 
     @Override
     public void done() {
-        if (linearBarIn){
-            Robot.getInstance().getLift().LinearBarIn();
+        if (foundationDown){
+            Robot.getInstance().getMecanumDrive().CloseFoundationHook();
         }else {
-            Robot.getInstance().getLift().LinearBarOut();
+            Robot.getInstance().getMecanumDrive().OpenFoundationHook();
         }
     }
 }

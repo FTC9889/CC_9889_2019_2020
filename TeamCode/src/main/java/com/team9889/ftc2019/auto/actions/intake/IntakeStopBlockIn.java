@@ -33,7 +33,7 @@ public class IntakeStopBlockIn extends Action {
     }
 
     @Override
-    public boolean isFinished() {
+    public boolean isAtPose() {
         if (timer.milliseconds() > 130) {
             timer.reset();
             return Robot.getInstance().blockDetector.getDistance(DistanceUnit.INCH) < 4;

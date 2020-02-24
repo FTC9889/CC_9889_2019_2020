@@ -144,7 +144,7 @@ public class DimensionalPID extends Action {
 
     int angleCounter = 0;
     @Override
-    public boolean isFinished() {
+    public boolean isAtPose() {
         if (Math.abs(turnPID.getError()) < 3) angleCounter++;
 
         return follower.isFinished() && angleCounter > 3 && movement > eachMovement.length - 1;
