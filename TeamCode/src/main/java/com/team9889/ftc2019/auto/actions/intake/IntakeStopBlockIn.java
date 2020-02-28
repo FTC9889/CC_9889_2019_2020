@@ -23,8 +23,11 @@ public class IntakeStopBlockIn extends Action {
     public void start() {
         timer.reset();
 
-        Robot.getInstance().getIntake().SetIntakePower(.5);
+        Robot.getInstance().intakeRight.setPower(.85);
+        Robot.getInstance().intakeLeft.setPower(.7);
         Robot.getInstance().getIntake().SetRollerPower(.5);
+
+        Robot.getInstance().grabber.setPosition(1);
     }
 
     @Override
@@ -33,7 +36,7 @@ public class IntakeStopBlockIn extends Action {
     }
 
     @Override
-    public boolean isAtPose() {
+    public boolean isFinished() {
         if (timer.milliseconds() > 130) {
             timer.reset();
             return Robot.getInstance().blockDetector.getDistance(DistanceUnit.INCH) < 4;

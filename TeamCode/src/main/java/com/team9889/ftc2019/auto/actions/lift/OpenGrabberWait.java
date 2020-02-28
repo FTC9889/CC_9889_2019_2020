@@ -39,7 +39,7 @@ public class OpenGrabberWait extends Action {
     }
 
     @Override
-    public boolean isAtPose() {
+    public boolean isFinished() {
         return done;
     }
 

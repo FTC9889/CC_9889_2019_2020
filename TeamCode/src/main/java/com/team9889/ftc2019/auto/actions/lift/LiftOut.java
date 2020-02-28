@@ -22,7 +22,7 @@ public class LiftOut extends Action {
     public void update() {}
 
     @Override
-    public boolean isAtPose() {
+    public boolean isFinished() {
         return true;
     }
 

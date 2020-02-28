@@ -35,7 +35,7 @@ public class TestMotorAction extends Action{
     }
 
     @Override
-    public boolean isAtPose() {
+    public boolean isFinished() {
         return CruiseLib.isBetween(Robot.getInstance().fLDrive.getPosition(), 5996, 6004);
     }
 

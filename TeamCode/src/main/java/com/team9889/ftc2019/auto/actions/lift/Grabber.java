@@ -9,39 +9,39 @@ import com.team9889.lib.CruiseLib;
 /**
  * Created by Eric on 2/17/2020.
  */
-public class Lift extends Action {
-    private boolean poseBool = false, xBool = false, yBool = false, xGreaterThan, yGreaterThan, atPose;
+public class Grabber extends Action {
+    private boolean grabberOpen, poseBool = false, xBool = false, yBool = false, xGreaterThan, yGreaterThan, atPose, finished;
     private Pose2d pose;
-    private double tolerance, x, y, power;
-    private int time;
-    private ElapsedTime timer = new ElapsedTime();
+    private double tolerance, x, y;
+    int time;
+    ElapsedTime timer = new ElapsedTime();
 
-    public Lift(double power, int time){
-        this.power = power;
+    public Grabber(boolean grabberOpen, int time){
+        this.grabberOpen = grabberOpen;
         this.time = time;
         poseBool = false;
         xBool = false;
         yBool = false;
     }
 
-    public Lift(double power, int time, Pose2d pose, double tolerance){
-        this.power = power;
+    public Grabber(boolean grabberOpen, int time, Pose2d pose, double tolerance){
+        this.grabberOpen = grabberOpen;
         this.time = time;
         this.pose = pose;
         this.tolerance = tolerance;
         poseBool = true;
     }
 
-    public Lift(double power, int time, boolean xGreaterThan, double x){
-        this.power = power;
+    public Grabber(boolean grabberOpen, int time, boolean xGreaterThan, double x){
+        this.grabberOpen = grabberOpen;
         this.time = time;
         this.x = x;
         this.xGreaterThan = xGreaterThan;
         xBool = true;
     }
 
-    public Lift(double power, int time, double y, boolean yGreaterThan){
-        this.power = power;
+    public Grabber(boolean grabberOpen, int time, double y, boolean yGreaterThan){
+        this.grabberOpen = grabberOpen;
         this.time = time;
         this.y = y;
         this.yGreaterThan = yGreaterThan;
@@ -94,7 +94,9 @@ public class Lift extends Action {
         }
 
         if (atPose){
-            Robot.getInstance().getLift().SetLiftPower(power);
+            if (timer.milliseconds() > time){
+                finished = true;
+            }
         }else {
             timer.reset();
         }
@@ -102,11 +104,15 @@ public class Lift extends Action {
 
     @Override
     public boolean isFinished() {
-        return timer.milliseconds() > time;
+        return finished;
     }
 
     @Override
     public void done() {
-        Robot.getInstance().getLift().SetLiftPower(0);
+        if (grabberOpen){
+            Robot.getInstance().getLift().GrabberOpen();
+        }else {
+            Robot.getInstance().getLift().GrabberClose();
+        }
     }
 }

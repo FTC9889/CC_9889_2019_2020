@@ -35,6 +35,7 @@ public class ScoringLift extends Subsystem{
         if(auto) {
             GrabberOpen();
             LinearBarIn();
+            Robot.getInstance().teamMarkerDeployServo.setPosition(.96);
         }
     }
 

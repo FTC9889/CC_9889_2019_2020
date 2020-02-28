@@ -25,7 +25,7 @@ public class IntakeDown extends Action {
     public void update() {}
 
     @Override
-    public boolean isAtPose() {
+    public boolean isFinished() {
         return timer.milliseconds() > 1000;
     }
 

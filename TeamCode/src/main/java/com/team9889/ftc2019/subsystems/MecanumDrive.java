@@ -47,10 +47,10 @@ public class MecanumDrive extends Subsystem {
     @Override
     public void outputToTelemetry(Telemetry telemetry) {
         Log.i("Pose Of Robot", "" + getCurrentPose());
-        telemetry.addData("Left Encoder", "" + Robot.getInstance().leftLift.getPosition());
-        telemetry.addData("Right Encoder", "" + Robot.getInstance().intakeRight.getPosition());
-        telemetry.addData("Side", "" + Y_OdometryPosition());
-        telemetry.addData("Right Offset", "" + Right_Position_Offset);
+//        telemetry.addData("Left Encoder", "" + Robot.getInstance().leftLift.getPosition());
+//        telemetry.addData("Right Encoder", "" + Robot.getInstance().intakeRight.getPosition());
+//        telemetry.addData("Side", "" + Y_OdometryPosition());
+//        telemetry.addData("Right Offset", "" + Right_Position_Offset);
 
         telemetry.addData("Pose of Robot", getCurrentPose().toString());
 

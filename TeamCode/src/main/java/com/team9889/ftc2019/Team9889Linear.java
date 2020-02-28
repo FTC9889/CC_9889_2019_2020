@@ -127,7 +127,7 @@ public abstract class Team9889Linear extends LinearOpMode {
         if(opModeIsActive())
             action.start();
 
-        while (!action.isAtPose() && opModeIsActive()) {
+        while (!action.isFinished() && opModeIsActive()) {
             action.update();
         }
 

@@ -28,7 +28,7 @@ public abstract class Action {
     public abstract void start();
 
     /**
-     * Called by runAction in AutoModeBase iteratively until isAtPose returns true. Iterative logic lives in this
+     * Called by runAction in AutoModeBase iteratively until isFinished returns true. Iterative logic lives in this
      * method
      */
     public abstract void update();
@@ -39,7 +39,7 @@ public abstract class Action {
      *
      * @return boolean
      */
-    public abstract boolean isAtPose();
+    public abstract boolean isFinished();
 
     /**
      * Run code once when the action finishes, usually for clean up

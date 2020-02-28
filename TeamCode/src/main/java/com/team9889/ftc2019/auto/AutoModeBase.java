@@ -99,7 +99,7 @@ public abstract class AutoModeBase extends Team9889Linear {
         if(opModeIsActive() && !isStopRequested())
             action.start();
 
-        while (!action.isAtPose() && opModeIsActive() && !isStopRequested()) {
+        while (!action.isFinished() && opModeIsActive() && !isStopRequested()) {
             action.update();
             Robot.outputToTelemetry(telemetry);
             telemetry.update();
@@ -146,7 +146,7 @@ public abstract class AutoModeBase extends Team9889Linear {
         while (!all_finished && opModeIsActive() && !isStopRequested()) {
             all_finished = false;
             for (Action action : actions) {
-                if (!action.isAtPose()) {
+                if (!action.isFinished()) {
                     action.update();
                     all_finished = true;
                 }

@@ -8,12 +8,21 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 public class FollowPath {
     Pose2d pose, tollerancePose;
     double radius, maxVelocity;
+    int timeOut = 30000;
 
     public FollowPath(Pose2d pose, Pose2d tollerancePose, double radius, double maxVelocity){
         this.pose = pose;
         this.tollerancePose = tollerancePose;
         this.radius = radius;
         this.maxVelocity = maxVelocity;
+    }
+
+    public FollowPath(Pose2d pose, Pose2d tollerancePose, double radius, double maxVelocity, int timeOut){
+        this.pose = pose;
+        this.tollerancePose = tollerancePose;
+        this.radius = radius;
+        this.maxVelocity = maxVelocity;
+        this.timeOut = timeOut;
     }
 
     public FollowPath(FollowPath path){
@@ -34,5 +43,8 @@ public class FollowPath {
     }
     public double getMaxVelocity(){
         return maxVelocity;
+    }
+    public int getTimeOut(){
+        return timeOut;
     }
 }

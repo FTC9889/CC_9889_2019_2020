@@ -9,12 +9,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 /**
  * Created by Eric on 11/22/2019.
  */
-public class IntakeStopBlockInWait extends Action {
+public class IntakeStopBlockInWaitBlue extends Action {
     private boolean finished = false, first = true;
     private int time;
     private ElapsedTime timer = new ElapsedTime(), waitTimer = new ElapsedTime();
 
-    public IntakeStopBlockInWait(int time){
+    public IntakeStopBlockInWaitBlue(int time){
         this.time = time;
     }
 
@@ -37,8 +37,8 @@ public class IntakeStopBlockInWait extends Action {
                 first = false;
             }
 
-            Robot.getInstance().intakeRight.setPower(.85);
-            Robot.getInstance().intakeLeft.setPower(.7);
+            Robot.getInstance().intakeLeft.setPower(.85);
+            Robot.getInstance().intakeRight.setPower(.7);
             Robot.getInstance().getIntake().SetRollerPower(.5);
         }
     }

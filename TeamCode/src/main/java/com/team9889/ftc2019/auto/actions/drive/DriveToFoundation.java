@@ -47,11 +47,11 @@ public class DriveToFoundation extends Action {
 
         double rotation = turnPID.update(turn, 0);
 
-        mDrive.setPower(0, -.3, rotation);
+        mDrive.setPower(0, -.4, rotation);
     }
 
     @Override
-    public boolean isAtPose() {
+    public boolean isFinished() {
         if (Math.abs(turnPID.getError()) < 3) angleCounter++;
 
         return (Robot.getInstance().foundationDetector.getDistance(DistanceUnit.INCH) <= 2.2 && angleCounter > 3) || timer.milliseconds() > timeOut;
@@ -60,5 +60,6 @@ public class DriveToFoundation extends Action {
     @Override
     public void done() {
         mDrive.setPower(0,0,0);
+        Robot.getInstance().getMecanumDrive().CloseFoundationHook();
     }
 }

@@ -100,7 +100,7 @@ public class Drive3DimensionalPID extends Action {
     }
 
     @Override
-    public boolean isAtPose() {
+    public boolean isFinished() {
         if (Math.abs(xPID.getError()) < Math.abs(tolerancePose.getX())) xCounter++; else xCounter = 0;
         if (Math.abs(yPID.getError()) < Math.abs(tolerancePose.getY())) yCounter++; else xCounter = 0;
 

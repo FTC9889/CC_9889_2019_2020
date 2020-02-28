@@ -63,6 +63,8 @@ public class Robot{
 
     public HardwareMap hardwareMap;
 
+    int lastTime;
+
     public static ElapsedTime timer = new ElapsedTime();
     public static ElapsedTime gyroTimer = new ElapsedTime();
 
@@ -212,6 +214,8 @@ public class Robot{
 
     public void outputToTelemetry(Telemetry telemetry) {
         getMecanumDrive().outputToTelemetry(telemetry);
+        telemetry.addData("Loop Time", (timer.milliseconds() - lastTime));
+        lastTime = (int) timer.milliseconds();
     }
 
     public void stop(){

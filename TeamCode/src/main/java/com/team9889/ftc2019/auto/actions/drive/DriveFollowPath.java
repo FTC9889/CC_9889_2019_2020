@@ -42,7 +42,7 @@ public class DriveFollowPath extends Action {
     // Controllers
     // XPID tuned
     private PID xPID = new PID(-0.2, 0, -16);
-    private PID yPID = new PID(-0.1, 0, 0);
+    private PID yPID = new PID(-0.1, 0, .1);
     private PID turnPID = new PID(.02, 0, 0.6);
 
     // Max Speed
@@ -127,6 +127,12 @@ public class DriveFollowPath extends Action {
         this.path = path;
     }
 
+    public DriveFollowPath(List<FollowPath> path, int timeOut){
+        this.path = path;
+        this.timeOut = timeOut;
+    }
+
+
     public DriveFollowPath(List<FollowPath> path, PID xPID){
         this.path = path;
         this.xPID = xPID;
@@ -164,6 +170,7 @@ public class DriveFollowPath extends Action {
 
         tolerancePose = path.get(tNum).getTollerancePose();
         maxVel = path.get(vNum).getMaxVelocity();
+        timeOut = path.get(vNum).getTimeOut();
 
         if(rNum > path.size()-1){
             rNum = path.size()-1;
@@ -172,11 +179,14 @@ public class DriveFollowPath extends Action {
 
         if (Math.sqrt(Math.pow(path.get(pose).getPose().getX() - x, 2) + Math.pow(path.get(pose).getPose().getY() - y, 2)) <= path.get(rNum).getRadius() &&
 //                Math.abs(pDistance(x, y, endOfNextLineX, endOfNextLineY, startOfNextLineX, startOfNextLineY)) <= r[rNum] &&
-                pose < path.size()-1){
+                pose < path.size()-1 || timer.milliseconds() > timeOut){
             pose++;
             rNum++;
             tNum++;
             vNum++;
+
+            timeOut = path.get(vNum).getTimeOut();
+            timer.reset();
 
             startOfNextLineX = path.get(pose).getPose().getX();
             startOfNextLineY = path.get(pose).getPose().getY();
@@ -255,7 +265,7 @@ public class DriveFollowPath extends Action {
     }
 
     @Override
-    public boolean isAtPose() {
+    public boolean isFinished() {
         if (Math.abs(xPID.getError()) < Math.abs(tolerancePose.getX())) xCounter++; else xCounter = 0;
         if (Math.abs(yPID.getError()) < Math.abs(tolerancePose.getY())) yCounter++; else yCounter = 0;
 
