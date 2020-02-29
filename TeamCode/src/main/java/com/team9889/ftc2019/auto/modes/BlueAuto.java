@@ -87,8 +87,8 @@ public class BlueAuto extends AutoModeBase {
                 break;
         }
 //        pose.add(new FollowPath(new Pose2d(24, 39 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
-        pose.add(new FollowPath(new Pose2d(26, 75 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
-        pose.add(new FollowPath(new Pose2d(26, 75 * Side.getNum(Side_), -180 * Side.getNum(Side_)), new Pose2d(2, 2, 5), 4, 1, 1000));
+        pose.add(new FollowPath(new Pose2d(24, 70 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
+        pose.add(new FollowPath(new Pose2d(24, 70 * Side.getNum(Side_), -180 * Side.getNum(Side_)), new Pose2d(2, 2, 5), 4, 1, 1000));
 
         runAction(new DriveFollowPath(pose));
         pose.clear();
@@ -119,18 +119,18 @@ public class BlueAuto extends AutoModeBase {
                 break;
 
             case MIDDLE:
-                pose.add(new FollowPath(new Pose2d(22, 10 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1, 4000));
-                pose.add(new FollowPath(new Pose2d(28, 10 * Side.getNum(Side_), -65 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.2, 4000));
-                pose.add(new FollowPath(new Pose2d(40, 10 * Side.getNum(Side_), -65 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.2, 4000));
+                pose.add(new FollowPath(new Pose2d(22, 12 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1, 4000));
+                pose.add(new FollowPath(new Pose2d(28, 12 * Side.getNum(Side_), -65 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.2, 4000));
+                pose.add(new FollowPath(new Pose2d(40, 12 * Side.getNum(Side_), -65 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.2, 4000));
                 pose.add(new FollowPath(new Pose2d(40, 6 * Side.getNum(Side_), -65 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.6, 2000));
                 pose.add(new FollowPath(new Pose2d(28, 6 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1, 2000));
 //                pose.add(new FollowPath(new Pose2d(30, 10 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.2, 2000));
                 break;
 
             case LEFT:
-                pose.add(new FollowPath(new Pose2d(24, 6 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
-                pose.add(new FollowPath(new Pose2d(28, 6 * Side.getNum(Side_), -75 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
-                pose.add(new FollowPath(new Pose2d(40, 6 * Side.getNum(Side_), -75 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.5));
+                pose.add(new FollowPath(new Pose2d(24, 8 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+                pose.add(new FollowPath(new Pose2d(28, 8 * Side.getNum(Side_), -75 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
+                pose.add(new FollowPath(new Pose2d(40, 8 * Side.getNum(Side_), -75 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.5));
                 pose.add(new FollowPath(new Pose2d(40, -2 * Side.getNum(Side_), -75 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.5, 1000));
                 break;
         }
@@ -173,10 +173,10 @@ public class BlueAuto extends AutoModeBase {
 
             case MIDDLE:
 //                pose.add(new FollowPath(new Pose2d(36, 55 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
-                pose.add(new FollowPath(new Pose2d(36, 0 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, 1));
-                pose.add(new FollowPath(new Pose2d(34, 0 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
-                pose.add(new FollowPath(new Pose2d(56, 0 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
-                pose.add(new FollowPath(new Pose2d(36, 0 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+                pose.add(new FollowPath(new Pose2d(36, 2 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, 1));
+                pose.add(new FollowPath(new Pose2d(34, 2 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
+                pose.add(new FollowPath(new Pose2d(60, 2 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
+                pose.add(new FollowPath(new Pose2d(36, 2 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
                 break;
 
             case LEFT:
@@ -203,8 +203,8 @@ public class BlueAuto extends AutoModeBase {
 
         ThreadAction(new Lift(1, 700, -60, true));
         ThreadAction(new LiftLinearBar(true, -65, true));
-        pose.add(new FollowPath(new Pose2d(34, 30 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 1, 3), 2, 1));
-        pose.add(new FollowPath(new Pose2d(34, 30 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 1, 3), 4, 1));
+        pose.add(new FollowPath(new Pose2d(36, 30 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 1, 3), 2, 1));
+        pose.add(new FollowPath(new Pose2d(36, 30 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 1, 3), 4, 1));
         runAction(new DriveFollowPath(pose));
         pose.clear();
     }
