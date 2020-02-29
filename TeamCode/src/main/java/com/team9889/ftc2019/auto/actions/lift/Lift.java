@@ -98,6 +98,10 @@ public class Lift extends Action {
         }else {
             timer.reset();
         }
+
+        if (Robot.getInstance().downLimit.isPressed() && power > 0){
+            Robot.getInstance().getLift().SetLiftPower(0);
+        }
     }
 
     @Override

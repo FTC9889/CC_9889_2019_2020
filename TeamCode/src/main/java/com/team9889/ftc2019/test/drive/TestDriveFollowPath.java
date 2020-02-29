@@ -3,6 +3,7 @@ package com.team9889.ftc2019.test.drive;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.team9889.ftc2019.auto.AutoModeBase;
+import com.team9889.ftc2019.auto.actions.Wait;
 import com.team9889.ftc2019.auto.actions.drive.DriveFollowPath;
 import com.team9889.lib.CruiseLib;
 import com.team9889.lib.FollowPath;
@@ -24,12 +25,13 @@ public class TestDriveFollowPath extends AutoModeBase {
 
 //      NEW CODE
 
-        pose.add(new FollowPath(new Pose2d(10, 0, Math.toRadians(0)), new Pose2d(2, 2, 3), 8.5, .5));
-        pose.add(new FollowPath(new Pose2d(20, 12, 0), new Pose2d(2, 2, 3), 8.5, .5));
-        pose.add(new FollowPath(new Pose2d(50, 0, Math.toRadians(90)), new Pose2d(3, 3, 3), 8.5, .5));
+        pose.add(new FollowPath(new Pose2d(100, 0, Math.toRadians(0)), new Pose2d(2, 2, 3), 8.5, 1));
+        pose.add(new FollowPath(new Pose2d(100, 0, 0), new Pose2d(2, 2, 3), 8.5, 1));
+//        pose.add(new FollowPath(new Pose2d(50, 0, Math.toRadians(90)), new Pose2d(3, 3, 3), 8.5, .5));
 
         runAction(new DriveFollowPath(pose));
         pose.clear();
+        runAction(new Wait(5000));
 
 //      OLD CODE
 //

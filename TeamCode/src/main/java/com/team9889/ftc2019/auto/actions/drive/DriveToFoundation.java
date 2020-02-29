@@ -54,7 +54,7 @@ public class DriveToFoundation extends Action {
     public boolean isFinished() {
         if (Math.abs(turnPID.getError()) < 3) angleCounter++;
 
-        return (Robot.getInstance().foundationDetector.getDistance(DistanceUnit.INCH) <= 2.2 && angleCounter > 3) || timer.milliseconds() > timeOut;
+        return (Robot.getInstance().foundationDetector.getDistance(DistanceUnit.INCH) <= 3 && angleCounter > 3) || timer.milliseconds() > timeOut;
     }
 
     @Override

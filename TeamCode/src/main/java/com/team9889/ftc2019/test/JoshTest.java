@@ -2,6 +2,7 @@ package com.team9889.ftc2019.test;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team9889.ftc2019.Team9889Linear;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 
 @Autonomous
+@Disabled
 public class JoshTest extends AutoModeBase {
     @Override
     public void run(Side side, SkyStonePosition stonePosition) {

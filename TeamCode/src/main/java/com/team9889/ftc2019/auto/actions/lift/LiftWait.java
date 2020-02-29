@@ -35,6 +35,10 @@ public class LiftWait extends Action {
         } else {
             liftTimer.reset();
         }
+
+        if (Robot.getInstance().downLimit.isPressed() && LiftPower > 0){
+            Robot.getInstance().getLift().SetLiftPower(0);
+        }
     }
 
     @Override

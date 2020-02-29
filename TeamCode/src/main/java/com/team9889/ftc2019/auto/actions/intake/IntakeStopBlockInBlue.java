@@ -45,7 +45,7 @@ public class IntakeStopBlockInBlue extends Action {
 
     @Override
     public void done() {
-        Robot.getInstance().getIntake().SetIntakePower(-.15);
+        Robot.getInstance().getIntake().SetIntakePower(-.3);
         Robot.getInstance().getIntake().SetRollerPower(0);
         Robot.getInstance().getLift().GrabberClose();
     }

@@ -1,5 +1,6 @@
 package com.team9889.ftc2019.test;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.team9889.ftc2019.Team9889Linear;
@@ -11,6 +12,7 @@ import com.team9889.lib.CruiseLib;
  */
 
 @TeleOp (group = "Test")
+@Disabled
 public class TestVexMotor extends Team9889Linear {
 //    CRServo vexMotor;
 

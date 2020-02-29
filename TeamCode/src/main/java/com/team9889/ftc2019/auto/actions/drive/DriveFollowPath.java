@@ -1,11 +1,9 @@
 package com.team9889.ftc2019.auto.actions.drive;
 
-import android.os.health.PidHealthStats;
 import android.util.Log;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.RobotLog;
 import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.MecanumDrive;
 import com.team9889.ftc2019.subsystems.Robot;
@@ -13,11 +11,7 @@ import com.team9889.lib.CruiseLib;
 import com.team9889.lib.FollowPath;
 import com.team9889.lib.control.controllers.PID;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by Eric on 1/10/2020.
@@ -42,8 +36,8 @@ public class DriveFollowPath extends Action {
     // Controllers
     // XPID tuned
     private PID xPID = new PID(-0.2, 0, -16);
-    private PID yPID = new PID(-0.1, 0, .1);
-    private PID turnPID = new PID(.02, 0, 0.6);
+    private PID yPID = new PID(-0.1, 0, -16);
+    private PID turnPID = new PID(.02, 0, .6);
 
     // Max Speed
     double maxVel = 0.5;
@@ -62,7 +56,10 @@ public class DriveFollowPath extends Action {
     private double time;
     private ElapsedTime tempTimer = new ElapsedTime();
 
+    double lastYPower;
+
     double currentAngle;
+    int first = 5;
 
     // Drivetrain object
     private MecanumDrive mDrive = Robot.getInstance().getMecanumDrive();
@@ -165,8 +162,14 @@ public class DriveFollowPath extends Action {
         time = tempTimer.milliseconds();
 
 //      x and y = robot position
-        double x = Robot.getInstance().getMecanumDrive().getCurrentPose().getX();
-        double y = Robot.getInstance().getMecanumDrive().getCurrentPose().getY();
+        double x = Robot.getInstance().getMecanumDrive().getAdjustedPose().getX();
+        double y = Robot.getInstance().getMecanumDrive().getAdjustedPose().getY();
+
+        if (Math.toDegrees(Robot.getInstance().getMecanumDrive().getAdjustedPose().getHeading()) > 180){
+            currentAngle = Math.toDegrees(Robot.getInstance().getMecanumDrive().getAdjustedPose().getHeading()) - 360;
+        }else {
+            currentAngle = Math.toDegrees(Robot.getInstance().getMecanumDrive().getAdjustedPose().getHeading());
+        }
 
         tolerancePose = path.get(tNum).getTollerancePose();
         maxVel = path.get(vNum).getMaxVelocity();
@@ -175,15 +178,39 @@ public class DriveFollowPath extends Action {
         if(rNum > path.size()-1){
             rNum = path.size()-1;
         }
-
+        if (pose > path.size()-1){
+            pose = path.size()-1;
+        }
+        if (tNum > path.size()-1){
+            tNum = path.size()-1;
+        }
+        if (vNum > path.size()-1){
+            vNum = path.size()-1;
+        }
 
         if (Math.sqrt(Math.pow(path.get(pose).getPose().getX() - x, 2) + Math.pow(path.get(pose).getPose().getY() - y, 2)) <= path.get(rNum).getRadius() &&
+                Math.abs(path.get(pose).getPose().getHeading() - currentAngle) <= path.get(rNum).getRadius() + 2 &&
 //                Math.abs(pDistance(x, y, endOfNextLineX, endOfNextLineY, startOfNextLineX, startOfNextLineY)) <= r[rNum] &&
                 pose < path.size()-1 || timer.milliseconds() > timeOut){
             pose++;
             rNum++;
             tNum++;
             vNum++;
+
+            if(rNum > path.size()-1){
+                rNum = path.size()-1;
+            }
+            if (pose > path.size()-1){
+                pose = path.size()-1;
+            }
+            if (tNum > path.size()-1){
+                tNum = path.size()-1;
+            }
+            if (vNum > path.size()-1){
+                vNum = path.size()-1;
+            }
+
+            first = 5;
 
             timeOut = path.get(vNum).getTimeOut();
             timer.reset();
@@ -206,13 +233,19 @@ public class DriveFollowPath extends Action {
 
         double y_power = yPID.update(wantedPose.getY(), y);
 
-        Log.i("X Power", "" + y_power);
-
-        if (Math.toDegrees(Robot.getInstance().getMecanumDrive().getCurrentPose().getHeading()) > 180){
-            currentAngle = Math.toDegrees(Robot.getInstance().getMecanumDrive().getCurrentPose().getHeading()) - 360;
-        }else {
-            currentAngle = Math.toDegrees(Robot.getInstance().getMecanumDrive().getCurrentPose().getHeading());
-        }
+//        if (first > 0) {
+//            y_power = y_power;
+//            first--;
+//        }else {
+//            if (!CruiseLib.isBetween(Math.abs(y_power), Math.abs(lastYPower) - .5, Math.abs(lastYPower) + .5) &&
+//                    (lastYPower / Math.abs(lastYPower)) != (y_power / Math.abs(y_power))) {
+//                y_power = lastYPower;
+//            } else {
+//                y_power = y_power;
+//            }
+//        }
+//
+//        lastYPower = y_power;
 
 //        currentAngle = mDrive.gyroAngle.getTheda(AngleUnit.RADIANS);
 //        double dx = Math.cos(wantedPose.getHeading() - currentAngle);
@@ -242,15 +275,34 @@ public class DriveFollowPath extends Action {
         Log.i("Current Angle", "" + currentAngle);
         Log.i("Wanted Angle", "" + wA);
 
-        if (Math.abs(xPID.getError()) > Math.abs(tolerancePose.getX()-1))
-            x_power = CruiseLib.limitValue(x_power, -0.15, -maxVel, 0.15, maxVel);
-        else
-            x_power = 0;
+//        if (Math.abs(xPID.getError()) > Math.abs(tolerancePose.getX()-1))
+//            x_power = CruiseLib.limitValue(x_power, -0.15, -maxVel + .2, 0.15, maxVel - .2);
+//        else
+//            x_power = 0;
 
-        if (Math.abs(yPID.getError()) > Math.abs(tolerancePose.getY()-1))
-            y_power = CruiseLib.limitValue(y_power, -0.15, -maxVel, 0.15, maxVel);
-        else
-            y_power = 0;
+        if (Math.abs(xPID.getError()) > 15){
+            if (-xPID.getError() > 0)
+                x_power = CruiseLib.limitValue(x_power, (-Math.signum(xPID.getError()) * maxVel), (-Math.signum(xPID.getError()) * 0.15));
+            else
+                x_power = CruiseLib.limitValue(x_power, (-Math.signum(xPID.getError()) * 0.15), (-Math.signum(xPID.getError()) * maxVel));
+        }else {
+            if (Math.abs(xPID.getError()) > Math.abs(tolerancePose.getX() - 1))
+                x_power = CruiseLib.limitValue(x_power, -0.15, -maxVel, 0.15, maxVel);
+            else
+                x_power = 0;
+        }
+
+        if (Math.abs(yPID.getError()) > 15){
+            if (-yPID.getError() > 0)
+                y_power = CruiseLib.limitValue(y_power, (-Math.signum(yPID.getError()) * maxVel), (-Math.signum(yPID.getError()) * 0.15));
+            else
+                y_power = CruiseLib.limitValue(y_power, (-Math.signum(yPID.getError()) * 0.15), (-Math.signum(yPID.getError()) * maxVel));
+        }else {
+            if (Math.abs(yPID.getError()) > Math.abs(tolerancePose.getY() - 1))
+                y_power = CruiseLib.limitValue(y_power, -0.15, -maxVel, 0.15, maxVel);
+            else
+                y_power = 0;
+        }
 
         Log.i("X Error", "" + xPID.getError());
         Log.i("Y Error", "" + yPID.getError());
@@ -258,6 +310,7 @@ public class DriveFollowPath extends Action {
 
         if (Math.abs(turnPID.getError()) > Math.abs(tolerancePose.getHeading()))
             rotation = CruiseLib.limitValue(rotation, -.2, -maxVel, .2, maxVel);
+//            rotation = rotation;
         else
             rotation = 0;
 

@@ -3,6 +3,7 @@ package com.team9889.ftc2019.test;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.ThreeTrackingWheelLocalizer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.team9889.ftc2019.auto.AutoModeBase;
 import com.team9889.ftc2019.auto.actions.drive.DriveFollowPath;
 import com.team9889.ftc2019.auto.actions.lift.LiftLinearBar;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 
 @Autonomous(group = "Test")
+@Disabled
 public class TestAuto extends AutoModeBase {
     @Override
     public void run(Side side, SkyStonePosition stonePosition) {

@@ -63,7 +63,7 @@ public class Robot{
 
     public HardwareMap hardwareMap;
 
-    int lastTime;
+    int lastTime = 0, loopTimeOverCount = 0, loopTimeOverCount30 = 0, loopTimeOverCount25 = 0;
 
     public static ElapsedTime timer = new ElapsedTime();
     public static ElapsedTime gyroTimer = new ElapsedTime();
@@ -86,6 +86,7 @@ public class Robot{
 
     boolean debugging = false;
     private com.team9889.lib.android.FileWriter writer = new FileWriter("Drive3.csv");
+    private com.team9889.lib.android.FileWriter poseWriter = new FileWriter("Pose.csv");
 
     public void init(HardwareMap hardwareMap, boolean auto){
         timer.reset();
@@ -150,7 +151,7 @@ public class Robot{
         tapeMeasureDeploy = hardwareMap.get(Servo.class, Constants.kTMShooter);
         tapeMeasureDeploy.setPosition(1);
 
-        imu = new RevIMU("imu", hardwareMap);
+        imu = new RevIMU("imu1", hardwareMap);
 
         if (auto)
             debugging = true;
@@ -161,6 +162,13 @@ public class Robot{
         getIntake().init(auto);
         getCamera().init(auto);
         getLift().init(auto);
+
+        lastTime = 0;
+        timer.reset();
+
+        loopTimeOverCount = 0;
+        loopTimeOverCount25 = 0;
+        loopTimeOverCount30 = 0;
     }
 
 
@@ -172,10 +180,10 @@ public class Robot{
 //        if (redAuto && mAuto) {
 //                getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
 //        }else {
-            if (Robot.gyroTimer.milliseconds() > 100) {
-                gyroTimer.reset();
+//            if (Robot.gyroTimer.milliseconds() > 100) {
+//                gyroTimer.reset();
                 getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
-                getMecanumDrive().updated = true;
+//                getMecanumDrive().updated = true;
 
 //                if (getMecanumDrive().currentPose.getX() > getMecanumDrive().currentPose.getY())
 //                    getMecanumDrive().setCurrentPose(new Pose2d(getMecanumDrive().currentPose.getY(), getMecanumDrive().currentPose.getY(), getMecanumDrive().gyroAngle.getTheda(AngleUnit.DEGREES)));
@@ -183,7 +191,7 @@ public class Robot{
 //                    getMecanumDrive().setCurrentPose(new Pose2d(getMecanumDrive().currentPose.getX(), getMecanumDrive().currentPose.getX(), getMecanumDrive().gyroAngle.getTheda(AngleUnit.DEGREES)));
 
 //                getMecanumDrive().setCurrentPose(new Pose2d(getMecanumDrive().getCurrentPose().getX(), getMecanumDrive().getCurrentPose().getY(), getMecanumDrive().gyroAngle.getTheda(AngleUnit.RADIANS)));
-            }
+//            }
 //        }
         if (mAuto){
 //            bulkDataMaster = revHubMaster.getBulkInputData();
@@ -206,16 +214,30 @@ public class Robot{
         if(debugging)
             writer.write(updateTimer.milliseconds() + "," + getMecanumDrive().getCurrentPose().getX() + ","
                     + getMecanumDrive().getCurrentPose().getY() + ","
-                    + getMecanumDrive().getCurrentPose().getHeading()
+                    + -Robot.getInstance().getMecanumDrive().gyroAngle.getTheda(AngleUnit.RADIANS)
             );
 
         updateTimer.reset();
+        if (timer.milliseconds() - lastTime > 20)
+            loopTimeOverCount++;
+        else if (timer.milliseconds() - lastTime > 25)
+            loopTimeOverCount25++;
+        else if (timer.milliseconds() - lastTime > 30)
+            loopTimeOverCount30++;
+
+        while (timer.milliseconds() - lastTime < 25){
+
+        }
+
+        lastTime = (int) timer.milliseconds();
     }
 
     public void outputToTelemetry(Telemetry telemetry) {
         getMecanumDrive().outputToTelemetry(telemetry);
         telemetry.addData("Loop Time", (timer.milliseconds() - lastTime));
-        lastTime = (int) timer.milliseconds();
+        telemetry.addData("Loop Time Over 20 Milliseconds", loopTimeOverCount);
+        telemetry.addData("Loop Time Over 25 Milliseconds", loopTimeOverCount25);
+        telemetry.addData("Loop Time Over 30 Milliseconds", loopTimeOverCount30);
     }
 
     public void stop(){
