@@ -76,7 +76,7 @@ public class ScoringLift extends Subsystem{
         }
     }
 
-    public void SetLinearBarPosition(int position){
+    public void SetLinearBarPosition(double position){
         Robot.getInstance().linearBar.setPosition(position);
     }
 
@@ -84,7 +84,7 @@ public class ScoringLift extends Subsystem{
         SetLinearBarPosition(1);
     }
     public void LinearBarOut(){
-        SetLinearBarPosition(-1);
+        SetLinearBarPosition(0.29);
     }
 
     public void GrabberOpen(){

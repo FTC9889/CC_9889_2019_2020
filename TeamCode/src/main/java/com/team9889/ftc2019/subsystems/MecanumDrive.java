@@ -57,9 +57,9 @@ public class MecanumDrive extends Subsystem {
     @Override
     public void outputToTelemetry(Telemetry telemetry) {
         Log.i("Pose Of Robot", "" + getCurrentPose());
-//        telemetry.addData("Left Encoder", "" + Robot.getInstance().leftLift.getPosition());
-//        telemetry.addData("Right Encoder", "" + Robot.getInstance().intakeRight.getPosition());
-//        telemetry.addData("Side", "" + Y_OdometryPosition());
+        telemetry.addData("Left Encoder", "" + Robot.getInstance().leftLift.getPosition());
+        telemetry.addData("Right Encoder", "" + Robot.getInstance().intakeLeft.getPosition());
+        telemetry.addData("Side Encoder", "" + Robot.getInstance().intakeRight.getPosition());
 //        telemetry.addData("Right Offset", "" + Right_Position_Offset);
 
         telemetry.addData("Side Encoder", Robot.getInstance().intakeRight.getPosition());
@@ -68,8 +68,8 @@ public class MecanumDrive extends Subsystem {
         telemetry.addData("Adjusted Pose of Robot", getAdjustedPose().toString());
         telemetry.addData("Velocity Pose of Robot", velocityPose);
 
-        telemetry.addData("Change in X", currentPose.getX() - lastPoseOfRobotBeforeDriftCalc.getX());
-        telemetry.addData("Change in Y", currentPose.getY() - lastPoseOfRobotBeforeDriftCalc.getY());
+//        telemetry.addData("Change in X", currentPose.getX() - lastPoseOfRobotBeforeDriftCalc.getX());
+//        telemetry.addData("Change in Y", currentPose.getY() - lastPoseOfRobotBeforeDriftCalc.getY());
 
         Log.i("Right Offset", "" + Right_Position_Offset);
         Log.i("Left Offset", "" + Left_Position_Offset);
@@ -96,7 +96,8 @@ public class MecanumDrive extends Subsystem {
     public void update() {
         odometry.update();
 
-        double adjustValue = -0.00063;
+        double adjustValue = -0.0002;
+//        double adjustValue = 0.0;
         if(timer.milliseconds() > 0)
             velocityPose = currentPose.minus(lastPoseOfRobotBeforeDriftCalc).div(timer.seconds()).times(adjustValue);
         else
@@ -114,7 +115,7 @@ public class MecanumDrive extends Subsystem {
         odometry.update();
 //        else {
 
-            updated = true;
+        updated = true;
 //            currentPose = odometry.getPoseEstimate();
 //        }
 

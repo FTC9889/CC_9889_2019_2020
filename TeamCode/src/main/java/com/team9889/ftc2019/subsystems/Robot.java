@@ -182,7 +182,7 @@ public class Robot{
 //        }else {
 //            if (Robot.gyroTimer.milliseconds() > 100) {
 //                gyroTimer.reset();
-                getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
+        getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
 //                getMecanumDrive().updated = true;
 
 //                if (getMecanumDrive().currentPose.getX() > getMecanumDrive().currentPose.getY())
@@ -234,10 +234,10 @@ public class Robot{
 
     public void outputToTelemetry(Telemetry telemetry) {
         getMecanumDrive().outputToTelemetry(telemetry);
-        telemetry.addData("Loop Time", (timer.milliseconds() - lastTime));
-        telemetry.addData("Loop Time Over 20 Milliseconds", loopTimeOverCount);
-        telemetry.addData("Loop Time Over 25 Milliseconds", loopTimeOverCount25);
-        telemetry.addData("Loop Time Over 30 Milliseconds", loopTimeOverCount30);
+//        telemetry.addData("Loop Time", (timer.milliseconds() - lastTime));
+//        telemetry.addData("Loop Time Over 20 Milliseconds", loopTimeOverCount);
+//        telemetry.addData("Loop Time Over 25 Milliseconds", loopTimeOverCount25);
+//        telemetry.addData("Loop Time Over 30 Milliseconds", loopTimeOverCount30);
     }
 
     public void stop(){

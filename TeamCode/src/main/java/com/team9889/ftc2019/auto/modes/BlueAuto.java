@@ -44,9 +44,9 @@ public class BlueAuto extends AutoModeBase {
 
     @Override
     public void run(AutoModeBase.Side side, AutoModeBase.SkyStonePosition stonePosition) {
-        if (positionOfSkyStone < 110)
+        if (positionOfSkyStone < 101)
             currentSkyStonePosition = SkyStonePosition.RIGHT;
-        else if (positionOfSkyStone > 109 && positionOfSkyStone < 200)
+        else if (positionOfSkyStone > 100 && positionOfSkyStone < 200)
             currentSkyStonePosition = SkyStonePosition.MIDDLE;
         else if (positionOfSkyStone > 200)
             currentSkyStonePosition = SkyStonePosition.LEFT;
@@ -63,32 +63,32 @@ public class BlueAuto extends AutoModeBase {
 
         switch (stonePosition){
             case RIGHT:
-                pose.add(new FollowPath(new Pose2d(4, 0 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, 1));
-                pose.add(new FollowPath(new Pose2d(26, 0 * Side.getNum(Side_), -30 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
-                pose.add(new FollowPath(new Pose2d(42, 0 * Side.getNum(Side_), -30 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
-                pose.add(new FollowPath(new Pose2d(26, 0 * Side.getNum(Side_), -30 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+                pose.add(new FollowPath(new Pose2d(4, 0 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, .8));
+                pose.add(new FollowPath(new Pose2d(26, 0 * Side.getNum(Side_), -40 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
+                pose.add(new FollowPath(new Pose2d(42, 0 * Side.getNum(Side_), -40 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .6));
+                pose.add(new FollowPath(new Pose2d(26, 0 * Side.getNum(Side_), -40 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
                 break;
 
             case MIDDLE:
-                pose.add(new FollowPath(new Pose2d(4, 0 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, 1));
-                pose.add(new FollowPath(new Pose2d(26, -14 * Side.getNum(Side_), -20 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
-                pose.add(new FollowPath(new Pose2d(40, -14 * Side.getNum(Side_), -20 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
-                pose.add(new FollowPath(new Pose2d(40, -16 * Side.getNum(Side_), -20 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
-                pose.add(new FollowPath(new Pose2d(26, -10 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, 1));
+                pose.add(new FollowPath(new Pose2d(4, 0 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, .8));
+                pose.add(new FollowPath(new Pose2d(26, -12 * Side.getNum(Side_), -30 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8, 1500));
+                pose.add(new FollowPath(new Pose2d(40, -12 * Side.getNum(Side_), -30 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .6, 1000));
+                pose.add(new FollowPath(new Pose2d(40, -18 * Side.getNum(Side_), -30 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8, 1000));
+                pose.add(new FollowPath(new Pose2d(26, -10 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, .8, 1500));
                 break;
 
             case LEFT:
-                pose.add(new FollowPath(new Pose2d(4, 0 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, 1));
-                pose.add(new FollowPath(new Pose2d(26, -15 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
-                pose.add(new FollowPath(new Pose2d(42, -15 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
-                pose.add(new FollowPath(new Pose2d(42, -18 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1, 1000));
-                pose.add(new FollowPath(new Pose2d(24, -18 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, 1));
-                pose.add(new FollowPath(new Pose2d(24, -18 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, 1));
+                pose.add(new FollowPath(new Pose2d(4, 0 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, .8));
+                pose.add(new FollowPath(new Pose2d(26, -15 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
+                pose.add(new FollowPath(new Pose2d(42, -15 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .6));
+                pose.add(new FollowPath(new Pose2d(42, -18 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8, 1000));
+                pose.add(new FollowPath(new Pose2d(24, -18 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, .8));
+                pose.add(new FollowPath(new Pose2d(24, -18 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, .8));
                 break;
         }
 //        pose.add(new FollowPath(new Pose2d(24, 39 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
-        pose.add(new FollowPath(new Pose2d(24, 70 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
-        pose.add(new FollowPath(new Pose2d(24, 70 * Side.getNum(Side_), -180 * Side.getNum(Side_)), new Pose2d(2, 2, 5), 4, 1, 1000));
+        pose.add(new FollowPath(new Pose2d(24, 90 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8));
+        pose.add(new FollowPath(new Pose2d(24, 90 * Side.getNum(Side_), -180 * Side.getNum(Side_)), new Pose2d(2, 2, 5), 4, .8, 1000));
 
         runAction(new DriveFollowPath(pose));
         pose.clear();
@@ -101,58 +101,58 @@ public class BlueAuto extends AutoModeBase {
         ThreadAction(new LinearWait(0, true));
         ThreadAction(new OpenGrabberWait(1500, true));
         ThreadAction(new LinearWait(1700, false));
-        ThreadAction(new Foundation(false, -55, true));
+        ThreadAction(new Foundation(false, -65, true));
         runAction(new FoundationHookClose());
 
         Robot.getIntake().SetIntakePower(1);
         Robot.getIntake().SetRollerPower(.5);
         ThreadAction(new IntakeStopBlockInWait(3000));
-        pose.add(new FollowPath(new Pose2d(24, 50 * Side.getNum(Side_), -100 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1.5));
-        pose.add(new FollowPath(new Pose2d(24, 50 * Side.getNum(Side_), -100 * Side.getNum(Side_)), new Pose2d(1, 2, 3), 4, 1.5));
+        pose.add(new FollowPath(new Pose2d(24, 60 * Side.getNum(Side_), -100 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+        pose.add(new FollowPath(new Pose2d(24, 60 * Side.getNum(Side_), -100 * Side.getNum(Side_)), new Pose2d(1, 2, 3), 4, 1));
 
         switch (stonePosition){
             case RIGHT:
-                pose.add(new FollowPath(new Pose2d(20, 20 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1, 4000));
-                pose.add(new FollowPath(new Pose2d(24, 20 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8, 2000));
-                pose.add(new FollowPath(new Pose2d(40, 20 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 1000));
-                pose.add(new FollowPath(new Pose2d(40, 14 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 2000));
+                pose.add(new FollowPath(new Pose2d(20, 25 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8, 4000));
+                pose.add(new FollowPath(new Pose2d(24, 25 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .6, 2000));
+                pose.add(new FollowPath(new Pose2d(40, 25 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .6, 1000));
+                pose.add(new FollowPath(new Pose2d(40, 16 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .6, 2000));
                 break;
 
             case MIDDLE:
-                pose.add(new FollowPath(new Pose2d(22, 12 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1, 4000));
-                pose.add(new FollowPath(new Pose2d(28, 12 * Side.getNum(Side_), -65 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.2, 4000));
-                pose.add(new FollowPath(new Pose2d(40, 12 * Side.getNum(Side_), -65 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.2, 4000));
-                pose.add(new FollowPath(new Pose2d(40, 6 * Side.getNum(Side_), -65 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.6, 2000));
-                pose.add(new FollowPath(new Pose2d(28, 6 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1, 2000));
+                pose.add(new FollowPath(new Pose2d(26, 24 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 4000));
+                pose.add(new FollowPath(new Pose2d(28, 24 * Side.getNum(Side_), -65 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 1000));
+                pose.add(new FollowPath(new Pose2d(40, 24 * Side.getNum(Side_), -65 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 1500));
+                pose.add(new FollowPath(new Pose2d(40, 14 * Side.getNum(Side_), -65 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 2000));
+                pose.add(new FollowPath(new Pose2d(28, 20 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 1000));
 //                pose.add(new FollowPath(new Pose2d(30, 10 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.2, 2000));
                 break;
 
             case LEFT:
-                pose.add(new FollowPath(new Pose2d(24, 8 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
-                pose.add(new FollowPath(new Pose2d(28, 8 * Side.getNum(Side_), -75 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
-                pose.add(new FollowPath(new Pose2d(40, 8 * Side.getNum(Side_), -75 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.5));
-                pose.add(new FollowPath(new Pose2d(40, -2 * Side.getNum(Side_), -75 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1.5, 1000));
+                pose.add(new FollowPath(new Pose2d(26, 15 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
+                pose.add(new FollowPath(new Pose2d(28, 15 * Side.getNum(Side_), -75 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .6));
+                pose.add(new FollowPath(new Pose2d(40, 15 * Side.getNum(Side_), -75 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8));
+                pose.add(new FollowPath(new Pose2d(40, 5 * Side.getNum(Side_), -75 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 1000));
                 break;
         }
         runAction(new DriveFollowPath(pose));
         pose.clear();
 
-        ThreadAction(new Lift(-1, 400, -40, false));
-        ThreadAction(new LiftLinearBar(false, -40, false));
-        ThreadAction(new Grabber(true, 600, -40, false));
+        ThreadAction(new Lift(-1, 400, -60, false));
+        ThreadAction(new LiftLinearBar(false, -60, false));
+        ThreadAction(new Grabber(true, 600, -60, false));
 
-        pose.add(new FollowPath(new Pose2d(20, 0 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1, 2000));
+//        pose.add(new FollowPath(new Pose2d(20, 0 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 2000));
 
-        pose.add(new FollowPath(new Pose2d(20, 30 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1, 2000));
-        pose.add(new FollowPath(new Pose2d(58, 30 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1, 500));
+        pose.add(new FollowPath(new Pose2d(24, 45 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 2000));
+        pose.add(new FollowPath(new Pose2d(68, 45 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 500));
         runAction(new DriveFollowPath(pose));
         pose.clear();
 
         Robot.getMecanumDrive().setCurrentPose(new Pose2d(38.5, Robot.getMecanumDrive().currentPose.getY()));
         Robot.getMecanumDrive().driftCalc = new Pose2d(0, Robot.getMecanumDrive().driftCalc.getY());
 
-        pose.add(new FollowPath(new Pose2d(36, 50 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 2, 3), 4, 1, 3000));
-        pose.add(new FollowPath(new Pose2d(36, 50 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 2, 3), 4, 1, 3000));
+        pose.add(new FollowPath(new Pose2d(36, 65 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 2, 3), 4, .8, 3000));
+        pose.add(new FollowPath(new Pose2d(36, 65 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 2, 3), 4, .8, 3000));
         runAction(new DriveFollowPath(pose));
         pose.clear();
 
@@ -165,46 +165,47 @@ public class BlueAuto extends AutoModeBase {
         ThreadAction(new IntakeStopBlockInWait(500));
         switch (stonePosition){
             case RIGHT:
-                pose.add(new FollowPath(new Pose2d(32, -20 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1, 3000));
+                pose.add(new FollowPath(new Pose2d(32, -20 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8, 4000));
                 pose.add(new FollowPath(new Pose2d(44, -20 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8, 1000));
-                pose.add(new FollowPath(new Pose2d(44, -35 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1, 1000));
-                pose.add(new FollowPath(new Pose2d(36, -15 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, 1, 1000));
+                pose.add(new FollowPath(new Pose2d(44, -35 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8, 1000));
+                pose.add(new FollowPath(new Pose2d(36, -15 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, .8, 1000));
                 break;
 
             case MIDDLE:
 //                pose.add(new FollowPath(new Pose2d(36, 55 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
-                pose.add(new FollowPath(new Pose2d(36, 2 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, 1));
-                pose.add(new FollowPath(new Pose2d(34, 2 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
-                pose.add(new FollowPath(new Pose2d(60, 2 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
-                pose.add(new FollowPath(new Pose2d(36, 2 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+                pose.add(new FollowPath(new Pose2d(36, 15 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, .8));
+                pose.add(new FollowPath(new Pose2d(34, 15 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8));
+                pose.add(new FollowPath(new Pose2d(60, 15 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 2000));
+                pose.add(new FollowPath(new Pose2d(36, 15 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
                 break;
 
             case LEFT:
 //                pose.add(new FollowPath(new Pose2d(36, 55 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
-                pose.add(new FollowPath(new Pose2d(36, 5 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, 1));
-                pose.add(new FollowPath(new Pose2d(34, 5 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
-                pose.add(new FollowPath(new Pose2d(56, 5 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1));
-                pose.add(new FollowPath(new Pose2d(36, 5 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+                pose.add(new FollowPath(new Pose2d(36, 15 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, .8));
+                pose.add(new FollowPath(new Pose2d(34, 15 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8));
+                pose.add(new FollowPath(new Pose2d(56, 15 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8));
+                pose.add(new FollowPath(new Pose2d(34, 15 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
                 break;
         }
         runAction(new DriveFollowPath(pose));
         pose.clear();
 
-        ThreadAction(new LiftLinearBar(false, -55, false));
-        ThreadAction(new Lift(-1, 600, -45, false));
-        ThreadAction(new Grabber(true, 1000, -55, false));
-        pose.add(new FollowPath(new Pose2d(36, 50 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, 1, 3000));
-        pose.add(new FollowPath(new Pose2d(36, 60 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 2, 1000));
-        pose.add(new FollowPath(new Pose2d(36, 90 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 2, 1500));
+        ThreadAction(new LiftLinearBar(false, -75, false));
+        ThreadAction(new Lift(-1, 600, -65, false));
+        ThreadAction(new Grabber(true, 1000, -75, false));
+//        pose.add(new FollowPath(new Pose2d(30, 50 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 3000));
+//        pose.add(new FollowPath(new Pose2d(30, 60 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1, 1000));
+        pose.add(new FollowPath(new Pose2d(34, 100 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1, 3000));
+        pose.add(new FollowPath(new Pose2d(34, 100 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1, 3000));
         runAction(new DriveFollowPath(pose));
         pose.clear();
 
         runAction(new Wait(700));
 
-        ThreadAction(new Lift(1, 700, -60, true));
-        ThreadAction(new LiftLinearBar(true, -65, true));
-        pose.add(new FollowPath(new Pose2d(36, 30 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 1, 3), 2, 1));
-        pose.add(new FollowPath(new Pose2d(36, 30 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 1, 3), 4, 1));
+        ThreadAction(new LiftWait(100, 1, 700));
+//        ThreadAction(new LiftLinearBar(true, -75, true));
+        pose.add(new FollowPath(new Pose2d(30, 40 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 1, 3), 2, 1));
+        pose.add(new FollowPath(new Pose2d(30, 40 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 1, 3), 4, 1));
         runAction(new DriveFollowPath(pose));
         pose.clear();
     }

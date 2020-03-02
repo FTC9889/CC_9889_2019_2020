@@ -76,6 +76,6 @@ public class Intake extends Subsystem {
         SetIntakeHeight(0, 1);
     }
     public void IntakeFlip(){
-        SetIntakeHeight(.46, .5);
+        SetIntakeHeight(.33, .5);
     }
 }

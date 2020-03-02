@@ -63,13 +63,26 @@ public class DriverStation {
     private boolean intakeToggle = true;
     private boolean intakeDown = true;
     boolean getIntake() {
-        if(gamepad1.right_bumper && intakeToggle) {
+        if(gamepad1.right_bumper && intakeToggle && !intakeFlipDown) {
             intakeDown = !intakeDown;
             intakeToggle = false;
         } else if(!gamepad1.right_bumper)
             intakeToggle = true;
 
         return intakeDown;
+    }
+
+    private boolean intakeFlipToggle = true;
+    private boolean intakeFlipDown = false;
+    boolean getIntakeFlip() {
+        if (gamepad1.right_bumper){
+            intakeFlipDown = false;
+        } else if(gamepad1.left_bumper && intakeFlipToggle) {
+            intakeFlipDown = !intakeFlipDown;
+            intakeFlipToggle = false;
+        } else if(!gamepad1.left_bumper || gamepad1.right_bumper)
+            intakeFlipToggle = true;
+        return intakeFlipDown;
     }
 
     private boolean slowDownToggle = true;
@@ -117,10 +130,10 @@ public class DriverStation {
     private boolean linearBarToggle = false;
     private boolean linearBarIn = true;
     boolean getLinearBarIn(boolean override) {
-        if((gamepad2.right_bumper || gamepad1.left_bumper) && linearBarToggle) {
+        if((gamepad2.right_bumper || gamepad1.dpad_down) && linearBarToggle) {
             linearBarIn = !linearBarIn;
             linearBarToggle = false;
-        } else if(!gamepad2.right_bumper && !gamepad1.left_bumper)
+        } else if(!gamepad2.right_bumper && !gamepad1.dpad_down)
             linearBarToggle = true;
 
         if(!override)

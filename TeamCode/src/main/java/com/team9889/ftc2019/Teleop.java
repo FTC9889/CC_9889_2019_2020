@@ -150,7 +150,7 @@ public class Teleop extends Team9889Linear {
 
                 // Intake Servos
 
-                if (gamepad1.dpad_down)
+                if (driverStation.getIntakeFlip())
                     Robot.getIntake().IntakeFlip();
                 else if (driverStation.getIntake())
                     Robot.getIntake().IntakeDown();
