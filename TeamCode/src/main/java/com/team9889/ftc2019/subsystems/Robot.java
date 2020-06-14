@@ -163,6 +163,9 @@ public class Robot{
         getCamera().init(auto);
         getLift().init(auto);
 
+        if (auto)
+            teamMarkerDeployServo.setPosition(1);
+
         lastTime = 0;
         timer.reset();
 

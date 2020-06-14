@@ -84,7 +84,7 @@ public class ScoringLift extends Subsystem{
         SetLinearBarPosition(1);
     }
     public void LinearBarOut(){
-        SetLinearBarPosition(0.29);
+        SetLinearBarPosition(0.31);
     }
 
     public void GrabberOpen(){
@@ -95,10 +95,10 @@ public class ScoringLift extends Subsystem{
     }
 
     public void LiftBrakeEngaged(){
-        Robot.getInstance().liftBrake.setPosition(.68);
+        Robot.getInstance().liftBrake.setPosition(.71);
     }
     public void LiftBrakeDisengaged(){
-        Robot.getInstance().liftBrake.setPosition(.61);
+        Robot.getInstance().liftBrake.setPosition(.67);
     }
 
     public boolean isDown() {

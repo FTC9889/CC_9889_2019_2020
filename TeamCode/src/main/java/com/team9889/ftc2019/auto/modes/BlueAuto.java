@@ -79,11 +79,11 @@ public class BlueAuto extends AutoModeBase {
 
             case LEFT:
                 pose.add(new FollowPath(new Pose2d(4, 0 * Side.getNum(Side_), 0 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 3, .8));
-                pose.add(new FollowPath(new Pose2d(26, -15 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
-                pose.add(new FollowPath(new Pose2d(42, -15 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .6));
-                pose.add(new FollowPath(new Pose2d(42, -18 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8, 1000));
-                pose.add(new FollowPath(new Pose2d(24, -18 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, .8));
-                pose.add(new FollowPath(new Pose2d(24, -18 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, .8));
+                pose.add(new FollowPath(new Pose2d(26, -18 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8));
+                pose.add(new FollowPath(new Pose2d(42, -18 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .6));
+                pose.add(new FollowPath(new Pose2d(42, -22 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, .8, 1000));
+                pose.add(new FollowPath(new Pose2d(24, -22 * Side.getNum(Side_), -45 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, .8));
+                pose.add(new FollowPath(new Pose2d(24, -22 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 8.5, .8));
                 break;
         }
 //        pose.add(new FollowPath(new Pose2d(24, 39 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
@@ -107,8 +107,8 @@ public class BlueAuto extends AutoModeBase {
         Robot.getIntake().SetIntakePower(1);
         Robot.getIntake().SetRollerPower(.5);
         ThreadAction(new IntakeStopBlockInWait(3000));
-        pose.add(new FollowPath(new Pose2d(24, 60 * Side.getNum(Side_), -100 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
-        pose.add(new FollowPath(new Pose2d(24, 60 * Side.getNum(Side_), -100 * Side.getNum(Side_)), new Pose2d(1, 2, 3), 4, 1));
+        pose.add(new FollowPath(new Pose2d(20, 60 * Side.getNum(Side_), -100 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1));
+        pose.add(new FollowPath(new Pose2d(20, 60 * Side.getNum(Side_), -100 * Side.getNum(Side_)), new Pose2d(1, 2, 3), 4, 1));
 
         switch (stonePosition){
             case RIGHT:
@@ -191,12 +191,12 @@ public class BlueAuto extends AutoModeBase {
         pose.clear();
 
         ThreadAction(new LiftLinearBar(false, -75, false));
-        ThreadAction(new Lift(-1, 600, -65, false));
-        ThreadAction(new Grabber(true, 1000, -75, false));
+        ThreadAction(new Lift(-1, 600, -55, false));
+        ThreadAction(new Grabber(true, 500, -75, false));
 //        pose.add(new FollowPath(new Pose2d(30, 50 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 2, .8, 3000));
 //        pose.add(new FollowPath(new Pose2d(30, 60 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1, 1000));
-        pose.add(new FollowPath(new Pose2d(34, 100 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1, 3000));
-        pose.add(new FollowPath(new Pose2d(34, 100 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1, 3000));
+        pose.add(new FollowPath(new Pose2d(30, 100 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1, 3000));
+        pose.add(new FollowPath(new Pose2d(30, 100 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(2, 2, 3), 4, 1, 3000));
         runAction(new DriveFollowPath(pose));
         pose.clear();
 

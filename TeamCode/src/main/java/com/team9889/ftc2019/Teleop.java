@@ -33,12 +33,18 @@ public class Teleop extends Team9889Linear {
     private ElapsedTime automatedCapStoneTimer = new ElapsedTime();
     private boolean stoneWasThere = false;
 
+    private boolean timeOverride = false;
+
+    private boolean autoCapFirst = true, done = false;
+    private ElapsedTime autoCapTime = new ElapsedTime();
+
     @Override
     public void runOpMode() {
         DriverStation driverStation = new DriverStation(gamepad1, gamepad2);
         waitForStart(false);
 
         Robot.odometryLifter.setPosition(0.5);
+        Robot.teamMarkerDeployServo.setPosition(1);
 
         Robot.getLift().GrabberOpen();
         Robot.getMecanumDrive().OpenFoundationHook();
@@ -65,20 +71,29 @@ public class Teleop extends Team9889Linear {
 
                     double forward = 0;
                     double turn = 0;
-
-                    if(pipeline.getMinPoint().y > 25)
+                    if (pipeline.getMinPoint().x == 40 && pipeline.getMinPoint().y == 60){
+                        forward = .5;
+                    } else if(pipeline.getMinPoint().y > 25)
                         forward = 1;
                     else if(pipeline.getMinPoint().y < 25)
-                        forward = 0.3;
+                        forward = 0.5;
 
-                    int center = 25;
-                    if (pipeline.getMinPoint().x > center + 5)
+                    double center = 38.5;
+                    if (pipeline.getMinPoint().x == 40 && pipeline.getMinPoint().y == 60){
+
+                    } else if (pipeline.getMinPoint().x > center + 5 && pipeline.getMinPoint().x < center + 20)
                         turn = -0.2;
-                    else if (pipeline.getMinPoint().x < center - 5)
+                    else if (pipeline.getMinPoint().x < center - 5 && pipeline.getMinPoint().x > center - 20)
                         turn = 0.2;
+                    else if (pipeline.getMinPoint().x <= center - 20)
+                        turn = .4;
+                    else if (pipeline.getMinPoint().x >= center + 20){
+                        turn = -.4;
+                    }
                     else
                         turn = 0;
 
+                    telemetry.addData("turn", turn);
 
                     Robot.getMecanumDrive().setPower(0, forward, turn);
                 } else {
@@ -89,25 +104,31 @@ public class Teleop extends Team9889Linear {
                             driverStation.getSteer() / slowDownFactor);
                 }
 
-                if (!automateScoring && !automateCapStone) {
+                // CapStone
+                if ((driverStation.capStoneAuto(true, done) || done) && (matchTime.seconds() > 120 - 30 || timeOverride)){
+                    if (autoCapFirst){
+                        autoCapFirst = false;
+                        autoCapTime.reset();
+                    }else if (autoCapTime.milliseconds() < 300){
+                        Robot.getLift().GrabberOpen();
+                    }else if (autoCapTime.milliseconds() >= 300 && autoCapTime.milliseconds() < 500){
+                        Robot.getLift().SetLiftPower(-1);
+                    }else if (autoCapTime.milliseconds() >= 500 && autoCapTime.milliseconds() < 600){
+                        Robot.getLift().SetLiftPower(0);
+                        Robot.getLift().LinearBarIn();
+                        Robot.teamMarkerDeployServo.setPosition(-1);
+                        done = true;
+                    }else if (autoCapTime.milliseconds() >= 600){
+                        done = false;
+                        autoCapFirst = true;
+                    }
+                }else if (!automateScoring && !automateCapStone) {
                     Robot.getLift().SetLiftPower(driverStation.getLiftPower(Robot.downLimit.isPressed()));
 
                     if (driverStation.getLinearBarIn(first))
                         Robot.getLift().LinearBarIn();
                     else
                         Robot.getLift().LinearBarOut();
-
-                    if (driverStation.getStartIntaking()) {
-                        Robot.getIntake().Intake();
-                        Robot.getLift().GrabberOpen();
-                        intaking = true;
-                    } else if (driverStation.getStopIntaking()) {
-                        Robot.getIntake().Stop();
-                        intaking = false;
-                    } else if (driverStation.getStartOuttaking()) {
-                        Robot.getIntake().Outtake();
-                        intaking = false;
-                    }
 
                     if (Robot.downLimit.isPressed() && driverStation.getGrabberOpen(first)){
                         Robot.grabber.setPosition(1);
@@ -139,14 +160,19 @@ public class Teleop extends Team9889Linear {
                     first = false;
                 }
 
-                if (driverStation.capStone(true)){
-                    Robot.teamMarkerDeployServo.setPosition(-1);
-                }else {
-                    Robot.teamMarkerDeployServo.setPosition(.96);
+                if (gamepad2.right_stick_button && gamepad2.left_stick_button){
+                    timeOverride = true;
                 }
 
-                if (matchTime.seconds() > 120 - 30 && driverStation.releaseTapeMeasure())
+                if ((matchTime.seconds() > 120 - 30 || timeOverride) && driverStation.releaseTapeMeasure())
                     Robot.tapeMeasureDeploy.setPosition(0.5);
+                else if (matchTime.seconds() > 120 - 30 || timeOverride) {
+                    if (driverStation.capStone(true)) {
+                        Robot.teamMarkerDeployServo.setPosition(-1);
+                    } else {
+                        Robot.teamMarkerDeployServo.setPosition(1);
+                    }
+                }
 
                 // Intake Servos
 
@@ -156,6 +182,18 @@ public class Teleop extends Team9889Linear {
                     Robot.getIntake().IntakeDown();
                 else
                     Robot.getIntake().IntakeUp();
+
+                if (driverStation.getStartIntaking()) {
+                    Robot.getIntake().Intake();
+                    Robot.getLift().GrabberOpen();
+                    intaking = true;
+                } else if (driverStation.getStopIntaking()) {
+                    Robot.getIntake().Stop();
+                    intaking = false;
+                } else if (driverStation.getStartOuttaking()) {
+                    Robot.getIntake().Outtake();
+                    intaking = false;
+                }
 
                 // Foundation Hook
                 if (driverStation.getFoundationClose())

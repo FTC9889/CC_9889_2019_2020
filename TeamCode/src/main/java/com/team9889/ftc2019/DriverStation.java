@@ -85,6 +85,7 @@ public class DriverStation {
         return intakeFlipDown;
     }
 
+
     private boolean slowDownToggle = true;
     private boolean slowDown = false;
     double getSlowDownFactor() {
@@ -94,7 +95,7 @@ public class DriverStation {
         } else if(!gamepad1.x)
             slowDownToggle = true;
 
-        return slowDown ? 2 : 1;
+        return slowDown ? 1.8 : 1;
     }
 
     private boolean foundationToggle = false;
@@ -130,10 +131,10 @@ public class DriverStation {
     private boolean linearBarToggle = false;
     private boolean linearBarIn = true;
     boolean getLinearBarIn(boolean override) {
-        if((gamepad2.right_bumper || gamepad1.dpad_down) && linearBarToggle) {
+        if((gamepad2.right_bumper || gamepad1.left_bumper) && linearBarToggle) {
             linearBarIn = !linearBarIn;
             linearBarToggle = false;
-        } else if(!gamepad2.right_bumper && !gamepad1.dpad_down)
+        } else if(!gamepad2.right_bumper && !gamepad1.left_bumper)
             linearBarToggle = true;
 
         if(!override)
@@ -149,16 +150,36 @@ public class DriverStation {
     private boolean capStoneToggle = true;
     private boolean capStoneDeployed = false;
     boolean capStone(boolean override) {
-        if ((gamepad2.a) && capStoneToggle) {
+        if ((gamepad2.left_bumper) && capStoneToggle) {
             capStoneDeployed = !capStoneDeployed;
             capStoneToggle = false;
-        } else if (!gamepad2.a)
+        } else if (!gamepad2.left_bumper)
             capStoneToggle = true;
 
         if(!override)
             capStoneToggle = true;
 
         return capStoneDeployed;
+    }
+
+    private boolean capStoneAutoToggle = true;
+    private boolean capStoneAutoDeployed = false;
+    boolean capStoneAuto(boolean override, boolean done) {
+        if ((gamepad2.a) && capStoneAutoToggle) {
+            capStoneAutoDeployed = !capStoneAutoDeployed;
+            capStoneAutoToggle = false;
+        } else if (done){
+            capStoneAutoDeployed = false;
+            linearBarIn = true;
+            grabberOpen = true;
+            capStoneDeployed = true;
+        } else if (!gamepad2.a)
+            capStoneAutoToggle = true;
+
+        if(!override)
+            capStoneAutoToggle = true;
+
+        return capStoneAutoDeployed;
     }
 
     boolean releaseTapeMeasure() {
