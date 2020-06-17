@@ -18,9 +18,6 @@ import java.util.List;
  */
 public class DriveFollowPath extends Action {
     List<FollowPath> path;
-//    double[] r;
-//    Pose2d[] tolerancePose;
-//    double[] maxVels;
     int pose = 0;
     int rNum = 0;
     int tNum = 0;
@@ -31,7 +28,6 @@ public class DriveFollowPath extends Action {
 
     double startOfNextLineX, endOfNextLineX;
     double startOfNextLineY, endOfNextLineY;
-
 
     // Controllers
     // XPID tuned
@@ -63,62 +59,6 @@ public class DriveFollowPath extends Action {
 
     // Drivetrain object
     private MecanumDrive mDrive = Robot.getInstance().getMecanumDrive();
-
-//    public DriveFollowPath(Pose2d[] path){
-//        this.path = path;
-//        this.r = new double[]{8.5};
-//        this.tolerancePoses = new Pose2d[]{new Pose2d(2,2,Math.toRadians(3))};
-//        this.maxVels = new float[]{.5f};
-//    }
-//
-//    public DriveFollowPath(Pose2d[] path, double[] r){
-//        this.path = path;
-//        this.r = r;
-//        this.tolerancePoses = new Pose2d[]{new Pose2d(2,2,Math.toRadians(3))};
-//        this.maxVels = new float[]{.5f};
-//    }
-//
-//    public DriveFollowPath(Pose2d[] path, double[] r, Pose2d[] tolerancePose){
-//        this.path = path;
-//        this.r = r;
-//        this.tolerancePoses = tolerancePose;
-//        this.maxVels = new float[]{.5f};
-//    }
-//
-//    public DriveFollowPath(Pose2d[] path, double[] r, Pose2d[] tolerancePose, float[] maxVel){
-//        this.path = path;
-//        this.r = r;
-//        this.tolerancePoses = tolerancePose;
-//        this.maxVels = maxVel;
-//    }
-//
-//    public DriveFollowPath(Pose2d[] path, Pose2d[] tolerancePose){
-//        this.path = path;
-//        this.r = new double[]{8.5};
-//        this.tolerancePoses = tolerancePose;
-//        this.maxVels = new float[]{.5f};
-//    }
-//
-//    public DriveFollowPath(Pose2d[] path, float[] maxVel){
-//        this.path = path;
-//        this.r = new double[]{8.5};
-//        this.tolerancePoses = new Pose2d[]{new Pose2d(2,2,Math.toRadians(3))};
-//        this.maxVels = maxVel;
-//    }
-//
-//    public DriveFollowPath(Pose2d[] path, Pose2d[] tolerancePose, float[] maxVel){
-//        this.path = path;
-//        this.r = new double[]{8.5};
-//        this.tolerancePoses = tolerancePose;
-//        this.maxVels = maxVel;
-//    }
-//
-//    public DriveFollowPath(Pose2d[] path, double[] r, float[] maxVel){
-//        this.path = path;
-//        this.r = r;
-//        this.tolerancePoses = new Pose2d[]{new Pose2d(2,2,Math.toRadians(3))};
-//        this.maxVels = maxVel;
-//    }
 
     public DriveFollowPath(List<FollowPath> path){
         this.path = path;
@@ -233,25 +173,6 @@ public class DriveFollowPath extends Action {
 
         double y_power = yPID.update(wantedPose.getY(), y);
 
-//        if (first > 0) {
-//            y_power = y_power;
-//            first--;
-//        }else {
-//            if (!CruiseLib.isBetween(Math.abs(y_power), Math.abs(lastYPower) - .5, Math.abs(lastYPower) + .5) &&
-//                    (lastYPower / Math.abs(lastYPower)) != (y_power / Math.abs(y_power))) {
-//                y_power = lastYPower;
-//            } else {
-//                y_power = y_power;
-//            }
-//        }
-//
-//        lastYPower = y_power;
-
-//        currentAngle = mDrive.gyroAngle.getTheda(AngleUnit.RADIANS);
-//        double dx = Math.cos(wantedPose.getHeading() - currentAngle);
-//        double dy = Math.sin(wantedPose.getHeading() - currentAngle);
-//        double turn = Math.toDegrees(Math.atan2(dy, dx));
-
         double wA;
         if (wantedPose.getHeading() > 180){
             wA = wantedPose.getHeading() - 360;
@@ -274,11 +195,6 @@ public class DriveFollowPath extends Action {
 
         Log.i("Current Angle", "" + currentAngle);
         Log.i("Wanted Angle", "" + wA);
-
-//        if (Math.abs(xPID.getError()) > Math.abs(tolerancePose.getX()-1))
-//            x_power = CruiseLib.limitValue(x_power, -0.15, -maxVel + .2, 0.15, maxVel - .2);
-//        else
-//            x_power = 0;
 
         if (Math.abs(xPID.getError()) > 15){
             if (-xPID.getError() > 0)
@@ -310,7 +226,6 @@ public class DriveFollowPath extends Action {
 
         if (Math.abs(turnPID.getError()) > Math.abs(tolerancePose.getHeading()))
             rotation = CruiseLib.limitValue(rotation, -.2, -maxVel, .2, maxVel);
-//            rotation = rotation;
         else
             rotation = 0;
 
@@ -336,15 +251,6 @@ public class DriveFollowPath extends Action {
     @Override
     public void done() {
         mDrive.setPower(0,0 ,0);
-    }
-
-    public static void main(String[] args){
-//        DriveFollowPath path = new DriveFollowPath(new Pose2d[]{new Pose2d(5, 0, 0), new Pose2d(10, 0, 0)}, new double[]{5, 5});
-
-//        System.out.println(path.pDistance(0, 0, -5, 0, 5, 0));
-//        System.out.println(path.pDistance(3, 1, 5, 0, 10, 0));
-
-
     }
 
     public double pDistance(double x, double y, double x1, double y1, double x2, double y2) {
