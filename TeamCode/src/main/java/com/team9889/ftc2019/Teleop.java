@@ -218,14 +218,9 @@ public class Teleop extends Team9889Linear {
                 Robot.getMecanumDrive().readAngleFromFile();
             }
 
-
-//            telemetry.addData("Point", pipeline.getMinPoint().toString());
             telemetry.addData("Loop Time", loopTimer.milliseconds());
-//            telemetry.addData("angle", Robot.getMecanumDrive().getAngle().getTheda(AngleUnit.DEGREES));
             telemetry.addData("Slow Drive", driveSlow);
-
             telemetry.addData("Gyro After Auto", Robot.getMecanumDrive().angleFromAuton);
-
             telemetry.addData("left lift height", -Robot.leftLift.getPosition());
             telemetry.addData("right lift height", -Robot.rightLift.getPosition());
             telemetry.addData("left intake", -Robot.intakeLeft.getPosition());
