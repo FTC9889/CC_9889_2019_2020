@@ -3,7 +3,7 @@ package com.team9889.ftc2019.auto;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.team9889.ftc2019.Team9889Linear;
 import com.team9889.ftc2019.auto.actions.Action;
-import com.team9889.ftc2019.auto.actions.RobotUpdate;
+import com.team9889.ftc2019.auto.actions.utl.RobotUpdate;
 
 import java.util.List;
 

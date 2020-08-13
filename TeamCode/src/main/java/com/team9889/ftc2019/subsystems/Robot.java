@@ -1,6 +1,5 @@
 package com.team9889.ftc2019.subsystems;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -10,7 +9,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
 import com.team9889.ftc2019.Constants;
-import com.team9889.ftc2019.DriverStation;
 import com.team9889.lib.android.FileWriter;
 import com.team9889.lib.hardware.Motor;
 import com.team9889.lib.hardware.RevIMU;
@@ -25,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
-//import org.openftc.revextensions2.RevExtensions2;
 
 /**
  * Created by Eric on 7/26/2019.
@@ -214,7 +211,7 @@ public class Robot{
             loopTimeOverCount30++;
 
         while (timer.milliseconds() - lastTime < 25){
-
+            Thread.yield();
         }
 
         lastTime = (int) timer.milliseconds();
@@ -222,10 +219,13 @@ public class Robot{
 
     public void outputToTelemetry(Telemetry telemetry) {
         getMecanumDrive().outputToTelemetry(telemetry);
-//        telemetry.addData("Loop Time", (timer.milliseconds() - lastTime));
-//        telemetry.addData("Loop Time Over 20 Milliseconds", loopTimeOverCount);
-//        telemetry.addData("Loop Time Over 25 Milliseconds", loopTimeOverCount25);
-//        telemetry.addData("Loop Time Over 30 Milliseconds", loopTimeOverCount30);
+
+        if(false) {
+            telemetry.addData("Loop Time", (timer.milliseconds() - lastTime));
+            telemetry.addData("Loop Time Over 20 Milliseconds", loopTimeOverCount);
+            telemetry.addData("Loop Time Over 25 Milliseconds", loopTimeOverCount25);
+            telemetry.addData("Loop Time Over 30 Milliseconds", loopTimeOverCount30);
+        }
     }
 
     public void stop(){
@@ -235,6 +235,7 @@ public class Robot{
             motor.setPower(0);
         }
     }
+
     public MecanumDrive getMecanumDrive(){
         return mMecanumDrive;
     }

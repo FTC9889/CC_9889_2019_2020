@@ -1,12 +1,13 @@
-package com.team9889.ftc2019.auto.actions;
+package com.team9889.ftc2019.auto.actions.utl;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.subsystems.Robot;
 
 /**
  * Created by Eric on 12/13/2019.
  */
-public class RobotUpdate extends Action{
+public class RobotUpdate extends Action {
     private ElapsedTime time;
 
     public RobotUpdate(ElapsedTime autoTimer) {

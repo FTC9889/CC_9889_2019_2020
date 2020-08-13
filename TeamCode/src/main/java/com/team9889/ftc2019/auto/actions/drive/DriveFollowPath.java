@@ -89,7 +89,7 @@ public class DriveFollowPath extends Action {
         endOfNextLineY = path.get(1).getPose().getY();
 
         wantedPose = path.get(pose).getPose();
-        tolerancePose = path.get(tNum).getTollerancePose();
+        tolerancePose = path.get(tNum).getTolerancePose();
         maxVel = path.get(vNum).getMaxVelocity();
 
         tempTimer.reset();
@@ -111,7 +111,7 @@ public class DriveFollowPath extends Action {
             currentAngle = Math.toDegrees(Robot.getInstance().getMecanumDrive().getAdjustedPose().getHeading());
         }
 
-        tolerancePose = path.get(tNum).getTollerancePose();
+        tolerancePose = path.get(tNum).getTolerancePose();
         maxVel = path.get(vNum).getMaxVelocity();
         timeOut = path.get(vNum).getTimeOut();
 

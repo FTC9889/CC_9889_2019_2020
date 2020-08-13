@@ -60,16 +60,12 @@ public class MecanumDrive extends Subsystem {
         telemetry.addData("Left Encoder", "" + Robot.getInstance().leftLift.getPosition());
         telemetry.addData("Right Encoder", "" + Robot.getInstance().intakeLeft.getPosition());
         telemetry.addData("Side Encoder", "" + Robot.getInstance().intakeRight.getPosition());
-//        telemetry.addData("Right Offset", "" + Right_Position_Offset);
 
         telemetry.addData("Side Encoder", Robot.getInstance().intakeRight.getPosition());
 
         telemetry.addData("Pose of Robot", getCurrentPose().toString());
         telemetry.addData("Adjusted Pose of Robot", getAdjustedPose().toString());
         telemetry.addData("Velocity Pose of Robot", velocityPose);
-
-//        telemetry.addData("Change in X", currentPose.getX() - lastPoseOfRobotBeforeDriftCalc.getX());
-//        telemetry.addData("Change in Y", currentPose.getY() - lastPoseOfRobotBeforeDriftCalc.getY());
 
         Log.i("Right Offset", "" + Right_Position_Offset);
         Log.i("Left Offset", "" + Left_Position_Offset);
@@ -78,26 +74,11 @@ public class MecanumDrive extends Subsystem {
 
     }
 
-//    public static void main(String[] args) {
-//        double timer = .025;
-//        Pose2d velocityPose, currentPose = new Pose2d(200, 0.3, 1.7), lastPoseOfRobotBeforeDriftCalc = new Pose2d(199, 0.3, 1.4);
-//
-//        double adjustValue = 0.01;
-//        if(timer > 0)
-//            velocityPose = currentPose.minus(lastPoseOfRobotBeforeDriftCalc).div(timer).times(adjustValue);
-//        else
-//            velocityPose = currentPose.minus(lastPoseOfRobotBeforeDriftCalc).div(20 / 1000).times(adjustValue);
-////        lastPoseOfRobotBeforeDriftCalc = currentPose;
-////        driftCalc = driftCalc.plus(velocityPose);
-//        System.out.println(velocityPose);
-//    }
-
     @Override
     public void update() {
         odometry.update();
 
         double adjustValue = -0.0002;
-//        double adjustValue = 0.0;
         if(timer.milliseconds() > 0)
             velocityPose = currentPose.minus(lastPoseOfRobotBeforeDriftCalc).div(timer.seconds()).times(adjustValue);
         else
@@ -110,19 +91,11 @@ public class MecanumDrive extends Subsystem {
             setCurrentPose(new Pose2d(odometry.getPoseEstimate().getX(),
                     odometry.getPoseEstimate().getY(),
                     gyroAngle.getTheda(AngleUnit.RADIANS)));
-//            updated = false;
         }
+
         odometry.update();
-//        else {
 
         updated = true;
-//            currentPose = odometry.getPoseEstimate();
-//        }
-
-//        if (first){
-//            resetOdometryEncoders();
-//            first = false;
-//        }
     }
 
     private void resetOdometryEncoders() {
@@ -224,16 +197,6 @@ public class MecanumDrive extends Subsystem {
         double rightX = rotation;
         return (r * Math.cos(robotAngle) + rightX) * 1.414;
     }
-
-//    public static void main(String[] args) {
-//        double r = Math.hypot(0, 4.149773633411362);
-//        double robotAngle = Math.atan2(4.149773633411362, 0) - Math.PI / 4;
-//        double rightX = 0;
-//        System.out.println(r * Math.cos(robotAngle) + rightX);
-//        System.out.println(r * Math.sin(robotAngle) - rightX);
-//        System.out.println(r * Math.sin(robotAngle) + rightX);
-//        System.out.println(r * Math.cos(robotAngle) - rightX);
-//    }
 
     public void OpenFoundationHook(){
         Robot.getInstance().foundationHook.setPosition(.9);

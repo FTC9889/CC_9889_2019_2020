@@ -7,7 +7,7 @@ import com.team9889.ftc2019.auto.actions.lift.CloseGrabber;
 import com.team9889.ftc2019.auto.actions.lift.LiftIn;
 import com.team9889.ftc2019.auto.actions.lift.LiftOut;
 import com.team9889.ftc2019.auto.actions.lift.OpenGrabber;
-import com.team9889.ftc2019.auto.actions.Wait;
+import com.team9889.ftc2019.auto.actions.utl.Wait;
 import com.team9889.ftc2019.auto.actions.foundation.FoundationHookClose;
 import com.team9889.ftc2019.auto.actions.foundation.FoundationHookOpen;
 import com.team9889.ftc2019.auto.actions.drive.MecanumDriveSimpleAction;
@@ -17,8 +17,6 @@ import com.team9889.ftc2019.auto.actions.intake.IntakeRollerOn;
 import com.team9889.ftc2019.auto.actions.intake.IntakeRollerStop;
 import com.team9889.ftc2019.auto.actions.intake.IntakeStop;
 import com.team9889.ftc2019.auto.actions.intake.IntakeUp;
-
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 /**
  * Created by Eric on 11/26/2019.

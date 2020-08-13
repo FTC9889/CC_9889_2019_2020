@@ -6,20 +6,20 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
  * Created by Eric on 1/17/2020.
  */
 public class FollowPath {
-    Pose2d pose, tollerancePose;
+    Pose2d pose, tolerancePose;
     double radius, maxVelocity;
     int timeOut = 30000;
 
-    public FollowPath(Pose2d pose, Pose2d tollerancePose, double radius, double maxVelocity){
+    public FollowPath(Pose2d pose, Pose2d tolerancePose, double radius, double maxVelocity){
         this.pose = pose;
-        this.tollerancePose = tollerancePose;
+        this.tolerancePose = tolerancePose;
         this.radius = radius;
         this.maxVelocity = maxVelocity;
     }
 
-    public FollowPath(Pose2d pose, Pose2d tollerancePose, double radius, double maxVelocity, int timeOut){
+    public FollowPath(Pose2d pose, Pose2d tolerancePose, double radius, double maxVelocity, int timeOut){
         this.pose = pose;
-        this.tollerancePose = tollerancePose;
+        this.tolerancePose = tolerancePose;
         this.radius = radius;
         this.maxVelocity = maxVelocity;
         this.timeOut = timeOut;
@@ -27,7 +27,7 @@ public class FollowPath {
 
     public FollowPath(FollowPath path){
         this.pose = path.pose;
-        this.tollerancePose = path.tollerancePose;
+        this.tolerancePose = path.tolerancePose;
         this.radius = path.radius;
         this.maxVelocity = path.maxVelocity;
     }
@@ -35,8 +35,8 @@ public class FollowPath {
     public Pose2d getPose(){
         return pose;
     }
-    public Pose2d getTollerancePose(){
-        return tollerancePose;
+    public Pose2d getTolerancePose(){
+        return tolerancePose;
     }
     public double getRadius(){
         return radius;
