@@ -137,8 +137,8 @@ public class BlueAuto extends AutoModeBase {
         runAction(new DriveFollowPath(pose));
         pose.clear();
 
-        Robot.getMecanumDrive().setCurrentPose(new Pose2d(38.5, Robot.getMecanumDrive().currentPose.getY()));
-        Robot.getMecanumDrive().driftCalc = new Pose2d(0, Robot.getMecanumDrive().driftCalc.getY());
+        //Robot.getMecanumDrive().setCurrentPose(new Pose2d(38.5, Robot.getMecanumDrive().currentPose.getY()));
+//        Robot.getMecanumDrive().driftCalc = new Pose2d(0, Robot.getMecanumDrive().driftCalc.getY());
 
         pose.add(new FollowPath(new Pose2d(36, 65 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 2, 3), 4, .8, 3000));
         pose.add(new FollowPath(new Pose2d(36, 65 * Side.getNum(Side_), -90 * Side.getNum(Side_)), new Pose2d(1, 2, 3), 4, .8, 3000));

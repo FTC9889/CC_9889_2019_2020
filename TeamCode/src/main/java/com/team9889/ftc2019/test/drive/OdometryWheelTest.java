@@ -19,7 +19,7 @@ public class OdometryWheelTest extends AutoModeBase {
         Side Side_ = Side.BLUE;
         List<FollowPath> pose = new ArrayList<>();
         Robot.redAuto = false;
-        Robot.getMecanumDrive().setCurrentPose(new Pose2d());
+//        Robot.getMecanumDrive().setCurrentPose(new Pose2d());
 
 //        while (opModeIsActive()){
 //            Robot.update();

@@ -102,13 +102,13 @@ public class DriveFollowPath extends Action {
         time = tempTimer.milliseconds();
 
 //      x and y = robot position
-        double x = Robot.getInstance().getMecanumDrive().getAdjustedPose().getX();
-        double y = Robot.getInstance().getMecanumDrive().getAdjustedPose().getY();
+        double x = Robot.getInstance().getMecanumDrive().odometry.returnXCoordinate();
+        double y = Robot.getInstance().getMecanumDrive().odometry.returnYCoordinate();
 
-        if (Math.toDegrees(Robot.getInstance().getMecanumDrive().getAdjustedPose().getHeading()) > 180){
-            currentAngle = Math.toDegrees(Robot.getInstance().getMecanumDrive().getAdjustedPose().getHeading()) - 360;
+        if (Math.toDegrees(Robot.getInstance().getMecanumDrive().odometry.returnOrientation()) > 180){
+            currentAngle = Math.toDegrees(Robot.getInstance().getMecanumDrive().odometry.returnOrientation()) - 360;
         }else {
-            currentAngle = Math.toDegrees(Robot.getInstance().getMecanumDrive().getAdjustedPose().getHeading());
+            currentAngle = Math.toDegrees(Robot.getInstance().getMecanumDrive().odometry.returnOrientation());
         }
 
         tolerancePose = path.get(tNum).getTolerancePose();

@@ -55,7 +55,7 @@ public class Robot{
 
     public boolean redAuto;
 
-    RevBulkData bulkDataMaster, bulkDataSlave;
+    public RevBulkData bulkDataMaster, bulkDataSlave;
     ExpansionHubEx revHubMaster, revHubSlave;
 
     public HardwareMap hardwareMap;
@@ -178,7 +178,7 @@ public class Robot{
 
         getMecanumDrive().getAngle().getTheda(AngleUnit.RADIANS);
 
-        if (mAuto){
+//        if (mAuto){
 //            bulkDataMaster = revHubMaster.getBulkInputData();
             bulkDataSlave = revHubSlave.getBulkInputData();
 
@@ -194,7 +194,7 @@ public class Robot{
             rightLift.update(bulkDataSlave);
 
             mMecanumDrive.update();
-        }
+//        }
 
         if(debugging)
             writer.write(updateTimer.milliseconds() + "," + getMecanumDrive().getCurrentPose().getX() + ","

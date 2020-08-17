@@ -9,6 +9,7 @@ import com.team9889.ftc2019.Constants;
 import com.team9889.lib.android.FileReader;
 import com.team9889.lib.android.FileWriter;
 import com.team9889.lib.control.math.cartesian.Rotation2d;
+import com.team9889.lib.odometry.Odometry;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -28,14 +29,9 @@ public class MecanumDrive extends Subsystem {
     private double Right_Position_Offset = 0, Left_Position_Offset = 0, Y_Position_Offset = 0;
     public double angleFromAuton = 0;
 
-    private Odometry odometry = new Odometry();
+    public Odometry odometry = new Odometry();
 
     private String filename = "gyro.txt";
-
-    public ElapsedTime timer = new ElapsedTime();
-    public Pose2d driftCalc = new Pose2d(0,0,0);
-    public Pose2d velocityPose = new Pose2d(0,0,0);
-    public Pose2d lastPoseOfRobotBeforeDriftCalc = new Pose2d(0,0,0);
 
     public boolean first = true, updated = false;
 
@@ -44,54 +40,70 @@ public class MecanumDrive extends Subsystem {
         if(auto) {
             Robot.getInstance().odometryLifter.setPosition(1);
             OpenFoundationHook();
-            setCurrentPose(new Pose2d());
+//            setCurrentPose(new Pose2d());
         } else {
             readAngleFromFile();
         }
 
-        lastPoseOfRobotBeforeDriftCalc = currentPose;
-        driftCalc = new Pose2d(0, 0, 0);
-        timer.reset();
+        double LATERAL_DISTANCE = 7.25;
+        double FORWARD_OFFSET = 2.5 + (1.0/16.0);
+
+        odometry.setOdometryOffsets(new Pose2d[] {new Pose2d(-1.375, -LATERAL_DISTANCE - 0.25, Math.toRadians(180)),
+        new Pose2d(FORWARD_OFFSET, LATERAL_DISTANCE + 0.25, Math.toRadians(0)),
+                new Pose2d(0.25, LATERAL_DISTANCE, Math.toRadians(-90))});
+
+        odometry.reverseLeftEncoder();
+        odometry.reverseNormalEncoder();
+
+//        lastPoseOfRobotBeforeDriftCalc = currentPose;
+//        driftCalc = new Pose2d(0, 0, 0);
+//        timer.reset();
     }
 
     @Override
     public void outputToTelemetry(Telemetry telemetry) {
-        Log.i("Pose Of Robot", "" + getCurrentPose());
+//        Log.i("Pose Of Robot", "" + getCurrentPose());
         telemetry.addData("Left Encoder", "" + Robot.getInstance().leftLift.getPosition());
         telemetry.addData("Right Encoder", "" + Robot.getInstance().intakeLeft.getPosition());
         telemetry.addData("Side Encoder", "" + Robot.getInstance().intakeRight.getPosition());
 
-        telemetry.addData("Side Encoder", Robot.getInstance().intakeRight.getPosition());
+        telemetry.addData("offset X", odometry.offset[1]);
 
-        telemetry.addData("Pose of Robot", getCurrentPose().toString());
-        telemetry.addData("Adjusted Pose of Robot", getAdjustedPose().toString());
-        telemetry.addData("Velocity Pose of Robot", velocityPose);
+        telemetry.addData("x", odometry.returnXCoordinate());
+        telemetry.addData("Y", odometry.returnYCoordinate());
+        telemetry.addData("Angle", odometry.returnOrientation());
 
-        Log.i("Right Offset", "" + Right_Position_Offset);
-        Log.i("Left Offset", "" + Left_Position_Offset);
-        Log.i("Side Offset", "" + Y_Position_Offset);
+//        telemetry.addData("Side Encoder", Robot.getInstance().intakeRight.getPosition());
+
+//        telemetry.addData("Pose of Robot", getCurrentPose().toString());
+//        telemetry.addData("Adjusted Pose of Robot", getAdjustedPose().toString());
+//        telemetry.addData("Velocity Pose of Robot", velocityPose);
+//
+//        Log.i("Right Offset", "" + Right_Position_Offset);
+//        Log.i("Left Offset", "" + Left_Position_Offset);
+//        Log.i("Side Offset", "" + Y_Position_Offset);
 
 
     }
 
     @Override
     public void update() {
+        if (first){
+            odometry.offset[0] = Left_OdometryPosition();
+            odometry.offset[1] = Right_OdometryPosition();
+            odometry.offset[2] = Y_OdometryPosition();
+            first = false;
+        }
+
+        odometry.odometryValues = new double[] {Left_OdometryPosition(), Right_OdometryPosition(), Y_OdometryPosition()};
+
         odometry.update();
 
-        double adjustValue = -0.0002;
-        if(timer.milliseconds() > 0)
-            velocityPose = currentPose.minus(lastPoseOfRobotBeforeDriftCalc).div(timer.seconds()).times(adjustValue);
-        else
-            velocityPose = currentPose.minus(lastPoseOfRobotBeforeDriftCalc).div(20 / 1000).times(adjustValue);
-        lastPoseOfRobotBeforeDriftCalc = currentPose;
-        timer.reset();
-        driftCalc = driftCalc.plus(velocityPose);
-
-        if (updated) {
-            setCurrentPose(new Pose2d(odometry.getPoseEstimate().getX(),
-                    odometry.getPoseEstimate().getY(),
-                    gyroAngle.getTheda(AngleUnit.RADIANS)));
-        }
+//        if (updated) {
+//            setCurrentPose(new Pose2d(odometry.getPoseEstimate().getX(),
+//                    odometry.getPoseEstimate().getY(),
+//                    gyroAngle.getTheda(AngleUnit.RADIANS)));
+//        }
 
         odometry.update();
 
@@ -119,15 +131,15 @@ public class MecanumDrive extends Subsystem {
     public Pose2d getCurrentPose() {
         return currentPose;
     }
-    public Pose2d getAdjustedPose(){
-        return currentPose.plus(driftCalc);
-    }
+//    public Pose2d getAdjustedPose(){
+//        return currentPose.plus(driftCalc);
+//    }
 
-    public void setCurrentPose(Pose2d pose) {
-        resetOdometryEncoders();
-        odometry.setPoseEstimate(pose);
-        currentPose = odometry.getPoseEstimate();
-    }
+//    public void setCurrentPose(Pose2d pose) {
+//        resetOdometryEncoders();
+//        odometry.setPoseEstimate(pose);
+//        currentPose = odometry.getPoseEstimate();
+//    }
 
     public Rotation2d getAngle(){
         try {
@@ -169,7 +181,7 @@ public class MecanumDrive extends Subsystem {
     public void setFieldCentricAutoPower(double x, double y, double rotation){
         double xMod = x * gyroAngle.cos() - y * gyroAngle.sin();
         double yMod = x * gyroAngle.sin() + y * gyroAngle.cos();
-        setPower(xMod, yMod, rotation);
+        setPower(xMod * 2, yMod, rotation);
     }
 
     public void setPower(double leftStickX, double leftStickY, double rightStickX){
@@ -203,28 +215,5 @@ public class MecanumDrive extends Subsystem {
     }
     public void CloseFoundationHook(){
         Robot.getInstance().foundationHook.setPosition(0.55);
-    }
-
-    public class Odometry extends ThreeTrackingWheelLocalizer {
-
-        private static final double LATERAL_DISTANCE = 7.25;
-        private static final double FORWARD_OFFSET = 2.5 + (1.0/16.0);
-
-        Odometry() {
-            super(Arrays.asList(
-                    new Pose2d(-1.375, -LATERAL_DISTANCE - 0.25, Math.toRadians(180)),
-                    new Pose2d(FORWARD_OFFSET, LATERAL_DISTANCE + 0.25, Math.toRadians(0)),
-                    new Pose2d(0.25, LATERAL_DISTANCE, Math.toRadians(-90))
-            ));
-        }
-
-        @Override
-        public List<Double> getWheelPositions() {
-            return Arrays.asList(
-                    Robot.getInstance().getMecanumDrive().Left_OdometryPosition(),
-                    Robot.getInstance().getMecanumDrive().Right_OdometryPosition(),
-                    Robot.getInstance().getMecanumDrive().Y_OdometryPosition()
-            );
-        }
     }
 }
