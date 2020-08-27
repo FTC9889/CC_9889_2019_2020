@@ -2,6 +2,7 @@ package com.team9889.ftc2019;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.team9889.ftc2019.subsystems.Robot;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -227,6 +228,8 @@ public class Teleop extends Team9889Linear {
             telemetry.addData("right intake", -Robot.intakeRight.getPosition());
 
             telemetry.addData("Magnet", Robot.downLimit.isPressed());
+
+            Robot.outputToTelemetry(telemetry);
 
             telemetry.update();
 

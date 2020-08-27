@@ -9,9 +9,14 @@ import com.team9889.ftc2019.subsystems.Robot;
  */
 public class RobotUpdate extends Action {
     private ElapsedTime time;
+    boolean teleOp = false;
 
     public RobotUpdate(ElapsedTime autoTimer) {
         time = autoTimer;
+    }
+
+    public RobotUpdate(boolean teleOp){
+        this.teleOp = teleOp;
     }
 
     @Override
@@ -28,8 +33,10 @@ public class RobotUpdate extends Action {
     public void update() {
         Robot.getInstance().update();
 
-        if(time.milliseconds() > 29 * 1000)
-            Robot.getInstance().getMecanumDrive().writeAngleToFile();
+        if (!teleOp) {
+            if (time.milliseconds() > 29 * 1000)
+                Robot.getInstance().getMecanumDrive().writeAngleToFile();
+        }
     }
 
     @Override

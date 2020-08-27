@@ -13,15 +13,6 @@ public abstract class Action {
 
     public abstract void setup(String args);
 
-    public double[] getNumbersFromString(String args){
-        String[] numbers = args.split(",");
-        double[] output = new double[numbers.length];
-        for (int i = 0; i < numbers.length; i++)
-            output[i] = Double.parseDouble(numbers[i]);
-
-        return output;
-    }
-
     /**
      * Run code once when the action is started, for set up
      */

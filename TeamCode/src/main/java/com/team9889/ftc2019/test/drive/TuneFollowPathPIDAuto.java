@@ -4,7 +4,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.team9889.ftc2019.auto.AutoModeBase;
 import com.team9889.ftc2019.auto.actions.drive.DriveFollowPath;
-import com.team9889.lib.FollowPath;
+import com.team9889.lib.Path;
 import com.team9889.lib.control.controllers.PID;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Autonomous
 public class TuneFollowPathPIDAuto extends AutoModeBase {
-    List<FollowPath> path = new ArrayList<>();
+    List<Path> path = new ArrayList<>();
     double p = -0.2, i = 0, d = -16;
     double maxVelocity = .5, add = 0.05;
     int number = 1;
@@ -31,18 +31,18 @@ public class TuneFollowPathPIDAuto extends AutoModeBase {
             PID pid = new PID(p, i, d);
 
             if (gamepad1.a) {
-                path.add(new FollowPath(new Pose2d(
+                path.add(new Path(new Pose2d(
                         Robot.getMecanumDrive().getCurrentPose().getX() + 24,
                         Robot.getMecanumDrive().getCurrentPose().getY(),
                         Robot.getMecanumDrive().getCurrentPose().getHeading()),
                         new Pose2d(1, 1, 2), 2, maxVelocity));
-                path.add(new FollowPath(new Pose2d(
+                path.add(new Path(new Pose2d(
                         Robot.getMecanumDrive().getCurrentPose().getX() + 24,
                         Robot.getMecanumDrive().getCurrentPose().getY(),
                         Robot.getMecanumDrive().getCurrentPose().getHeading()),
                         new Pose2d(1, 1, 2), 8.5, maxVelocity));
 
-                runAction(new DriveFollowPath(path, pid));
+                runAction(new DriveFollowPath(path, pid, telemetry));
             }
 
             if (gamepad1.dpad_left && lRToggle) {

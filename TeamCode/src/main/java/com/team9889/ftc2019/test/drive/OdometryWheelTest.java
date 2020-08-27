@@ -1,9 +1,8 @@
 package com.team9889.ftc2019.test.drive;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.team9889.ftc2019.auto.AutoModeBase;
-import com.team9889.lib.FollowPath;
+import com.team9889.lib.Path;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ public class OdometryWheelTest extends AutoModeBase {
     @Override
     public void run(Side side, SkyStonePosition stonePosition) {
         Side Side_ = Side.BLUE;
-        List<FollowPath> pose = new ArrayList<>();
+        List<Path> pose = new ArrayList<>();
         Robot.redAuto = false;
 //        Robot.getMecanumDrive().setCurrentPose(new Pose2d());
 

@@ -20,9 +20,9 @@ public class Wait extends Action {
 
     @Override
     public void setup(String args) {
-        double[] array = getNumbersFromString(args);
+//        double[] array = getNumbersFromString(args);
 
-        timeToWaitMilli = (int)array[0];
+//        timeToWaitMilli = (int)array[0];
     }
 
     @Override

@@ -3,9 +3,9 @@ package com.team9889.ftc2019.test.drive;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.team9889.ftc2019.Team9889Linear;
-import com.team9889.ftc2019.auto.actions.Action;
 import com.team9889.ftc2019.auto.actions.drive.DriveFollowPath;
-import com.team9889.lib.FollowPath;
+import com.team9889.ftc2019.auto.actions.utl.RobotUpdate;
+import com.team9889.lib.Path;
 import com.team9889.lib.control.controllers.PID;
 
 import java.util.ArrayList;
@@ -17,8 +17,8 @@ import java.util.List;
 
 @TeleOp
 public class TuneFollowPathPID extends Team9889Linear {
-    List<FollowPath> path = new ArrayList<>();
-    double p = -0.1, i = 0, d = 0;
+    List<Path> path = new ArrayList<>();
+    double p = 0, i = 0, d = 0.008;
     double maxVelocity = .5;
     int number = 1;
 
@@ -29,25 +29,26 @@ public class TuneFollowPathPID extends Team9889Linear {
         waitForStart(false);
 
         Robot.odometryLifter.setPosition(1);
+        ThreadAction(new RobotUpdate(true));
 
         while (opModeIsActive()) {
-            Robot.update();
+//            Robot.update();
 
             PID pid = new PID(p, i, d);
 
             if (gamepad1.a) {
-                path.add(new FollowPath(new Pose2d(
+                path.add(new Path(new Pose2d(
                         24,
-                        Robot.getMecanumDrive().getCurrentPose().getY(),
-                        Robot.getMecanumDrive().getCurrentPose().getHeading()),
-                        new Pose2d(2, 2, 3), 8.5, maxVelocity));
-                path.add(new FollowPath(new Pose2d(
-                        24,
-                        Robot.getMecanumDrive().getCurrentPose().getY(),
-                        Robot.getMecanumDrive().getCurrentPose().getHeading()),
-                        new Pose2d(2, 2, 3), 8.5, maxVelocity));
+                        0,
+                        0),
+                        new Pose2d(1, 1, 2), 5, maxVelocity));
+                path.add(new Path(new Pose2d(
+                        48,
+                        12,
+                        90),
+                        new Pose2d(2, 2, 3), 5, maxVelocity));
 
-                runAction(new DriveFollowPath(path, pid));
+                runAction(new DriveFollowPath(path, pid, telemetry));
             }
 
             if (gamepad1.dpad_left && lRToggle) {
@@ -101,6 +102,8 @@ public class TuneFollowPathPID extends Team9889Linear {
             telemetry.addData("X", Robot.getMecanumDrive().getCurrentPose().getX());
 
             telemetry.addData("Max Velocity", maxVelocity);
+            telemetry.addLine();
+            Robot.outputToTelemetry(telemetry);
 
             telemetry.update();
         }

@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.team9889.ftc2019.auto.AutoModeBase;
 import com.team9889.ftc2019.auto.actions.drive.DriveFollowPath;
-import com.team9889.lib.FollowPath;
+import com.team9889.lib.Path;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +22,11 @@ public class JoshTest extends AutoModeBase {
         waitForStart(true);
 
         AutoModeBase.Side Side_ = AutoModeBase.Side.RED;
-        List<FollowPath> pose = new ArrayList<>();
+        List<Path> pose = new ArrayList<>();
         Robot.redAuto = true;
 
-        pose.add(new FollowPath(new Pose2d(0, -20, 0), new Pose2d(2, 2, 3), 4, 1));
-        pose.add(new FollowPath(new Pose2d(0, -20, 0), new Pose2d(2, 2, 3), 4, 1));
+        pose.add(new Path(new Pose2d(0, -20, 0), new Pose2d(2, 2, 3), 4, 1));
+        pose.add(new Path(new Pose2d(0, -20, 0), new Pose2d(2, 2, 3), 4, 1));
         runAction(new DriveFollowPath(pose));
     }
 }

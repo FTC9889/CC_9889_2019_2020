@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.team9889.ftc2019.auto.AutoModeBase;
 import com.team9889.ftc2019.auto.actions.utl.Wait;
 import com.team9889.ftc2019.auto.actions.drive.DriveFollowPath;
-import com.team9889.lib.FollowPath;
+import com.team9889.lib.Path;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +19,12 @@ public class TestDriveFollowPath extends AutoModeBase {
     @Override
     public void run(Side side, SkyStonePosition stonePosition) {
 
-        List<FollowPath> pose = new ArrayList<>();
+        List<Path> pose = new ArrayList<>();
 
 //      NEW CODE
 
-        pose.add(new FollowPath(new Pose2d(100, 0, Math.toRadians(0)), new Pose2d(2, 2, 3), 8.5, 1));
-        pose.add(new FollowPath(new Pose2d(100, 0, 0), new Pose2d(2, 2, 3), 8.5, 1));
+        pose.add(new Path(new Pose2d(100, 0, Math.toRadians(0)), new Pose2d(2, 2, 3), 8.5, 1));
+        pose.add(new Path(new Pose2d(100, 0, 0), new Pose2d(2, 2, 3), 8.5, 1));
 //        pose.add(new FollowPath(new Pose2d(50, 0, Math.toRadians(90)), new Pose2d(3, 3, 3), 8.5, .5));
 
         runAction(new DriveFollowPath(pose));

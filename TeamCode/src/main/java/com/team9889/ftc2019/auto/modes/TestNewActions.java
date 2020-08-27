@@ -1,11 +1,9 @@
 package com.team9889.ftc2019.auto.modes;
 
-import com.acmerobotics.roadrunner.drive.DriveSignal;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.team9889.ftc2019.auto.AutoModeBase;
-import com.team9889.ftc2019.auto.actions.intake.Intake;
 import com.team9889.ftc2019.auto.actions.intake.IntakeStopBlockInWait;
 import com.team9889.ftc2019.auto.actions.lift.Grabber;
 import com.team9889.ftc2019.auto.actions.lift.Lift;
@@ -22,8 +20,7 @@ import com.team9889.ftc2019.auto.actions.intake.Outtake;
 import com.team9889.ftc2019.auto.actions.lift.LiftWait;
 import com.team9889.ftc2019.auto.actions.lift.LinearWait;
 import com.team9889.ftc2019.auto.actions.lift.OpenGrabberWait;
-import com.team9889.ftc2019.auto.actions.utl.Wait;
-import com.team9889.lib.FollowPath;
+import com.team9889.lib.Path;
 import com.team9889.lib.control.Timeout;
 
 import java.util.Arrays;
@@ -37,60 +34,60 @@ import java.util.concurrent.TimeUnit;
 @Autonomous
 public class TestNewActions extends AutoModeBase {
 
-    List<FollowPath> red_to_first_stone_left = Arrays.asList(
-            new FollowPath(new Pose2d(4, 0, 0), new Pose2d(2, 2, 3), 3, .8),
-            new FollowPath(new Pose2d(26, -15, -45), new Pose2d(2, 2, 3), 4, .8),
-            new FollowPath(new Pose2d(42, -15, -45), new Pose2d(2, 2, 3), 4, .6),
-            new FollowPath(new Pose2d(42, -20, -45), new Pose2d(2, 2, 3), 4, .8, 1000),
-            new FollowPath(new Pose2d(24, -20, -45), new Pose2d(2, 2, 3), 8.5, .8),
-            new FollowPath(new Pose2d(24, -20, -90), new Pose2d(2, 2, 3), 8.5, .8)
+    List<Path> red_to_first_stone_left = Arrays.asList(
+            new Path(new Pose2d(4, 0, 0), new Pose2d(2, 2, 3), 3, .8),
+            new Path(new Pose2d(26, -15, -45), new Pose2d(2, 2, 3), 4, .8),
+            new Path(new Pose2d(42, -15, -45), new Pose2d(2, 2, 3), 4, .6),
+            new Path(new Pose2d(42, -20, -45), new Pose2d(2, 2, 3), 4, .8, 1000),
+            new Path(new Pose2d(24, -20, -45), new Pose2d(2, 2, 3), 8.5, .8),
+            new Path(new Pose2d(24, -20, -90), new Pose2d(2, 2, 3), 8.5, .8)
     );
 
-    private List<FollowPath> red_to_first_stone_right = Arrays.asList(
-            new FollowPath(new Pose2d(4, 0 , 0), new Pose2d(2, 2, 3), 3, .8),
-            new FollowPath(new Pose2d(26, 0, -40), new Pose2d(2, 2, 3), 4, .8),
-            new FollowPath(new Pose2d(42, 0, -40), new Pose2d(2, 2, 3), 4, .6),
-            new FollowPath(new Pose2d(42, -5, -40), new Pose2d(2, 2, 3), 4, .6),
-            new FollowPath(new Pose2d(26, -5, -40), new Pose2d(2, 2, 3), 4, .8)
+    private List<Path> red_to_first_stone_right = Arrays.asList(
+            new Path(new Pose2d(4, 0 , 0), new Pose2d(2, 2, 3), 3, .8),
+            new Path(new Pose2d(26, 0, -40), new Pose2d(2, 2, 3), 4, .8),
+            new Path(new Pose2d(42, 0, -40), new Pose2d(2, 2, 3), 4, .6),
+            new Path(new Pose2d(42, -5, -40), new Pose2d(2, 2, 3), 4, .6),
+            new Path(new Pose2d(26, -5, -40), new Pose2d(2, 2, 3), 4, .8)
     );
 
-    private List<FollowPath> red_to_first_stone_middle = Arrays.asList(
-            new FollowPath(new Pose2d(4, 0 , 0), new Pose2d(2, 2, 3), 3, .8),
-            new FollowPath(new Pose2d(26, -12, -30), new Pose2d(2, 2, 3), 4, .8, 1500),
-            new FollowPath(new Pose2d(40, -12, -30), new Pose2d(2, 2, 3), 4, .6, 1000),
-            new FollowPath(new Pose2d(40, -18, -30), new Pose2d(2, 2, 3), 4, .8, 1000),
-            new FollowPath(new Pose2d(26, -10, -90), new Pose2d(2, 2, 3), 3, .8, 1500)
+    private List<Path> red_to_first_stone_middle = Arrays.asList(
+            new Path(new Pose2d(4, 0 , 0), new Pose2d(2, 2, 3), 3, .8),
+            new Path(new Pose2d(26, -12, -30), new Pose2d(2, 2, 3), 4, .8, 1500),
+            new Path(new Pose2d(40, -12, -30), new Pose2d(2, 2, 3), 4, .6, 1000),
+            new Path(new Pose2d(40, -18, -30), new Pose2d(2, 2, 3), 4, .8, 1000),
+            new Path(new Pose2d(26, -10, -90), new Pose2d(2, 2, 3), 3, .8, 1500)
     );
 
-    private List<FollowPath> foundation_to_second_stone_left = Arrays.asList(
-            new FollowPath(new Pose2d(24, 60, -100), new Pose2d(2, 2, 3), 4, 1),
-            new FollowPath(new Pose2d(24, 60, -100), new Pose2d(1, 2, 3), 4, 1),
+    private List<Path> foundation_to_second_stone_left = Arrays.asList(
+            new Path(new Pose2d(24, 60, -100), new Pose2d(2, 2, 3), 4, 1),
+            new Path(new Pose2d(24, 60, -100), new Pose2d(1, 2, 3), 4, 1),
 
-            new FollowPath(new Pose2d(26, 20, -90), new Pose2d(2, 2, 3), 4, .8),
-            new FollowPath(new Pose2d(28, 20, -75), new Pose2d(2, 2, 3), 4, .6),
-            new FollowPath(new Pose2d(42, 15, -75), new Pose2d(2, 2, 3), 2, .8),
-            new FollowPath(new Pose2d(42, 5, -75), new Pose2d(2, 2, 3), 2, .8, 1000)
+            new Path(new Pose2d(26, 20, -90), new Pose2d(2, 2, 3), 4, .8),
+            new Path(new Pose2d(28, 20, -75), new Pose2d(2, 2, 3), 4, .6),
+            new Path(new Pose2d(42, 15, -75), new Pose2d(2, 2, 3), 2, .8),
+            new Path(new Pose2d(42, 5, -75), new Pose2d(2, 2, 3), 2, .8, 1000)
     );
 
-    private List<FollowPath> foundation_to_second_stone_right = Arrays.asList(
-            new FollowPath(new Pose2d(24, 60, -100), new Pose2d(2, 2, 3), 4, 1),
-            new FollowPath(new Pose2d(24, 60, -100), new Pose2d(1, 2, 3), 4, 1),
+    private List<Path> foundation_to_second_stone_right = Arrays.asList(
+            new Path(new Pose2d(24, 60, -100), new Pose2d(2, 2, 3), 4, 1),
+            new Path(new Pose2d(24, 60, -100), new Pose2d(1, 2, 3), 4, 1),
 
-            new FollowPath(new Pose2d(20, 25, -90), new Pose2d(2, 2, 3), 4, .8, 4000),
-            new FollowPath(new Pose2d(24, 25, -45), new Pose2d(2, 2, 3), 4, .6, 2000),
-            new FollowPath(new Pose2d(40, 25, -45), new Pose2d(2, 2, 3), 2, .6, 1000),
-            new FollowPath(new Pose2d(40, 16, -45), new Pose2d(2, 2, 3), 2, .6, 2000)
+            new Path(new Pose2d(20, 25, -90), new Pose2d(2, 2, 3), 4, .8, 4000),
+            new Path(new Pose2d(24, 25, -45), new Pose2d(2, 2, 3), 4, .6, 2000),
+            new Path(new Pose2d(40, 25, -45), new Pose2d(2, 2, 3), 2, .6, 1000),
+            new Path(new Pose2d(40, 16, -45), new Pose2d(2, 2, 3), 2, .6, 2000)
     );
 
-    private List<FollowPath> foundation_to_second_stone_middle = Arrays.asList(
-            new FollowPath(new Pose2d(24, 60, -100), new Pose2d(2, 2, 3), 4, 1),
-            new FollowPath(new Pose2d(24, 60, -100), new Pose2d(1, 2, 3), 4, 1),
+    private List<Path> foundation_to_second_stone_middle = Arrays.asList(
+            new Path(new Pose2d(24, 60, -100), new Pose2d(2, 2, 3), 4, 1),
+            new Path(new Pose2d(24, 60, -100), new Pose2d(1, 2, 3), 4, 1),
 
-            new FollowPath(new Pose2d(26, 22, -90), new Pose2d(2, 2, 3), 2, .8, 4000),
-            new FollowPath(new Pose2d(28, 22, -65), new Pose2d(2, 2, 3), 2, .8, 1000),
-            new FollowPath(new Pose2d(40, 22, -65), new Pose2d(2, 2, 3), 2, .8, 1500),
-            new FollowPath(new Pose2d(40, 12, -65), new Pose2d(2, 2, 3), 2, .8, 2000),
-            new FollowPath(new Pose2d(28, 20, -90), new Pose2d(2, 2, 3), 2, .8, 1000)
+            new Path(new Pose2d(26, 22, -90), new Pose2d(2, 2, 3), 2, .8, 4000),
+            new Path(new Pose2d(28, 22, -65), new Pose2d(2, 2, 3), 2, .8, 1000),
+            new Path(new Pose2d(40, 22, -65), new Pose2d(2, 2, 3), 2, .8, 1500),
+            new Path(new Pose2d(40, 12, -65), new Pose2d(2, 2, 3), 2, .8, 2000),
+            new Path(new Pose2d(28, 20, -90), new Pose2d(2, 2, 3), 2, .8, 1000)
     );
 
     @Override

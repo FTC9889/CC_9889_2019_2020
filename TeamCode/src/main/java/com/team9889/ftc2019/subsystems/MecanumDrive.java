@@ -3,8 +3,7 @@ package com.team9889.ftc2019.subsystems;
 import android.util.Log;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.localization.ThreeTrackingWheelLocalizer;
-import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.team9889.ftc2019.Constants;
 import com.team9889.lib.android.FileReader;
 import com.team9889.lib.android.FileWriter;
@@ -13,9 +12,6 @@ import com.team9889.lib.odometry.Odometry;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Eric on 9/7/2019.
@@ -29,7 +25,7 @@ public class MecanumDrive extends Subsystem {
     private double Right_Position_Offset = 0, Left_Position_Offset = 0, Y_Position_Offset = 0;
     public double angleFromAuton = 0;
 
-    public Odometry odometry = new Odometry();
+    public Odometry odometry;
 
     private String filename = "gyro.txt";
 
@@ -48,10 +44,8 @@ public class MecanumDrive extends Subsystem {
         double LATERAL_DISTANCE = 7.25;
         double FORWARD_OFFSET = 2.5 + (1.0/16.0);
 
-        odometry.setOdometryOffsets(new Pose2d[] {new Pose2d(-1.375, -LATERAL_DISTANCE - 0.25, Math.toRadians(180)),
-        new Pose2d(FORWARD_OFFSET, LATERAL_DISTANCE + 0.25, Math.toRadians(0)),
-                new Pose2d(0.25, LATERAL_DISTANCE, Math.toRadians(-90))});
-
+        odometry = new Odometry(Robot.getInstance().leftLift, Robot.getInstance().intakeLeft,
+                Robot.getInstance().intakeRight, Constants.OdometryConstants.ENCODER_TO_DISTANCE_RATIO);
         odometry.reverseLeftEncoder();
         odometry.reverseNormalEncoder();
 
@@ -66,8 +60,6 @@ public class MecanumDrive extends Subsystem {
         telemetry.addData("Left Encoder", "" + Robot.getInstance().leftLift.getPosition());
         telemetry.addData("Right Encoder", "" + Robot.getInstance().intakeLeft.getPosition());
         telemetry.addData("Side Encoder", "" + Robot.getInstance().intakeRight.getPosition());
-
-        telemetry.addData("offset X", odometry.offset[1]);
 
         telemetry.addData("x", odometry.returnXCoordinate());
         telemetry.addData("Y", odometry.returnYCoordinate());
@@ -88,15 +80,6 @@ public class MecanumDrive extends Subsystem {
 
     @Override
     public void update() {
-        if (first){
-            odometry.offset[0] = Left_OdometryPosition();
-            odometry.offset[1] = Right_OdometryPosition();
-            odometry.offset[2] = Y_OdometryPosition();
-            first = false;
-        }
-
-        odometry.odometryValues = new double[] {Left_OdometryPosition(), Right_OdometryPosition(), Y_OdometryPosition()};
-
         odometry.update();
 
 //        if (updated) {
@@ -105,7 +88,7 @@ public class MecanumDrive extends Subsystem {
 //                    gyroAngle.getTheda(AngleUnit.RADIANS)));
 //        }
 
-        odometry.update();
+//        odometry.update();
 
         updated = true;
     }
@@ -160,9 +143,13 @@ public class MecanumDrive extends Subsystem {
         try {
             FileReader angleReader = new FileReader(filename);
             String[] rows = angleReader.lines();
-            String value = rows[rows.length - 1];
-            angleFromAuton = Double.parseDouble(value);
-            angleReader.close();
+            if (rows[rows.length - 1] != null) {
+                String value = rows[rows.length - 1];
+                angleFromAuton = Double.parseDouble(value);
+                angleReader.close();
+            } else{
+                angleFromAuton = 0;
+            }
         } catch (NumberFormatException e) {
             angleFromAuton = 0;
         }
